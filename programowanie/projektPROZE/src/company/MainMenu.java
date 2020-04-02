@@ -19,9 +19,11 @@ public class MainMenu extends Frame {
     BufferedImage img;
     private static final long serialVersionUID = 1L;
     private String nick;
+    private int levelNumber;
 
     public MainMenu()
     {
+
         String bg_path = "Images/MainMenu.png";
         load_image(bg_path);
 
@@ -93,11 +95,15 @@ public class MainMenu extends Frame {
         b_start.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 nick = enterName.getText();
+                loadLevel(1);
+
+
             }
         });
         Button b_back = new Button("Back");
         b_back.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                dispose();
                MainMenu win =  new MainMenu();
             }
         });
@@ -120,7 +126,6 @@ public class MainMenu extends Frame {
         b_back.setFont(font);
         b_back.setBackground(Color.black);
 
-
         gbc.gridwidth = 3;
         gbc.gridx = 0;
         gbc.gridy = 1;
@@ -141,10 +146,56 @@ public class MainMenu extends Frame {
         gbc.gridy = 3;
         components_container.add(b_back, gbc);
 
-
         this.setSize(700,500);
         this.add(components_container);
         this.setVisible(true);
+
+    }
+    void loadLevel(int levelNumber){
+
+        String imgPath;
+        switch (levelNumber) {
+            case 1:
+                imgPath = "Images/SaturnMoon.png";
+                break;
+            case 2:
+                imgPath = "Images/MainMenu.png";
+                break;
+            case 3:
+                imgPath = "Images/SaturnMoon.png";
+                break;
+            case 4:
+                imgPath = "Images/SaturnMoon.png";
+                break;
+            case 5:
+                imgPath = "Images/SaturnMoon.png";
+                break;
+            case 6:
+                imgPath = "Images/MainMenu.png";
+                break;
+            case 7:
+                imgPath = "Images/SaturnMoon.png";
+                break;
+            case 8:
+                imgPath = "Images/SaturnMoon.png";
+                break;
+            default:
+                imgPath = "Images/SaturnMoon.png";
+        }
+
+        load_image(imgPath);
+        this.removeAll();
+        this.repaint();
+
+        Container components_container1 = new JLabel(new ImageIcon(imgPath));
+        components_container1.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+
+
+        Level level = new Level(levelNumber);
+
+
+
 
     }
 
@@ -157,11 +208,21 @@ public class MainMenu extends Frame {
         }
         catch(Exception e){e.printStackTrace();}
     }
+    /*public void delete_image()
+    {
+        try
+        {
+            img =  ImageIO.read(new File(path));
+            System.out.println(img);
+        }
+        catch(Exception e){e.printStackTrace();}
+    }*/
 
     @Override
     public void paint(Graphics g){
         super.paint(g);
         g.drawImage(img, 0, 0, getWidth(), getHeight(), null);
+
     }
 
 
