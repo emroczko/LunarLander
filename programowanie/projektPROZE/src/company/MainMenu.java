@@ -11,7 +11,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.Color;
 
-public class MainMenu extends Frame {
+public class MainMenu extends JFrame {
     /**
      *
      */
@@ -23,7 +23,6 @@ public class MainMenu extends Frame {
 
     public MainMenu()
     {
-
         String bg_path = "Images/MainMenu.png";
         load_image(bg_path);
 
@@ -42,13 +41,9 @@ public class MainMenu extends Frame {
         Button b_instructions = new Button("Instructions");
 
         Font font = new Font("uni 05_53", Font.PLAIN, 20);
+
         b_play.setFont(font);
-       // b_play.setForeground(Color.white);
         b_play.setBackground(Color.black);
-
-
-        //b_play.set(new LineBorder(Color.red,1));
-       // b_play.setOpaque(true);
         b_best_scores.setFont(font);
         b_best_scores.setBackground(Color.black);
         b_instructions.setFont(font);
@@ -75,13 +70,12 @@ public class MainMenu extends Frame {
         this.setVisible(true);
 
         this.addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent evt) {
-                System.exit(0);
+            public void windowClosing(WindowEvent evt) {System.exit(0);
             }
         });
     }
     void nickScreen(){
-        this.removeAll();
+        this.getContentPane().removeAll();
         this.setLayout(new GridBagLayout());
         String bg_path = "Images/MainMenu.png";
         Container components_container = new JLabel(new ImageIcon(bg_path));
@@ -126,6 +120,8 @@ public class MainMenu extends Frame {
         b_back.setFont(font);
         b_back.setBackground(Color.black);
 
+
+
         gbc.gridwidth = 3;
         gbc.gridx = 0;
         gbc.gridy = 1;
@@ -145,14 +141,12 @@ public class MainMenu extends Frame {
         gbc.gridx = 0;
         gbc.gridy = 3;
         components_container.add(b_back, gbc);
-
-        this.setSize(700,500);
+        this.repaint();
         this.add(components_container);
         this.setVisible(true);
-
     }
     void loadLevel(int levelNumber){
-
+        this.getContentPane().removeAll();
         String imgPath;
         switch (levelNumber) {
             case 1:
@@ -184,21 +178,14 @@ public class MainMenu extends Frame {
         }
 
         load_image(imgPath);
-        this.removeAll();
         this.repaint();
 
         Container components_container1 = new JLabel(new ImageIcon(imgPath));
         components_container1.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 
-
         Level level = new Level(levelNumber);
-
-
-
-
     }
-
     public void load_image(String path)
     {
         try
@@ -221,7 +208,7 @@ public class MainMenu extends Frame {
     @Override
     public void paint(Graphics g){
         super.paint(g);
-        g.drawImage(img, 0, 0, getWidth(), getHeight(), null);
+        g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
 
     }
 
