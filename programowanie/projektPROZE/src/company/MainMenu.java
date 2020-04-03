@@ -38,14 +38,19 @@ public class MainMenu extends JFrame {
                                      }
                                  });
         Button b_best_scores = new Button("Best Scores");
+
+
         Button b_instructions = new Button("Instructions");
+
 
         Font font = new Font("uni 05_53", Font.PLAIN, 20);
 
         b_play.setFont(font);
         b_play.setBackground(Color.black);
+
         b_best_scores.setFont(font);
         b_best_scores.setBackground(Color.black);
+
         b_instructions.setFont(font);
         b_instructions.setBackground(Color.black);
 
@@ -195,15 +200,6 @@ public class MainMenu extends JFrame {
         }
         catch(Exception e){e.printStackTrace();}
     }
-    /*public void delete_image()
-    {
-        try
-        {
-            img =  ImageIO.read(new File(path));
-            System.out.println(img);
-        }
-        catch(Exception e){e.printStackTrace();}
-    }*/
 
     @Override
     public void paint(Graphics g){
