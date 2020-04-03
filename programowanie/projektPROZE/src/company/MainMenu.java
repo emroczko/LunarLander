@@ -10,6 +10,7 @@ import java.io.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.Color;
+import java.util.Timer;
 
 public class MainMenu extends JFrame {
     /**
@@ -20,11 +21,15 @@ public class MainMenu extends JFrame {
     private static final long serialVersionUID = 1L;
     private String nick;
     private int levelNumber;
+    private Timer timer;
 
     public MainMenu()
     {
+        Frame test =new Frame();
         String bg_path = "Images/MainMenu.png";
         load_image(bg_path);
+
+        timer = new Timer();
 
         Container components_container = new JLabel(new ImageIcon(bg_path));
 
@@ -81,6 +86,7 @@ public class MainMenu extends JFrame {
     }
     void nickScreen(){
         this.getContentPane().removeAll();
+        this.repaint();
         this.setLayout(new GridBagLayout());
         String bg_path = "Images/MainMenu.png";
         Container components_container = new JLabel(new ImageIcon(bg_path));
@@ -146,12 +152,12 @@ public class MainMenu extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 3;
         components_container.add(b_back, gbc);
-        this.repaint();
         this.add(components_container);
         this.setVisible(true);
     }
     void loadLevel(int levelNumber){
         this.getContentPane().removeAll();
+        timer = new Timer();
         String imgPath;
         switch (levelNumber) {
             case 1:
@@ -190,6 +196,8 @@ public class MainMenu extends JFrame {
         GridBagConstraints gbc = new GridBagConstraints();
 
         Level level = new Level(levelNumber);
+        timer.scheduleAtFixedRate(level.new Animation_Timer(), 100, 30);
+
     }
     public void load_image(String path)
     {
