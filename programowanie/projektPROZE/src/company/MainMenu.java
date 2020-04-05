@@ -7,8 +7,7 @@ public class MainMenu extends JFrame {
 
 
     public MainMenu() {
-    initializeLayout();
-
+        initializeLayout();
     }
 
 
@@ -16,24 +15,12 @@ public class MainMenu extends JFrame {
         setTitle("Lunar Lander");
         setIconImage(ImageFactory.createImage(Image.Lander).getImage());
 
-
         add(new Menu());
-
-        //add(new Level());
-
-
         pack();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setResizable(true);
         setVisible(true);
     }
-
-    private void startLevel(){
-        add(new Level());
-    }
-
-
-
 
 }

@@ -21,7 +21,7 @@ public class Menu extends JPanel{
                 removeAll();
                 repaint();
                 revalidate();
-                add(new Level());
+                add(new Name());
             }
         });
         Font font = new Font("uni 05_53", Font.PLAIN, 20);
@@ -34,6 +34,7 @@ public class Menu extends JPanel{
         rankingButton.setFont(font);
         //rankingButton.setBackground(Color.black);
         //rankingButton.setForeground(Color.white);
+
 
         this.add(startButton);
         this.add(rankingButton);
