@@ -33,6 +33,8 @@ public class Name extends JPanel{
                 removeAll();
                 repaint();
                 revalidate();
+                setLayout(new GridBagLayout());
+                GridBagConstraints gbc = new GridBagConstraints();
                 gbc.weightx = 1;
                 gbc.weighty = 1;
                 gbc.fill = GridBagConstraints.BOTH;
@@ -48,6 +50,8 @@ public class Name extends JPanel{
                 removeAll();
                 repaint();
                 revalidate();
+                setLayout(new GridBagLayout());
+                GridBagConstraints gbc = new GridBagConstraints();
                 gbc.weightx = 1;
                 gbc.weighty = 1;
                 gbc.fill = GridBagConstraints.BOTH;
