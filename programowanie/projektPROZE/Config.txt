@@ -1,10 +1,10 @@
-CanvasSizeX=800
-CanvasSizeY=600
+xSize=800
+ySize=600
+LanderWidth=40
 enginePowerVx=2
 enginePowerVy=7
 fuelAmount=100
 maxPointsAmount=400
 numberOfLives=5
 bonusPerSecond=-5
-Landerwidth=40
-LanderHeight=40
+
