@@ -1,5 +1,5 @@
-xSize=800
-ySize=600
+xSize=700
+ySize=500
 LanderWidth=40
 enginePowerVx=2
 enginePowerVy=7

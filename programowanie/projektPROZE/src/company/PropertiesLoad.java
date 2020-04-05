@@ -1,13 +1,14 @@
 package company;
 
 
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.BufferedReader;
-import java.io.PrintWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.Properties;
 import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Arrays;
+import java.util.Properties;
+
 
 
 public class PropertiesLoad {
@@ -42,14 +43,11 @@ public class PropertiesLoad {
     static int[] yLanding;
 
 
-    /** Metoda wczytująca plik konfiguracyjny i obłsugująca parsowanie danych
-     *
-     * @throws IOException
-     */
         static void loadProps() throws IOException {
 
+            InputStream propertiesFile = new FileInputStream("Config.txt");
             Properties gameProps = new Properties();
-            gameProps.load(new FileInputStream("Config.txt"));
+            gameProps.load(propertiesFile);
             xSize = Integer.parseInt(gameProps.getProperty("xSize"));
             ySize = Integer.parseInt(gameProps.getProperty("ySize"));
             LanderWidth = Integer.parseInt(gameProps.getProperty("LanderWidth"));
@@ -59,6 +57,7 @@ public class PropertiesLoad {
             numberOfLives = Integer.parseInt(gameProps.getProperty("numberOfLives"));
             bonusPerSecond = Integer.parseInt(gameProps.getProperty("bonusPerSecond"));
             maxPointsAmount = Integer.parseInt(gameProps.getProperty("maxPointsAmount"));
+            propertiesFile.close();
 
         }
 

@@ -59,7 +59,7 @@ public class Level extends JPanel{
     }
 
     private void update(){
-        System.out.println("Update");
+
     }
 
 

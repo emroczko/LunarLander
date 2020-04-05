@@ -13,6 +13,7 @@ public class MainMenu extends JFrame {
         setIconImage(ImageFactory.createImage(Image.Lander).getImage());
 
 
+
         add(new Level());
 
         pack();
