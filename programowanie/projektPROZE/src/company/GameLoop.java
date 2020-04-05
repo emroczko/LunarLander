@@ -1,6 +1,6 @@
 package company;
 
-public class gameLoop implements actionlistener {
+public class GameLoop implements actionlistener {
 
     private GamePanel gamePanel;
 
