@@ -15,6 +15,10 @@ public class Level extends JPanel{
     private boolean inGame = true;
 
     public Level() {
+        try {
+            PropertiesLoad.loadMapsConfigs(1);
+        }
+        catch(Exception e){e.printStackTrace();}
         revalidate();
         repaint();
         this.removeAll();
@@ -35,8 +39,19 @@ public class Level extends JPanel{
     }
 
     private void drawPlayer(Graphics g) {
-        g.drawImage(lander.getImage(), (int)(lander.getX()*((float)(this.getWidth())/700)), (int)(lander.getY()*((float)this.getHeight()/500)), (int)(this.getWidth()/17.5), (int)(this.getHeight()/12.5), this);
-        System.out.println((this.getWidth())/700 +"            " + this.getHeight()/500);
+        g.drawImage(lander.getImage(), (int)(lander.getX()*((float)(this.getWidth())/700)),
+                (int)(lander.getY()*((float)this.getHeight()/500)), (int)(this.getWidth()/17.5),
+                (int)(this.getHeight()/12.5), this);
+        g.setColor(Color.red);
+        g.drawRect(lander.getX(), lander.getY(), 40, 40);
+    }
+    private void drawGround(Graphics g){
+        Polygon moon = new Polygon(PropertiesLoad.xPoints, PropertiesLoad.yPoints, PropertiesLoad.xPoints.length);
+        Polygon landing = new Polygon(PropertiesLoad.xLanding, PropertiesLoad.yLanding, PropertiesLoad.xLanding.length);
+        g.setColor(Color.green);
+        g.drawPolygon(moon);
+        g.setColor(Color.blue);
+        g.drawPolygon(landing);
     }
 
     @Override
@@ -49,6 +64,7 @@ public class Level extends JPanel{
     private void doDrawing(Graphics g) {
         if (inGame) {
             drawPlayer(g);
+            drawGround(g);
         } else {
             if (timer.isRunning()) {
                 timer.stop();

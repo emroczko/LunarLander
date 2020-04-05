@@ -83,9 +83,7 @@ public class Name extends JPanel{
     private void initializeVariables() {
         this.MainMenuImage = ImageFactory.createImage(Image.MainMenu);
     }
-    private void initializeLayout() {
-        setPreferredSize(new Dimension(PropertiesLoad.xSize, PropertiesLoad.ySize));
-    }
+    private void initializeLayout() { setPreferredSize(new Dimension(PropertiesLoad.xSize, PropertiesLoad.ySize)); }
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

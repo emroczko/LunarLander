@@ -1,13 +1,11 @@
 package company;
 
 
-import java.io.*;
 import java.util.Properties;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
-import java.util.Properties;
 
 
 
@@ -42,7 +40,6 @@ public class PropertiesLoad {
     /** tablica przechowujaca y'owe wspolrzedne wierzcholkow wielokata bedacego ladowiskiem */
     static int[] yLanding;
 
-
         static void loadProps() throws IOException {
 
             InputStream propertiesFile = new FileInputStream("Config.txt");
@@ -58,7 +55,15 @@ public class PropertiesLoad {
             bonusPerSecond = Integer.parseInt(gameProps.getProperty("bonusPerSecond"));
             maxPointsAmount = Integer.parseInt(gameProps.getProperty("maxPointsAmount"));
             propertiesFile.close();
-
+        }
+        static void loadMapsConfigs(int levelnumber) throws IOException{
+            InputStream propertiesFile_maps = new FileInputStream("Maps.txt");
+            Properties mapProps = new Properties();
+            mapProps.load(propertiesFile_maps);
+            xPoints = Arrays.stream(mapProps.getProperty("xpoints"+levelnumber).split("-")).mapToInt(Integer::parseInt).toArray();
+            yPoints = Arrays.stream(mapProps.getProperty("ypoints"+levelnumber).split("-")).mapToInt(Integer::parseInt).toArray();
+            xLanding = Arrays.stream(mapProps.getProperty("xlanding"+levelnumber).split("-")).mapToInt(Integer::parseInt).toArray();
+            yLanding = Arrays.stream(mapProps.getProperty("ylanding"+levelnumber).split("-")).mapToInt(Integer::parseInt).toArray();
         }
 
 
