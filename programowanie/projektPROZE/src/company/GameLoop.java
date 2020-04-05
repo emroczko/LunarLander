@@ -12,7 +12,7 @@ public class GameLoop implements ActionListener{
     }
 
     @Override
-    public void ActionPerformed(ActionEvent a) {
+    public void actionPerformed(ActionEvent a) {
         this.level.doOneLoop();
 
     }
