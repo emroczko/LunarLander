@@ -95,20 +95,13 @@ public class Name extends JPanel{
         gbc.weightx = 1.0;
         gbc.weighty = 1.0;//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-        ///getContentPane().add(jTextField2, gridBagConstraints);
 
 
     }
     private void initializeVariables() {
         this.MainMenuImage = ImageFactory.createImage(Image.MainMenu);
     }
-<<<<<<< HEAD
-    private void initializeLayout() {
 
-    }
-=======
-    private void initializeLayout() { setPreferredSize(new Dimension(PropertiesLoad.xSize, PropertiesLoad.ySize)); }
->>>>>>> 088f2c1daf9c4b78454a5b82f2da2d0680820039
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

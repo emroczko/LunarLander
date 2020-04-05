@@ -15,27 +15,27 @@ public class Level extends JPanel{
     private boolean inGame = true;
     int a,b;
 
-<<<<<<< HEAD
+
     public Level(int xSize, int ySize) {
 
         this.removeAll();
         a = xSize;
         b = ySize;
         setPreferredSize(new Dimension(xSize,ySize));
-=======
-    public Level() {
+
+
         try {
             PropertiesLoad.loadMapsConfigs(1);
         }
         catch(Exception e){e.printStackTrace();}
->>>>>>> 088f2c1daf9c4b78454a5b82f2da2d0680820039
+
         revalidate();
         repaint();
         initializeVariables();
 
     }
 
-    private void initializeVariables() {
+    private void initializeVariables(){
         this.lander = new Lander();
         this.backgroundImage = ImageFactory.createImage(Image.Earth1);
         this.timer = new Timer(10, new GameLoop(this));
@@ -45,7 +45,7 @@ public class Level extends JPanel{
 
 
 
-    private void drawPlayer(Graphics g) {
+    private void drawPlayer(Graphics g){
         g.drawImage(lander.getImage(), (int)(lander.getX()*((float)(this.getWidth())/700)),
                 (int)(lander.getY()*((float)this.getHeight()/500)), (int)(this.getWidth()/17.5),
                 (int)(this.getHeight()/12.5), this);
