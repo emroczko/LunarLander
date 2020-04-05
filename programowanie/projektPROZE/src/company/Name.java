@@ -8,11 +8,16 @@ import java.awt.event.ActionListener;
 public class Name extends JPanel{
     private ImageIcon MainMenuImage;
     private String nick;
+    private int a, b;
 
-    public Name(){
-
+    public Name(int xSize, int ySize){
         this.removeAll();
-        initializeLayout();
+        repaint();
+        revalidate();
+        a = xSize;
+        b = ySize;
+        setPreferredSize(new Dimension(a,b));
+
         initializeVariables();
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -28,7 +33,13 @@ public class Name extends JPanel{
                 removeAll();
                 repaint();
                 revalidate();
-                add(new Level());
+                gbc.weightx = 1;
+                gbc.weighty = 1;
+                gbc.fill = GridBagConstraints.BOTH;
+                add(new Level(getWidth(),getHeight()),gbc);
+
+
+
             }
         });
        backButton.addActionListener(new ActionListener() {
@@ -37,7 +48,10 @@ public class Name extends JPanel{
                 removeAll();
                 repaint();
                 revalidate();
-                add(new Menu());
+                gbc.weightx = 1;
+                gbc.weighty = 1;
+                gbc.fill = GridBagConstraints.BOTH;
+                add(new Menu(),gbc);
             }
         });
         Font font = new Font("uni 05_53", Font.PLAIN, 20);
@@ -78,13 +92,18 @@ public class Name extends JPanel{
         gbc.gridy = 3;
         this.add(backButton, gbc);
 
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+        ///getContentPane().add(jTextField2, gridBagConstraints);
+
 
     }
     private void initializeVariables() {
         this.MainMenuImage = ImageFactory.createImage(Image.MainMenu);
     }
     private void initializeLayout() {
-        setPreferredSize(new Dimension(PropertiesLoad.xSize, PropertiesLoad.ySize));
+
     }
     @Override
     protected void paintComponent(Graphics g) {

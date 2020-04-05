@@ -12,7 +12,10 @@ public class Menu extends JPanel{
         this.removeAll();
         initializeLayout();
         initializeVariables();
+
+
         this.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
 
         JButton startButton = new JButton("Start!");
         JButton rankingButton = new JButton("Best Scores");
@@ -21,7 +24,11 @@ public class Menu extends JPanel{
                 removeAll();
                 repaint();
                 revalidate();
-                add(new Name());
+                gbc.weightx = 1;
+                gbc.weighty = 1;
+                gbc.fill = GridBagConstraints.BOTH;
+                add(new Name(getWidth(),getHeight()), gbc);
+
             }
         });
         Font font = new Font("uni 05_53", Font.PLAIN, 20);
@@ -36,8 +43,26 @@ public class Menu extends JPanel{
         //rankingButton.setForeground(Color.white);
 
 
-        this.add(startButton);
-        this.add(rankingButton);
+
+
+
+        gbc.gridwidth = 3;
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.insets = new Insets(15, 15, 15, 15);
+        this.add(startButton, gbc);
+
+        gbc.gridwidth = 1;
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.anchor = GridBagConstraints.SOUTH;
+        gbc.insets = new Insets(15, 15, 15, 15);
+        this.add(rankingButton, gbc);
+
+        //gbc.gridx = 0;
+        //gbc.gridy = 3;
+        //components_container.add(b_instructions, gbc);
+
 
 
 

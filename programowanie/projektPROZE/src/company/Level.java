@@ -13,13 +13,18 @@ public class Level extends JPanel{
     private Timer timer;
     private Lander lander;
     private boolean inGame = true;
+    int a,b;
 
-    public Level() {
+    public Level(int xSize, int ySize) {
+
+        this.removeAll();
+        a = xSize;
+        b = ySize;
+        setPreferredSize(new Dimension(xSize,ySize));
         revalidate();
         repaint();
-        this.removeAll();
         initializeVariables();
-        initializeLayout();
+
     }
 
     private void initializeVariables() {
@@ -30,9 +35,7 @@ public class Level extends JPanel{
 
     }
 
-    private void initializeLayout() {
-        setPreferredSize(new Dimension(PropertiesLoad.xSize, PropertiesLoad.ySize));
-    }
+
 
     private void drawPlayer(Graphics g) {
         g.drawImage(lander.getImage(), (int)(lander.getX()*((float)(this.getWidth())/700)), (int)(lander.getY()*((float)this.getHeight()/500)), (int)(this.getWidth()/17.5), (int)(this.getHeight()/12.5), this);
