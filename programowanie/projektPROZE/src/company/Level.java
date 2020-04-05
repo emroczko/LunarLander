@@ -8,8 +8,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.TimerTask;
 
-public class  Level extends JPanel
-{
+public class Level extends JPanel{
     private ImageIcon backgroundImage;
     private Timer timer;
     private Lander lander;
@@ -63,7 +62,8 @@ public class  Level extends JPanel
         System.out.println("Update");
     }
 
-    }
+
 }
+
 
 

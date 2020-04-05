@@ -10,10 +10,10 @@ public class Lander extends Sprite {
     }
 
     private void initialize() {
-        ImageIcon imageicon = imageFactory.createimage(Image.Lunar);
-        setImage(imageIcon.getImage());
-        int start_x = Constans.Boarswidt / 2 - Cnostans.Spaceshipwidth / 2;
-        int start_y = constans.boardhegiht;
+        ImageIcon imageicon = ImageFactory.createImage(Image.Lander);
+        setImage(imageicon.getImage());
+        int start_x = PropertiesLoad.xSize / 2 - PropertiesLoad.LanderWidth / 2;
+        int start_y = PropertiesLoad.ySize;
 
         setX(start_x);
         setY(start_y);
