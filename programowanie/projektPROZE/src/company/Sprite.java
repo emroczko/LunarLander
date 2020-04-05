@@ -1,6 +1,7 @@
 package company;
 
 import java.awt.Image;
+import java.awt.geom.Rectangle2D;
 
 public abstract class Sprite {
     private Image image;
@@ -8,6 +9,10 @@ public abstract class Sprite {
     protected int x;
     protected int y;
     protected int dx;
+
+
+
+    protected Rectangle2D rect;
 
     public abstract void move();
 
@@ -33,6 +38,9 @@ public abstract class Sprite {
     public void setY(int y){
         this.y = y;
     }
+    public void setRect(Rectangle2D r){
+        this.rect =r;
+    }
     public int getX(){
         return this.x;
     }
@@ -40,7 +48,9 @@ public abstract class Sprite {
     public int getY(){
         return this.y;
     }
-
+    public Rectangle2D getRect() {
+        return rect;
+    }
 
     public void setdead(boolean dead){
         this.dead = dead;

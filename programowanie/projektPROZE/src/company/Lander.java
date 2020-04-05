@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
 public class Lander extends Sprite {
+
     public Lander() {
         initialize();
     }
@@ -15,9 +16,10 @@ public class Lander extends Sprite {
         setImage(imageIcon.getImage());
         int start_x = PropertiesLoad.xSize / 2 - PropertiesLoad.LanderWidth / 2;
         int start_y = PropertiesLoad.ySize-450;
-
+        Rectangle2D rect = new Rectangle2D.Float(this.getX(), this.getY(), 40, 40);
         setX(start_x);
         setY(start_y);
+        setRect(rect);
 
 
     }
