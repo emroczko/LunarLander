@@ -1,8 +1,9 @@
 package company;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class GameLoop implements actionlistener {
+public class GameLoop implements ActionListener{
 
     private Level level;
 
@@ -11,7 +12,7 @@ public class GameLoop implements actionlistener {
     }
 
     @Override
-    public void ActionPerformed(ActionEvent a) {
+    public void actionPerformed(ActionEvent a) {
         this.level.doOneLoop();
 
     }

@@ -1,4 +1,4 @@
-import company.Image;
+package company;
 
 import javax.swing.JFrame;
 
@@ -9,8 +9,8 @@ public class MainMenu extends JFrame {
 
 
     private void initializeLayout() {
-        setTitle(Constans.TITLE);
-        setIconImage(ImageFactory.createimage(Image.Lander).getImage());
+        setTitle("Lunar Lander");
+        setIconImage(ImageFactory.createImage(Image.Lander).getImage());
 
 
         add(new Level());

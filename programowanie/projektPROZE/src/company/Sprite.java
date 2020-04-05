@@ -1,6 +1,6 @@
 package company;
 
-public class Sprite {
+public abstract class Sprite {
     private Image image;
     private boolean dead;
     protected int x;

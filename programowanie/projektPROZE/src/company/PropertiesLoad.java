@@ -16,6 +16,8 @@ public class PropertiesLoad {
     static int xSize;
     /** Okresla startowa wysokosc okna */
     static int ySize;
+    /** Okresla startowa wysokosc okna */
+    static int LanderWidth;
     /** Okresla odpowiednia predkosc w plaszczyznie X */
     static int enginePowerVx;
     /** Okresla odpowiednia predkosc w plaszczyznie Y */
@@ -50,6 +52,7 @@ public class PropertiesLoad {
             gameProps.load(new FileInputStream("Config.txt"));
             xSize = Integer.parseInt(gameProps.getProperty("xSize"));
             ySize = Integer.parseInt(gameProps.getProperty("ySize"));
+            LanderWidth = Integer.parseInt(gameProps.getProperty("LanderWidth"));
             enginePowerVx = Integer.parseInt(gameProps.getProperty("enginePowerVx"));
             enginePowerVy = Integer.parseInt(gameProps.getProperty("enginePowerVy"));
             fuelAmount = Integer.parseInt(gameProps.getProperty("fuelAmount"));
