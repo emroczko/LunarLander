@@ -6,3 +6,5 @@ fuelAmount=100
 maxPointsAmount=400
 numberOfLives=5
 bonusPerSecond=-5
+Landerwidth=40
+LanderHeight=40
