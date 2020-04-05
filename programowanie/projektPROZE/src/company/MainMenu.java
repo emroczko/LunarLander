@@ -16,12 +16,11 @@ public class MainMenu extends JFrame {
         setTitle("Lunar Lander");
         setIconImage(ImageFactory.createImage(Image.Lander).getImage());
 
-<<<<<<< HEAD
 
         add(new Menu());
-=======
-        add(new Level());
->>>>>>> 3a8a8cf5e8e538f5e09926c1f20d6393725020b9
+
+        //add(new Level());
+
 
         pack();
         setDefaultCloseOperation(EXIT_ON_CLOSE);

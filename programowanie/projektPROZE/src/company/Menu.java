@@ -18,7 +18,10 @@ public class Menu extends JPanel{
         JButton rankingButton = new JButton("Best Scores");
         startButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            Level lvl = new Level();
+                removeAll();
+                repaint();
+                revalidate();
+                add(new Level());
             }
         });
         Font font = new Font("uni 05_53", Font.PLAIN, 20);
