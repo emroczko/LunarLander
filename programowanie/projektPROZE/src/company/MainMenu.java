@@ -5,7 +5,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.*;
 import javax.imageio.ImageIO;
-import javax.swing.border.LineBorder;
 import java.io.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -28,11 +27,11 @@ public class MainMenu extends JFrame {
 
         Frame test =new JFrame();
         String bg_path = "Images/MainMenu.png";
-        load_image(bg_path);
+        //load_image(bg_path);
 
         timer = new Timer();
 
-        Container components_container = new JLabel(new ImageIcon(bg_path));
+        Container components_container = new JLabel();
 
         components_container.setLayout(new GridBagLayout());
 
@@ -102,7 +101,7 @@ public class MainMenu extends JFrame {
     }
     void bestScoreScreen(){
         this.getContentPane().removeAll();
-        load_image("Images/SaturnMoon.png");
+        //load_image("Images/SaturnMoon.png");
         Container components_container = new JLabel(new ImageIcon("Images/SaturnMoon.png"));
 
 
@@ -201,14 +200,14 @@ public class MainMenu extends JFrame {
         this.setLayout(new GridBagLayout());
 
         String imgPath = whichLevel(levelNumber);
-        load_image(imgPath);
-        Container components_container = new JLabel(new ImageIcon(imgPath));
+        //load_image(imgPath);
+        Container components_container = new JLabel();
 
         components_container.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 
         Level level = new Level(levelNumber);
-        timer.scheduleAtFixedRate(level.new Animation_Timer(), 100, 30);
+        //timer.scheduleAtFixedRate(level.new Animation_Timer(), 100, 30);
         this.add(components_container);
         this.add(level);
         this.setVisible(true);
@@ -305,6 +304,7 @@ public class MainMenu extends JFrame {
     public void paint(Graphics g){
         super.paint(g);
         g.drawImage(img, 0, 0,getWidth(), getHeight(),this);
+
     }
 
 

@@ -13,12 +13,7 @@ public class Level extends Canvas
     private Lander player;
     private BufferStrategy bufstrat;
     public Level(int levelNumber){
-        player = new Lander(this.getWidth(), this.getHeight());
-    }
-    public void render_objects(Graphics g)
-    {
-        Graphics2D g2d = (Graphics2D) g;
-        player.drawLander(g, this.getWidth(), this.getHeight());
+        player = new Lander(this.getWidth(), this.getHeight());this.repaint();
     }
     public final void addNotify()
     {
@@ -26,17 +21,8 @@ public class Level extends Canvas
         createBufferStrategy(2);
         bufstrat = getBufferStrategy();
     }
-    public class Animation_Timer extends TimerTask{
-        public void run()
-        {
-            do {
-                do {
-                    Graphics graph = bufstrat.getDrawGraphics();
-                    render_objects(graph);
-                    graph.dispose();
-                } while(bufstrat.contentsRestored());
-                bufstrat.show();
-            }while(bufstrat.contentsLost());
-        }
+    public void paint(Graphics g){
+        super.paint(g);
+        player.drawLander(g, this.getWidth(), this.getHeight());
     }
 }
