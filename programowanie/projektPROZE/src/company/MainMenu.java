@@ -1,7 +1,5 @@
 package company;
 
-import javafx.scene.layout.BackgroundImage;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -198,6 +196,7 @@ public class MainMenu extends JFrame {
     void loadLevel(int levelNumber){
         this.getContentPane().removeAll();
         this.repaint();
+        this.reset_timer();
         timer = new Timer();
         this.setLayout(new GridBagLayout());
 
@@ -207,60 +206,11 @@ public class MainMenu extends JFrame {
 
         components_container.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        Button exitButton = new Button("Wyjście");
-       // Button pauseButton =  new Button("Pauza");
-        Label vy = new Label("999999");
-        Label vx = new Label("999999");
-        Label fuelLabel = new Label("Paliwo: 99999");
-        Label spaceships = new Label("Pozostałe statki: 99");
-        Label typeNick=new Label("chuj");
-        TextField enterName = new TextField("nie dziala");
-        JButton pauseButton = new JButton("||");
-        Button b_back = new Button("Back");
 
-        Font font = new Font("uni 05_53", Font.PLAIN, 20);
-
-        typeNick.setBackground(Color.black);
-        typeNick.setFont(font);
-        typeNick.setForeground(Color.lightGray);
-
-        enterName.setBackground(Color.black);
-        enterName.setFont(font);
-        enterName.setForeground(Color.YELLOW);
-        //enterName.setHorizontalAlignment(JTextField.CENTER);
-
-        pauseButton.setFont(font);
-        pauseButton.setForeground(Color.white);
-       // pauseButton.setBackground(Color.black);
-       pauseButton.setOpaque(false);
-       pauseButton.setContentAreaFilled(false);
-        pauseButton.setBorderPainted(false);
-
-        b_back.setFont(font);
-        b_back.setBackground(Color.black);
-
-
-
-        gbc.gridwidth = 3;
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.insets = new Insets(15, 15, 15, 15);
-        components_container.add(typeNick, gbc);
-
-        gbc.gridwidth = 2;
-        gbc.gridx = 1;
-        gbc.gridy = 2;
-
-        components_container.add(enterName, gbc);
-
-        gbc.gridx = -7;
-        gbc.gridy = -8;
-        components_container.add(pauseButton, gbc);
-
-        gbc.gridx = 0;
-        gbc.gridy = 3;
-        components_container.add(b_back, gbc);
+        Level level = new Level(levelNumber);
+        timer.scheduleAtFixedRate(level.new Animation_Timer(), 100, 30);
         this.add(components_container);
+        this.add(level);
         this.setVisible(true);
     }
 
@@ -345,11 +295,16 @@ public class MainMenu extends JFrame {
         catch(Exception e){e.printStackTrace();}
     }
 
+    private void reset_timer()
+    {
+        timer.cancel();
+        timer.purge();
+    }
+
     @Override
     public void paint(Graphics g){
         super.paint(g);
         g.drawImage(img, 0, 0,getWidth(), getHeight(),this);
-        //super.paint(g);
     }
 
 

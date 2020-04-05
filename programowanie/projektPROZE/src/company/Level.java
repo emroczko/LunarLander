@@ -18,8 +18,7 @@ public class Level extends Canvas
     public void render_objects(Graphics g)
     {
         Graphics2D g2d = (Graphics2D) g;
-
-        g2d.fill(player.get_rect());
+        player.drawLander(g, this.getWidth(), this.getHeight());
     }
     public final void addNotify()
     {
@@ -30,9 +29,14 @@ public class Level extends Canvas
     public class Animation_Timer extends TimerTask{
         public void run()
         {
-            Graphics graph = bufstrat.getDrawGraphics();
-            render_objects(graph);
-            graph.dispose();
+            do {
+                do {
+                    Graphics graph = bufstrat.getDrawGraphics();
+                    render_objects(graph);
+                    graph.dispose();
+                } while(bufstrat.contentsRestored());
+                bufstrat.show();
+            }while(bufstrat.contentsLost());
         }
     }
 }
