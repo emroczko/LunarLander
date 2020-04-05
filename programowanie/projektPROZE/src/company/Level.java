@@ -32,14 +32,14 @@ public class Level extends JPanel{
     }
 
     private void drawPlayer(Graphics g) {
-        g.drawImage(lander.getImage(), lander.getX(), lander.getY(), this);
-
+        g.drawImage(lander.getImage(), (int)(lander.getX()*((float)(this.getWidth())/700)), (int)(lander.getY()*((float)this.getHeight()/500)), (int)(this.getWidth()/17.5), (int)(this.getHeight()/12.5), this);
+        System.out.println((this.getWidth())/700 +"            " + this.getHeight()/500);
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(backgroundImage.getImage(), 0, 0, null);
+        g.drawImage(backgroundImage.getImage(), 0, 0, this.getWidth(), this.getHeight(), null);
         doDrawing(g);
     }
 
