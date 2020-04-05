@@ -1,10 +1,14 @@
 package company;
 
-import javax.swing.JFrame;
+import javax.swing.*;
+import java.awt.*;
 
 public class MainMenu extends JFrame {
+
+
     public MainMenu() {
-        initializeLayout();
+    initializeLayout();
+
     }
 
 
@@ -13,8 +17,7 @@ public class MainMenu extends JFrame {
         setIconImage(ImageFactory.createImage(Image.Lander).getImage());
 
 
-
-        add(new Level());
+        add(new Menu());
 
         pack();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -22,4 +25,12 @@ public class MainMenu extends JFrame {
         setResizable(true);
         setVisible(true);
     }
+
+    private void startLevel(){
+        add(new Level());
+    }
+
+
+
+
 }
