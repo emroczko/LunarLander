@@ -10,7 +10,6 @@ public class backgroundImage extends JPanel{
     public backgroundImage(String path) {
         try {
             image = ImageIO.read(new File(path));
-            //System.out.println(img);
         } catch (Exception e) {
             e.printStackTrace();
         }
