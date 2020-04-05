@@ -1,3 +1,5 @@
+import company.Image;
+
 import javax.swing.JFrame;
 
 public class MainMenu extends JFrame {
@@ -8,15 +10,15 @@ public class MainMenu extends JFrame {
 
     private void initializeLayout() {
         setTitle(Constans.TITLE);
-        seticonImage(ImageFactory.createimage(image.spaceship).getImage());
+        setIconImage(ImageFactory.createimage(Image.Lander).getImage());
 
 
-        add(new GamePanel());
+        add(new Level());
 
         pack();
-        setDefaultCoseOperative(Exitonclose);
-        setLocationRelativetoNull
-        setResizable(false);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setResizable(true);
         setVisible(true);
     }
 }

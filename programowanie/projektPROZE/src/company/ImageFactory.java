@@ -7,6 +7,9 @@ public class ImageFactory {
         ImageIcon imageIcon = null;
 
         switch (image) {
+            case MainMenu:
+                imageIcon = new ImageIcon("Images/MainMenu.png");
+                break;
             case Lander:
                 imageIcon = new ImageIcon("Images/Lander.png");
                 break;
