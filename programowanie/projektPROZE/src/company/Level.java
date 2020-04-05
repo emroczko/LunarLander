@@ -15,6 +15,9 @@ public class Level extends JPanel{
     private boolean inGame = true;
 
     public Level() {
+        revalidate();
+        repaint();
+        this.removeAll();
         initializeVariables();
         initializeLayout();
     }

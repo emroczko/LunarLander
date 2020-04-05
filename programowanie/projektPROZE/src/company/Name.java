@@ -10,6 +10,7 @@ public class Name extends JPanel{
     private String nick;
 
     public Name(){
+
         this.removeAll();
         initializeLayout();
         initializeVariables();
