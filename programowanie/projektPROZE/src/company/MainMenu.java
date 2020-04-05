@@ -16,7 +16,7 @@ public class MainMenu extends JFrame {
         pack();
         setDefaultCoseOperative(Exitonclose);
         setLocationRelativetoNull
-        setResizable(false);
+        setResizable(true);
         setVisible(true);
     }
 }
