@@ -22,13 +22,22 @@ public class  Level extends JPanel
 
     private void initializeVariables() {
         this.lander = new Lander();
+<<<<<<< HEAD
         this.backgroundImage = ImageFactory.createImage(Image.Earth1);
         this.timer = new Timer(10, new GameLoop(this));
+=======
+        this.backgroundImage = ImageFactory.createImage(Image.Background);
+        this.timer = new Timer(10, new GameLoop(this) );
+>>>>>>> ce543b38e6215e2596473ae99ad50d117e8e3235
         this.timer.start();
 
     }
 
+<<<<<<< HEAD
     private void initializeLayout() {
+=======
+    private void initializeLayout(){
+>>>>>>> ce543b38e6215e2596473ae99ad50d117e8e3235
         setPreferredSize(new Dimension(PropertiesLoad.xSize, PropertiesLoad.ySize));
     }
 
@@ -38,6 +47,7 @@ public class  Level extends JPanel
     }
 
     @Override
+<<<<<<< HEAD
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(backgroundImage.getImage(), 0, 0, null);
@@ -52,6 +62,23 @@ public class  Level extends JPanel
                 timer.stop();
             }
             Toolkit.getDefaultToolkit().sync();
+=======
+    protected void paintComponent(Graphics g){
+		super.paintComponent(g);
+		g.drawImage(backgroundImage.getImage(),0, 0, null);
+        doDrawing(g);
+    }
+
+    private void doDrawing(Graphics g){
+        if(inGame){
+            drawPlayer(g);
+        }else{
+            if(timer.isRunning()){
+                timer.stop();
+            }
+            toolkit.getDefaultToolkit().sync();
+
+>>>>>>> ce543b38e6215e2596473ae99ad50d117e8e3235
         }
 
         public void doOneLoop () {

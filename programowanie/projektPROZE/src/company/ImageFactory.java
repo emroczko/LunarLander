@@ -7,7 +7,11 @@ public class ImageFactory {
         ImageIcon imageIcon = null;
 
         switch (image) {
+<<<<<<< HEAD
             case MainMenu:
+=======
+            case Background:
+>>>>>>> ce543b38e6215e2596473ae99ad50d117e8e3235
                 imageIcon = new ImageIcon("Images/MainMenu.png");
                 break;
             case Lander:

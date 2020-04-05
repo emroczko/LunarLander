@@ -1,6 +1,6 @@
 package company;
 
-public class Sprite {
+public abstract class Sprite {
     private Image image;
     private boolean dead;
     protected int x;
@@ -15,7 +15,6 @@ public class Sprite {
 
     public void die(){
         this.dead = true;
-
     }
 
     public void setImage(Image image){
@@ -40,7 +39,7 @@ public class Sprite {
     }
 
 
-    public void setdead(boolean dead){
+    public void setDead(boolean dead){
         this.dead = dead;
     }
     public boolean isDead(){
