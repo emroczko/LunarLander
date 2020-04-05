@@ -1,5 +1,7 @@
 package company;
 
+import java.awt.Image;
+
 public abstract class Sprite {
     private Image image;
     private boolean dead;
