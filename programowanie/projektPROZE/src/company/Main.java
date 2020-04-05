@@ -1,9 +1,15 @@
 package company;
 
-public class Main{
+
+import java.awt.EventQueue;
+
+public class Main {
 
     public static void main(String[] args) {
         MainMenu win = new MainMenu();
-    }
+        EventQueue.invokeLater(() -> {
+            new MainMenu();
+        });
 
+    }
 }
