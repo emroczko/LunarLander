@@ -10,7 +10,7 @@ public class Lander extends Sprite {
     }
 
     private void initialize() {
-        ImageIcon imageIcon = ImageFactory.createImage(Image.LUNAR);
+        ImageIcon imageIcon = ImageFactory.createImage(Image.Lander);
         setImage(imageIcon.getImage());
         int start_x = PropertiesLoad.xSize/2-PropertiesLoad.LunarWidth/2;
         int start_y = PropertiesLoad.ySize;

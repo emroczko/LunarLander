@@ -12,6 +12,8 @@ import java.io.FileInputStream;
 
 public class PropertiesLoad {
 
+    /** Tytuł gry */
+    static String Title;
     /** Okresla startowa szerokosc okna */
     static int xSize;
     /** Okresla startowa wysokosc okna */

@@ -16,18 +16,18 @@ public class  Level extends JPanel{
 
     public Level(){
         initializeVariables();
-        initializeLaytout();
+        initializeLayout();
     }
     private void initializeVariables(){
         this.lander = new Lander();
-        this.backgroundImage = ImageFactory.createimiage(Image.background);
+        this.backgroundImage = ImageFactory.createImage(Image.Background);
         this.timer = new Timer(10, new GameLoop(this) );
         this.timer.start();
 
     }
 
     private void initializeLayout(){
-        setPreferredsize(new Dimensiosn(PropertiesLoad.xSize, PropertiesLoad.ySize));
+        setPreferredSize(new Dimension(PropertiesLoad.xSize, PropertiesLoad.ySize));
     }
     private void drawPlayer(Graphics g{
         g.drawImage(lander.getImage(), lander.getX(), lander.getY(), this);
@@ -35,21 +35,20 @@ public class  Level extends JPanel{
     }
 
     @Override
-    protected void paintComponent(Graphics g)[
+    protected void paintComponent(Graphics g){
 		super.paintComponent(g);
-		g.drawImage(backgroundImage.getimage(),0, 0, null)
+		g.drawImage(backgroundImage.getImage(),0, 0, null);
+        doDrawing(g);
+    }
 
-    doDrawing(g);
-}
-
-    private void doDrawing(graphics g){
+    private void doDrawing(Graphics g){
         if(inGame){
             drawPlayer(g);
         }else{
             if(timer.isRunning()){
                 timer.stop();
             }
-            TOOLKIT.GETDEFAULTTOOLKIT().SYNC();
+            toolkit.getDefaultToolkit().sync();
 
         }
 

@@ -7,19 +7,14 @@ public class ImageFactory {
         ImageIcon imageIcon = null;
 
         switch (image) {
-<<<<<<< HEAD
-            case UFO:
-                imageIcon = new ImageIcon(Constans.Ufo_image_url);
+            case Background:
+                imageIcon = new ImageIcon("Images/MainMenu.png");
                 break;
-            case Lander
-                imageIcon = new ImageIcon(Constans.Ufo_image_url);
-=======
             case Lander:
                 imageIcon = new ImageIcon("Images/Lander.png");
                 break;
             case Earth1:
                 imageIcon = new ImageIcon("Images/EarthMoon.png");
->>>>>>> c00e5df2e7e32d64399ba47308bff595882f8e7f
                 break;
             case Earth2:
                 imageIcon = new ImageIcon("Images/EarthMoon2.png");
