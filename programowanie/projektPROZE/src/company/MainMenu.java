@@ -12,8 +12,6 @@ public class MainMenu extends JFrame {
         setTitle("Lunar Lander");
         setIconImage(ImageFactory.createImage(Image.Lander).getImage());
 
-
-
         add(new Level());
 
         pack();
