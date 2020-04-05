@@ -46,22 +46,22 @@ public class  Level extends JPanel
 
     private void doDrawing(Graphics g) {
         if (inGame) {
-            drawPlayer(g);}
-        else {
+            drawPlayer(g);
+        } else {
             if (timer.isRunning()) {
                 timer.stop();
             }
             Toolkit.getDefaultToolkit().sync();
         }
+    }
+    public void doOneLoop(){
+        this.update();
+        this.repaint();
+    }
 
-        public void doOneLoop () {
-            this.update();
-            this.repaint();
-        }
-
-        private void update () {
-            System.out.println("Update");
-        }
+    private void update(){
+        System.out.println("Update");
+    }
 
     }
 }

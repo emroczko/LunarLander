@@ -1,16 +1,18 @@
 package company;
 
+import java.awt.event.ActionEvent;
+
 public class GameLoop implements actionlistener {
 
-    private GamePanel gamePanel;
+    private Level level;
 
-    public GameLoop(GamePanel gamePanel) {
-        this.gamePanel = gamePanel;
+    public GameLoop(Level level) {
+        this.level = level;
     }
 
-    @Overrride
-    public void actionperformed(ActionEvent a) {
-        this.gamePanel.doOneloop();
+    @Override
+    public void ActionPerformed(ActionEvent a) {
+        this.level.doOneLoop();
 
     }
 }
