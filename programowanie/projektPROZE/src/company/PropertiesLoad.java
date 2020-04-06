@@ -41,6 +41,8 @@ public class PropertiesLoad {
     static int[] xLanding;
     /** tablica przechowujaca y'owe wspolrzedne wierzcholkow wielokata bedacego ladowiskiem */
     static int[] yLanding;
+    /** Określa przyśpieszenie grawitacyjne na danej mapie*/
+    static float mapGravity;
 
         /** Metoda wczytuje dane z lokalnego pliku i zapisuje do odpowiednich pól w klasie */
         static void loadProps() throws IOException {
@@ -59,7 +61,7 @@ public class PropertiesLoad {
             maxPointsAmount = Integer.parseInt(gameProps.getProperty("maxPointsAmount"));
             propertiesFile.close();
         }
-        /** metoda wczytująca współrzędne ukształtowania planet (Hit Box) */
+        /** metoda wczytująca współrzędne ukształtowania planet (Hit Box) i jej współczynnik grawitacji */
         static void loadMapsConfigs(int levelnumber) throws IOException{
             InputStream propertiesFile_maps = new FileInputStream("Maps.txt");
             Properties mapProps = new Properties();
@@ -68,6 +70,7 @@ public class PropertiesLoad {
             yPoints = Arrays.stream(mapProps.getProperty("ypoints"+levelnumber).split("-")).mapToInt(Integer::parseInt).toArray();
             xLanding = Arrays.stream(mapProps.getProperty("xlanding"+levelnumber).split("-")).mapToInt(Integer::parseInt).toArray();
             yLanding = Arrays.stream(mapProps.getProperty("ylanding"+levelnumber).split("-")).mapToInt(Integer::parseInt).toArray();
+            mapGravity = Float.parseFloat(mapProps.getProperty("gravity"));
         }
 
 

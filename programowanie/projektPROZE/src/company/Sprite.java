@@ -17,9 +17,14 @@ public abstract class Sprite {
     protected int x;
     /** Zmienna określająca położenie Landera w pionie*/
     protected int y;
+    /**Zmiana w położeniu poziomym*/
     protected int dx;
-
-
+    /**Zmiana w położeniu pionowym*/
+    protected int dy;
+    /**Prędkość w poziomie*/
+    protected float velx;
+    /**Prędkość w pionie*/
+    protected float vely;
 
     protected Rectangle2D rect;
 
@@ -58,6 +63,7 @@ public abstract class Sprite {
     public int getY(){
         return this.y;
     }
+    /** metoda typu setter ustawiająca prostokąt obiektu(Hitbox)*/
     public Rectangle2D getRect() {
         return rect;
     }

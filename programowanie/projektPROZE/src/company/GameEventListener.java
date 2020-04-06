@@ -12,11 +12,13 @@ public class GameEventListener extends KeyAdapter {
 
     @Override
     public void keyReleased(KeyEvent e){
+        System.out.println("GameEventListener Released");
         this.level.keyReleased(e);
     }
 
     @Override
     public void keyPressed(KeyEvent e){
+        System.out.println("GameEventListener Pressed");
         this.level.keyPressed(e);
     }
 }

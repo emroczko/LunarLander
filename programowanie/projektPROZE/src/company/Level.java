@@ -173,6 +173,8 @@ public class Level extends JPanel{
     }
     /** Funkcja inicjująca zmienne klasy*/
     private void initializeVariables(){
+        this.addKeyListener(new GameEventListener(this));
+        setFocusable(true);
         this.lander = new Lander();
         this.backgroundImage = ImageFactory.createImage(Image.Earth1);
         this.timer = new Timer(10, new GameLoop(this));
@@ -273,12 +275,14 @@ public class Level extends JPanel{
     }
 
     private void update(){
-
+        this.lander.update();
     }
     public void keyReleased(KeyEvent e){
+        System.out.println("Level key released");
         this.lander.keyReleased(e);
     }
     public void keyPressed(KeyEvent e){
+        System.out.println("Level key pressed");
         this.lander.keyPressed(e);
     }
 

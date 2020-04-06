@@ -31,16 +31,36 @@ public class Lander extends Sprite {
     }
     @Override
     public void move() {
+        //System.out.println(this.velx + "" + this.vely);
+        this.x += velx;
+        this.y += vely;
+        //System.out.println(this.x + " " + this.y);
+    }
+    public void acceleration(float accX, float accY){
+        this.velx += accX;
+        this.vely += accY;
+    }
+    public void update(){
+        move();
+        acceleration(0, PropertiesLoad.mapGravity);
     }
 
     public void keyPressed(KeyEvent e){
         int key = e.getKeyCode();
+        System.out.println("key event");
 
         if(key == KeyEvent.VK_UP){
-            //dx =
+            System.out.println(PropertiesLoad.enginePowerVx);
+            vely -= PropertiesLoad.enginePowerVy;
+            vely += PropertiesLoad.mapGravity;
+        }
+        if(key == KeyEvent.VK_LEFT){
+            velx -= PropertiesLoad.enginePowerVx;
+        }
+        if(key == KeyEvent.VK_RIGHT){
+            velx += PropertiesLoad.enginePowerVx;
         }
     }
     public void keyReleased(KeyEvent e){
-        int key = e.getKeyCode();
     }
 }
