@@ -42,6 +42,7 @@ public class PropertiesLoad {
     /** tablica przechowujaca y'owe wspolrzedne wierzcholkow wielokata bedacego ladowiskiem */
     static int[] yLanding;
 
+        /** Metoda wczytuje dane z lokalnego pliku i zapisuje do odpowiednich pól w klasie */
         static void loadProps() throws IOException {
 
             InputStream propertiesFile = new FileInputStream("Config.txt");
@@ -58,6 +59,7 @@ public class PropertiesLoad {
             maxPointsAmount = Integer.parseInt(gameProps.getProperty("maxPointsAmount"));
             propertiesFile.close();
         }
+        /** metoda wczytująca współrzędne ukształtowania planet (Hit Box) */
         static void loadMapsConfigs(int levelnumber) throws IOException{
             InputStream propertiesFile_maps = new FileInputStream("Maps.txt");
             Properties mapProps = new Properties();

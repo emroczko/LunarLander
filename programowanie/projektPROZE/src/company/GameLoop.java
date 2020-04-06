@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 
 public class GameLoop implements ActionListener{
 
+    /** obiekt klasy Level*/
     private Level level;
 
     public GameLoop(Level level) {
