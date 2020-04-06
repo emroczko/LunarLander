@@ -19,7 +19,6 @@ public class Level extends JPanel{
 
 
     public Level(int xSize, int ySize) {
-
         this.removeAll();
 
         setPreferredSize(new Dimension(xSize,ySize));
@@ -130,19 +129,38 @@ public class Level extends JPanel{
     }
 
     private void drawPlayer(Graphics g){
-        g.drawImage(lander.getImage(), (int)(lander.getX()*((float)(this.getWidth())/700)),
-                (int)(lander.getY()*((float)this.getHeight()/500)), (int)(this.getWidth()/17.5),
+        g.drawImage(lander.getImage(), (int)(lander.getX()*((float)(this.getWidth())/PropertiesLoad.xSize)),
+                (int)(lander.getY()*((float)this.getHeight()/PropertiesLoad.ySize)), (int)(this.getWidth()/17.5),
                 (int)(this.getHeight()/12.5), this);
+
         g.setColor(Color.red);
-        g.drawRect(lander.getX(), lander.getY(), 40, 40);
+        g.drawRect((int)(lander.getX()*((float)(this.getWidth())/PropertiesLoad.xSize)),
+                (int)(lander.getY()*((float)this.getHeight()/PropertiesLoad.ySize)),
+                (int)(40*((float)getWidth()/PropertiesLoad.xSize)),(int)(40*((float)getHeight()/PropertiesLoad.ySize)));
     }
     private void drawGround(Graphics g){
-        Polygon moon = new Polygon(PropertiesLoad.xPoints, PropertiesLoad.yPoints, PropertiesLoad.xPoints.length);
-        Polygon landing = new Polygon(PropertiesLoad.xLanding, PropertiesLoad.yLanding, PropertiesLoad.xLanding.length);
+        Polygon moon = new Polygon(scalePoints(PropertiesLoad.xPoints, 'x'), scalePoints(PropertiesLoad.yPoints, 'y'),
+                PropertiesLoad.xPoints.length);
+        Polygon landing = new Polygon(scalePoints(PropertiesLoad.xLanding, 'x'), scalePoints(PropertiesLoad.yLanding, 'y'), PropertiesLoad.xLanding.length);
         g.setColor(Color.green);
         g.drawPolygon(moon);
         g.setColor(Color.blue);
         g.drawPolygon(landing);
+    }
+    private int[] scalePoints(int[] points, char param)
+    {
+        int[] scaled_points = new int[points.length];
+        for(int i=0; i<points.length; i++){
+            if(param == 'y') {
+                scaled_points[i] = (int)(points[i] * ((float) getHeight() / PropertiesLoad.ySize));
+            }
+            else {
+                scaled_points[i] = (int)(points[i] * ((float) getWidth() / PropertiesLoad.xSize));
+            }
+            System.out.println((float)(getWidth())/PropertiesLoad.xSize);
+        }
+
+        return scaled_points;
     }
 
     @Override
