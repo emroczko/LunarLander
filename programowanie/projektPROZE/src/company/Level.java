@@ -53,16 +53,17 @@ public class Level extends JPanel{
         JLabel emptyLabel = new JLabel("  ");
         JLabel landersLeft = new JLabel(this.landersLeftIcon = ImageFactory.createImage(Image.Lander));
 
-        Fonts font = new Fonts();
+        Font font1 = new Font("uni 05_53", Font.PLAIN, 40);
 
-        continueButton.setFont(font.getFont(40));
+
+        continueButton.setFont(font1);
         continueButton.setForeground(Color.BLUE);
         continueButton.setOpaque(false);
         continueButton.setContentAreaFilled(false);
         continueButton.setBorderPainted(false);
         continueButton.setVisible(false);
 
-        exitButton.setFont(font.getFont(40));
+        exitButton.setFont(font1);
         exitButton.setForeground(Color.BLUE);
         exitButton.setOpaque(false);
         exitButton.setContentAreaFilled(false);
@@ -98,27 +99,29 @@ public class Level extends JPanel{
                 add(new Menu(),gbc);
             }
         });
+        Font font = new Font("uni 05_53", Font.PLAIN, 20);
+        Font font2 = new Font("uni 05_53", Font.PLAIN, 10);
 
-        pauseButton.setFont(font.getFont(40));
+        pauseButton.setFont(font1);
         pauseButton.setForeground(Color.lightGray);
         pauseButton.setOpaque(false);
         pauseButton.setContentAreaFilled(false);
         pauseButton.setBorderPainted(false);
 
         vx.setBackground(Color.black);
-        vx.setFont(font.getFont(20));
+        vx.setFont(font);
         vx.setForeground(Color.lightGray);
 
         vy.setBackground(Color.black);
-        vy.setFont(font.getFont(20));
+        vy.setFont(font);
         vy.setForeground(Color.lightGray);
 
         time.setBackground(Color.black);
-        time.setFont(font.getFont(20));
+        time.setFont(font);
         time.setForeground(Color.lightGray);
 
         leftLandersLabel.setBackground(Color.black);
-        leftLandersLabel.setFont(font.getFont(20));
+        leftLandersLabel.setFont(font);
         leftLandersLabel.setForeground(Color.lightGray);
 
         gbc.gridx = 7;
@@ -165,12 +168,10 @@ public class Level extends JPanel{
 
         this.add(exitButton);
         this.add(continueButton);
-
-
     }
     /** Funkcja inicjująca zmienne klasy*/
     private void initializeVariables(){
-        this.addKeyListener(new GameEventListener(this));
+        
         setFocusable(true);
         this.lander = new Lander();
         this.backgroundImage = ImageFactory.createImage(Image.Earth1);

@@ -17,7 +17,7 @@ public class Main {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            new MainFrame();
+            new MainMenu();
         });
 
     }

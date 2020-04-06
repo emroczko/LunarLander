@@ -4,8 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 
 /**
@@ -27,9 +25,6 @@ public class Name extends JPanel{
         a = xSize;
         b = ySize;
         setPreferredSize(new Dimension(a,b));
-        Fonts font = new Fonts();
-        Color aqua = new Color (51, 134, 175);
-        Color citron = new Color (223, 234, 24);
 
         initializeVariables();
         this.setLayout(new GridBagLayout());
@@ -37,7 +32,7 @@ public class Name extends JPanel{
 
         JButton startButton = new JButton("Start!");
         JButton backButton = new JButton("Back");
-        JLabel typeNick=new JLabel("Type your nick:");
+        JLabel typeNick=new JLabel("Type your nick");
         JTextField enterName = new JTextField("Your nick...");
 
         startButton.addActionListener(new ActionListener() {
@@ -68,34 +63,30 @@ public class Name extends JPanel{
                 add(new Menu(),gbc);
             }
         });
+        Font font = new Font("uni 05_53", Font.PLAIN, 24);
+        Font font1 = new Font("uni 05_53", Font.PLAIN, 32);
 
-        enterName.addMouseListener(new MouseAdapter(){
-            @Override
-            public void mouseClicked(MouseEvent e){
-                enterName.setText("");
-            }
-        });
 
-        startButton.setFont(font.getFont(32));
+        startButton.setFont(font1);
         startButton.setOpaque(false);
         startButton.setContentAreaFilled(false);
         startButton.setBorderPainted(false);
-        startButton.setForeground(citron);
+        startButton.setForeground(Color.white);
 
 
-        backButton.setFont(font.getFont(32));
+        backButton.setFont(font1);
         backButton.setOpaque(false);
         backButton.setContentAreaFilled(false);
         backButton.setBorderPainted(false);
-        backButton.setForeground(citron);
+        backButton.setForeground(Color.white);
 
         typeNick.setBackground(Color.black);
-        typeNick.setFont(font.getFont(24));
+        typeNick.setFont(font);
         typeNick.setForeground(Color.lightGray);
 
         enterName.setBackground(Color.black);
-        enterName.setFont(font.getFont(24));
-        enterName.setForeground(aqua);
+        enterName.setFont(font);
+        enterName.setForeground(Color.YELLOW);
 
         gbc.gridwidth = 3;
         gbc.gridx = 0;
@@ -118,7 +109,7 @@ public class Name extends JPanel{
         this.add(backButton, gbc);
 
         gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
+        gbc.weighty = 1.0;//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
 
