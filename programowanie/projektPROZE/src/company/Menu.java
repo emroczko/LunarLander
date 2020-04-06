@@ -99,6 +99,6 @@ public class Menu extends JPanel{
         g.drawImage(MainMenuImage.getImage(), 0, 0, this.getWidth(), this.getHeight(), null);
 
     }
-    
+
 
 }
