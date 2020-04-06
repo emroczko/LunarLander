@@ -83,6 +83,7 @@ public class Level extends JPanel{
                 pauseButton.setVisible(true);
                 pause(false);
                 continueButton.setVisible(false);
+                exitButton.setVisible(false);
             }
         });
 
