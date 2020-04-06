@@ -52,17 +52,16 @@ public class Level extends JPanel{
         JLabel emptyLabel = new JLabel("  ");
         JLabel landersLeft = new JLabel(this.landersLeftIcon = ImageFactory.createImage(Image.Lander));
 
-        Font font1 = new Font("uni 05_53", Font.PLAIN, 40);
+        Fonts font = new Fonts();
 
-
-        continueButton.setFont(font1);
+        continueButton.setFont(font.getFont(40));
         continueButton.setForeground(Color.BLUE);
         continueButton.setOpaque(false);
         continueButton.setContentAreaFilled(false);
         continueButton.setBorderPainted(false);
         continueButton.setVisible(false);
 
-        exitButton.setFont(font1);
+        exitButton.setFont(font.getFont(40));
         exitButton.setForeground(Color.BLUE);
         exitButton.setOpaque(false);
         exitButton.setContentAreaFilled(false);
@@ -98,29 +97,27 @@ public class Level extends JPanel{
                 add(new Menu(),gbc);
             }
         });
-        Font font = new Font("uni 05_53", Font.PLAIN, 20);
-        Font font2 = new Font("uni 05_53", Font.PLAIN, 10);
 
-        pauseButton.setFont(font1);
+        pauseButton.setFont(font.getFont(40));
         pauseButton.setForeground(Color.lightGray);
         pauseButton.setOpaque(false);
         pauseButton.setContentAreaFilled(false);
         pauseButton.setBorderPainted(false);
 
         vx.setBackground(Color.black);
-        vx.setFont(font);
+        vx.setFont(font.getFont(20));
         vx.setForeground(Color.lightGray);
 
         vy.setBackground(Color.black);
-        vy.setFont(font);
+        vy.setFont(font.getFont(20));
         vy.setForeground(Color.lightGray);
 
         time.setBackground(Color.black);
-        time.setFont(font);
+        time.setFont(font.getFont(20));
         time.setForeground(Color.lightGray);
 
         leftLandersLabel.setBackground(Color.black);
-        leftLandersLabel.setFont(font);
+        leftLandersLabel.setFont(font.getFont(20));
         leftLandersLabel.setForeground(Color.lightGray);
 
         gbc.gridx = 7;

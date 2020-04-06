@@ -38,16 +38,15 @@ public class Menu extends JPanel{
 
             }
         });
-        Font font = new Font("uni 05_53", Font.PLAIN, 32);
 
-        startButton.setFont(fontName.getFont());
+        startButton.setFont(fontName.getFont(32));
         startButton.setOpaque(false);
         startButton.setContentAreaFilled(false);
         startButton.setBorderPainted(false);
         startButton.setForeground(Color.white);
 
 
-        rankingButton.setFont(font);
+        rankingButton.setFont(fontName.getFont(32));
         rankingButton.setOpaque(false);
         rankingButton.setContentAreaFilled(false);
         rankingButton.setBorderPainted(false);
