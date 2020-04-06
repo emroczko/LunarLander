@@ -8,7 +8,7 @@ public class Fonts {
     public Fonts(){
 
     }
-    private static final Font SERIF_FONT = new Font("serif", Font.PLAIN, 30);
+    private static final Font SERIF_FONT = new Font("serif", Font.PLAIN, 24);
 
     public static Font getFont(int size) {
         Font font = null;
@@ -19,6 +19,7 @@ public class Fonts {
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(font);
             font = font.deriveFont(Font.PLAIN,size);
+
 
         } catch (Exception ex) {
             font = SERIF_FONT;

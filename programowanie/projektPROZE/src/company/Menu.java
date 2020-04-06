@@ -4,8 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
 
 /**
  * Klasa odpowiedzialna za obsługę zdarzeń z pochodzących z graficznego interfejsu użytkownika
@@ -22,6 +20,7 @@ public class Menu extends JPanel{
         Fonts fontName = new Fonts();
         Color aqua = new Color (51, 134, 175);
         Color citron = new Color (200, 220, 24);
+
 
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -43,6 +42,7 @@ public class Menu extends JPanel{
             }
         });
 
+
         startButton.setFont(fontName.getFont(32));
         startButton.setOpaque(false);
         startButton.setContentAreaFilled(false);
@@ -62,13 +62,16 @@ public class Menu extends JPanel{
         gbc.gridy = 1;
         gbc.weightx = 1;
         gbc.weighty = 0;
+
         gbc.insets = new Insets(15, 15, 15, 15);
         this.add(startButton, gbc);
 
         gbc.gridwidth = 1;
         gbc.gridx = 0;
         gbc.gridy = 2;
+
         gbc.weighty = -1;
+
         gbc.anchor = GridBagConstraints.SOUTH;
         gbc.insets = new Insets(15, 15, 15, 15);
         this.add(rankingButton, gbc);
@@ -99,6 +102,5 @@ public class Menu extends JPanel{
         g.drawImage(MainMenuImage.getImage(), 0, 0, this.getWidth(), this.getHeight(), null);
 
     }
-
 
 }

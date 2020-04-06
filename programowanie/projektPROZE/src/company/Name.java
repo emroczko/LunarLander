@@ -31,6 +31,7 @@ public class Name extends JPanel{
         Color aqua = new Color (51, 134, 175);
         Color citron = new Color (223, 234, 24);
 
+
         initializeVariables();
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -76,6 +77,8 @@ public class Name extends JPanel{
             }
         });
 
+
+
         startButton.setFont(font.getFont(32));
         startButton.setOpaque(false);
         startButton.setContentAreaFilled(false);
@@ -118,7 +121,7 @@ public class Name extends JPanel{
         this.add(backButton, gbc);
 
         gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
+        gbc.weighty = 1.0;//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
 
