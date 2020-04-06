@@ -38,42 +38,62 @@ public class Level extends JPanel{
         //GridBagConstraints gbc = new GridBagConstraints();
 
 
-        JButton exitButton = new JButton("Wyjście");
+        JButton exitButton = new JButton("EXIT");
         JButton pauseButton =  new JButton("||");
-        JButton continueButton=  new JButton("CONTINUE");
+        JButton continueButton =  new JButton("CONTINUE");
         //JLabel pauseLabel = new JLabel("PAUSE");
         JLabel vy = new JLabel("PAUSE");
         JLabel vx = new JLabel("999999");
         JLabel fuelLabel = new JLabel("Paliwo: 99999");
         JLabel spaceships = new JLabel("Pozostałe statki: 99");
-
+        Font font1 = new Font("uni 05_53", Font.PLAIN, 40);
         //pauseLabel.setFont(new Font("uni 05_53", Font.PLAIN, 40));
         //pauseLabel.setForeground(Color.WHITE);
         //pauseLabel.setOpaque(false);
 
-        continueButton.setFont(new Font("uni 05_53", Font.PLAIN, 40));
+        continueButton.setFont(font1);
         continueButton.setForeground(Color.BLUE);
         continueButton.setOpaque(false);
         continueButton.setContentAreaFilled(false);
         continueButton.setBorderPainted(false);
+        continueButton.setVisible(false);
 
+        exitButton.setFont(font1);
+        exitButton.setForeground(Color.BLUE);
+        exitButton.setOpaque(false);
+        exitButton.setContentAreaFilled(false);
+        exitButton.setBorderPainted(false);
+        exitButton.setVisible(false);
 
         pauseButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                continueButton.setVisible(true);
+                exitButton.setVisible(true);
                 pauseButton.setVisible(false);
-                //add(pauseLabel);
                 pause(true);
-                add(continueButton);
-                continueButton.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        pauseButton.setVisible(true);
-                        pause(false);
-                        continueButton.setVisible(false);
-                    }
-                });
+            }
+        });
+        continueButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                pauseButton.setVisible(true);
+                pause(false);
+                continueButton.setVisible(false);
             }
         });
 
+        exitButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                removeAll();
+                repaint();
+                revalidate();
+                setLayout(new GridBagLayout());
+                GridBagConstraints gbc = new GridBagConstraints();
+                gbc.weightx = 1;
+                gbc.weighty = 1;
+                gbc.fill = GridBagConstraints.BOTH;
+                add(new Menu(),gbc);
+            }
+        });
         Font font = new Font("uni 05_53", Font.PLAIN, 20);
 
         pauseButton.setFont(font);
@@ -86,8 +106,9 @@ public class Level extends JPanel{
         //gbc.gridx = 8;
         //gbc.gridy = -3;
 
-
+        this.add(continueButton);
         this.add(pauseButton);
+        this.add(exitButton);
 
     }
 
