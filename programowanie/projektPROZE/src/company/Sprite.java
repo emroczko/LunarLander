@@ -50,6 +50,7 @@ public abstract class Sprite {
     public void setY(int y){
         this.y = y;
     }
+    /** metoda typu setter do ustanawiania obiektu typu Rectangle2D*/
     public void setRect(Rectangle2D r){
         this.rect =r;
     }
