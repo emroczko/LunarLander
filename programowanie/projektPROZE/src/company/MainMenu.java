@@ -14,6 +14,8 @@ public class MainMenu extends JFrame {
         initializeLayout();
     }
 
+    /** metoda tworząca obiekt głównego menu, tytułuje okno, oraz ustawia kilka podstawowych własciowści gry:
+     * możliwość zmiany rozmiaru, zamykanie aplikacji*/
 
     private void initializeLayout() {
         setTitle("Lunar Lander");

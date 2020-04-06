@@ -76,14 +76,17 @@ public class Menu extends JPanel{
 
 
     }
+    /** metoda inicjalizująca obrazek tła za pomocą metody obiektu ImageFactory*/
     private void initializeVariables() {
         this.MainMenuImage = ImageFactory.createImage(Image.MainMenu);
         }
+
+    /** metoda ustawiająca rozmiar okna za pomocą danych z pliku Config.txt*/
     private void initializeLayout() {
         setPreferredSize(new Dimension(PropertiesLoad.xSize, PropertiesLoad.ySize));
     }
 
-
+    /** metoda przesłaniająca metodę paintComponent, w celu odpowiedniego skalowania obrazka w tle*/
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
