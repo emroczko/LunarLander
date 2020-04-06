@@ -33,19 +33,20 @@ public class Menu extends JPanel{
 
             }
         });
-        Font font = new Font("uni 05_53", Font.PLAIN, 20);
+        Font font = new Font("uni 05_53", Font.PLAIN, 22);
 
         startButton.setFont(font);
-        //startButton.setBackground(Color.black);
-        //startButton.setForeground(Color.white);
+        startButton.setOpaque(false);
+        startButton.setContentAreaFilled(false);
+        startButton.setBorderPainted(false);
+        startButton.setForeground(Color.white);
 
 
         rankingButton.setFont(font);
-        //rankingButton.setBackground(Color.black);
-        //rankingButton.setForeground(Color.white);
-
-
-
+        rankingButton.setOpaque(false);
+        rankingButton.setContentAreaFilled(false);
+        rankingButton.setBorderPainted(false);
+        rankingButton.setForeground(Color.white);
 
 
         gbc.gridwidth = 3;

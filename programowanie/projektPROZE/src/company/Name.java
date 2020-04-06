@@ -39,9 +39,6 @@ public class Name extends JPanel{
                 gbc.weighty = 1;
                 gbc.fill = GridBagConstraints.BOTH;
                 add(new Level(getWidth(),getHeight()),gbc);
-
-
-
             }
         });
        backButton.addActionListener(new ActionListener() {
