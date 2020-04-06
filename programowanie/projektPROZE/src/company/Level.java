@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 
 public class Level extends JPanel{
     private ImageIcon backgroundImage;
+    private ImageIcon landersLeftIcon;
     private Timer timer;
     private Lander lander;
     private boolean inGame = true;
@@ -44,11 +45,12 @@ public class Level extends JPanel{
         JButton exitButton = new JButton("EXIT");
         JButton pauseButton =  new JButton("||");
         JButton continueButton =  new JButton("CONTINUE");
-        //JLabel pauseLabel = new JLabel("PAUSE");
+        JLabel leftLandersLabel = new JLabel(": 4");
         JLabel vy = new JLabel("V. Speed: 100");
         JLabel vx = new JLabel("H. Speed: 100");
         JLabel time = new JLabel("Time: 60");
-        JLabel spaceships = new JLabel("Pozostałe statki: 99");
+        JLabel emptyLabel = new JLabel("  ");
+        JLabel landersLeft = new JLabel(this.landersLeftIcon = ImageFactory.createImage(Image.Lander));
 
         Font font1 = new Font("uni 05_53", Font.PLAIN, 40);
 
@@ -117,12 +119,31 @@ public class Level extends JPanel{
         time.setFont(font);
         time.setForeground(Color.lightGray);
 
+        leftLandersLabel.setBackground(Color.black);
+        leftLandersLabel.setFont(font);
+        leftLandersLabel.setForeground(Color.lightGray);
 
         gbc.gridx = 7;
-        gbc.gridy = 0;
-        gbc.weightx = 0.1;
+        gbc.gridy = 3;
+        gbc.weighty = 0.005;
+        gbc.anchor = GridBagConstraints.FIRST_LINE_END;
+        this.add(emptyLabel,gbc);
+
+        gbc.gridx = 7;
+        gbc.gridy = 2;
         gbc.anchor = GridBagConstraints.FIRST_LINE_END;
         this.add(pauseButton,gbc);
+
+        gbc.gridx = 7;
+        gbc.gridy = 1;
+        gbc.weighty = 0;
+        gbc.anchor = GridBagConstraints.FIRST_LINE_END;
+        this.add(landersLeft,gbc);
+
+        gbc.gridx = 8;
+        gbc.gridy = 1;
+        gbc.anchor = GridBagConstraints.FIRST_LINE_END;
+        this.add(leftLandersLabel,gbc);
 
 
 
@@ -140,12 +161,13 @@ public class Level extends JPanel{
 
         gbc.gridx = 0;
         gbc.gridy = 2;
-        gbc.weightx = 0.1;
+        gbc.weighty = 0;
         gbc.anchor = GridBagConstraints.FIRST_LINE_START;
         this.add(time,gbc);
 
         this.add(exitButton);
         this.add(continueButton);
+
 
     }
 
@@ -195,7 +217,7 @@ public class Level extends JPanel{
             else {
                 scaled_points[i] = (int)(points[i] * ((float) getWidth() / PropertiesLoad.xSize));
             }
-            System.out.println((float)(getWidth())/PropertiesLoad.xSize);
+            //System.out.println((float)(getWidth())/PropertiesLoad.xSize);
         }
 
         return scaled_points;
