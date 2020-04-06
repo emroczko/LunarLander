@@ -51,7 +51,6 @@ public class Level extends JPanel{
         JLabel time = new JLabel("Time: 60");
         JLabel emptyLabel = new JLabel("  ");
         JLabel landersLeft = new JLabel(this.landersLeftIcon = ImageFactory.createImage(Image.Lander));
-        JProgressBar fuel = new JProgressBar(SwingConstants.VERTICAL);
 
         Font font1 = new Font("uni 05_53", Font.PLAIN, 40);
 
@@ -168,7 +167,6 @@ public class Level extends JPanel{
 
         this.add(exitButton);
         this.add(continueButton);
-        //this.add(fuel);
 
 
     }
