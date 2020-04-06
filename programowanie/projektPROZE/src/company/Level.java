@@ -276,10 +276,10 @@ public class Level extends JPanel{
 
     }
     public void keyReleased(KeyEvent e){
-        this.lander.keyReleased(e)
+        this.lander.keyReleased(e);
     }
     public void keyPressed(KeyEvent e){
-        this.ladner.keyPressed
+        this.lander.keyPressed(e);
     }
 
 

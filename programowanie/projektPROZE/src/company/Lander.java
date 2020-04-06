@@ -37,7 +37,10 @@ public class Lander extends Sprite {
         int key = e.getKeyCode();
 
         if(key == KeyEvent.VK_UP){
-            dx = 
+            //dx =
         }
+    }
+    public void keyReleased(KeyEvent e){
+        int key = e.getKeyCode();
     }
 }
