@@ -15,6 +15,9 @@ public class Lander extends Sprite {
         initialize();
     }
 
+    /**
+     * Funkcja inicjująca zmienne odziedziczone od klasy Sprite
+     */
     private void initialize() {
         ImageIcon imageIcon = ImageFactory.createImage(Image.Lander);
         setImage(imageIcon.getImage());

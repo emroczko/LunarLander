@@ -170,7 +170,7 @@ public class Level extends JPanel{
 
 
     }
-
+    /** Funkcja inicjująca zmienne klasy*/
     private void initializeVariables(){
         this.lander = new Lander();
         this.backgroundImage = ImageFactory.createImage(Image.Earth1);
@@ -178,7 +178,7 @@ public class Level extends JPanel{
         this.timer.start();
 
     }
-
+    /** Funkcja pauzująca grę*/
     private void pause(boolean condit){
         if (condit){
 
@@ -187,7 +187,10 @@ public class Level extends JPanel{
 
         }
     }
-
+    /**Funkcja odpowiedzialna za rysowanie obrazku reprezentującego gracza oraz jego hitboxa oraz skalowanie rozmiarów
+     * tych elementów poprzez mnożenie ich wielkości i położenia przez współczynnik skali będący stosunkiem obecnej wielkośi
+     * okna do jego początkowej wielkości wczytywanej z pliku konfiguracyjnego
+     */
     private void drawPlayer(Graphics g){
         g.drawImage(lander.getImage(), (int)(lander.getX()*((float)(this.getWidth())/PropertiesLoad.xSize)),
                 (int)(lander.getY()*((float)this.getHeight()/PropertiesLoad.ySize)), (int)(this.getWidth()/17.5),
@@ -198,6 +201,10 @@ public class Level extends JPanel{
                 (int)(lander.getY()*((float)this.getHeight()/PropertiesLoad.ySize)),
                 (int)(40*((float)getWidth()/PropertiesLoad.xSize)),(int)(40*((float)getHeight()/PropertiesLoad.ySize)));
     }
+
+    /**
+     * Rysuje hitbox powirzchni księzyca i lądowiska oraz skaluje do rozmiarów okna
+     */
     private void drawGround(Graphics g){
         Polygon moon = new Polygon(scalePoints(PropertiesLoad.xPoints, 'x'), scalePoints(PropertiesLoad.yPoints, 'y'),
                 PropertiesLoad.xPoints.length);
@@ -207,6 +214,14 @@ public class Level extends JPanel{
         g.setColor(Color.blue);
         g.drawPolygon(landing);
     }
+
+
+    /**
+     * Funkcja skalująca zadaną tablicę intów w zależności od rozmiarów okna
+     * @param points tablica intów będąca reprezentacją punktów uzywanych w metodzie drawGround do rysowania powieżchni księżyca
+     * @param param zmianna char mówiąca o tym czy punkty które skalujemy są punktami z osi OX czy OY
+     * @return zwraca przeskalowaną tablicę intów
+     */
     private int[] scalePoints(int[] points, char param)
     {
         int[] scaled_points = new int[points.length];
@@ -223,6 +238,9 @@ public class Level extends JPanel{
         return scaled_points;
     }
 
+    /**
+     * metoda nadpisująca metodę paintComponent w celu przeskalowania obrazka w tle oraz rysowania obiektów z gry
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -230,6 +248,9 @@ public class Level extends JPanel{
         doDrawing(g);
     }
 
+    /**
+     *Funkcja rysująca obiekty gry(gracz i powieżchnia księżyca)
+     */
     private void doDrawing(Graphics g) {
         if (inGame) {
             drawPlayer(g);
@@ -241,6 +262,10 @@ public class Level extends JPanel{
             Toolkit.getDefaultToolkit().sync();
         }
     }
+
+    /**
+     * Aplikuje zmiany wykonane przez gracza oraz odświeża okno gry
+     */
     public void doOneLoop(){
         this.update();
         this.repaint();
