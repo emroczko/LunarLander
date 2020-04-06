@@ -17,7 +17,7 @@ public class Menu extends JPanel{
         this.removeAll();
         initializeLayout();
         initializeVariables();
-
+        Fonts fontName = new Fonts();
 
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -38,9 +38,9 @@ public class Menu extends JPanel{
 
             }
         });
-        Font font = new Font("uni 05_53", Font.PLAIN, 22);
+        Font font = new Font("uni 05_53", Font.PLAIN, 32);
 
-        startButton.setFont(font);
+        startButton.setFont(fontName.getFont());
         startButton.setOpaque(false);
         startButton.setContentAreaFilled(false);
         startButton.setBorderPainted(false);

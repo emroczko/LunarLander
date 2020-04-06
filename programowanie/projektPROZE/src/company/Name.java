@@ -63,16 +63,23 @@ public class Name extends JPanel{
                 add(new Menu(),gbc);
             }
         });
-        Font font = new Font("uni 05_53", Font.PLAIN, 20);
-
-        startButton.setFont(font);
-        //startButton.setBackground(Color.black);
-        //startButton.setForeground(Color.white);
+        Font font = new Font("uni 05_53", Font.PLAIN, 24);
+        Font font1 = new Font("uni 05_53", Font.PLAIN, 32);
 
 
-        backButton.setFont(font);
-        //rankingButton.setBackground(Color.black);
-        //rankingButton.setForeground(Color.white);
+        startButton.setFont(font1);
+        startButton.setOpaque(false);
+        startButton.setContentAreaFilled(false);
+        startButton.setBorderPainted(false);
+        startButton.setForeground(Color.white);
+
+
+        backButton.setFont(font1);
+        backButton.setOpaque(false);
+        backButton.setContentAreaFilled(false);
+        backButton.setBorderPainted(false);
+        backButton.setForeground(Color.white);
+
         typeNick.setBackground(Color.black);
         typeNick.setFont(font);
         typeNick.setForeground(Color.lightGray);
