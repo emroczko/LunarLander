@@ -5,6 +5,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
+/**
+ * Klasa odpowiedzialna za utworzenie statku
+ */
+
 public class Lander extends Sprite {
 
     public Lander() {

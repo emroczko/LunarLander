@@ -3,6 +3,10 @@ package company;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Klasa odpowiedzialna za utworzenie okna głównego i stworzenie w nim okna głównego menu
+ */
+
 public class MainMenu extends JFrame {
 
 

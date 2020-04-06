@@ -3,9 +3,17 @@ package company;
 import java.awt.Image;
 import java.awt.geom.Rectangle2D;
 
+
+/**
+ * Klasa abstrakcyjna odpowiedzialna za rysowanie gracza
+ */
+
 public abstract class Sprite {
+    /** Zmienna przechowująca obrazek*/
     private Image image;
+    /** Zmienna określająca stan statku*/
     private boolean dead;
+
     protected int x;
     protected int y;
     protected int dx;

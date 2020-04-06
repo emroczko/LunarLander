@@ -7,7 +7,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
 
-
+/**
+ * Klasa odpowiedzialna za wczytywanie danych z plików i serwera (na razie tylko pliki, docelowo również z serwera)
+ */
 
 public class PropertiesLoad {
 

@@ -5,7 +5,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Klasa odpowiedzialna za obsługę zdarzeń z pochodzących z graficznego interfejsu użytkownika
+ */
+
 public class Menu extends JPanel{
+    /** Zmienna przechowująca obrazek tła*/
     private ImageIcon MainMenuImage;
 
     public Menu() {

@@ -5,9 +5,17 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
+/**
+ * Klasa odpowiedzialna za obsługę zdarzeń z graficznego interfejsu użytkownika, tutaj za pobranie nicku gracza i rozpoczęcie gry
+ */
+
 public class Name extends JPanel{
+    /** Zmienna przechowująca obrazek tła*/
     private ImageIcon MainMenuImage;
+    /** Zmienna przechowująca nick gracza*/
     private String nick;
+    /** Zmienne przechowująca wielkość poprzedniego okna*/
     private int a, b;
 
     public Name(int xSize, int ySize){

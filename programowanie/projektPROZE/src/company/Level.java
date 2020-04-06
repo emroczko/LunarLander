@@ -1,14 +1,14 @@
 package company;
 
-import javax.imageio.ImageIO;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.util.TimerTask;
+
+/**
+ * Klasa odpowiedzialna za rysowanie poziomu ziemi oraz statku gracza
+ */
 
 public class Level extends JPanel{
     private ImageIcon backgroundImage;
@@ -34,22 +34,25 @@ public class Level extends JPanel{
         repaint();
         initializeVariables();
 
-        //this.setLayout(new GridBagLayout());
-        //GridBagConstraints gbc = new GridBagConstraints();
+        this.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.fill = GridBagConstraints.VERTICAL;
+
 
 
         JButton exitButton = new JButton("EXIT");
         JButton pauseButton =  new JButton("||");
         JButton continueButton =  new JButton("CONTINUE");
         //JLabel pauseLabel = new JLabel("PAUSE");
-        JLabel vy = new JLabel("PAUSE");
-        JLabel vx = new JLabel("999999");
-        JLabel fuelLabel = new JLabel("Paliwo: 99999");
+        JLabel vy = new JLabel("V. Speed: 100");
+        JLabel vx = new JLabel("H. Speed: 100");
+        JLabel time = new JLabel("Time: 60");
         JLabel spaceships = new JLabel("Pozostałe statki: 99");
+
         Font font1 = new Font("uni 05_53", Font.PLAIN, 40);
-        //pauseLabel.setFont(new Font("uni 05_53", Font.PLAIN, 40));
-        //pauseLabel.setForeground(Color.WHITE);
-        //pauseLabel.setOpaque(false);
+
 
         continueButton.setFont(font1);
         continueButton.setForeground(Color.BLUE);
@@ -95,20 +98,55 @@ public class Level extends JPanel{
             }
         });
         Font font = new Font("uni 05_53", Font.PLAIN, 20);
+        Font font2 = new Font("uni 05_53", Font.PLAIN, 10);
 
-        pauseButton.setFont(font);
+        pauseButton.setFont(font1);
         pauseButton.setForeground(Color.lightGray);
         pauseButton.setOpaque(false);
         pauseButton.setContentAreaFilled(false);
         pauseButton.setBorderPainted(false);
-        //gbc.gridwidth = 8;
-        //gbc.gridwidth = 8;
-        //gbc.gridx = 8;
-        //gbc.gridy = -3;
 
-        this.add(continueButton);
-        this.add(pauseButton);
+        vx.setBackground(Color.black);
+        vx.setFont(font);
+        vx.setForeground(Color.lightGray);
+
+        vy.setBackground(Color.black);
+        vy.setFont(font);
+        vy.setForeground(Color.lightGray);
+
+        time.setBackground(Color.black);
+        time.setFont(font);
+        time.setForeground(Color.lightGray);
+
+
+        gbc.gridx = 7;
+        gbc.gridy = 0;
+        gbc.weightx = 0.1;
+        gbc.anchor = GridBagConstraints.FIRST_LINE_END;
+        this.add(pauseButton,gbc);
+
+
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 0.1;
+        gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+        this.add(vx,gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.weightx = 0.1;
+        gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+        this.add(vy,gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.weightx = 0.1;
+        gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+        this.add(time,gbc);
+
         this.add(exitButton);
+        this.add(continueButton);
 
     }
 
