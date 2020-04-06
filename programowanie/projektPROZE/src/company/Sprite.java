@@ -17,7 +17,7 @@ public abstract class Sprite {
     protected int x;
     /** Zmienna określająca położenie Landera w pionie*/
     protected int y;
-    //protected int dx;
+    protected int dx;
 
 
 
