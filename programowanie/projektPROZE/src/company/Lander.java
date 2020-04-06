@@ -3,6 +3,7 @@ package company;
 import javax.swing.*;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.geom.Rectangle2D;
 
 /**
@@ -27,10 +28,19 @@ public class Lander extends Sprite {
         setX(start_x);
         setY(start_y);
         setRect(rect);
-
-
     }
     @Override
     public void move() {
+    }
+
+    public void keyPressed(KeyEvent e){
+        int key = e.getKeyCode();
+
+        if(key == KeyEvent.VK_UP){
+            //dx =
+        }
+    }
+    public void keyReleased(KeyEvent e){
+        int key = e.getKeyCode();
     }
 }

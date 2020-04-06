@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
 /**
  * Klasa odpowiedzialna za rysowanie poziomu ziemi oraz statku gracza
@@ -270,6 +271,12 @@ public class Level extends JPanel{
 
     private void update(){
 
+    }
+    public void keyReleased(KeyEvent e){
+        this.lander.keyReleased(e);
+    }
+    public void keyPressed(KeyEvent e){
+        this.lander.keyPressed(e);
     }
 
 
