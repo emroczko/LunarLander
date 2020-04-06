@@ -51,13 +51,9 @@ public abstract class Sprite {
         this.y = y;
     }
     /** metoda typu setter do ustanawiania obiektu typu Rectangle2D*/
-    public void setRect(Rectangle2D r){
-        this.rect =r;
-    }
+    public void setRect(Rectangle2D r){ this.rect =r; }
     /** metoda typu getter do pobierania położenia statku w poziomie*/
-    public int getX(){
-        return this.x;
-    }
+    public int getX(){ return this.x; }
     /** metoda typu getter do pobierania położenia statku w pionie*/
     public int getY(){
         return this.y;

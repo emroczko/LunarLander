@@ -10,7 +10,6 @@ public class GameLoop implements ActionListener{
 
     /** obiekt klasy Level*/
     private Level level;
-
     public GameLoop(Level level) {
         this.level = level;
     }
@@ -18,6 +17,5 @@ public class GameLoop implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent a) {
         this.level.doOneLoop();
-
     }
 }
