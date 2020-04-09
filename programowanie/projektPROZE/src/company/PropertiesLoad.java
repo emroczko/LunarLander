@@ -58,7 +58,7 @@ public class PropertiesLoad {
             fuelAmount = Integer.parseInt(gameProps.getProperty("fuelAmount"));
             numberOfLives = Integer.parseInt(gameProps.getProperty("numberOfLives"));
             bonusPerSecond = Integer.parseInt(gameProps.getProperty("bonusPerSecond"));
-            maxPointsAmount = Integer.parseInt(gameProps.getProperty("maxPointsAmount"));
+            maxPointsAmount = Integer.parseInt(gameProps.getProperty("maxPointsAmount"));           // AB: czy  w tych properties nie powinna być zapisana liczba poziomów?
             propertiesFile.close();
         }
         /** metoda wczytująca współrzędne ukształtowania planet (Hit Box) i jej współczynnik grawitacji */
