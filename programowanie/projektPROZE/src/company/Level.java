@@ -305,16 +305,9 @@ public class Level extends JPanel{
         label.setForeground(color);
 
     }
-    /*
-    pauseButton.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-            continueButton.setVisible(true);
-            exitButton.setVisible(true);
-            pauseButton.setVisible(false);
-            pause(true);
-        }
-    });
-*/
+    /**
+     * Odpowiada za przypisanie akcji przyciskowi || (pauza)
+     */
     private ActionListener pauseButtonListener(JButton continueButton, JButton exitButton, JButton pauseButton) {
         ActionListener actionListener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -326,6 +319,10 @@ public class Level extends JPanel{
         };
         return actionListener;
     }
+
+    /**
+     * Odpowiada za przypisanie akcji przyciskowi CONTINUE
+     */
     private ActionListener continueButtonListener(JButton continueButton, JButton exitButton, JButton pauseButton) {
         ActionListener actionListener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
