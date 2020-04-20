@@ -17,7 +17,7 @@ public class Menu extends JPanel{
         this.removeAll();
         initializeLayout();
         initializeVariables();
-        Fonts fontName = new Fonts();
+
         Color aqua = new Color (51, 134, 175);
         Color citron = new Color (200, 220, 24);
 
@@ -27,34 +27,11 @@ public class Menu extends JPanel{
 
         JButton startButton = new JButton("Start!");
         JButton rankingButton = new JButton("Best Scores");
-        startButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                removeAll();
-                repaint();
-                revalidate();
-                setLayout(new GridBagLayout());
-                GridBagConstraints gbc = new GridBagConstraints();
-                gbc.weightx = 1;
-                gbc.weighty = 1;
-                gbc.fill = GridBagConstraints.BOTH;
-                add(new Name(getWidth(),getHeight()), gbc);
 
-            }
-        });
+        startButton.addActionListener(startButtonListener());
 
-
-        startButton.setFont(fontName.getFont(32));
-        startButton.setOpaque(false);
-        startButton.setContentAreaFilled(false);
-        startButton.setBorderPainted(false);
-        startButton.setForeground(citron);
-
-
-        rankingButton.setFont(fontName.getFont(32));
-        rankingButton.setOpaque(false);
-        rankingButton.setContentAreaFilled(false);
-        rankingButton.setBorderPainted(false);
-        rankingButton.setForeground(citron);
+        buttonCustomizer(startButton,citron);
+        buttonCustomizer(rankingButton,citron);
 
 
         gbc.gridwidth = 3;
@@ -101,6 +78,36 @@ public class Menu extends JPanel{
         super.paintComponent(g);
         g.drawImage(MainMenuImage.getImage(), 0, 0, this.getWidth(), this.getHeight(), null);
 
+    }
+
+    /**
+     * Odpowiada za kolor, czcionkę i wygląd przycisków w głównym menu
+     */
+    private void buttonCustomizer(JButton button, Color color){
+
+        button.setFont(Fonts.getFont(32));
+        button.setOpaque(false);
+        button.setContentAreaFilled(false);
+        button.setBorderPainted(false);
+        button.setForeground(color);
+
+    }
+
+    private ActionListener startButtonListener() {
+        ActionListener actionListener = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                removeAll();
+                repaint();
+                revalidate();
+                setLayout(new GridBagLayout());
+                GridBagConstraints gbc = new GridBagConstraints();
+                gbc.weightx = 1;
+                gbc.weighty = 1;
+                gbc.fill = GridBagConstraints.BOTH;
+                add(new Name(getWidth(),getHeight()), gbc);
+            }
+        };
+        return actionListener;
     }
 
 }
