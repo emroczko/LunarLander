@@ -9,16 +9,18 @@ public class GameEventListener extends KeyAdapter {
     public GameEventListener(Level level){
         this.level = level;
     }
-
-    @Override
-    public void keyReleased(KeyEvent e){
-        System.out.println("GameEventListener Released");
-        this.level.keyReleased(e);
-    }
-
+    /*
     @Override
     public void keyPressed(KeyEvent e){
         System.out.println("GameEventListener Pressed");
         this.level.keyPressed(e);
     }
+
+    @Override
+    public void keyReleased(KeyEvent e){
+        System.out.println("GameEventListener Released");
+        this.level.keyReleased(e);
+        }*/
+
 }
+

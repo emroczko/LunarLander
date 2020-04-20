@@ -32,8 +32,8 @@ public class Lander extends Sprite {
     @Override
     public void move() {
         //System.out.println(this.velx + "" + this.vely);
-        this.x += velx;
-        this.y += vely;
+        x += velx;
+        y += vely;
         //System.out.println(this.x + " " + this.y);
     }
     public void acceleration(float accX, float accY){
@@ -44,23 +44,60 @@ public class Lander extends Sprite {
         move();
         acceleration(0, PropertiesLoad.mapGravity);
     }
+    public void moveUp(){
+        vely -= PropertiesLoad.enginePowerVy;
+        //vely += PropertiesLoad.mapGravity;
+    }
+    public void moveDown(){
+        vely += PropertiesLoad.enginePowerVy;
+        //vely += PropertiesLoad.mapGravity;
+    }
+    public void moveLeft(){
+        velx -= PropertiesLoad.enginePowerVx;
+    }
+    public void moveRight(){
+        velx += PropertiesLoad.enginePowerVx;
+    }
 
+    /*
     public void keyPressed(KeyEvent e){
         int key = e.getKeyCode();
-        System.out.println("key event");
+        System.out.println("Lander pressed");
+        System.out.println(key);
 
         if(key == KeyEvent.VK_UP){
             System.out.println(PropertiesLoad.enginePowerVx);
             vely -= PropertiesLoad.enginePowerVy;
+
             vely += PropertiesLoad.mapGravity;
         }
         if(key == KeyEvent.VK_LEFT){
+            System.out.println("lewo");
             velx -= PropertiesLoad.enginePowerVx;
         }
         if(key == KeyEvent.VK_RIGHT){
+            System.out.println("prawo");
             velx += PropertiesLoad.enginePowerVx;
         }
     }
     public void keyReleased(KeyEvent e){
-    }
+        int key = e.getKeyCode();
+        System.out.println("released");
+
+
+        if(key == KeyEvent.VK_UP){
+            System.out.println(PropertiesLoad.enginePowerVx);
+            vely = 0;
+
+            vely += PropertiesLoad.mapGravity;
+        }
+        if(key == KeyEvent.VK_LEFT){
+            System.out.println("lewo");
+            velx = 0;
+        }
+        if(key == KeyEvent.VK_RIGHT){
+            System.out.println("prawo");
+            velx = 0;
+        }
+    }*/
 }

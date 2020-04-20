@@ -52,6 +52,7 @@ public class Name extends JPanel{
                 gbc.weightx = 1;
                 gbc.weighty = 1;
                 gbc.fill = GridBagConstraints.BOTH;
+
                 add(new Level(getWidth(),getHeight()),gbc);
             }
         });

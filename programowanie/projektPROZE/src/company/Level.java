@@ -17,19 +17,26 @@ public class Level extends JPanel{
     private Timer timer;
     private Lander lander;
     private boolean inGame = true;
+    private static final int IFW = JComponent.WHEN_IN_FOCUSED_WINDOW;
+    private static final String MOVE_UP = "move up";
+    private static final String MOVE_LEFT = "move left";
+    private static final String MOVE_RIGHT = "move right";
+    private static final String MOVE_DOWN = "move down";
+
     int a,b;
 
 
     public Level(int xSize, int ySize) {
         this.removeAll();
 
-        setPreferredSize(new Dimension(xSize,ySize));
+        setPreferredSize(new Dimension(xSize, ySize));
 
 
         try {
             PropertiesLoad.loadMapsConfigs(1);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        catch(Exception e){e.printStackTrace();}
 
         revalidate();
         repaint();
@@ -42,10 +49,9 @@ public class Level extends JPanel{
         gbc.fill = GridBagConstraints.VERTICAL;
 
 
-
         JButton exitButton = new JButton("EXIT");
-        JButton pauseButton =  new JButton("||");
-        JButton continueButton =  new JButton("CONTINUE");
+        JButton pauseButton = new JButton("||");
+        JButton continueButton = new JButton("CONTINUE");
         JLabel leftLandersLabel = new JLabel(": 4");
         JLabel vy = new JLabel("V. Speed: 100");
         JLabel vx = new JLabel("H. Speed: 100");
@@ -69,6 +75,13 @@ public class Level extends JPanel{
         exitButton.setContentAreaFilled(false);
         exitButton.setBorderPainted(false);
         exitButton.setVisible(false);
+        /*
+        requestFocusInWindow();
+        setFocusable(true);
+        addKeyListener(new GameEventListener(this));*/
+
+
+
 
         pauseButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -97,9 +110,44 @@ public class Level extends JPanel{
                 gbc.weightx = 1;
                 gbc.weighty = 1;
                 gbc.fill = GridBagConstraints.BOTH;
-                add(new Menu(),gbc);
+                add(new Menu(), gbc);
             }
         });
+
+        Action upAction = new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                lander.moveUp();
+            }
+        };
+
+        Action downAction = new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                lander.moveDown();
+            }
+        };
+
+        Action leftAction = new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                lander.moveLeft();
+            }
+        };
+
+        Action rightAction = new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                lander.moveRight();
+            }
+        };
+
+        this.getInputMap(IFW).put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0,false), MOVE_UP);
+        this.getActionMap().put(MOVE_UP,upAction);
+        this.getInputMap(IFW).put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0,false), MOVE_DOWN);
+        this.getActionMap().put(MOVE_DOWN, downAction);
+        this.getInputMap(IFW).put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0,false), MOVE_LEFT);
+        this.getActionMap().put(MOVE_LEFT, leftAction);
+        this.getInputMap(IFW).put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0,false), MOVE_RIGHT);
+        this.getActionMap().put(MOVE_RIGHT, rightAction);
+
+
         Font font = new Font("uni 05_53", Font.PLAIN, 20);
         Font font2 = new Font("uni 05_53", Font.PLAIN, 10);
 
@@ -129,46 +177,48 @@ public class Level extends JPanel{
         gbc.gridy = 3;
         gbc.weighty = 0.005;
         gbc.anchor = GridBagConstraints.FIRST_LINE_END;
-        this.add(emptyLabel,gbc);
+        this.add(emptyLabel, gbc);
 
         gbc.gridx = 7;
         gbc.gridy = 2;
         gbc.anchor = GridBagConstraints.FIRST_LINE_END;
-        this.add(pauseButton,gbc);
+        this.add(pauseButton, gbc);
 
         gbc.gridx = 7;
         gbc.gridy = 1;
         gbc.weighty = 0;
         gbc.anchor = GridBagConstraints.FIRST_LINE_END;
-        this.add(landersLeft,gbc);
+        this.add(landersLeft, gbc);
 
         gbc.gridx = 8;
         gbc.gridy = 1;
         gbc.anchor = GridBagConstraints.FIRST_LINE_END;
-        this.add(leftLandersLabel,gbc);
-
+        this.add(leftLandersLabel, gbc);
 
 
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.weightx = 0.1;
         gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-        this.add(vx,gbc);
+        this.add(vx, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.weightx = 0.1;
         gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-        this.add(vy,gbc);
+        this.add(vy, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 2;
         gbc.weighty = 0;
         gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-        this.add(time,gbc);
+        this.add(time, gbc);
 
         this.add(exitButton);
         this.add(continueButton);
+
+
+
     }
     /** Funkcja inicjująca zmienne klasy*/
     private void initializeVariables(){
@@ -178,6 +228,7 @@ public class Level extends JPanel{
         this.backgroundImage = ImageFactory.createImage(Image.Earth1);
         this.timer = new Timer(10, new GameLoop(this));
         this.timer.start();
+
 
     }
     /** Funkcja pauzująca grę*/
@@ -276,6 +327,9 @@ public class Level extends JPanel{
     private void update(){
         this.lander.update();
     }
+
+
+    /*
     public void keyReleased(KeyEvent e){
         System.out.println("Level key released");
         this.lander.keyReleased(e);
@@ -284,6 +338,8 @@ public class Level extends JPanel{
         System.out.println("Level key pressed");
         this.lander.keyPressed(e);
     }
+    */
+
 
 
 }
