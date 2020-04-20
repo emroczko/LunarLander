@@ -67,12 +67,12 @@ public class Lander extends Sprite {
 
     public void moveUp() {
         vely -= PropertiesLoad.enginePowerVy;
-        //vely += PropertiesLoad.mapGravity;
+        vely += PropertiesLoad.mapGravity;
     }
 
     public void moveDown() {
         vely += PropertiesLoad.enginePowerVy;
-        //vely += PropertiesLoad.mapGravity;
+        vely += PropertiesLoad.mapGravity;
     }
 
     public void moveLeft() {

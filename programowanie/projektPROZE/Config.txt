@@ -1,8 +1,8 @@
 xSize=700
 ySize=500
 LanderWidth=40
-enginePowerVx=0.1
-enginePowerVy=0.2
+enginePowerVx=2
+enginePowerVy=2
 fuelAmount=100
 maxPointsAmount=400
 numberOfLives=5
