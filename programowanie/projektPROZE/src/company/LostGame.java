@@ -34,8 +34,7 @@ public class LostGame extends JPanel {
 
             JButton startButton = new JButton("Play again");
             JButton backButton = new JButton("Return to main menu");
-            JLabel lost =new JLabel("THE MISSION HAS FAILED" +
-                    "ALL SHIPS ARE WRECKED");
+            JLabel lost =new JLabel("THE MISSION HAS FAILED");
 
 
             startButton.addActionListener(playAgainButtonListener());
@@ -54,12 +53,12 @@ public class LostGame extends JPanel {
             gbc.insets = new Insets(15, 15, 15, 15);
             this.add(lost, gbc);
 
-            gbc.gridx = 2;
+            gbc.gridx = 0;
             gbc.gridy = 3;
             this.add(startButton, gbc);
 
             gbc.gridx = 0;
-            gbc.gridy = 3;
+            gbc.gridy = 4;
             this.add(backButton, gbc);
 
             gbc.weightx = 1.0;
