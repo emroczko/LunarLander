@@ -68,54 +68,12 @@ public class Level extends JPanel{
 
         pauseButton.addActionListener(pauseButtonListener(continueButton, exitButton, pauseButton));
         continueButton.addActionListener(continueButtonListener(continueButton, exitButton, pauseButton));
+        exitButton.addActionListener(exitButtonListener());
 
-
-        exitButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                removeAll();
-                repaint();
-                revalidate();
-                setLayout(new GridBagLayout());
-                GridBagConstraints gbc = new GridBagConstraints();
-                gbc.weightx = 1;
-                gbc.weighty = 1;
-                gbc.fill = GridBagConstraints.BOTH;
-                add(new Menu(), gbc);
-            }
-        });
-
-        Action upAction = new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {
-                lander.moveUp();
-            }
-        };
-
-        Action downAction = new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {
-                lander.moveDown();
-            }
-        };
-
-        Action leftAction = new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {
-                lander.moveLeft();
-            }
-        };
-
-        Action rightAction = new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {
-                lander.moveRight();
-            }
-        };
-
-        this.getInputMap(IFW).put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0,false), MOVE_UP);
-        this.getActionMap().put(MOVE_UP,upAction);
-        this.getInputMap(IFW).put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0,false), MOVE_DOWN);
-        this.getActionMap().put(MOVE_DOWN, downAction);
-        this.getInputMap(IFW).put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0,false), MOVE_LEFT);
-        this.getActionMap().put(MOVE_LEFT, leftAction);
-        this.getInputMap(IFW).put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0,false), MOVE_RIGHT);
-        this.getActionMap().put(MOVE_RIGHT, rightAction);
+        keyBindings(this, 38, MOVE_UP);
+        keyBindings(this, 40, MOVE_DOWN);
+        keyBindings(this, 39, MOVE_RIGHT);
+        keyBindings(this, 37, MOVE_LEFT);
 
 
         Font font1 = new Font("uni 05_53", Font.PLAIN, 20);
@@ -335,7 +293,52 @@ public class Level extends JPanel{
         return actionListener;
     }
 
-
+    /**
+     * Odpowiada za przypisanie akcji przyciskowi EXIT
+     */
+    private ActionListener exitButtonListener() {
+        ActionListener actionListener = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                removeAll();
+                repaint();
+                revalidate();
+                setLayout(new GridBagLayout());
+                GridBagConstraints gbc = new GridBagConstraints();
+                gbc.weightx = 1;
+                gbc.weighty = 1;
+                gbc.fill = GridBagConstraints.BOTH;
+                add(new Menu(), gbc);
+            }
+        };
+        return actionListener;
+    }
+    /**
+     * Odpowiada za wybranie odpowiedniej metody dla klikniętego klawisza
+     */
+    private Action action(String action){
+        Action newAction = new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                switch(action){
+                    case "move up": lander.moveUp();
+                        break;
+                    case "move left": lander.moveLeft();
+                        break;
+                    case "move right": lander.moveRight();
+                        break;
+                    case "move down": lander.moveDown();
+                        break;
+                }
+            }
+        };
+        return newAction;
+    }
+    /**
+     * Odpowiada za obłsugę klawiszy
+     */
+    private void keyBindings(Level level, int keyCode, String keyName){
+        level.getInputMap(IFW).put(KeyStroke.getKeyStroke(keyCode, 0,false), keyName);
+        level.getActionMap().put(keyName, action(keyName));
+    }
 
     /*
     public void keyReleased(KeyEvent e){
