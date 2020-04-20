@@ -32,10 +32,11 @@ public class LostGame extends JPanel {
             this.setLayout(new GridBagLayout());
             GridBagConstraints gbc = new GridBagConstraints();
 
-            JButton startButton = new JButton("Start!");
-            JButton backButton = new JButton("Back");
-            JLabel lost =new JLabel("Type your nick:");
-            JTextField enterName = new JTextField("Your nick...");
+            JButton startButton = new JButton("Play again");
+            JButton backButton = new JButton("Return to main menu");
+            JLabel lost =new JLabel("THE MISSION HAS FAILED" +
+                    "ALL SHIPS ARE WRECKED");
+
 
             startButton.addActionListener(playAgainButtonListener());
             backButton.addActionListener(returnToMainMenuButtonListener());
