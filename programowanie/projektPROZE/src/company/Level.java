@@ -61,27 +61,14 @@ public class Level extends JPanel{
 
         Font font = new Font("uni 05_53", Font.PLAIN, 40);
 
-        buttonCustom(continueButton, font, false, Color.BLUE);
-        buttonCustom(exitButton, font, false, Color.BLUE);
-        buttonCustom(pauseButton, font, true, Color.lightGray);
+        buttonCustomizer(continueButton, font, false, Color.BLUE);
+        buttonCustomizer(exitButton, font, false, Color.BLUE);
+        buttonCustomizer(pauseButton, font, true, Color.lightGray);
 
 
-        pauseButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                continueButton.setVisible(true);
-                exitButton.setVisible(true);
-                pauseButton.setVisible(false);
-                pause(true);
-            }
-        });
-        continueButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                pauseButton.setVisible(true);
-                pause(false);
-                continueButton.setVisible(false);
-                exitButton.setVisible(false);
-            }
-        });
+        pauseButton.addActionListener(pauseButtonListener(continueButton, exitButton, pauseButton));
+        continueButton.addActionListener(continueButtonListener(continueButton, exitButton, pauseButton));
+
 
         exitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -135,21 +122,10 @@ public class Level extends JPanel{
         Font font2 = new Font("uni 05_53", Font.PLAIN, 10);
 
 
-        vx.setBackground(Color.black);
-        vx.setFont(font1);
-        vx.setForeground(Color.lightGray);
-
-        vy.setBackground(Color.black);
-        vy.setFont(font1);
-        vy.setForeground(Color.lightGray);
-
-        time.setBackground(Color.black);
-        time.setFont(font1);
-        time.setForeground(Color.lightGray);
-
-        leftLandersLabel.setBackground(Color.black);
-        leftLandersLabel.setFont(font1);
-        leftLandersLabel.setForeground(Color.lightGray);
+        labelCustomizer(vx, font1, true, Color.lightGray);
+        labelCustomizer(vy, font1, true, Color.lightGray);
+        labelCustomizer(time, font1, true, Color.lightGray);
+        labelCustomizer(leftLandersLabel, font1, true, Color.lightGray);
 
         gbc.gridx = 7;
         gbc.gridy = 3;
@@ -280,7 +256,7 @@ public class Level extends JPanel{
     }
 
     /**
-     *Funkcja rysująca obiekty gry(gracz i powieżchnia księżyca)
+     *Funkcja rysująca obiekty gry(gracz i powierzchnia księżyca)
      */
     private void doDrawing(Graphics g) {
         if (inGame) {
@@ -308,7 +284,7 @@ public class Level extends JPanel{
     /**
      * Odpowiada za kolor, czcionkę i wygląd przycisków w oknie gry
      */
-    private void buttonCustom(JButton button, Font font, boolean visible, Color color){
+    private void buttonCustomizer(JButton button, Font font, boolean visible, Color color){
 
         button.setFont(font);
         button.setForeground(color);
@@ -318,6 +294,50 @@ public class Level extends JPanel{
         button.setVisible(visible);
 
     }
+
+    /**
+     * Odpowiada za kolor, czcionkę i wygląd napisów informacyjnych w oknie gry
+     */
+    private void labelCustomizer(JLabel label, Font font, boolean visible, Color color){
+
+        label.setBackground(Color.black);
+        label.setFont(font);
+        label.setForeground(color);
+
+    }
+    /*
+    pauseButton.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            continueButton.setVisible(true);
+            exitButton.setVisible(true);
+            pauseButton.setVisible(false);
+            pause(true);
+        }
+    });
+*/
+    private ActionListener pauseButtonListener(JButton continueButton, JButton exitButton, JButton pauseButton) {
+        ActionListener actionListener = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                continueButton.setVisible(true);
+                exitButton.setVisible(true);
+                pauseButton.setVisible(false);
+                pause(true);
+            }
+        };
+        return actionListener;
+    }
+    private ActionListener continueButtonListener(JButton continueButton, JButton exitButton, JButton pauseButton) {
+        ActionListener actionListener = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                pauseButton.setVisible(true);
+                pause(false);
+                continueButton.setVisible(false);
+                exitButton.setVisible(false);
+            }
+        };
+        return actionListener;
+    }
+
 
 
     /*
