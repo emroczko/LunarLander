@@ -45,10 +45,11 @@ public class Lander extends Sprite {
         if(x>level.getWidth()){
             x = 0;
         }
-
-
     }
-
+    private void updateRect() {
+        Rectangle2D rect = new Rectangle2D.Float(this.getX(), this.getY(), 40, 40);
+        setRect(rect);
+    }
     public void acceleration(float accX, float accY) {
         this.velx += accX;
         this.vely += accY;
@@ -56,6 +57,7 @@ public class Lander extends Sprite {
 
     public void update() {
         move();
+        updateRect();
         acceleration(0, PropertiesLoad.mapGravity);
     }
 

@@ -20,9 +20,9 @@ public class PropertiesLoad {
     /** Okresla startowa wysokosc okna */
     static int LanderWidth;
     /** Okresla odpowiednia predkosc w plaszczyznie X */
-    static int enginePowerVx;
+    static float enginePowerVx;
     /** Okresla odpowiednia predkosc w plaszczyznie Y */
-    static int enginePowerVy;
+    static float enginePowerVy;
     /** Okresla poczatkowa ilosc paliwa */
     static int fuelAmount;
     /** Okresla ilosc statkow */
@@ -53,8 +53,8 @@ public class PropertiesLoad {
             xSize = Integer.parseInt(gameProps.getProperty("xSize"));
             ySize = Integer.parseInt(gameProps.getProperty("ySize"));
             LanderWidth = Integer.parseInt(gameProps.getProperty("LanderWidth"));
-            enginePowerVx = Integer.parseInt(gameProps.getProperty("enginePowerVx"));
-            enginePowerVy = Integer.parseInt(gameProps.getProperty("enginePowerVy"));
+            enginePowerVx = Float.parseFloat(gameProps.getProperty("enginePowerVx"));
+            enginePowerVy = Float.parseFloat(gameProps.getProperty("enginePowerVy"));
             fuelAmount = Integer.parseInt(gameProps.getProperty("fuelAmount"));
             numberOfLives = Integer.parseInt(gameProps.getProperty("numberOfLives"));
             bonusPerSecond = Integer.parseInt(gameProps.getProperty("bonusPerSecond"));

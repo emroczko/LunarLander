@@ -171,6 +171,7 @@ public class Level extends JPanel{
         g.drawPolygon(moon);
         g.setColor(Color.blue);
         g.drawPolygon(landing);
+        detectCollision(landing, moon);
     }
 
 
@@ -218,6 +219,22 @@ public class Level extends JPanel{
                 timer.stop();
             }
             Toolkit.getDefaultToolkit().sync();
+        }
+    }
+
+    /**
+     * Wykrywanie kolizji
+     * @param landing- wielokąt strefy lądowania
+     * @param moon - wielokąt obszaru księzyca poza strefą lądowania
+     */
+    private void detectCollision(Polygon landing, Polygon moon){
+        if(moon.intersects(lander.getRect()))
+        {
+            System.out.println("penis!");
+        }
+        if(landing.intersects(lander.getRect()))
+        {
+            System.out.println("wolololo");
         }
     }
 
@@ -270,6 +287,8 @@ public class Level extends JPanel{
         };
         return actionListener;
     }
+
+
 
     /**
      * Odpowiada za przypisanie akcji przyciskowi CONTINUE
@@ -332,8 +351,6 @@ public class Level extends JPanel{
         level.getInputMap(IFW).put(KeyStroke.getKeyStroke(keyCode, 0,false), keyName);
         level.getActionMap().put(keyName, action(keyName));
     }
-
-
 }
 
 
