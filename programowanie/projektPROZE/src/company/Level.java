@@ -25,13 +25,14 @@ public class Level extends JPanel{
     private static final String MOVE_DOWN = "move down";
     JLabel vx = new JLabel();
     JLabel vy = new JLabel();
+    private int levelNum;
 
     int a,b;
 
 
     public Level(int xSize, int ySize, int levelNumber) {
         this.removeAll();
-
+        levelNum = levelNumber;
         setPreferredSize(new Dimension(xSize, ySize));
 
 
@@ -142,6 +143,14 @@ public class Level extends JPanel{
                 break;
             case 4:  this.backgroundImage = ImageFactory.createImage(Image.Saturn1);
                 break;
+            case 5: this.backgroundImage = ImageFactory.createImage(Image.Earth2);
+                break;
+            case 6:  this.backgroundImage = ImageFactory.createImage(Image.Mars2);
+                break;
+            case 7:  this.backgroundImage = ImageFactory.createImage(Image.Jupiter2);
+                break;
+            case 8:  this.backgroundImage = ImageFactory.createImage(Image.Saturn2);
+                break;
         }
         this.timer = new Timer(10, new GameLoop(this));
         this.timer.start();
@@ -242,14 +251,17 @@ public class Level extends JPanel{
     private void detectCollision(Polygon landing, Polygon moon){
         if(moon.intersects(lander.getRect()))
         {
-            //System.out.println("penis!");
-
             add(new LostGame(getWidth(),getHeight()), buttonsClickedBehaviour());
         }
         if(landing.intersects(lander.getRect()))
         {
-            add(new WonLevel(getWidth(),getHeight()), buttonsClickedBehaviour());
-            //System.out.println("wolololo");
+            if(levelNum != 8) {
+                add(new WonLevel(getWidth(), getHeight(), levelNum), buttonsClickedBehaviour());
+            }
+            else{
+                add(new WonGame(getWidth(), getHeight()), buttonsClickedBehaviour());
+            }
+
         }
     }
 
