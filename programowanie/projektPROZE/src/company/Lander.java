@@ -45,6 +45,11 @@ public class Lander extends Sprite {
         if(x>level.getWidth()){
             x = 0;
         }
+        if(y<0){
+            y = 0;
+            vely = 0;
+        }
+
     }
     private void updateRect() {
         Rectangle2D rect = new Rectangle2D.Float(this.getX(), this.getY(), 40, 40);
