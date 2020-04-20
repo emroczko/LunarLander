@@ -23,6 +23,8 @@ public class Level extends JPanel{
     private static final String MOVE_LEFT = "move left";
     private static final String MOVE_RIGHT = "move right";
     private static final String MOVE_DOWN = "move down";
+    JLabel vx = new JLabel();
+    JLabel vy = new JLabel();
 
     int a,b;
 
@@ -54,11 +56,12 @@ public class Level extends JPanel{
         JButton pauseButton = new JButton("||");
         JButton continueButton = new JButton("CONTINUE");
         JLabel leftLandersLabel = new JLabel(": 4");
-        JLabel vy = new JLabel("V. Speed: 100");
-        JLabel vx = new JLabel("H. Speed: 100");
+
         JLabel time = new JLabel("Time: 60");
         JLabel emptyLabel = new JLabel("  ");
         JLabel landersLeft = new JLabel(this.landersLeftIcon = ImageFactory.createImage(Image.Lander));
+        vx.setText("H. Speed: 0");
+        vy.setText("V. Speed: 0");
 
         buttonCustomizer(continueButton,  false, Color.BLUE);
         buttonCustomizer(exitButton, false, Color.BLUE);
@@ -230,11 +233,14 @@ public class Level extends JPanel{
     private void detectCollision(Polygon landing, Polygon moon){
         if(moon.intersects(lander.getRect()))
         {
-            System.out.println("penis!");
+            //System.out.println("penis!");
+
+            add(new LostGame(getWidth(),getHeight()), buttonsClickedBehaviour());
         }
         if(landing.intersects(lander.getRect()))
         {
-            System.out.println("wolololo");
+            add(new WonGame(getWidth(),getHeight()), buttonsClickedBehaviour());
+            //System.out.println("wolololo");
         }
     }
 
@@ -345,6 +351,20 @@ public class Level extends JPanel{
         return newAction;
     }
     /**
+     * Odpowiada za wyczyszczenie ekranu i umieszczenie nowego okna po naciśnięciu któregoś z przycisków w oknie Name
+     */
+    private GridBagConstraints buttonsClickedBehaviour(){
+        removeAll();
+        repaint();
+        revalidate();
+        setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+        gbc.fill = GridBagConstraints.BOTH;
+        return gbc;
+    }
+    /**
      * Odpowiada za obłsugę klawiszy
      */
     private void keyBindings(Level level, int keyCode, String keyName){
@@ -353,6 +373,16 @@ public class Level extends JPanel{
         level.getActionMap().put(keyName, action(keyName));
         //level.getActionMap().put(keyName, action(keyName));
     }
+    public void labelUpdate(String label){
+        switch(label){
+            case "vx": vx.setText("H. Speed: " + lander.velx);
+            break;
+            case "vy": vy.setText("V. Speed: " + lander.vely);
+            break;
+        }
+        super.update(this.getGraphics());
+    }
+
 }
 
 
