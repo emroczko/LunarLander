@@ -12,7 +12,10 @@ import java.awt.geom.Rectangle2D;
 
 public class Lander extends Sprite {
 
-    public Lander() {
+    private Level level;
+
+    public Lander(Level level) {
+        this.level = level;
         initialize();
     }
 
@@ -32,10 +35,18 @@ public class Lander extends Sprite {
 
     @Override
     public void move() {
-        //System.out.println(this.velx + "" + this.vely);
+
         x += velx;
         y += vely;
-        //System.out.println(this.x + " " + this.y);
+
+        if(x<0){
+            x = level.getWidth();
+        }
+        if(x>level.getWidth()){
+            x = 0;
+        }
+
+
     }
 
     public void acceleration(float accX, float accY) {

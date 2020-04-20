@@ -16,6 +16,7 @@ public class Level extends JPanel{
     private ImageIcon landersLeftIcon;
     private Timer timer;
     private Lander lander;
+
     private boolean inGame = true;
     private static final int IFW = JComponent.WHEN_IN_FOCUSED_WINDOW;
     private static final String MOVE_UP = "move up";
@@ -128,7 +129,7 @@ public class Level extends JPanel{
     private void initializeVariables(){
         
         setFocusable(true);
-        this.lander = new Lander();
+        this.lander = new Lander(this);
         this.backgroundImage = ImageFactory.createImage(Image.Earth1);
         this.timer = new Timer(10, new GameLoop(this));
         this.timer.start();
