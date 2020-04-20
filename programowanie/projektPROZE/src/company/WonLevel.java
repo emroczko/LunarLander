@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class WonGame extends JPanel{
+public class WonLevel extends JPanel {
 
     /** Zmienna przechowująca obrazek tła*/
     private ImageIcon MainMenuImage;
@@ -13,11 +13,13 @@ public class WonGame extends JPanel{
     private String nick;
     /** Zmienne przechowująca wielkość poprzedniego okna*/
     private int a, b;
+    private int wonLevelNumber;
 
-    public WonGame(int xSize, int ySize){
+    public WonLevel(int xSize, int ySize, int wonLevel){
         this.removeAll();
         repaint();
         revalidate();
+        wonLevelNumber = wonLevel;
         a = xSize;
         b = ySize;
         setPreferredSize(new Dimension(a,b));
@@ -30,9 +32,9 @@ public class WonGame extends JPanel{
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 
-        JButton startButton = new JButton("Play again!");
+        JButton startButton = new JButton("Continue");
         JButton backButton = new JButton("Return to Main Menu");
-        JLabel lost =new JLabel("YOU WON!!!");
+        JLabel lost =new JLabel("GOOD JOB!");
 
         startButton.addActionListener(continueButtonListener());
         backButton.addActionListener(returnToMainMenuButtonListener());
@@ -107,7 +109,7 @@ public class WonGame extends JPanel{
     private ActionListener continueButtonListener() {
         ActionListener actionListener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                add(new Level(getWidth(),getHeight(), 1),buttonsClickedBehaviour());
+                add(new Level(getWidth(),getHeight(), wonLevelNumber+1),buttonsClickedBehaviour());
             }
         };
         return actionListener;
@@ -140,3 +142,4 @@ public class WonGame extends JPanel{
         return gbc;
     }
 }
+
