@@ -37,7 +37,13 @@ public class Lander extends Sprite {
     public void move() {
 
         x += velx;
-        y += vely;
+
+        if (vely<1 && vely>0) {
+            y += 1;
+        }
+        else {
+            y += vely;
+        }
 
         if(x<0){
             x = level.getWidth();
