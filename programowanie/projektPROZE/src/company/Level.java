@@ -59,12 +59,9 @@ public class Level extends JPanel{
         JLabel emptyLabel = new JLabel("  ");
         JLabel landersLeft = new JLabel(this.landersLeftIcon = ImageFactory.createImage(Image.Lander));
 
-        Font font = new Font("uni 05_53", Font.PLAIN, 40);
-
-        buttonCustomizer(continueButton, font, false, Color.BLUE);
-        buttonCustomizer(exitButton, font, false, Color.BLUE);
-        buttonCustomizer(pauseButton, font, true, Color.lightGray);
-
+        buttonCustomizer(continueButton,  false, Color.BLUE);
+        buttonCustomizer(exitButton, false, Color.BLUE);
+        buttonCustomizer(pauseButton,  true, Color.lightGray);
 
         pauseButton.addActionListener(pauseButtonListener(continueButton, exitButton, pauseButton));
         continueButton.addActionListener(continueButtonListener(continueButton, exitButton, pauseButton));
@@ -75,15 +72,10 @@ public class Level extends JPanel{
         keyBindings(this, 39, MOVE_RIGHT);
         keyBindings(this, 37, MOVE_LEFT);
 
-
-        Font font1 = new Font("uni 05_53", Font.PLAIN, 20);
-        Font font2 = new Font("uni 05_53", Font.PLAIN, 10);
-
-
-        labelCustomizer(vx, font1, true, Color.lightGray);
-        labelCustomizer(vy, font1, true, Color.lightGray);
-        labelCustomizer(time, font1, true, Color.lightGray);
-        labelCustomizer(leftLandersLabel, font1, true, Color.lightGray);
+        labelCustomizer(vx, true, Color.lightGray);
+        labelCustomizer(vy, true, Color.lightGray);
+        labelCustomizer(time,  true, Color.lightGray);
+        labelCustomizer(leftLandersLabel, true, Color.lightGray);
 
         gbc.gridx = 7;
         gbc.gridy = 3;
@@ -242,9 +234,9 @@ public class Level extends JPanel{
     /**
      * Odpowiada za kolor, czcionkę i wygląd przycisków w oknie gry
      */
-    private void buttonCustomizer(JButton button, Font font, boolean visible, Color color){
+    private void buttonCustomizer(JButton button, boolean visible, Color color){
 
-        button.setFont(font);
+        button.setFont(Fonts.getFont(40));
         button.setForeground(color);
         button.setOpaque(false);
         button.setContentAreaFilled(false);
@@ -256,10 +248,10 @@ public class Level extends JPanel{
     /**
      * Odpowiada za kolor, czcionkę i wygląd napisów informacyjnych w oknie gry
      */
-    private void labelCustomizer(JLabel label, Font font, boolean visible, Color color){
+    private void labelCustomizer(JLabel label, boolean visible, Color color){
 
         label.setBackground(Color.black);
-        label.setFont(font);
+        label.setFont(Fonts.getFont(20));
         label.setForeground(color);
 
     }
@@ -339,18 +331,6 @@ public class Level extends JPanel{
         level.getInputMap(IFW).put(KeyStroke.getKeyStroke(keyCode, 0,false), keyName);
         level.getActionMap().put(keyName, action(keyName));
     }
-
-    /*
-    public void keyReleased(KeyEvent e){
-        System.out.println("Level key released");
-        this.lander.keyReleased(e);
-    }
-    public void keyPressed(KeyEvent e){
-        System.out.println("Level key pressed");
-        this.lander.keyPressed(e);
-    }
-    */
-
 
 
 }

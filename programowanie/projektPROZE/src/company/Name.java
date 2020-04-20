@@ -41,35 +41,8 @@ public class Name extends JPanel{
         JLabel typeNick=new JLabel("Type your nick:");
         JTextField enterName = new JTextField("Your nick...");
 
-        startButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                nick = enterName.getText();
-                removeAll();
-                repaint();
-                revalidate();
-                setLayout(new GridBagLayout());
-                GridBagConstraints gbc = new GridBagConstraints();
-                gbc.weightx = 1;
-                gbc.weighty = 1;
-                gbc.fill = GridBagConstraints.BOTH;
-
-                add(new Level(getWidth(),getHeight()),gbc);
-            }
-        });
-       backButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-
-                removeAll();
-                repaint();
-                revalidate();
-                setLayout(new GridBagLayout());
-                GridBagConstraints gbc = new GridBagConstraints();
-                gbc.weightx = 1;
-                gbc.weighty = 1;
-                gbc.fill = GridBagConstraints.BOTH;
-                add(new Menu(),gbc);
-            }
-        });
+        startButton.addActionListener(startButtonListener(enterName));
+        backButton.addActionListener(backButtonListener());
 
         enterName.addMouseListener(new MouseAdapter(){
             @Override
@@ -78,28 +51,11 @@ public class Name extends JPanel{
             }
         });
 
+        buttonCustomizer(startButton, citron);
+        buttonCustomizer(backButton, citron);
 
-
-        startButton.setFont(font.getFont(32));
-        startButton.setOpaque(false);
-        startButton.setContentAreaFilled(false);
-        startButton.setBorderPainted(false);
-        startButton.setForeground(citron);
-
-
-        backButton.setFont(font.getFont(32));
-        backButton.setOpaque(false);
-        backButton.setContentAreaFilled(false);
-        backButton.setBorderPainted(false);
-        backButton.setForeground(citron);
-
-        typeNick.setBackground(Color.black);
-        typeNick.setFont(font.getFont(24));
-        typeNick.setForeground(Color.lightGray);
-
-        enterName.setBackground(Color.black);
-        enterName.setFont(font.getFont(24));
-        enterName.setForeground(aqua);
+        labelCustomizer(typeNick, Color.lightGray);
+        textFieldCustomizer(enterName, aqua);
 
         gbc.gridwidth = 3;
         gbc.gridx = 0;
@@ -137,5 +93,80 @@ public class Name extends JPanel{
         super.paintComponent(g);
         g.drawImage(MainMenuImage.getImage(), 0, 0, this.getWidth(), this.getHeight(), null);
 
+    }
+
+    /**
+     * Odpowiada za kolor, czcionkę i wygląd przycisków w oknie przed grą
+     */
+    private void buttonCustomizer(JButton button, Color color){
+
+        button.setFont(Fonts.getFont(32));
+        button.setOpaque(false);
+        button.setContentAreaFilled(false);
+        button.setBorderPainted(false);
+        button.setForeground(color);
+
+    }
+
+    /**
+     * Odpowiada za kolor, czcionkę i wygląd napisów w oknie przed grą
+     */
+    private void labelCustomizer(JLabel label, Color color){
+
+        label.setBackground(Color.black);
+        label.setFont(Fonts.getFont(24));
+        label.setForeground(color);
+
+    }
+
+    /**
+     * Odpowiada za kolor, czcionkę i wygląd pól tekstowych w oknie przed grą
+     */
+    private void textFieldCustomizer(JTextField textField, Color color){
+
+        textField.setBackground(Color.black);
+        textField.setFont(Fonts.getFont(24));
+        textField.setForeground(color);
+
+    }
+
+    /**
+     * Odpowiada za przypisanie akcji przyciskowi START
+     */
+    private ActionListener startButtonListener(JTextField enterName) {
+        ActionListener actionListener = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                nick = enterName.getText();
+                add(new Level(getWidth(),getHeight()),buttonsClickedBehaviour());
+            }
+        };
+        return actionListener;
+    }
+
+    /**
+     * Odpowiada za przypisanie akcji przyciskowi BACK
+     */
+    private ActionListener backButtonListener() {
+        ActionListener actionListener = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                add(new Menu(),buttonsClickedBehaviour());
+            }
+        };
+        return actionListener;
+    }
+
+    /**
+     * Odpowiada za wyczyszczenie ekranu i umieszczenie nowego okna po naciśnięciu któregoś z przycisków w oknie Name
+     */
+    private GridBagConstraints buttonsClickedBehaviour(){
+        removeAll();
+        repaint();
+        revalidate();
+        setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+        gbc.fill = GridBagConstraints.BOTH;
+        return gbc;
     }
 }
