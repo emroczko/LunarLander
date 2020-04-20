@@ -29,21 +29,21 @@ public class Level extends JPanel{
     int a,b;
 
 
-    public Level(int xSize, int ySize) {
+    public Level(int xSize, int ySize, int levelNumber) {
         this.removeAll();
 
         setPreferredSize(new Dimension(xSize, ySize));
 
 
         try {
-            PropertiesLoad.loadMapsConfigs(1);
+            PropertiesLoad.loadMapsConfigs(levelNumber);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         revalidate();
         repaint();
-        initializeVariables();
+        initializeVariables(levelNumber);
 
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -129,11 +129,20 @@ public class Level extends JPanel{
 
     }
     /** Funkcja inicjująca zmienne klasy*/
-    private void initializeVariables(){
+    private void initializeVariables(int levelNumber){
         
         setFocusable(true);
         this.lander = new Lander(this);
-        this.backgroundImage = ImageFactory.createImage(Image.Earth1);
+        switch(levelNumber){
+            case 1: this.backgroundImage = ImageFactory.createImage(Image.Earth1);
+                break;
+            case 2:  this.backgroundImage = ImageFactory.createImage(Image.Mars1);
+                break;
+            case 3:  this.backgroundImage = ImageFactory.createImage(Image.Jupiter1);
+                break;
+            case 4:  this.backgroundImage = ImageFactory.createImage(Image.Saturn1);
+                break;
+        }
         this.timer = new Timer(10, new GameLoop(this));
         this.timer.start();
 
@@ -239,7 +248,7 @@ public class Level extends JPanel{
         }
         if(landing.intersects(lander.getRect()))
         {
-            add(new WonGame(getWidth(),getHeight()), buttonsClickedBehaviour());
+            add(new WonLevel(getWidth(),getHeight()), buttonsClickedBehaviour());
             //System.out.println("wolololo");
         }
     }

@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class WonGame extends JPanel {
+public class WonLevel extends JPanel {
 
     /** Zmienna przechowująca obrazek tła*/
     private ImageIcon MainMenuImage;
@@ -14,7 +14,7 @@ public class WonGame extends JPanel {
     /** Zmienne przechowująca wielkość poprzedniego okna*/
     private int a, b;
 
-    public WonGame(int xSize, int ySize){
+    public WonLevel(int xSize, int ySize){
         this.removeAll();
         repaint();
         revalidate();
@@ -34,7 +34,7 @@ public class WonGame extends JPanel {
         JButton backButton = new JButton("Return to Main Menu");
         JLabel lost =new JLabel("GOOD JOB!");
 
-        startButton.addActionListener(playAgainButtonListener());
+        startButton.addActionListener(continueButtonListener());
         backButton.addActionListener(returnToMainMenuButtonListener());
 
 
@@ -104,10 +104,10 @@ public class WonGame extends JPanel {
     /**
      * Odpowiada za przypisanie akcji przyciskowi START
      */
-    private ActionListener playAgainButtonListener() {
+    private ActionListener continueButtonListener() {
         ActionListener actionListener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                add(new Name(getWidth(),getHeight()),buttonsClickedBehaviour());
+                add(new Level(getWidth(),getHeight(), 2),buttonsClickedBehaviour());
             }
         };
         return actionListener;
