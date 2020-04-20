@@ -349,7 +349,9 @@ public class Level extends JPanel{
      */
     private void keyBindings(Level level, int keyCode, String keyName){
         level.getInputMap(IFW).put(KeyStroke.getKeyStroke(keyCode, 0,false), keyName);
+        //level.getInputMap(IFW).put(KeyStroke.getKeyStroke(keyCode, 0,false), keyName);
         level.getActionMap().put(keyName, action(keyName));
+        //level.getActionMap().put(keyName, action(keyName));
     }
 }
 
