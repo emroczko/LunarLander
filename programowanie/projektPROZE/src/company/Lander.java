@@ -53,6 +53,10 @@ public class Lander extends Sprite {
     public void acceleration(float accX, float accY) {
         this.velx += accX;
         this.vely += accY;
+
+        level.labelUpdate("vx");
+        level.labelUpdate("vy");
+
     }
 
     public void update() {
