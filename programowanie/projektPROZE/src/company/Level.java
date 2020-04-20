@@ -230,11 +230,14 @@ public class Level extends JPanel{
     private void detectCollision(Polygon landing, Polygon moon){
         if(moon.intersects(lander.getRect()))
         {
-            System.out.println("penis!");
+            //System.out.println("penis!");
+
+            add(new LostGame(getWidth(),getHeight()), buttonsClickedBehaviour());
         }
         if(landing.intersects(lander.getRect()))
         {
-            System.out.println("wolololo");
+            add(new WonGame(getWidth(),getHeight()), buttonsClickedBehaviour());
+            //System.out.println("wolololo");
         }
     }
 
@@ -343,6 +346,20 @@ public class Level extends JPanel{
             }
         };
         return newAction;
+    }
+    /**
+     * Odpowiada za wyczyszczenie ekranu i umieszczenie nowego okna po naciśnięciu któregoś z przycisków w oknie Name
+     */
+    private GridBagConstraints buttonsClickedBehaviour(){
+        removeAll();
+        repaint();
+        revalidate();
+        setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+        gbc.fill = GridBagConstraints.BOTH;
+        return gbc;
     }
     /**
      * Odpowiada za obłsugę klawiszy

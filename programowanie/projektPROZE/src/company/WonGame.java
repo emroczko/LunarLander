@@ -4,8 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class WonGame extends JPanel {
 
@@ -32,9 +30,9 @@ public class WonGame extends JPanel {
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 
-        JButton startButton = new JButton("Start!");
-        JButton backButton = new JButton("Back");
-        JLabel lost =new JLabel("Type your nick:");
+        JButton startButton = new JButton("Continue");
+        JButton backButton = new JButton("Return to Main Menu");
+        JLabel lost =new JLabel("GOOD JOB!");
 
         startButton.addActionListener(playAgainButtonListener());
         backButton.addActionListener(returnToMainMenuButtonListener());
