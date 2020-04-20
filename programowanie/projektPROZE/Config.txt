@@ -1,8 +1,13 @@
 xSize=700
 ySize=500
 LanderWidth=40
+<<<<<<< HEAD
 enginePowerVx=2
 enginePowerVy=2
+=======
+enginePowerVx=1
+enginePowerVy=1
+>>>>>>> 5dc458e4bdbbe4730ac299e481a4db1fc959a5ad
 fuelAmount=100
 maxPointsAmount=400
 numberOfLives=5
