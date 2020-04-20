@@ -59,28 +59,11 @@ public class Level extends JPanel{
         JLabel emptyLabel = new JLabel("  ");
         JLabel landersLeft = new JLabel(this.landersLeftIcon = ImageFactory.createImage(Image.Lander));
 
-        Font font1 = new Font("uni 05_53", Font.PLAIN, 40);
+        Font font = new Font("uni 05_53", Font.PLAIN, 40);
 
-
-        continueButton.setFont(font1);
-        continueButton.setForeground(Color.BLUE);
-        continueButton.setOpaque(false);
-        continueButton.setContentAreaFilled(false);
-        continueButton.setBorderPainted(false);
-        continueButton.setVisible(false);
-
-        exitButton.setFont(font1);
-        exitButton.setForeground(Color.BLUE);
-        exitButton.setOpaque(false);
-        exitButton.setContentAreaFilled(false);
-        exitButton.setBorderPainted(false);
-        exitButton.setVisible(false);
-        /*
-        requestFocusInWindow();
-        setFocusable(true);
-        addKeyListener(new GameEventListener(this));*/
-
-
+        buttonCustom(continueButton, font, false, Color.BLUE);
+        buttonCustom(exitButton, font, false, Color.BLUE);
+        buttonCustom(pauseButton, font, true, Color.lightGray);
 
 
         pauseButton.addActionListener(new ActionListener() {
@@ -148,29 +131,24 @@ public class Level extends JPanel{
         this.getActionMap().put(MOVE_RIGHT, rightAction);
 
 
-        Font font = new Font("uni 05_53", Font.PLAIN, 20);
+        Font font1 = new Font("uni 05_53", Font.PLAIN, 20);
         Font font2 = new Font("uni 05_53", Font.PLAIN, 10);
 
-        pauseButton.setFont(font1);
-        pauseButton.setForeground(Color.lightGray);
-        pauseButton.setOpaque(false);
-        pauseButton.setContentAreaFilled(false);
-        pauseButton.setBorderPainted(false);
 
         vx.setBackground(Color.black);
-        vx.setFont(font);
+        vx.setFont(font1);
         vx.setForeground(Color.lightGray);
 
         vy.setBackground(Color.black);
-        vy.setFont(font);
+        vy.setFont(font1);
         vy.setForeground(Color.lightGray);
 
         time.setBackground(Color.black);
-        time.setFont(font);
+        time.setFont(font1);
         time.setForeground(Color.lightGray);
 
         leftLandersLabel.setBackground(Color.black);
-        leftLandersLabel.setFont(font);
+        leftLandersLabel.setFont(font1);
         leftLandersLabel.setForeground(Color.lightGray);
 
         gbc.gridx = 7;
@@ -326,6 +304,19 @@ public class Level extends JPanel{
 
     private void update(){
         this.lander.update();
+    }
+    /**
+     * Odpowiada za kolor, czcionkę i wygląd przycisków w oknie gry
+     */
+    private void buttonCustom(JButton button, Font font, boolean visible, Color color){
+
+        button.setFont(font);
+        button.setForeground(color);
+        button.setOpaque(false);
+        button.setContentAreaFilled(false);
+        button.setBorderPainted(false);
+        button.setVisible(visible);
+
     }
 
 
