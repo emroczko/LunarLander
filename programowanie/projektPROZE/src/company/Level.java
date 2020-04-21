@@ -6,12 +6,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
-
-import java.util.TimerTask;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.ExecutorService;
 import static java.util.concurrent.TimeUnit.*;
 
 import java.util.ArrayList;
@@ -100,12 +96,20 @@ public class Level extends JPanel{
         keyBindings(this, 39, MOVE_RIGHT);
         keyBindings(this, 37, MOVE_LEFT);
 
-        labelCustomizer(vx, true, Color.lightGray);
+        /*
         labelCustomizer(vy, true, Color.lightGray);
         labelCustomizer(time,  true, Color.lightGray);
         labelCustomizer(leftLandersLabel, true, Color.lightGray);
         labelCustomizer(fuelLabel, true, Color.lightGray);
-        labelCustomizer(timeLabel, true, Color.lightGray);
+        labelCustomizer(timeLabel, true, Color.lightGray);*/
+
+        labelCustomizer custom = new labelCustomizer(Color.lightGray, 20);
+        custom.customizer(vx);
+        custom.customizer(vy);
+        custom.customizer(time);
+        custom.customizer(leftLandersLabel);
+        custom.customizer(fuelLabel);
+        custom.customizer(timeLabel);
 
         gbc.gridx = 1;
         gbc.gridy = 3;
@@ -278,13 +282,10 @@ public class Level extends JPanel{
             public void run() {
                time -= 1;
                labelUpdate("time");
-
             }
         };
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
         executor.scheduleAtFixedRate(helloRunnable, 1, 1, SECONDS);
-
-
     }
 
     /**
@@ -328,7 +329,7 @@ public class Level extends JPanel{
         }
     }
     private void countPoints(){
-        points = 10 * fuelLevel;
+        points = (10 * fuelLevel) + (10 * time);
     }
     /**
      * Aplikuje zmiany wykonane przez gracza oraz odświeża okno gry
@@ -436,7 +437,8 @@ public class Level extends JPanel{
                         break;
                     case "move down": lander.moveDown();
                         break;
-                    case "nothing": break;
+                    case "nothing":
+                        break;
                 }
             }
         };

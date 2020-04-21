@@ -27,7 +27,7 @@ public class Name extends JPanel{
         a = xSize;
         b = ySize;
         setPreferredSize(new Dimension(a,b));
-        Fonts font = new Fonts();
+
         Color aqua = new Color (51, 134, 175);
         Color citron = new Color (223, 234, 24);
 
@@ -54,7 +54,9 @@ public class Name extends JPanel{
         buttonCustomizer(startButton, citron);
         buttonCustomizer(backButton, citron);
 
-        labelCustomizer(typeNick, Color.lightGray);
+        labelCustomizer custom = new labelCustomizer(Color.lightGray, 36);
+        custom.customizer(typeNick);
+
         textFieldCustomizer(enterName, aqua);
 
         gbc.gridwidth = 3;
@@ -107,10 +109,10 @@ public class Name extends JPanel{
         button.setForeground(color);
 
     }
-
+/*
     /**
      * Odpowiada za kolor, czcionkę i wygląd napisów w oknie przed grą
-     */
+
     private void labelCustomizer(JLabel label, Color color){
 
         label.setBackground(Color.black);
@@ -118,7 +120,7 @@ public class Name extends JPanel{
         label.setForeground(color);
 
     }
-
+*/
     /**
      * Odpowiada za kolor, czcionkę i wygląd pól tekstowych w oknie przed grą
      */
