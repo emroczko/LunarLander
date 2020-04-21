@@ -19,6 +19,8 @@ public class ImageFactory {
             case Lander:
                 imageIcon = new ImageIcon("Images/Lander.png");
                 break;
+            case Asteroid:
+                imageIcon = new ImageIcon("Images/Asteroid.png");
             case Earth1:
                 imageIcon = new ImageIcon("Images/EarthMoon.png");
                 break;

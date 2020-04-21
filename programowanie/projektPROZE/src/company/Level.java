@@ -6,20 +6,21 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
+
 import java.util.TimerTask;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.ExecutorService;
 import static java.util.concurrent.TimeUnit.*;
-//import java.util.Timer;
+
+import java.util.ArrayList;
 
 
 
 /**
  * Klasa odpowiedzialna za rysowanie poziomu ziemi oraz statku gracza
  */
-
 public class Level extends JPanel{
     private ImageIcon backgroundImage;
     private ImageIcon landersLeftIcon;
@@ -41,10 +42,9 @@ public class Level extends JPanel{
     private int levelNum;
     private int leftLives;
     protected float fuelLevel;
+    private ArrayList<Asteroid> asteroids;
     private float points;
     private int time = 60;
-
-
 
 
     public Level(int xSize, int ySize, int levelNumber, int Lives, float previousPoints) {
@@ -154,6 +154,7 @@ public class Level extends JPanel{
 
         setFocusable(true);
         this.lander = new Lander(this);
+        this.asteroids = new ArrayList<Asteroid>();
         this.fuelLevel = PropertiesLoad.fuelAmount;
 
         switch(levelNumber){
@@ -200,7 +201,6 @@ public class Level extends JPanel{
      * okna do jego początkowej wielkości wczytywanej z pliku konfiguracyjnego
      */
     private void drawPlayer(Graphics g){
-        System.out.println(lander.getX());
         g.drawImage(lander.getImage(), (int)(lander.getX()*((float)(this.getWidth())/PropertiesLoad.xSize)),
                 (int)(lander.getY()*((float)this.getHeight()/PropertiesLoad.ySize)), (int)(this.getWidth()/17.5),
                 (int)(this.getHeight()/12.5), this);
@@ -218,6 +218,10 @@ public class Level extends JPanel{
         g.setColor(Color.blue);
         g.drawPolygon(landing);
         detectCollision(landing, moon);
+    }
+
+    private void drawAsteroid(){
+        
     }
 
 

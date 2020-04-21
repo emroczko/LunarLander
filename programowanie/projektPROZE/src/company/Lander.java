@@ -31,11 +31,9 @@ public class Lander extends Sprite {
         setImage(imageIcon.getImage());
         start_x = PropertiesLoad.xSize / 2 - PropertiesLoad.LanderWidth / 2;
         start_y = PropertiesLoad.ySize - 450;
-        int width = 40;
-        int height = 40;
-        Rectangle2D rect = new Rectangle2D.Float(this.getX(), this.getY(), 40, 40);
         setX(start_x);
         setY(start_y);
+        Rectangle2D rect = new Rectangle2D.Float(this.getX(), this.getY(), 40, 40);
         setRect(rect);
     }
 
@@ -72,15 +70,10 @@ public class Lander extends Sprite {
         level.labelUpdate("vx");
         level.labelUpdate("vy");
     }
-    public void update_pos(){
-        x = (int)(start_x*((float)(level.getWidth())/PropertiesLoad.xSize));
-        y = (int)(start_y*((float)(level.getHeight())/PropertiesLoad.ySize));
-    }
 
     public void update() {
         move();
         updateRect();
-        //update_pos();
         acceleration(0, PropertiesLoad.mapGravity);
     }
 
