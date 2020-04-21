@@ -43,6 +43,8 @@ public class PropertiesLoad {
     static int[] yLanding;
     /** Określa przyśpieszenie grawitacyjne na danej mapie*/
     static float mapGravity;
+    /** Określa przyśpieszenie grawitacyjne na danej mapie*/
+    static float numberOfLevels;
 
         /** Metoda wczytuje dane z lokalnego pliku i zapisuje do odpowiednich pól w klasie */
         static void loadProps() throws IOException {
@@ -59,6 +61,7 @@ public class PropertiesLoad {
             numberOfLives = Integer.parseInt(gameProps.getProperty("numberOfLives"));
             bonusPerSecond = Integer.parseInt(gameProps.getProperty("bonusPerSecond"));
             maxPointsAmount = Integer.parseInt(gameProps.getProperty("maxPointsAmount"));
+            numberOfLevels = Integer.parseInt(gameProps.getProperty("numberOfLives"));
             propertiesFile.close();
         }
         /** metoda wczytująca współrzędne ukształtowania planet (Hit Box) i jej współczynnik grawitacji */

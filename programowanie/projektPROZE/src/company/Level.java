@@ -318,13 +318,23 @@ public class Level extends JPanel{
         }
         if(landing.intersects(lander.getRect()))
         {
+            if(lander.velx < 7 && lander.vely < 7){
             countPoints();
-            if(levelNum != 8) {
+            if (levelNum != PropertiesLoad.numberOfLevels) {
                 add(new WonLevel(getWidth(), getHeight(), levelNum, leftLives, points), buttonsClickedBehaviour());
-            }
-            else{
+            } else {
                 add(new WonGame(getWidth(), getHeight(), points), buttonsClickedBehaviour());
             }
+        }
+            else{
+                if(leftLives == 0 ) {
+                    countPoints();
+                    add(new LostGame(getWidth(), getHeight(), points), buttonsClickedBehaviour());
+                }
+                else{
+                    add(new Level(getWidth(), getHeight(), levelNum ,leftLives-1, points), buttonsClickedBehaviour());
+                }
+        }
 
         }
     }
