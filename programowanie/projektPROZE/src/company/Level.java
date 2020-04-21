@@ -98,16 +98,13 @@ public class Level extends JPanel{
         gbc.anchor = GridBagConstraints.FIRST_LINE_END;
         this.add(emptyLabel, gbc);
 
-
-        gbc.gridx = 1;
+        gbc.gridx = 2;
         gbc.gridy = 1;
         gbc.weighty = 0;
         gbc.anchor = GridBagConstraints.FIRST_LINE_END;
         this.add(landersLeft, gbc);
 
-
-
-        gbc.gridx = 2;
+        gbc.gridx = 3;
         gbc.gridy = 1;
         gbc.anchor = GridBagConstraints.FIRST_LINE_END;
         this.add(leftLandersLabel, gbc);
@@ -115,13 +112,12 @@ public class Level extends JPanel{
 
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.weightx = 0.1;
+        gbc.weightx=0.1;
         gbc.anchor = GridBagConstraints.FIRST_LINE_START;
         this.add(vx, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 1;
-        gbc.weightx = 0.1;
         gbc.anchor = GridBagConstraints.FIRST_LINE_START;
         this.add(vy, gbc);
 
@@ -129,20 +125,15 @@ public class Level extends JPanel{
         gbc.gridy = 2;
         gbc.weighty = 0;
         gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-        gbc.insets = new Insets(0, 0, 0, 0);
         this.add(fuelLabel, gbc);
 
-        gbc.gridx = 1;
+        gbc.gridx = 2;
         gbc.gridy = 2;
+        gbc.weightx = 0.9;
         gbc.anchor = GridBagConstraints.FIRST_LINE_END;
-        gbc.insets = new Insets(10, 0, 0, 0);
         this.add(pauseButton, gbc);
         this.add(exitButton);
         this.add(continueButton);
-
-
-
-
     }
     /** Funkcja inicjująca zmienne klasy*/
     private void initializeVariables(int levelNumber){
