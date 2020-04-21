@@ -15,13 +15,15 @@ public class WonLevel extends JPanel {
     private int a, b;
     private int wonLevelNumber;
     private int lives;
+    private float points;
 
-    public WonLevel(int xSize, int ySize, int wonLevel, int leftLives){
+    public WonLevel(int xSize, int ySize, int wonLevel, int leftLives, float earnedPoints){
         this.removeAll();
         repaint();
         revalidate();
         wonLevelNumber = wonLevel;
         lives = leftLives;
+        points = earnedPoints;
         a = xSize;
         b = ySize;
         setPreferredSize(new Dimension(a,b));
@@ -111,7 +113,7 @@ public class WonLevel extends JPanel {
     private ActionListener continueButtonListener() {
         ActionListener actionListener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                add(new Level(getWidth(),getHeight(), wonLevelNumber+1, lives),buttonsClickedBehaviour());
+                add(new Level(getWidth(),getHeight(), wonLevelNumber+1, lives, points),buttonsClickedBehaviour());
             }
         };
         return actionListener;
