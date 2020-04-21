@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Random;
 
 
 /**
@@ -205,7 +206,11 @@ public class Level extends JPanel{
     }
 
     private void drawAsteroid(){
-        
+
+    }
+
+    private void addasteroid(){
+
     }
 
 
