@@ -14,7 +14,7 @@ public class WonGame extends JPanel{
     /** Zmienne przechowująca wielkość poprzedniego okna*/
     private int a, b;
 
-    public WonGame(int xSize, int ySize){
+    public WonGame(int xSize, int ySize, float earnedPoints){
         this.removeAll();
         repaint();
         revalidate();

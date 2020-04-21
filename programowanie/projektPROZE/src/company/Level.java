@@ -32,15 +32,19 @@ public class Level extends JPanel{
     private int levelNum;
     private int leftLives;
     protected float fuelLevel;
+<<<<<<< HEAD
     private ArrayList<Asteroid> asteroids;
+=======
+    private float points;
+>>>>>>> 8256621a737e152d401a940385ed2946a24837de
 
-    int a,b;
 
 
-    public Level(int xSize, int ySize, int levelNumber, int Lives) {
+    public Level(int xSize, int ySize, int levelNumber, int Lives, float previousPoints) {
         this.removeAll();
         levelNum = levelNumber;
         leftLives = Lives;
+        points = previousPoints;
         setPreferredSize(new Dimension(xSize, ySize));
 
 
@@ -143,6 +147,7 @@ public class Level extends JPanel{
         this.lander = new Lander(this);
         this.asteroids = new ArrayList<Asteroid>();
         this.fuelLevel = PropertiesLoad.fuelAmount;
+
         switch(levelNumber){
             case 1: this.backgroundImage = ImageFactory.createImage(Image.Earth1);
                 break;
@@ -262,19 +267,21 @@ public class Level extends JPanel{
         {
 
             if(leftLives == 0 ) {
-                add(new LostGame(getWidth(), getHeight()), buttonsClickedBehaviour());
+                countPoints();
+                add(new LostGame(getWidth(), getHeight(), points), buttonsClickedBehaviour());
             }
             else{
-                add(new Level(getWidth(), getHeight(), levelNum ,leftLives-1), buttonsClickedBehaviour());
+                add(new Level(getWidth(), getHeight(), levelNum ,leftLives-1, points), buttonsClickedBehaviour());
             }
         }
         if(landing.intersects(lander.getRect()))
         {
+            countPoints();
             if(levelNum != 8) {
-                add(new WonLevel(getWidth(), getHeight(), levelNum, leftLives), buttonsClickedBehaviour());
+                add(new WonLevel(getWidth(), getHeight(), levelNum, leftLives, points), buttonsClickedBehaviour());
             }
             else{
-                add(new WonGame(getWidth(), getHeight()), buttonsClickedBehaviour());
+                add(new WonGame(getWidth(), getHeight(), points), buttonsClickedBehaviour());
             }
 
         }
@@ -282,14 +289,17 @@ public class Level extends JPanel{
     protected void noFuel(){
         if (fuelLevel == 0){
             if(leftLives == 0 ) {
-                add(new LostGame(getWidth(), getHeight()), buttonsClickedBehaviour());
+                add(new LostGame(getWidth(), getHeight(), points), buttonsClickedBehaviour());
             }
             else{
-                add(new Level(getWidth(), getHeight(), levelNum ,leftLives-1), buttonsClickedBehaviour());
+
+                add(new Level(getWidth(), getHeight(), levelNum ,leftLives-1, points), buttonsClickedBehaviour());
             }
         }
     }
-
+    private void countPoints(){
+        points = 10 * fuelLevel;
+    }
     /**
      * Aplikuje zmiany wykonane przez gracza oraz odświeża okno gry
      */

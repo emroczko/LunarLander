@@ -15,11 +15,13 @@ public class LostGame extends JPanel {
         private String nick;
         /** Zmienne przechowująca wielkość poprzedniego okna*/
         private int a, b;
+        private float points;
 
-        public LostGame(int xSize, int ySize){
+        public LostGame(int xSize, int ySize, float earnedPoints){
             this.removeAll();
             repaint();
             revalidate();
+            points = earnedPoints;
             a = xSize;
             b = ySize;
             setPreferredSize(new Dimension(a,b));
@@ -35,6 +37,7 @@ public class LostGame extends JPanel {
             JButton startButton = new JButton("Play again");
             JButton backButton = new JButton("Return to main menu");
             JLabel lost =new JLabel("THE MISSION HAS FAILED");
+            JLabel points =new JLabel("Your score is: "+ earnedPoints);
 
 
             startButton.addActionListener(playAgainButtonListener());
@@ -44,7 +47,9 @@ public class LostGame extends JPanel {
             buttonCustomizer(startButton, citron, 32);
             buttonCustomizer(backButton, citron, 32);
 
+
             labelCustomizer(lost, aqua);
+            labelCustomizer(points, Color.white);
 
 
             gbc.gridwidth = 3;
@@ -54,11 +59,15 @@ public class LostGame extends JPanel {
             this.add(lost, gbc);
 
             gbc.gridx = 0;
-            gbc.gridy = 3;
-            this.add(startButton, gbc);
+            gbc.gridy = 2;
+            this.add(points, gbc);
 
             gbc.gridx = 0;
             gbc.gridy = 4;
+            this.add(startButton, gbc);
+
+            gbc.gridx = 0;
+            gbc.gridy = 5;
             this.add(backButton, gbc);
 
             gbc.weightx = 1.0;
@@ -110,7 +119,7 @@ public class LostGame extends JPanel {
         private ActionListener playAgainButtonListener() {
             ActionListener actionListener = new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    add(new Level(getWidth(),getHeight(),1, PropertiesLoad.numberOfLives),buttonsClickedBehaviour());
+                    add(new Level(getWidth(),getHeight(),1, PropertiesLoad.numberOfLives, 0),buttonsClickedBehaviour());
                 }
             };
             return actionListener;
