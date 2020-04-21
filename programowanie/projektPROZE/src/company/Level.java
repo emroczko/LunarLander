@@ -46,6 +46,7 @@ public class Level extends JPanel{
     private ArrayList<Asteroid> asteroids;
     private float points;
     private int time = 60;
+    private int asteroid_counter;
 
 
     public Level(int xSize, int ySize, int levelNumber, int Lives, float previousPoints) {
@@ -155,6 +156,7 @@ public class Level extends JPanel{
     private void initializeVariables(int levelNumber){
 
         setFocusable(true);
+        asteroid_counter = 0;
         this.lander = new Lander(this);
         this.asteroids = new ArrayList<Asteroid>();
         this.fuelLevel = PropertiesLoad.fuelAmount;
@@ -227,7 +229,18 @@ public class Level extends JPanel{
     }
 
     private void addasteroid(){
+        Random rand = new Random();
+        int direction = rand.nextInt(1);
+        if (asteroid_counter<levelNum)
+        {
+            if (direction == 0){
+                int velx = rand.nextInt(2)+1;
+                int vely = rand.nextInt(2)+1;
+                int start_x = rand.next(this.getWidth()/2 -((int)(lander.getX()*((float)(this.getWidth())/PropertiesLoad.xSize)))+
+                this.asteroids.add(Asteroid(velx, vely, ))
+            }
 
+        }
     }
 
 
