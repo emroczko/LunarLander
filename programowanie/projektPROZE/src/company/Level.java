@@ -129,7 +129,7 @@ public class Level extends JPanel{
 
         gbc.gridx = 2;
         gbc.gridy = 2;
-        gbc.weightx = 0.9;
+        gbc.weightx = 1;
         gbc.anchor = GridBagConstraints.FIRST_LINE_END;
         this.add(pauseButton, gbc);
         this.add(exitButton);
