@@ -275,13 +275,10 @@ public class Level extends JPanel{
         }
     }
 
-
-
     private void timeCounter(){
         Runnable helloRunnable = new Runnable() {
             public void run() {
                time -= 1;
-
             }
         };
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
@@ -339,8 +336,6 @@ public class Level extends JPanel{
     public void doOneLoop(){
         this.update();
         this.repaint();
-
-
     }
 
     private void update(){
