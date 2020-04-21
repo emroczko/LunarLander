@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
+import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import static java.util.concurrent.TimeUnit.*;
@@ -40,14 +41,10 @@ public class Level extends JPanel{
     private ArrayList<Asteroid> asteroids;
     private float points;
     private int time = 60;
-<<<<<<< HEAD
     private int asteroid_counter;
-=======
     ButtonCustomizer customButtonTrue = new ButtonCustomizer(true, Color.lightGray, 40);
     ButtonCustomizer customButtonFalse = new ButtonCustomizer(false, Color.BLUE, 40);
     LabelCustomizer custom = new LabelCustomizer(Color.lightGray, 20);
->>>>>>> e53d4f1bee42b784f66fec2370480ff5c927db5c
-
 
     public Level(int xSize, int ySize, int levelNumber, int Lives, float previousPoints) {
         this.removeAll();
@@ -88,15 +85,8 @@ public class Level extends JPanel{
         timeLabel.setText("Left time: 60 sec");
         labelUpdate("lives");
         timeCounter();
-    /*
-        buttonCustomizer(continueButton,  false, Color.BLUE);
-        buttonCustomizer(exitButton, false, Color.BLUE);
-        buttonCustomizer(pauseButton,  true, Color.lightGray);*/
-
 
         customButtonTrue.customizer(pauseButton);
-
-
         customButtonFalse.customizer(continueButton);
         customButtonFalse.customizer(exitButton);
 
@@ -109,11 +99,7 @@ public class Level extends JPanel{
         keyBindings(this, 39, MOVE_RIGHT);
         keyBindings(this, 37, MOVE_LEFT);
 
-<<<<<<< HEAD
-        labelCustomizer custom = new labelCustomizer(Color.lightGray, 20);
-=======
-
->>>>>>> e53d4f1bee42b784f66fec2370480ff5c927db5c
+        LabelCustomizer custom = new LabelCustomizer(Color.lightGray, 20);
         custom.customizer(vx);
         custom.customizer(vy);
         custom.customizer(time);
