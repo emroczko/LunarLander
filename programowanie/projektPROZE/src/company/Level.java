@@ -11,8 +11,6 @@ import java.util.concurrent.ScheduledExecutorService;
 import static java.util.concurrent.TimeUnit.*;
 
 import java.util.ArrayList;
-import java.util.Random;
-
 
 
 /**
@@ -42,7 +40,13 @@ public class Level extends JPanel{
     private ArrayList<Asteroid> asteroids;
     private float points;
     private int time = 60;
+<<<<<<< HEAD
     private int asteroid_counter;
+=======
+    ButtonCustomizer customButtonTrue = new ButtonCustomizer(true, Color.lightGray, 40);
+    ButtonCustomizer customButtonFalse = new ButtonCustomizer(false, Color.BLUE, 40);
+    LabelCustomizer custom = new LabelCustomizer(Color.lightGray, 20);
+>>>>>>> e53d4f1bee42b784f66fec2370480ff5c927db5c
 
 
     public Level(int xSize, int ySize, int levelNumber, int Lives, float previousPoints) {
@@ -84,10 +88,17 @@ public class Level extends JPanel{
         timeLabel.setText("Left time: 60 sec");
         labelUpdate("lives");
         timeCounter();
-
+    /*
         buttonCustomizer(continueButton,  false, Color.BLUE);
         buttonCustomizer(exitButton, false, Color.BLUE);
-        buttonCustomizer(pauseButton,  true, Color.lightGray);
+        buttonCustomizer(pauseButton,  true, Color.lightGray);*/
+
+
+        customButtonTrue.customizer(pauseButton);
+
+
+        customButtonFalse.customizer(continueButton);
+        customButtonFalse.customizer(exitButton);
 
         pauseButton.addActionListener(pauseButtonListener(continueButton, exitButton, pauseButton));
         continueButton.addActionListener(continueButtonListener(continueButton, exitButton, pauseButton));
@@ -98,7 +109,11 @@ public class Level extends JPanel{
         keyBindings(this, 39, MOVE_RIGHT);
         keyBindings(this, 37, MOVE_LEFT);
 
+<<<<<<< HEAD
         labelCustomizer custom = new labelCustomizer(Color.lightGray, 20);
+=======
+
+>>>>>>> e53d4f1bee42b784f66fec2370480ff5c927db5c
         custom.customizer(vx);
         custom.customizer(vy);
         custom.customizer(time);
@@ -358,30 +373,8 @@ public class Level extends JPanel{
         this.lander.setLevel(this);
 
     }
-    /**
-     * Odpowiada za kolor, czcionkę i wygląd przycisków w oknie gry
-     */
-    private void buttonCustomizer(JButton button, boolean visible, Color color){
 
-        button.setFont(Fonts.getFont(40));
-        button.setForeground(color);
-        button.setOpaque(false);
-        button.setContentAreaFilled(false);
-        button.setBorderPainted(false);
-        button.setVisible(visible);
 
-    }
-
-    /**
-     * Odpowiada za kolor, czcionkę i wygląd napisów informacyjnych w oknie gry
-     */
-    private void labelCustomizer(JLabel label, boolean visible, Color color){
-
-        label.setBackground(Color.black);
-        label.setFont(Fonts.getFont(20));
-        label.setForeground(color);
-
-    }
     /**
      * Odpowiada za przypisanie akcji przyciskowi || (pauza)
      */
@@ -396,7 +389,6 @@ public class Level extends JPanel{
         };
         return actionListener;
     }
-
 
 
     /**

@@ -17,6 +17,13 @@ public class LostGame extends JPanel {
         private int a, b;
         private float points;
 
+        Color aqua = new Color (51, 134, 175);
+        Color citron = new Color (223, 234, 24);
+
+        LabelCustomizer customLabelAqua = new LabelCustomizer(aqua, 40);
+        LabelCustomizer customLabelWhite = new LabelCustomizer(aqua, 40);
+        ButtonCustomizer customButton = new ButtonCustomizer(true, citron, 32);
+
         public LostGame(int xSize, int ySize, float earnedPoints){
             this.removeAll();
             repaint();
@@ -25,9 +32,8 @@ public class LostGame extends JPanel {
             a = xSize;
             b = ySize;
             setPreferredSize(new Dimension(a,b));
-            Fonts font = new Fonts();
-            Color aqua = new Color (51, 134, 175);
-            Color citron = new Color (223, 234, 24);
+
+
 
 
             initializeVariables();
@@ -44,12 +50,10 @@ public class LostGame extends JPanel {
             backButton.addActionListener(returnToMainMenuButtonListener());
 
 
-            buttonCustomizer(startButton, citron, 32);
-            buttonCustomizer(backButton, citron, 32);
-
-
-            labelCustomizer(lost, aqua);
-            labelCustomizer(points, Color.white);
+            customButton.customizer(startButton);
+            customButton.customizer(backButton);
+            customLabelAqua.customizer(lost);
+            customLabelWhite.customizer(points);
 
 
             gbc.gridwidth = 3;
@@ -85,30 +89,6 @@ public class LostGame extends JPanel {
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
             g.drawImage(MainMenuImage.getImage(), 0, 0, this.getWidth(), this.getHeight(), null);
-
-        }
-
-        /**
-         * Odpowiada za kolor, czcionkę i wygląd przycisków w oknie przed grą
-         */
-        private void buttonCustomizer(JButton button, Color color, int fontSize){
-
-            button.setFont(Fonts.getFont(fontSize));
-            button.setOpaque(false);
-            button.setContentAreaFilled(false);
-            button.setBorderPainted(false);
-            button.setForeground(color);
-
-        }
-
-        /**
-         * Odpowiada za kolor, czcionkę i wygląd napisów w oknie przed grą
-         */
-        private void labelCustomizer(JLabel label, Color color){
-
-            label.setBackground(Color.black);
-            label.setFont(Fonts.getFont(40));
-            label.setForeground(color);
 
         }
 

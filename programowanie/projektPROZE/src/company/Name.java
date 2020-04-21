@@ -20,6 +20,13 @@ public class Name extends JPanel{
     /** Zmienne przechowująca wielkość poprzedniego okna*/
     private int a, b;
 
+    Color aqua = new Color (51, 134, 175);
+    Color citron = new Color (223, 234, 24);
+
+    LabelCustomizer customLabel = new LabelCustomizer(Color.lightGray, 36);
+    ButtonCustomizer customButton = new ButtonCustomizer(true, citron, 32);
+
+
     public Name(int xSize, int ySize){
         this.removeAll();
         repaint();
@@ -27,9 +34,6 @@ public class Name extends JPanel{
         a = xSize;
         b = ySize;
         setPreferredSize(new Dimension(a,b));
-
-        Color aqua = new Color (51, 134, 175);
-        Color citron = new Color (223, 234, 24);
 
 
         initializeVariables();
@@ -51,11 +55,11 @@ public class Name extends JPanel{
             }
         });
 
-        buttonCustomizer(startButton, citron);
-        buttonCustomizer(backButton, citron);
 
-        labelCustomizer custom = new labelCustomizer(Color.lightGray, 36);
-        custom.customizer(typeNick);
+        customButton.customizer(startButton);
+        customButton.customizer(backButton);
+
+        customLabel.customizer(typeNick);
 
         textFieldCustomizer(enterName, aqua);
 
@@ -97,30 +101,7 @@ public class Name extends JPanel{
 
     }
 
-    /**
-     * Odpowiada za kolor, czcionkę i wygląd przycisków w oknie przed grą
-     */
-    private void buttonCustomizer(JButton button, Color color){
 
-        button.setFont(Fonts.getFont(32));
-        button.setOpaque(false);
-        button.setContentAreaFilled(false);
-        button.setBorderPainted(false);
-        button.setForeground(color);
-
-    }
-/*
-    /**
-     * Odpowiada za kolor, czcionkę i wygląd napisów w oknie przed grą
-
-    private void labelCustomizer(JLabel label, Color color){
-
-        label.setBackground(Color.black);
-        label.setFont(Fonts.getFont(24));
-        label.setForeground(color);
-
-    }
-*/
     /**
      * Odpowiada za kolor, czcionkę i wygląd pól tekstowych w oknie przed grą
      */
