@@ -14,12 +14,14 @@ public class WonLevel extends JPanel {
     /** Zmienne przechowująca wielkość poprzedniego okna*/
     private int a, b;
     private int wonLevelNumber;
+    private int lives;
 
-    public WonLevel(int xSize, int ySize, int wonLevel){
+    public WonLevel(int xSize, int ySize, int wonLevel, int leftLives){
         this.removeAll();
         repaint();
         revalidate();
         wonLevelNumber = wonLevel;
+        lives = leftLives;
         a = xSize;
         b = ySize;
         setPreferredSize(new Dimension(a,b));
@@ -109,7 +111,7 @@ public class WonLevel extends JPanel {
     private ActionListener continueButtonListener() {
         ActionListener actionListener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                add(new Level(getWidth(),getHeight(), wonLevelNumber+1),buttonsClickedBehaviour());
+                add(new Level(getWidth(),getHeight(), wonLevelNumber+1, lives),buttonsClickedBehaviour());
             }
         };
         return actionListener;

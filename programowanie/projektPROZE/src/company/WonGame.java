@@ -107,7 +107,7 @@ public class WonGame extends JPanel{
     private ActionListener continueButtonListener() {
         ActionListener actionListener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                add(new Level(getWidth(),getHeight(), 1),buttonsClickedBehaviour());
+                add(new Name(getWidth(),getHeight()),buttonsClickedBehaviour());
             }
         };
         return actionListener;

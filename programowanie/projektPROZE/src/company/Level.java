@@ -25,14 +25,17 @@ public class Level extends JPanel{
     private static final String MOVE_DOWN = "move down";
     JLabel vx = new JLabel();
     JLabel vy = new JLabel();
+    JLabel leftLandersLabel = new JLabel();
     private int levelNum;
+    private int leftLives = PropertiesLoad.numberOfLives;
 
     int a,b;
 
 
-    public Level(int xSize, int ySize, int levelNumber) {
+    public Level(int xSize, int ySize, int levelNumber, int Lives) {
         this.removeAll();
         levelNum = levelNumber;
+        leftLives = Lives;
         setPreferredSize(new Dimension(xSize, ySize));
 
 
@@ -56,13 +59,14 @@ public class Level extends JPanel{
         JButton exitButton = new JButton("EXIT");
         JButton pauseButton = new JButton("||");
         JButton continueButton = new JButton("CONTINUE");
-        JLabel leftLandersLabel = new JLabel(": 4");
+
 
         JLabel time = new JLabel("Time: 60");
         JLabel emptyLabel = new JLabel("  ");
         JLabel landersLeft = new JLabel(this.landersLeftIcon = ImageFactory.createImage(Image.Lander));
         vx.setText("H. Speed: 0");
         vy.setText("V. Speed: 0");
+        labelUpdate("lives");
 
         buttonCustomizer(continueButton,  false, Color.BLUE);
         buttonCustomizer(exitButton, false, Color.BLUE);
@@ -251,12 +255,19 @@ public class Level extends JPanel{
     private void detectCollision(Polygon landing, Polygon moon){
         if(moon.intersects(lander.getRect()))
         {
-            add(new LostGame(getWidth(),getHeight()), buttonsClickedBehaviour());
+
+            if(leftLives == 0 ) {
+                add(new LostGame(getWidth(), getHeight()), buttonsClickedBehaviour());
+                //leftLives = PropertiesLoad.numberOfLives;
+            }
+            else{
+                add(new Level(getWidth(), getHeight(), levelNum ,leftLives-1), buttonsClickedBehaviour());
+            }
         }
         if(landing.intersects(lander.getRect()))
         {
             if(levelNum != 8) {
-                add(new WonLevel(getWidth(), getHeight(), levelNum), buttonsClickedBehaviour());
+                add(new WonLevel(getWidth(), getHeight(), levelNum, leftLives), buttonsClickedBehaviour());
             }
             else{
                 add(new WonGame(getWidth(), getHeight()), buttonsClickedBehaviour());
@@ -400,6 +411,7 @@ public class Level extends JPanel{
             break;
             case "vy": vy.setText("V. Speed: " + lander.vely);
             break;
+            case "lives": leftLandersLabel.setText(": " + leftLives);
         }
         super.update(this.getGraphics());
     }
