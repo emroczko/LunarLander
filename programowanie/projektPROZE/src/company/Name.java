@@ -137,7 +137,7 @@ public class Name extends JPanel{
         ActionListener actionListener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 nick = enterName.getText();
-                add(new Level(getWidth(),getHeight(), 1),buttonsClickedBehaviour());
+                add(new Level(getWidth(),getHeight(), 1, PropertiesLoad.numberOfLives),buttonsClickedBehaviour());
             }
         };
         return actionListener;

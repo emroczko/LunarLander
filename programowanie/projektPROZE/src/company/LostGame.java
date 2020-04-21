@@ -110,7 +110,7 @@ public class LostGame extends JPanel {
         private ActionListener playAgainButtonListener() {
             ActionListener actionListener = new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    add(new Level(getWidth(),getHeight(),1),buttonsClickedBehaviour());
+                    add(new Level(getWidth(),getHeight(),1, PropertiesLoad.numberOfLives),buttonsClickedBehaviour());
                 }
             };
             return actionListener;
