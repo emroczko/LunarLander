@@ -6,12 +6,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 
 /**
  * Klasa odpowiedzialna za rysowanie poziomu ziemi oraz statku gracza
  */
-
 public class Level extends JPanel{
     private ImageIcon backgroundImage;
     private ImageIcon landersLeftIcon;
@@ -32,6 +32,7 @@ public class Level extends JPanel{
     private int levelNum;
     private int leftLives;
     protected float fuelLevel;
+    private ArrayList<Asteroid> asteroids;
 
     int a,b;
 
@@ -140,6 +141,7 @@ public class Level extends JPanel{
 
         setFocusable(true);
         this.lander = new Lander(this);
+        this.asteroids = new ArrayList<Asteroid>();
         this.fuelLevel = PropertiesLoad.fuelAmount;
         switch(levelNumber){
             case 1: this.backgroundImage = ImageFactory.createImage(Image.Earth1);
@@ -183,7 +185,6 @@ public class Level extends JPanel{
      * okna do jego początkowej wielkości wczytywanej z pliku konfiguracyjnego
      */
     private void drawPlayer(Graphics g){
-        System.out.println(lander.getX());
         g.drawImage(lander.getImage(), (int)(lander.getX()*((float)(this.getWidth())/PropertiesLoad.xSize)),
                 (int)(lander.getY()*((float)this.getHeight()/PropertiesLoad.ySize)), (int)(this.getWidth()/17.5),
                 (int)(this.getHeight()/12.5), this);
@@ -202,6 +203,8 @@ public class Level extends JPanel{
         g.drawPolygon(landing);
         detectCollision(landing, moon);
     }
+
+    private void drawAsteroid
 
 
     /**

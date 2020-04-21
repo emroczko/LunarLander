@@ -37,7 +37,6 @@ public abstract class Sprite {
     /** metoda która "uśmierca" statek*/
     public void die(){
         this.dead = true;
-
     }
     /** metoda typu setter do ustanawiania obrazka statku*/
     public void setImage(Image image){
