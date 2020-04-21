@@ -11,6 +11,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import static java.util.concurrent.TimeUnit.*;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 
 
@@ -226,7 +227,11 @@ public class Level extends JPanel{
     }
 
     private void drawAsteroid(){
-        
+
+    }
+
+    private void addasteroid(){
+
     }
 
 
@@ -274,8 +279,6 @@ public class Level extends JPanel{
             Toolkit.getDefaultToolkit().sync();
         }
     }
-
-
 
     private void timeCounter(){
         Runnable helloRunnable = new Runnable() {
@@ -337,8 +340,6 @@ public class Level extends JPanel{
     public void doOneLoop(){
         this.update();
         this.repaint();
-
-
     }
 
     private void update(){
