@@ -26,8 +26,11 @@ public class Level extends JPanel{
     JLabel vx = new JLabel();
     JLabel vy = new JLabel();
     JLabel leftLandersLabel = new JLabel();
+    JLabel fuelLabel = new JLabel();
+    JProgressBar fuel = new JProgressBar();
     private int levelNum;
-    private int leftLives = PropertiesLoad.numberOfLives;
+    private int leftLives;
+    protected float fuelLevel;
 
     int a,b;
 
@@ -66,6 +69,7 @@ public class Level extends JPanel{
         JLabel landersLeft = new JLabel(this.landersLeftIcon = ImageFactory.createImage(Image.Lander));
         vx.setText("H. Speed: 0");
         vy.setText("V. Speed: 0");
+        fuelLabel.setText("Fuel: 100");
         labelUpdate("lives");
 
         buttonCustomizer(continueButton,  false, Color.BLUE);
@@ -85,6 +89,7 @@ public class Level extends JPanel{
         labelCustomizer(vy, true, Color.lightGray);
         labelCustomizer(time,  true, Color.lightGray);
         labelCustomizer(leftLandersLabel, true, Color.lightGray);
+        labelCustomizer(fuelLabel, true, Color.lightGray);
 
         gbc.gridx = 7;
         gbc.gridy = 3;
@@ -97,11 +102,14 @@ public class Level extends JPanel{
         gbc.anchor = GridBagConstraints.FIRST_LINE_END;
         this.add(pauseButton, gbc);
 
+
         gbc.gridx = 7;
         gbc.gridy = 1;
         gbc.weighty = 0;
         gbc.anchor = GridBagConstraints.FIRST_LINE_END;
         this.add(landersLeft, gbc);
+
+
 
         gbc.gridx = 8;
         gbc.gridy = 1;
@@ -125,10 +133,11 @@ public class Level extends JPanel{
         gbc.gridy = 2;
         gbc.weighty = 0;
         gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-        this.add(time, gbc);
+        this.add(fuelLabel, gbc);
 
         this.add(exitButton);
         this.add(continueButton);
+
 
 
 
@@ -138,6 +147,7 @@ public class Level extends JPanel{
         
         setFocusable(true);
         this.lander = new Lander(this);
+        this.fuelLevel = PropertiesLoad.fuelAmount;
         switch(levelNumber){
             case 1: this.backgroundImage = ImageFactory.createImage(Image.Earth1);
                 break;
@@ -256,7 +266,6 @@ public class Level extends JPanel{
 
             if(leftLives == 0 ) {
                 add(new LostGame(getWidth(), getHeight()), buttonsClickedBehaviour());
-                //leftLives = PropertiesLoad.numberOfLives;
             }
             else{
                 add(new Level(getWidth(), getHeight(), levelNum ,leftLives-1), buttonsClickedBehaviour());
@@ -273,6 +282,16 @@ public class Level extends JPanel{
 
         }
     }
+    protected void noFuel(){
+        if (fuelLevel == 0){
+            if(leftLives == 0 ) {
+                add(new LostGame(getWidth(), getHeight()), buttonsClickedBehaviour());
+            }
+            else{
+                add(new Level(getWidth(), getHeight(), levelNum ,leftLives-1), buttonsClickedBehaviour());
+            }
+        }
+    }
 
     /**
      * Aplikuje zmiany wykonane przez gracza oraz odświeża okno gry
@@ -280,6 +299,7 @@ public class Level extends JPanel{
     public void doOneLoop(){
         this.update();
         this.repaint();
+
     }
 
     private void update(){
@@ -410,9 +430,13 @@ public class Level extends JPanel{
             case "vy": vy.setText("V. Speed: " + lander.vely);
             break;
             case "lives": leftLandersLabel.setText(": " + leftLives);
+            break;
+            case "fuel": fuelLabel.setText("Fuel: "+ fuelLevel);
+            break;
         }
         super.update(this.getGraphics());
     }
+
 
 }
 

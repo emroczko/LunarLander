@@ -65,6 +65,7 @@ public class Lander extends Sprite {
         this.velx += accX;
         this.vely += accY;
 
+
         level.labelUpdate("vx");
         level.labelUpdate("vy");
 
@@ -79,6 +80,9 @@ public class Lander extends Sprite {
     public void moveUp() {
         vely -= PropertiesLoad.enginePowerVy;
         vely += PropertiesLoad.mapGravity;
+        level.fuelLevel -= 5;
+        level.labelUpdate("fuel");
+        level.noFuel();
     }
 
     public void moveDown() {
@@ -88,9 +92,15 @@ public class Lander extends Sprite {
 
     public void moveLeft() {
         velx -= PropertiesLoad.enginePowerVx;
+        level.fuelLevel -= 2.5;
+        level.labelUpdate("fuel");
+        level.noFuel();
     }
 
     public void moveRight() {
         velx += PropertiesLoad.enginePowerVx;
+        level.fuelLevel -= 2.5;
+        level.labelUpdate("fuel");
+        level.noFuel();
     }
 }
