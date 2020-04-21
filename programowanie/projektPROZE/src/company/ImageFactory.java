@@ -21,6 +21,7 @@ public class ImageFactory {
                 break;
             case Asteroid:
                 imageIcon = new ImageIcon("Images/Asteroid.png");
+                break;
             case Earth1:
                 imageIcon = new ImageIcon("Images/EarthMoon.png");
                 break;

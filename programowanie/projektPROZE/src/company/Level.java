@@ -226,18 +226,18 @@ public class Level extends JPanel{
 
     private void addasteroid(){
         Random rand = new Random();
-        int direction = rand.nextInt(1);
-        if (asteroid_counter<levelNum)
-        {
-            int velx = rand.nextInt(2)+1;
-            int vely = rand.nextInt(2)+1;
-            if (direction == 0){
-                int start_x = rand.nextInt(this.getWidth()/2 - (int)(this.getWidth()/(17.5*2)))+ this.getWidth()/2 + (int)(this.getWidth()/(17.5*2));
-                this.asteroids.add(new Asteroid(start_x, -20, velx, vely, direction, this));
-            }
-            else{
-                int start_x = rand.nextInt(this.getHeight()/2 - (int)(this.getWidth()/(17.5*2)));
-                this.asteroids.add(new Asteroid(start_x, -20, velx, vely, direction, this));
+        if (rand.nextInt(101)<10) {
+            int direction = rand.nextInt(2);
+            if (asteroid_counter < levelNum) {
+                int velx = rand.nextInt(3) + 1;
+                int vely = rand.nextInt(3) + 1;
+                if (direction == 0) {
+                    int start_x = rand.nextInt(this.getWidth() / 2 - (int) (this.getWidth() / (17.5 * 2))) + this.getWidth() / 2 + (int) (this.getWidth() / (17.5 * 2));
+                    this.asteroids.add(new Asteroid(start_x, -20, velx, vely, direction, this));
+                } else {
+                    int start_x = rand.nextInt(this.getHeight() / 2 - (int) (this.getHeight() / (17.5 * 2)));
+                    this.asteroids.add(new Asteroid(start_x, -20, velx, vely, direction, this));
+                }
             }
         }
     }
@@ -280,6 +280,7 @@ public class Level extends JPanel{
         if (inGame) {
             drawPlayer(g);
             drawGround(g);
+            drawAsteroid(g);
         } else {
             if (timer.isRunning()) {
                 timer.stop();
@@ -350,6 +351,7 @@ public class Level extends JPanel{
      * Aplikuje zmiany wykonane przez gracza oraz odświeża okno gry
      */
     public void doOneLoop(){
+        addasteroid();
         this.update();
         this.repaint();
     }
@@ -357,10 +359,13 @@ public class Level extends JPanel{
     private void update(){
         this.lander.update();
         this.lander.setLevel(this);
-
+        updateAsteroids();
     }
-
-
+    private void updateAsteroids(){
+        for (int i =0; i<asteroids.size(); i++){
+            asteroids.get(i).update();
+        }
+    }
     /**
      * Odpowiada za przypisanie akcji przyciskowi || (pauza)
      */
