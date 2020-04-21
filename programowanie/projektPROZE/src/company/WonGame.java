@@ -13,6 +13,12 @@ public class WonGame extends JPanel{
     private String nick;
     /** Zmienne przechowująca wielkość poprzedniego okna*/
     private int a, b;
+    Color aqua = new Color (51, 134, 175);
+    Color citron = new Color (223, 234, 24);
+
+    LabelCustomizer customLabel = new LabelCustomizer(aqua, 40);
+    ButtonCustomizer customButton = new ButtonCustomizer(true, citron, 32);
+
 
     public WonGame(int xSize, int ySize, float earnedPoints){
         this.removeAll();
@@ -22,8 +28,7 @@ public class WonGame extends JPanel{
         b = ySize;
         setPreferredSize(new Dimension(a,b));
         Fonts font = new Fonts();
-        Color aqua = new Color (51, 134, 175);
-        Color citron = new Color (223, 234, 24);
+
 
 
         initializeVariables();
@@ -38,10 +43,11 @@ public class WonGame extends JPanel{
         backButton.addActionListener(returnToMainMenuButtonListener());
 
 
-        buttonCustomizer(startButton, citron, 32);
-        buttonCustomizer(backButton, citron, 32);
+        customButton.customizer(startButton);
+        customButton.customizer(backButton);
 
-        labelCustomizer(lost, aqua);
+        customLabel.customizer(lost);
+
 
 
         gbc.gridwidth = 3;
@@ -75,31 +81,6 @@ public class WonGame extends JPanel{
         g.drawImage(MainMenuImage.getImage(), 0, 0, this.getWidth(), this.getHeight(), null);
 
     }
-
-    /**
-     * Odpowiada za kolor, czcionkę i wygląd przycisków w oknie przed grą
-     */
-    private void buttonCustomizer(JButton button, Color color, int fontSize){
-
-        button.setFont(Fonts.getFont(fontSize));
-        button.setOpaque(false);
-        button.setContentAreaFilled(false);
-        button.setBorderPainted(false);
-        button.setForeground(color);
-
-    }
-
-    /**
-     * Odpowiada za kolor, czcionkę i wygląd napisów w oknie przed grą
-     */
-    private void labelCustomizer(JLabel label, Color color){
-
-        label.setBackground(Color.black);
-        label.setFont(Fonts.getFont(40));
-        label.setForeground(color);
-
-    }
-
 
     /**
      * Odpowiada za przypisanie akcji przyciskowi START

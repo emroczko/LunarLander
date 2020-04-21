@@ -13,13 +13,16 @@ public class Menu extends JPanel{
     /** Zmienna przechowująca obrazek tła*/
     private ImageIcon MainMenuImage;
 
+    Color aqua = new Color (51, 134, 175);
+    Color citron = new Color (200, 220, 24);
+    ButtonCustomizer customButton = new ButtonCustomizer(true, citron, 32);
+
     public Menu() {
         this.removeAll();
         initializeLayout();
         initializeVariables();
 
-        Color aqua = new Color (51, 134, 175);
-        Color citron = new Color (200, 220, 24);
+
 
 
         this.setLayout(new GridBagLayout());
@@ -29,10 +32,10 @@ public class Menu extends JPanel{
         JButton rankingButton = new JButton("Best Scores");
 
         startButton.addActionListener(startButtonListener());
+        rankingButton.addActionListener(rankingButtonListener());
 
-        buttonCustomizer(startButton,citron);
-        buttonCustomizer(rankingButton,citron);
-
+        customButton.customizer(startButton);
+        customButton.customizer(rankingButton);
 
         gbc.gridwidth = 3;
         gbc.gridx = 0;
@@ -80,19 +83,6 @@ public class Menu extends JPanel{
 
     }
 
-    /**
-     * Odpowiada za kolor, czcionkę i wygląd przycisków w głównym menu
-     */
-    private void buttonCustomizer(JButton button, Color color){
-
-        button.setFont(Fonts.getFont(32));
-        button.setOpaque(false);
-        button.setContentAreaFilled(false);
-        button.setBorderPainted(false);
-        button.setForeground(color);
-
-    }
-
     private ActionListener startButtonListener() {
         ActionListener actionListener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -105,6 +95,23 @@ public class Menu extends JPanel{
                 gbc.weighty = 1;
                 gbc.fill = GridBagConstraints.BOTH;
                 add(new Name(getWidth(),getHeight()), gbc);
+            }
+        };
+        return actionListener;
+    }
+
+    private ActionListener rankingButtonListener() {
+        ActionListener actionListener = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                removeAll();
+                repaint();
+                revalidate();
+                setLayout(new GridBagLayout());
+                GridBagConstraints gbc = new GridBagConstraints();
+                gbc.weightx = 1;
+                gbc.weighty = 1;
+                gbc.fill = GridBagConstraints.BOTH;
+                add(new Ranking(getWidth(),getHeight()), gbc);
             }
         };
         return actionListener;

@@ -16,6 +16,10 @@ public class WonLevel extends JPanel {
     private int wonLevelNumber;
     private int lives;
     private float points;
+    Color aqua = new Color (51, 134, 175);
+    Color citron = new Color (223, 234, 24);
+    LabelCustomizer customLabel = new LabelCustomizer(aqua, 40);
+    ButtonCustomizer customButton = new ButtonCustomizer(true, citron, 32);
 
     public WonLevel(int xSize, int ySize, int wonLevel, int leftLives, float earnedPoints){
         this.removeAll();
@@ -28,8 +32,7 @@ public class WonLevel extends JPanel {
         b = ySize;
         setPreferredSize(new Dimension(a,b));
         Fonts font = new Fonts();
-        Color aqua = new Color (51, 134, 175);
-        Color citron = new Color (223, 234, 24);
+
 
 
         initializeVariables();
@@ -38,23 +41,21 @@ public class WonLevel extends JPanel {
 
         JButton startButton = new JButton("Continue");
         JButton backButton = new JButton("Return to Main Menu");
-        JLabel lost =new JLabel("GOOD JOB!");
+        JLabel wonLabel =new JLabel("GOOD JOB!");
 
         startButton.addActionListener(continueButtonListener());
         backButton.addActionListener(returnToMainMenuButtonListener());
 
-
-        buttonCustomizer(startButton, citron, 32);
-        buttonCustomizer(backButton, citron, 32);
-
-        labelCustomizer(lost, aqua);
+        customButton.customizer(startButton);
+        customButton.customizer(backButton);
+        customLabel.customizer(wonLabel);
 
 
         gbc.gridwidth = 3;
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.insets = new Insets(15, 15, 15, 15);
-        this.add(lost, gbc);
+        this.add(wonLabel, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 3;
@@ -81,31 +82,6 @@ public class WonLevel extends JPanel {
         g.drawImage(MainMenuImage.getImage(), 0, 0, this.getWidth(), this.getHeight(), null);
 
     }
-
-    /**
-     * Odpowiada za kolor, czcionkę i wygląd przycisków w oknie przed grą
-     */
-    private void buttonCustomizer(JButton button, Color color, int fontSize){
-
-        button.setFont(Fonts.getFont(fontSize));
-        button.setOpaque(false);
-        button.setContentAreaFilled(false);
-        button.setBorderPainted(false);
-        button.setForeground(color);
-
-    }
-
-    /**
-     * Odpowiada za kolor, czcionkę i wygląd napisów w oknie przed grą
-     */
-    private void labelCustomizer(JLabel label, Color color){
-
-        label.setBackground(Color.black);
-        label.setFont(Fonts.getFont(40));
-        label.setForeground(color);
-
-    }
-
 
     /**
      * Odpowiada za przypisanie akcji przyciskowi START

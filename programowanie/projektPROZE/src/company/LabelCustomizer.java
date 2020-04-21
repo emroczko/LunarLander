@@ -3,13 +3,13 @@ package company;
 import javax.swing.*;
 import java.awt.*;
 
-public class labelCustomizer {
+public class LabelCustomizer {
 
     JLabel label = new JLabel();
     Color customizedColor;
     int customizedFont;
 
-    public labelCustomizer(Color color, int font){
+    public LabelCustomizer(Color color, int font){
         customizedColor = color;
         customizedFont = font;
         customizer(label);
