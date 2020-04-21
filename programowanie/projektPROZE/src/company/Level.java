@@ -214,7 +214,6 @@ public class Level extends JPanel{
                 scaled_points[i] = (int)(points[i] * ((float) getWidth() / PropertiesLoad.xSize));
             }
         }
-
         return scaled_points;
     }
 
