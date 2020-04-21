@@ -32,13 +32,8 @@ public class Level extends JPanel{
     private int levelNum;
     private int leftLives;
     protected float fuelLevel;
-<<<<<<< HEAD
     private ArrayList<Asteroid> asteroids;
-=======
     private float points;
->>>>>>> 8256621a737e152d401a940385ed2946a24837de
-
-
 
     public Level(int xSize, int ySize, int levelNumber, int Lives, float previousPoints) {
         this.removeAll();
@@ -209,7 +204,9 @@ public class Level extends JPanel{
         detectCollision(landing, moon);
     }
 
-    private void drawAsteroid
+    private void drawAsteroid(){
+        
+    }
 
 
     /**
