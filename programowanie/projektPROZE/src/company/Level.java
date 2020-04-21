@@ -29,11 +29,11 @@ public class Level extends JPanel{
     private static final String MOVE_LEFT = "move left";
     private static final String MOVE_RIGHT = "move right";
     private static final String MOVE_DOWN = "move down";
-    JLabel vx = new JLabel();
-    JLabel vy = new JLabel();
+    JLabel vx = new JLabel("H. Speed: 0");
+    JLabel vy = new JLabel("V. Speed: 0");
     JLabel leftLandersLabel = new JLabel();
-    JLabel fuelLabel = new JLabel();
-    JLabel timeLabel = new JLabel();
+    JLabel fuelLabel = new JLabel("Fuel: 100");
+    JLabel timeLabel = new JLabel("Left time: 60 sec");
     JProgressBar fuel = new JProgressBar();
     private int levelNum;
     private int leftLives;
@@ -76,13 +76,9 @@ public class Level extends JPanel{
         JButton continueButton = new JButton("CONTINUE");
 
 
-        JLabel time = new JLabel("Time: 60");
         JLabel emptyLabel = new JLabel("  ");
         JLabel landersLeft = new JLabel(this.landersLeftIcon = ImageFactory.createImage(Image.Lander));
-        vx.setText("H. Speed: 0");
-        vy.setText("V. Speed: 0");
-        fuelLabel.setText("Fuel: 100");
-        timeLabel.setText("Left time: 60 sec");
+
         labelUpdate("lives");
         timeCounter();
 
@@ -102,7 +98,7 @@ public class Level extends JPanel{
         LabelCustomizer custom = new LabelCustomizer(Color.lightGray, 20);
         custom.customizer(vx);
         custom.customizer(vy);
-        custom.customizer(time);
+        custom.customizer(timeLabel);
         custom.customizer(leftLandersLabel);
         custom.customizer(fuelLabel);
         custom.customizer(timeLabel);
@@ -343,6 +339,10 @@ public class Level extends JPanel{
             }
         }
     }
+
+    /**
+     * Odpowiada za zliczanie punktów 
+     */
     private void countPoints(){
         points = (10 * fuelLevel) + (10 * time);
     }
