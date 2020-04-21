@@ -166,10 +166,17 @@ public class Level extends JPanel{
     /** Funkcja pauzująca grę*/
     private void pause(){
         this.timer.stop();
+        for(int i = 37; i<41; i++){
+            keyBindings(this, i, "nothing");
+        }
     }
     /** Funkcja wznawiająca grę*/
     private void resume(){
         this.timer.start();
+        keyBindings(this, 38, MOVE_UP);
+        keyBindings(this, 40, MOVE_DOWN);
+        keyBindings(this, 39, MOVE_RIGHT);
+        keyBindings(this, 37, MOVE_LEFT);
     }
     /**Funkcja odpowiedzialna za rysowanie obrazku reprezentującego gracza oraz jego hitboxa oraz skalowanie rozmiarów
      * tych elementów poprzez mnożenie ich wielkości i położenia przez współczynnik skali będący stosunkiem obecnej wielkośi
@@ -384,6 +391,7 @@ public class Level extends JPanel{
                         break;
                     case "move down": lander.moveDown();
                         break;
+                    case "nothing": break;
                 }
             }
         };
