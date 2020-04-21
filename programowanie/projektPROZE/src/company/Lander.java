@@ -10,8 +10,6 @@ import java.awt.geom.Rectangle2D;
 public class Lander extends Sprite {
 
     private Level level;
-    public int width;
-    public int height;
     public int start_x;
     public int start_y;
 
