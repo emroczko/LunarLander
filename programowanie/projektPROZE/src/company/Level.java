@@ -85,6 +85,7 @@ public class Level extends JPanel{
         fuelLabel.setText("Fuel: 100");
         timeLabel.setText("Left time: 60 sec");
         labelUpdate("lives");
+        timeCounter();
 
         buttonCustomizer(continueButton,  false, Color.BLUE);
         buttonCustomizer(exitButton, false, Color.BLUE);
@@ -276,12 +277,13 @@ public class Level extends JPanel{
         Runnable helloRunnable = new Runnable() {
             public void run() {
                time -= 1;
+               labelUpdate("time");
 
             }
         };
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
-        executor.scheduleAtFixedRate(helloRunnable, 0, 1, SECONDS);
-        labelUpdate("time");
+        executor.scheduleAtFixedRate(helloRunnable, 1, 1, SECONDS);
+
 
     }
 
@@ -341,7 +343,7 @@ public class Level extends JPanel{
     private void update(){
         this.lander.update();
         this.lander.setLevel(this);
-        timeCounter();
+
     }
     /**
      * Odpowiada za kolor, czcionkę i wygląd przycisków w oknie gry
