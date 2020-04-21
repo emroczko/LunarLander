@@ -159,16 +159,14 @@ public class Level extends JPanel{
         this.timer = new Timer(10, new GameLoop(this));
         this.timer.start();
 
-
     }
     /** Funkcja pauzująca grę*/
-    private void pause(boolean condit){
-        if (condit){
-
-        }
-        else{
-
-        }
+    private void pause(){
+        this.timer.stop();
+    }
+    /** Funkcja wznawiająca grę*/
+    private void resume(){
+        this.timer.start();
     }
     /**Funkcja odpowiedzialna za rysowanie obrazku reprezentującego gracza oraz jego hitboxa oraz skalowanie rozmiarów
      * tych elementów poprzez mnożenie ich wielkości i położenia przez współczynnik skali będący stosunkiem obecnej wielkośi
@@ -320,7 +318,7 @@ public class Level extends JPanel{
                 continueButton.setVisible(true);
                 exitButton.setVisible(true);
                 pauseButton.setVisible(false);
-                pause(true);
+                pause();
             }
         };
         return actionListener;
@@ -335,7 +333,7 @@ public class Level extends JPanel{
         ActionListener actionListener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 pauseButton.setVisible(true);
-                pause(false);
+                resume();
                 continueButton.setVisible(false);
                 exitButton.setVisible(false);
             }
