@@ -280,11 +280,7 @@ public class Level extends JPanel{
         Runnable helloRunnable = new Runnable() {
             public void run() {
                time -= 1;
-<<<<<<< HEAD
-=======
                labelUpdate("time");
-
->>>>>>> 4741775ebd1ae8ca373ad5974a1a895847c16fef
             }
         };
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
