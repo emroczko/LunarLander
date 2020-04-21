@@ -144,7 +144,7 @@ public class Level extends JPanel{
     }
     /** Funkcja inicjująca zmienne klasy*/
     private void initializeVariables(int levelNumber){
-        
+
         setFocusable(true);
         this.lander = new Lander(this);
         this.fuelLevel = PropertiesLoad.fuelAmount;
@@ -224,7 +224,6 @@ public class Level extends JPanel{
             else {
                 scaled_points[i] = (int)(points[i] * ((float) getWidth() / PropertiesLoad.xSize));
             }
-            //System.out.println((float)(getWidth())/PropertiesLoad.xSize);
         }
 
         return scaled_points;
@@ -304,6 +303,7 @@ public class Level extends JPanel{
 
     private void update(){
         this.lander.update();
+        this.lander.setLevel(this);
     }
     /**
      * Odpowiada za kolor, czcionkę i wygląd przycisków w oknie gry

@@ -13,6 +13,10 @@ import java.awt.geom.Rectangle2D;
 public class Lander extends Sprite {
 
     private Level level;
+    public int width;
+    public int height;
+    public int start_x;
+    public int start_y;
 
     public Lander(Level level) {
         this.level = level;
@@ -25,8 +29,10 @@ public class Lander extends Sprite {
     private void initialize() {
         ImageIcon imageIcon = ImageFactory.createImage(Image.Lander);
         setImage(imageIcon.getImage());
-        int start_x = PropertiesLoad.xSize / 2 - PropertiesLoad.LanderWidth / 2;
-        int start_y = PropertiesLoad.ySize - 450;
+        start_x = PropertiesLoad.xSize / 2 - PropertiesLoad.LanderWidth / 2;
+        start_y = PropertiesLoad.ySize - 450;
+        int width = 40;
+        int height = 40;
         Rectangle2D rect = new Rectangle2D.Float(this.getX(), this.getY(), 40, 40);
         setX(start_x);
         setY(start_y);
@@ -35,7 +41,6 @@ public class Lander extends Sprite {
 
     @Override
     public void move() {
-
         x += velx;
 
         if (vely<1 && vely>0) {
@@ -58,23 +63,30 @@ public class Lander extends Sprite {
 
     }
     private void updateRect() {
-        Rectangle2D rect = new Rectangle2D.Float(this.getX(), this.getY(), 40, 40);
+        Rectangle2D rect = new Rectangle2D.Float((int)(x*((float)(level.getWidth())/PropertiesLoad.xSize)), (int)(y*((float)level.getHeight()/PropertiesLoad.ySize)), (int)(40*((float)level.getWidth()/PropertiesLoad.xSize)), (int)(40*((float)level.getHeight()/PropertiesLoad.ySize)));
         setRect(rect);
     }
     public void acceleration(float accX, float accY) {
         this.velx += accX;
         this.vely += accY;
-
-
         level.labelUpdate("vx");
         level.labelUpdate("vy");
-
+    }
+    public void update_pos(){
+        x = (int)(start_x*((float)(level.getWidth())/PropertiesLoad.xSize));
+        y = (int)(start_y*((float)(level.getHeight())/PropertiesLoad.ySize));
     }
 
     public void update() {
         move();
         updateRect();
+        //update_pos();
         acceleration(0, PropertiesLoad.mapGravity);
+    }
+
+    public void setLevel(Level lev)
+    {
+        this.level = lev;
     }
 
     public void moveUp() {
