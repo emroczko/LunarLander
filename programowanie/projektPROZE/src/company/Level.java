@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 
 
 /**
@@ -91,19 +92,14 @@ public class Level extends JPanel{
         labelCustomizer(leftLandersLabel, true, Color.lightGray);
         labelCustomizer(fuelLabel, true, Color.lightGray);
 
-        gbc.gridx = 7;
+        gbc.gridx = 1;
         gbc.gridy = 3;
         gbc.weighty = 0.005;
         gbc.anchor = GridBagConstraints.FIRST_LINE_END;
         this.add(emptyLabel, gbc);
 
-        gbc.gridx = 7;
-        gbc.gridy = 2;
-        gbc.anchor = GridBagConstraints.FIRST_LINE_END;
-        this.add(pauseButton, gbc);
 
-
-        gbc.gridx = 7;
+        gbc.gridx = 1;
         gbc.gridy = 1;
         gbc.weighty = 0;
         gbc.anchor = GridBagConstraints.FIRST_LINE_END;
@@ -111,7 +107,7 @@ public class Level extends JPanel{
 
 
 
-        gbc.gridx = 8;
+        gbc.gridx = 2;
         gbc.gridy = 1;
         gbc.anchor = GridBagConstraints.FIRST_LINE_END;
         this.add(leftLandersLabel, gbc);
@@ -135,6 +131,11 @@ public class Level extends JPanel{
         gbc.anchor = GridBagConstraints.FIRST_LINE_START;
         this.add(fuelLabel, gbc);
 
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        gbc.anchor = GridBagConstraints.FIRST_LINE_END;
+        gbc.insets = new Insets(10, 50, 0, 0);
+        this.add(pauseButton, gbc);
         this.add(exitButton);
         this.add(continueButton);
 
@@ -186,11 +187,6 @@ public class Level extends JPanel{
         g.drawImage(lander.getImage(), (int)(lander.getX()*((float)(this.getWidth())/PropertiesLoad.xSize)),
                 (int)(lander.getY()*((float)this.getHeight()/PropertiesLoad.ySize)), (int)(this.getWidth()/17.5),
                 (int)(this.getHeight()/12.5), this);
-
-        g.setColor(Color.red);
-        g.drawRect((int)(lander.getX()*((float)(this.getWidth())/PropertiesLoad.xSize)),
-                (int)(lander.getY()*((float)this.getHeight()/PropertiesLoad.ySize)),
-                (int)(40*((float)getWidth()/PropertiesLoad.xSize)),(int)(40*((float)getHeight()/PropertiesLoad.ySize)));
     }
 
     /**
@@ -419,15 +415,14 @@ public class Level extends JPanel{
      */
     private void keyBindings(Level level, int keyCode, String keyName){
         level.getInputMap(IFW).put(KeyStroke.getKeyStroke(keyCode, 0,false), keyName);
-        //level.getInputMap(IFW).put(KeyStroke.getKeyStroke(keyCode, 0,false), keyName);
         level.getActionMap().put(keyName, action(keyName));
-        //level.getActionMap().put(keyName, action(keyName));
     }
     public void labelUpdate(String label){
+        DecimalFormat df = new DecimalFormat("#.##");
         switch(label){
-            case "vx": vx.setText("H. Speed: " + lander.velx);
+            case "vx": vx.setText("H. Speed: " + df.format(lander.velx));
             break;
-            case "vy": vy.setText("V. Speed: " + lander.vely);
+            case "vy": vy.setText("V. Speed: " + df.format(lander.vely));
             break;
             case "lives": leftLandersLabel.setText(": " + leftLives);
             break;
