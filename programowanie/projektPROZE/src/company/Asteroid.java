@@ -10,9 +10,10 @@ public class Asteroid extends Sprite {
     private int vely;
     private int direction;
 
-    public void Asteroid(int start_x, int start_y, int velx, int vely, int direction ,Level level){
+    public Asteroid(int start_x, int start_y, int velx, int vely, int direction, Level level) {
         initialize(start_x, start_y, direction, velx, vely, level);
     }
+
 
     private void initialize(int start_x, int start_y, int velx, int vely ,int dicercion ,Level level){
         ImageIcon imageIcon = ImageFactory.createImage(Image.Asteroid);

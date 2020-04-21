@@ -98,13 +98,6 @@ public class Level extends JPanel{
         keyBindings(this, 39, MOVE_RIGHT);
         keyBindings(this, 37, MOVE_LEFT);
 
-        /*
-        labelCustomizer(vy, true, Color.lightGray);
-        labelCustomizer(time,  true, Color.lightGray);
-        labelCustomizer(leftLandersLabel, true, Color.lightGray);
-        labelCustomizer(fuelLabel, true, Color.lightGray);
-        labelCustomizer(timeLabel, true, Color.lightGray);*/
-
         labelCustomizer custom = new labelCustomizer(Color.lightGray, 20);
         custom.customizer(vx);
         custom.customizer(vy);
@@ -221,15 +214,17 @@ public class Level extends JPanel{
         Polygon moon = new Polygon(scalePoints(PropertiesLoad.xPoints, 'x'), scalePoints(PropertiesLoad.yPoints, 'y'),
                 PropertiesLoad.xPoints.length);
         Polygon landing = new Polygon(scalePoints(PropertiesLoad.xLanding, 'x'), scalePoints(PropertiesLoad.yLanding, 'y'), PropertiesLoad.xLanding.length);
-        g.setColor(Color.green);
-        g.drawPolygon(moon);
-        g.setColor(Color.blue);
-        g.drawPolygon(landing);
         detectCollision(landing, moon);
     }
 
-    private void drawAsteroid(){
-
+    private void drawAsteroid(Graphics g){
+        for (int i =0; i<asteroids.size(); i++)
+        {
+            g.drawImage(asteroids.get(i).getImage(),
+                    (int)(asteroids.get(i).getX()*((float)(this.getWidth())/PropertiesLoad.xSize)),
+                    (int)(asteroids.get(i).getY()*((float)(this.getWidth())/PropertiesLoad.ySize)),
+                    (int)(this.getWidth()/35), (int)(this.getHeight()/25), this);
+        }
     }
 
     private void addasteroid(){
@@ -237,13 +232,16 @@ public class Level extends JPanel{
         int direction = rand.nextInt(1);
         if (asteroid_counter<levelNum)
         {
+            int velx = rand.nextInt(2)+1;
+            int vely = rand.nextInt(2)+1;
             if (direction == 0){
-                int velx = rand.nextInt(2)+1;
-                int vely = rand.nextInt(2)+1;
-                int start_x = rand.next(this.getWidth()/2 -((int)(lander.getX()*((float)(this.getWidth())/PropertiesLoad.xSize)))+
-                this.asteroids.add(Asteroid(velx, vely, ))
+                int start_x = rand.nextInt(this.getWidth()/2 - (int)(this.getWidth()/(17.5*2)))+ this.getWidth()/2 + (int)(this.getWidth()/(17.5*2));
+                this.asteroids.add(new Asteroid(start_x, -20, velx, vely, direction, this));
             }
-
+            else{
+                int start_x = rand.nextInt(this.getHeight()/2 - (int)(this.getWidth()/(17.5*2)));
+                this.asteroids.add(new Asteroid(start_x, -20, velx, vely, direction, this));
+            }
         }
     }
 
