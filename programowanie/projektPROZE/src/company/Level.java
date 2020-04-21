@@ -129,12 +129,13 @@ public class Level extends JPanel{
         gbc.gridy = 2;
         gbc.weighty = 0;
         gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+        gbc.insets = new Insets(0, 0, 0, 0);
         this.add(fuelLabel, gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 2;
         gbc.anchor = GridBagConstraints.FIRST_LINE_END;
-        gbc.insets = new Insets(10, 50, 0, 0);
+        gbc.insets = new Insets(10, 0, 0, 0);
         this.add(pauseButton, gbc);
         this.add(exitButton);
         this.add(continueButton);
@@ -167,7 +168,7 @@ public class Level extends JPanel{
             case 8:  this.backgroundImage = ImageFactory.createImage(Image.Saturn2);
                 break;
         }
-        this.timer = new Timer(10, new GameLoop(this));
+        this.timer = new Timer(40, new GameLoop(this));
         this.timer.start();
 
     }
@@ -184,6 +185,7 @@ public class Level extends JPanel{
      * okna do jego początkowej wielkości wczytywanej z pliku konfiguracyjnego
      */
     private void drawPlayer(Graphics g){
+        System.out.println(lander.getX());
         g.drawImage(lander.getImage(), (int)(lander.getX()*((float)(this.getWidth())/PropertiesLoad.xSize)),
                 (int)(lander.getY()*((float)this.getHeight()/PropertiesLoad.ySize)), (int)(this.getWidth()/17.5),
                 (int)(this.getHeight()/12.5), this);
