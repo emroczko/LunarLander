@@ -6,8 +6,17 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
+
+import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.ExecutorService;
+import static java.util.concurrent.TimeUnit.*;
+
 import java.util.ArrayList;
 import java.util.Random;
+
 
 
 /**
@@ -29,12 +38,15 @@ public class Level extends JPanel{
     JLabel vy = new JLabel();
     JLabel leftLandersLabel = new JLabel();
     JLabel fuelLabel = new JLabel();
+    JLabel timeLabel = new JLabel();
     JProgressBar fuel = new JProgressBar();
     private int levelNum;
     private int leftLives;
     protected float fuelLevel;
     private ArrayList<Asteroid> asteroids;
     private float points;
+    private int time = 60;
+
 
     public Level(int xSize, int ySize, int levelNumber, int Lives, float previousPoints) {
         this.removeAll();
@@ -72,6 +84,7 @@ public class Level extends JPanel{
         vx.setText("H. Speed: 0");
         vy.setText("V. Speed: 0");
         fuelLabel.setText("Fuel: 100");
+        timeLabel.setText("Left time: 60 sec");
         labelUpdate("lives");
 
         buttonCustomizer(continueButton,  false, Color.BLUE);
@@ -92,6 +105,7 @@ public class Level extends JPanel{
         labelCustomizer(time,  true, Color.lightGray);
         labelCustomizer(leftLandersLabel, true, Color.lightGray);
         labelCustomizer(fuelLabel, true, Color.lightGray);
+        labelCustomizer(timeLabel, true, Color.lightGray);
 
         gbc.gridx = 1;
         gbc.gridy = 3;
@@ -126,7 +140,7 @@ public class Level extends JPanel{
         gbc.gridy = 2;
         gbc.weighty = 0;
         gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-        this.add(fuelLabel, gbc);
+        this.add(timeLabel, gbc);
 
         gbc.gridx = 2;
         gbc.gridy = 2;
@@ -164,6 +178,8 @@ public class Level extends JPanel{
         }
         this.timer = new Timer(40, new GameLoop(this));
         this.timer.start();
+
+
 
     }
     /** Funkcja pauzująca grę*/
@@ -259,6 +275,21 @@ public class Level extends JPanel{
         }
     }
 
+
+
+    private void timeCounter(){
+        Runnable helloRunnable = new Runnable() {
+            public void run() {
+               time -= 1;
+
+            }
+        };
+        ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+        executor.scheduleAtFixedRate(helloRunnable, 0, 1, SECONDS);
+        labelUpdate("time");
+
+    }
+
     /**
      * Wykrywanie kolizji
      * @param landing- wielokąt strefy lądowania
@@ -309,11 +340,13 @@ public class Level extends JPanel{
         this.update();
         this.repaint();
 
+
     }
 
     private void update(){
         this.lander.update();
         this.lander.setLevel(this);
+        timeCounter();
     }
     /**
      * Odpowiada za kolor, czcionkę i wygląd przycisków w oknie gry
@@ -443,6 +476,8 @@ public class Level extends JPanel{
             case "lives": leftLandersLabel.setText(": " + leftLives);
             break;
             case "fuel": fuelLabel.setText("Fuel: "+ fuelLevel);
+            break;
+            case "time": timeLabel.setText("Left time: " + time+ " sec");
             break;
         }
         super.update(this.getGraphics());
