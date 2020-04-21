@@ -323,7 +323,7 @@ public class Level extends JPanel{
     }
 
     /**
-     * Odpowiada za zliczanie punktów 
+     * Odpowiada za zliczanie punktów
      */
     private void countPoints(){
         points = (10 * fuelLevel) + (10 * time);
