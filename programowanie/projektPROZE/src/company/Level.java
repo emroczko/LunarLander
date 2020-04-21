@@ -373,6 +373,7 @@ public class Level extends JPanel{
                 gbc.weightx = 1;
                 gbc.weighty = 1;
                 gbc.fill = GridBagConstraints.BOTH;
+                timer.stop();
                 add(new Menu(), gbc);
             }
         };
