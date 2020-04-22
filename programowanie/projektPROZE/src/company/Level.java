@@ -125,10 +125,10 @@ public class Level extends JPanel{
 
         fuelBar.setVisible(true);
         fuelBar.setValue(100);
-        fuelBar.setBorderPainted(true);
+        fuelBar.setBorderPainted(false);
         fuelBar.setStringPainted(false);
         fuelBar.setForeground(citron);
-        fuelBar.setBackground(citron);
+        fuelBar.setBackground(aqua);
 
         this.add(emptyLabel, customGBC.gbcCustomize(1,3,0,0.005,0, "FIRST_LINE_END"));
         this.add(landersLeft, customGBC.gbcCustomize(2,1,0,0,0, "FIRST_LINE_END"));
@@ -176,6 +176,7 @@ public class Level extends JPanel{
 
 
     }
+
 
 
     /** Funkcja pauzująca grę*/
