@@ -2,7 +2,6 @@ package company;
 
 
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicProgressBarUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -93,17 +92,14 @@ public class Level extends JPanel{
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.fill = GridBagConstraints.VERTICAL;
 
-
         JButton exitButton = new JButton("EXIT");
         JButton pauseButton = new JButton("||");
         JButton continueButton = new JButton("CONTINUE");
-
 
         JLabel emptyLabel = new JLabel("  ");
         JLabel landersLeft = new JLabel(this.landersLeftIcon = ImageFactory.createImage(Image.Lander));
 
         labelUpdate("lives");
-
 
         customButtonTrue.customizer(pauseButton);
         customButtonFalse.customizer(continueButton);
@@ -131,8 +127,6 @@ public class Level extends JPanel{
         fuelBar.setStringPainted(false);
         fuelBar.setForeground(citron);
         fuelBar.setBackground(citron);
-
-
 
         this.add(emptyLabel, customGBC.gbcCustomize(1,3,0,0.005,0, "FIRST_LINE_END"));
         this.add(landersLeft, customGBC.gbcCustomize(2,1,0,0,0, "FIRST_LINE_END"));
