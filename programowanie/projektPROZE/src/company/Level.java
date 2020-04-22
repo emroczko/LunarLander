@@ -67,6 +67,8 @@ public class Level extends JPanel{
     NewWindow newWindow = new NewWindow();
 
     ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+    ScheduledExecutorService boomExecutor = Executors.newScheduledThreadPool(1);
+
 
     public Level(int xSize, int ySize, int levelNumber, int Lives, float previousPoints) {
         this.removeAll();
@@ -314,16 +316,21 @@ public class Level extends JPanel{
         }
         else {
             executor.shutdown();
-            newExecutor();
+            newExecutor("executor");
         }
     }
 
     /**
      * Metoda tworząca nowy obiekt ScheduledExecutorService i przypisująca go do obiektu który został zadeklarowany w klasie Level, który został wyłączony
      */
-    private void newExecutor(){
+    private void newExecutor(String whichExecutor){
         ScheduledExecutorService newExecutor = Executors.newScheduledThreadPool(1);
-        executor = newExecutor;
+        if(whichExecutor == "executor") {
+            executor = newExecutor;
+        }
+        else{
+            boomExecutor = newExecutor;
+        }
 
     }
     /**
@@ -334,7 +341,6 @@ public class Level extends JPanel{
     private void detectCollision(Polygon landing, Polygon moon){
         if(moon.intersects(lander.getRect())) {
             boom();
-            wreckedShip();
         }
         if(landing.intersects(lander.getRect())) {
             goodLanding();
@@ -351,7 +357,6 @@ public class Level extends JPanel{
             System.out.println(asteroids.size());
             if (lander.getRect().intersects(asteroids.get(i).getRect())){
                 boom();
-                wreckedShip();
             }
 
             if (i+1<this.asteroids.size()){
@@ -371,6 +376,22 @@ public class Level extends JPanel{
      */
     private void boom(){
         this.lander.landerImageChange(Image.Boom);
+        this.timer.stop();
+        BoomCounter();
+    }
+
+    /**
+     *Metoda odpowiadająca za odliczanie w oknie gry
+     */
+    private void BoomCounter()
+    {
+        Runnable crash = this::wreckedShip;
+        try {
+            boomExecutor.schedule(crash, 1, SECONDS);
+            boomExecutor.shutdown();
+        }
+        catch(Exception E){
+    }
     }
 
     /**
@@ -385,7 +406,7 @@ public class Level extends JPanel{
                 add(new WonGame(getWidth(), getHeight(), points), buttonsClickedBehaviour());
             }
         } else {
-            wreckedShip();
+            boom();
         }
     }
     /**
@@ -405,7 +426,9 @@ public class Level extends JPanel{
      */
     protected void noFuel(){
         if (fuelLevel <= 0){
-            wreckedShip();
+            for(int i = 37; i<41; i++){
+                keyBindings(this, i, "nothing");
+            }
         }
     }
 
