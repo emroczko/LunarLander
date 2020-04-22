@@ -57,26 +57,11 @@ public class LostGame extends JPanel {
         customLabelWhite.customizer(pointsLabel);
 
 
-        gbc.gridwidth = 3;
-            gbc.gridx = 0;
-            gbc.gridy = 1;
-            gbc.insets = new Insets(15, 15, 15, 15);
-            this.add(lost, gbc);
-
-            gbc.gridx = 0;
-            gbc.gridy = 2;
-            this.add(pointsLabel, gbc);
-
-            gbc.gridx = 0;
-            gbc.gridy = 4;
-            this.add(startButton, gbc);
-
-            gbc.gridx = 0;
-            gbc.gridy = 5;
-            this.add(backButton, gbc);
-
-            gbc.weightx = 1.0;
-            gbc.weighty = 1.0;//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+        this.add(lost, customGBC.gbcCustomize(0,2, 0, 0,3, "none"));
+        this.add(pointsLabel, customGBC.gbcCustomize(0,3, 0, 0,3, "none"));
+        this.add(startButton, customGBC.gbcCustomize(0,4, 0, 0,3, "none"));
+        this.add(backButton, customGBC.gbcCustomize(0,5, 0, 0,3, "none"));
+        customGBC.gbcCustomize(0,0,1,1,0,"none");
 
 
 

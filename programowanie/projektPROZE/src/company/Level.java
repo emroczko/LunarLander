@@ -304,53 +304,59 @@ public class Level extends JPanel{
     }
 
     /**
-     * Wykrywanie kolizji
+     * Wykrywanie kolizji i wywołanie odpowiednych metod
      * @param landing- wielokąt strefy lądowania
      * @param moon - wielokąt obszaru księzyca poza strefą lądowania
      */
     private void detectCollision(Polygon landing, Polygon moon){
-        if(moon.intersects(lander.getRect()))
-        {
+        if(moon.intersects(lander.getRect())) {
+            wreckedShip();
+            //this.timer.
+            boom();
 
-            if(leftLives == 0 ) {
-                countPoints();
-                add(new LostGame(getWidth(), getHeight(), points), buttonsClickedBehaviour());
-            }
-            else{
-                add(new Level(getWidth(), getHeight(), levelNum ,leftLives-1, points), buttonsClickedBehaviour());
-            }
+
         }
-        if(landing.intersects(lander.getRect()))
-        {
-            if(lander.velx < 7 && lander.vely < 7){
+        if(landing.intersects(lander.getRect())) {
+            goodLanding();
+        }
+    }
+
+    private void boom(){
+
+    }
+    /**
+     * Metoda która definiuje zachowanie okna po udanym lądowaniu
+     */
+    private void goodLanding(){
+        if (lander.velx < 7 && lander.vely < 7) {
             countPoints();
             if (levelNum != PropertiesLoad.numberOfLevels) {
                 add(new WonLevel(getWidth(), getHeight(), levelNum, leftLives, points), buttonsClickedBehaviour());
             } else {
                 add(new WonGame(getWidth(), getHeight(), points), buttonsClickedBehaviour());
             }
-        }
-            else{
-                if(leftLives == 0 ) {
-                    countPoints();
-                    add(new LostGame(getWidth(), getHeight(), points), buttonsClickedBehaviour());
-                }
-                else{
-                    add(new Level(getWidth(), getHeight(), levelNum ,leftLives-1, points), buttonsClickedBehaviour());
-                }
-        }
-
+        } else {
+            wreckedShip();
         }
     }
+    /**
+     * Metoda która definiuje zachowanie okna po rozbiciu statku, w zalezności od ilości żyć
+     */
+    private void wreckedShip(){
+        if(leftLives == 0) {
+            countPoints();
+            add(new LostGame(getWidth(), getHeight(), points), buttonsClickedBehaviour());
+        }
+        else{
+            add(new Level(getWidth(), getHeight(), levelNum, leftLives - 1, points), buttonsClickedBehaviour());
+        }
+    }
+    /**
+     * Odpowiada za wywołanie odpowiedniej funkcji (outOfLives) gdy statkowi zabraknie paliwa
+     */
     protected void noFuel(){
-        if (fuelLevel == 0){
-            if(leftLives == 0 ) {
-                add(new LostGame(getWidth(), getHeight(), points), buttonsClickedBehaviour());
-            }
-            else{
-
-                add(new Level(getWidth(), getHeight(), levelNum ,leftLives-1, points), buttonsClickedBehaviour());
-            }
+        if (fuelLevel <= 0){
+            wreckedShip();
         }
     }
 
