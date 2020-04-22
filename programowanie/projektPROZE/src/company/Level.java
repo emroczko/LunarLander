@@ -98,7 +98,7 @@ public class Level extends JPanel{
         JButton pauseButton = new JButton("||");
         JButton continueButton = new JButton("CONTINUE");
 
-        JLabel emptyLabel = new JLabel("  ");
+        JLabel emptyLabel = new JLabel("eeeeeeee");
         JLabel landersLeft = new JLabel(this.landersLeftIcon = ImageFactory.createImage(Image.Lander));
 
         labelUpdate("lives");
@@ -130,17 +130,18 @@ public class Level extends JPanel{
         fuelBar.setForeground(citron);
         fuelBar.setBackground(aqua);
 
-        this.add(emptyLabel, customGBC.gbcCustomize(1,3,0,0.005,0, "FIRST_LINE_END"));
-        this.add(landersLeft, customGBC.gbcCustomize(2,1,0,0,0, "FIRST_LINE_END"));
-        this.add(fuelBar, customGBC.gbcCustomize(3,0,0,0,0, "FIRST_LINE_END"));
-        this.add(fuelLabel, customGBC.gbcCustomize(0,0,0,0,0, "NORTH"));
-        this.add(leftLandersLabel, customGBC.gbcCustomize(3,1,0,0,0, "FIRST_LINE_END"));
-        this.add(vx, customGBC.gbcCustomize(0,0,0.1,0,0, "FIRST_LINE_START"));
-        this.add(vy, customGBC.gbcCustomize(0,1,0.1,0,0, "FIRST_LINE_START"));
-        this.add(timeLabel, customGBC.gbcCustomize(0,2,0.1,0,0, "FIRST_LINE_START"));
-        this.add(pauseButton, customGBC.gbcCustomize(2,2,1,0,0, "FIRST_LINE_END"));
-        this.add(exitButton,customGBC.gbcCustomize(1,4,0,0,0, "FIRST_LINE_START"));
-        this.add(continueButton, customGBC.gbcCustomize(2,4,0,0,0, "FIRST_LINE_END"));
+
+        this.add(leftLandersLabel, customGBC.gbcCustomize(2,1,0,0,1, "FIRST_LINE_END"));
+        this.add(landersLeft, customGBC.gbcCustomize(2,1,0,0,1, "CENTER"));
+        this.add(fuelLabel, customGBC.gbcCustomize(1,0,1,0,1, "FIRST_LINE_END"));
+        this.add(fuelBar, customGBC.gbcCustomize(2,0,0,0,1, "FIRST_LINE_END"));
+        this.add(vx, customGBC.gbcCustomize(0,0,0,0,1, "FIRST_LINE_START"));
+        this.add(vy, customGBC.gbcCustomize(0,1,0,0,1, "FIRST_LINE_START"));
+        this.add(timeLabel, customGBC.gbcCustomize(0,2,0,1,1, "FIRST_LINE_START"));
+        this.add(pauseButton, customGBC.gbcCustomize(2,2,0,0,1, "FIRST_LINE_END"));
+        this.add(exitButton,customGBC.gbcCustomize(0,3,0,0,1, "LAST_LINE_START"));
+        this.add(continueButton, customGBC.gbcCustomize(1,3,0,0,2, "LAST_LINE_END"));
+
     }
     /** Funkcja inicjująca zmienne klasy*/
     private void initializeVariables(int levelNumber){
@@ -221,8 +222,6 @@ public class Level extends JPanel{
     private void drawAsteroid(Graphics g){
         for (int i =0; i<asteroids.size(); i++)
         {
-            g.drawRect((int)(asteroids.get(i).getX()*((float)(this.getWidth())/PropertiesLoad.xSize)), (int)(asteroids.get(i).getY()*((float)this.getHeight()/PropertiesLoad.ySize)),
-                    (int)(20*((float)this.getWidth()/PropertiesLoad.xSize)), (int)(20*((float)this.getHeight()/PropertiesLoad.ySize)));
             g.drawImage(asteroids.get(i).getImage(),
                     (int)(asteroids.get(i).getX()*((float)(this.getWidth())/PropertiesLoad.xSize)), (int)(asteroids.get(i).getY()*((float)this.getHeight()/PropertiesLoad.ySize)),
                     (int)(20*((float)this.getWidth()/PropertiesLoad.xSize)), (int)(20*((float)this.getHeight()/PropertiesLoad.ySize)), this);
@@ -231,7 +230,7 @@ public class Level extends JPanel{
 
     private void addAsteroid(){
         Random rand = new Random();
-        if (rand.nextInt(101)<2) {
+        if (rand.nextInt(101)<4) {
             int direction = rand.nextInt(2);
             if (asteroid_counter < levelNum+2) {
                 int velx = rand.nextInt(3) + 1;
@@ -250,7 +249,7 @@ public class Level extends JPanel{
                     catch(Exception e){}
 
                 }
-                asteroid_counter +=1;
+                //asteroid_counter +=1;
             }
         }
     }
@@ -332,7 +331,6 @@ public class Level extends JPanel{
         else{
             boomExecutor = newExecutor;
         }
-
     }
     /**
      * Wykrywanie kolizji i wywołanie odpowiednych metod
@@ -351,21 +349,21 @@ public class Level extends JPanel{
 
     private void asteroidsCollision(Polygon landing, Polygon moon){
         for(int i = 0; i<this.asteroids.size();i++){
-            if (moon.intersects(asteroids.get(i).getRect())){
-                asteroids.remove(i);
-            }
-            if (landing.intersects(asteroids.get(i).getRect())){
-                asteroids.remove(i);
-            }
+
             if (lander.getRect().intersects(asteroids.get(i).getRect())){
                 boom();
             }
+
+            if (moon.intersects(asteroids.get(i).getRect()) || landing.intersects(asteroids.get(i).getRect())){
+                asteroids.remove(i);
+            }
+            if (asteroids.size()==0){
+                break;
+            }
             if (i+1<this.asteroids.size()){
-                if(asteroids.get(i).getRect().intersects(lander.getRect()))
                     for(int j=i+1; j<this.asteroids.size(); j++) {
                         if (asteroids.get(i).getRect().intersects(asteroids.get(j).getRect())) {
                             asteroids.remove(i);
-                            asteroids.remove(j);
                         }
                     }
             }
