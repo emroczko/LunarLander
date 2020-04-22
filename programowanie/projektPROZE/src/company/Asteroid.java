@@ -11,11 +11,11 @@ public class Asteroid extends Sprite {
     private int direction;
 
     public Asteroid(int start_x, int start_y, int velx, int vely, int direction, Level level) {
-        initialize(start_x, start_y, direction, velx, vely, level);
+        initialize(start_x, start_y, velx, vely, direction, level);
     }
 
 
-    private void initialize(int start_x, int start_y, int velx, int vely ,int dicercion ,Level level){
+    private void initialize(int start_x, int start_y, int velx, int vely ,int direction ,Level level){
         ImageIcon imageIcon = ImageFactory.createImage(Image.Asteroid);
         setImage(imageIcon.getImage());
         setX(start_x);
@@ -29,7 +29,8 @@ public class Asteroid extends Sprite {
     }
 
     private void updateRect() {
-        Rectangle2D rect = new Rectangle2D.Float((int)(x*((float)(level.getWidth())/PropertiesLoad.xSize)), (int)(y*((float)level.getHeight()/PropertiesLoad.ySize)), (int)(20*((float)level.getWidth()/PropertiesLoad.xSize)), (int)(20*((float)level.getHeight()/PropertiesLoad.ySize)));
+        Rectangle2D rect = new Rectangle2D.Float((int)(getX()*((float)(level.getWidth())/PropertiesLoad.xSize)), (int)(getY()*((float)level.getHeight()/PropertiesLoad.ySize)),
+                (int)(20*((float)level.getWidth()/PropertiesLoad.xSize)), (int)(20*((float)level.getHeight()/PropertiesLoad.ySize)));
         setRect(rect);
     }
 

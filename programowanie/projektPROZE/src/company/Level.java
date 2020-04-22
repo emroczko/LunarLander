@@ -224,27 +224,36 @@ public class Level extends JPanel{
     private void drawAsteroid(Graphics g){
         for (int i =0; i<asteroids.size(); i++)
         {
+            g.drawRect((int)(asteroids.get(i).getX()*((float)(this.getWidth())/PropertiesLoad.xSize)), (int)(asteroids.get(i).getY()*((float)this.getHeight()/PropertiesLoad.ySize)),
+                    (int)(20*((float)this.getWidth()/PropertiesLoad.xSize)), (int)(20*((float)this.getHeight()/PropertiesLoad.ySize)));
             g.drawImage(asteroids.get(i).getImage(),
-                    (int)(asteroids.get(i).getX()*((float)(this.getWidth())/PropertiesLoad.xSize)),
-                    (int)(asteroids.get(i).getY()*((float)(this.getWidth())/PropertiesLoad.ySize)),
-                    (int)(this.getWidth()/35), (int)(this.getHeight()/25), this);
+                    (int)(asteroids.get(i).getX()*((float)(this.getWidth())/PropertiesLoad.xSize)), (int)(asteroids.get(i).getY()*((float)this.getHeight()/PropertiesLoad.ySize)),
+                    (int)(20*((float)this.getWidth()/PropertiesLoad.xSize)), (int)(20*((float)this.getHeight()/PropertiesLoad.ySize)), this);
         }
     }
 
-    private void addasteroid(){
+    private void addAsteroid(){
         Random rand = new Random();
-        if (rand.nextInt(101)<5) {
+        if (rand.nextInt(101)<2) {
             int direction = rand.nextInt(2);
-            if (asteroid_counter < levelNum) {
+            if (asteroid_counter < levelNum+2) {
                 int velx = rand.nextInt(3) + 1;
                 int vely = rand.nextInt(3) + 1;
                 if (direction == 0) {
-                    int start_x = rand.nextInt(this.getWidth() / 2 - (int) (this.getWidth() / (17.5 * 2))) + this.getWidth() / 2 + (int) (this.getWidth() / (17.5 * 2));
-                    this.asteroids.add(new Asteroid(start_x, -20, velx, vely, direction, this));
+                    try {
+                        int start_x = rand.nextInt(this.getWidth() / 2 - (int) (this.getWidth() / (17.5 * 2))) + this.getWidth() / 2 + (int) (this.getWidth() / (17.5 * 2));
+                        this.asteroids.add(new Asteroid(start_x, -20, velx, vely, direction, this));
+                    }
+                    catch(Exception e){}
                 } else {
-                    int start_x = rand.nextInt(this.getHeight() / 2 - (int) (this.getHeight() / (17.5 * 2)));
-                    this.asteroids.add(new Asteroid(start_x, -20, velx, vely, direction, this));
+                    try {
+                        int start_x = rand.nextInt(this.getHeight() / 2 - (int) (this.getHeight() / (17.5 * 2)));
+                        this.asteroids.add(new Asteroid(start_x, -20, velx, vely, direction, this));
+                    }
+                    catch(Exception e){}
+
                 }
+                asteroid_counter +=1;
             }
         }
     }
@@ -336,6 +345,22 @@ public class Level extends JPanel{
         if(landing.intersects(lander.getRect())) {
             goodLanding();
         }
+
+    }
+
+    private void asteroidsCollision(Polygon landing, Polygon moon){
+        for(int i = 0; i<this.asteroids.size();i++){
+            //if (moon.intersects())
+            if (i+1<this.asteroids.size()){
+                if(asteroids.get(i).getRect().intersects(lander.getRect()))
+                    for(int j=i+1; j<this.asteroids.size(); j++) {
+                        if (asteroids.get(i).getRect().intersects(asteroids.get(j).getRect())) {
+                            asteroids.remove(i);
+                            asteroids.remove(j);
+                        }
+                    }
+            }
+        }
     }
 
     /**
@@ -344,6 +369,7 @@ public class Level extends JPanel{
     private void boom(){
         this.lander.landerImageChange(Image.Boom);
     }
+
     /**
      * Metoda która definiuje zachowanie okna po udanym lądowaniu
      */
@@ -390,7 +416,7 @@ public class Level extends JPanel{
      * Aplikuje zmiany wykonane przez gracza oraz odświeża okno gry
      */
     public void doOneLoop(){
-        addasteroid();
+        addAsteroid();
         this.update();
         this.repaint();
     }
