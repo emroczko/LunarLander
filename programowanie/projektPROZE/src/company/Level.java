@@ -2,6 +2,7 @@ package company;
 
 
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicProgressBarUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,33 +19,55 @@ import java.util.ArrayList;
  * Klasa odpowiedzialna za rysowanie poziomu ziemi oraz statku gracza
  */
 public class Level extends JPanel{
+
     private ImageIcon backgroundImage;
     private ImageIcon landersLeftIcon;
+    /** Obiekt klasy Timer**/
     private Timer timer;
+    /** Obiekt klasy Lander**/
     private Lander lander;
-
     private boolean inGame = true;
+    /** Zmienna wykorzystywana do KeyBindings**/
     private static final int IFW = JComponent.WHEN_IN_FOCUSED_WINDOW;
+    /** String przechowujący nazwę przycisku używany do KeyBindings**/
     private static final String MOVE_UP = "move up";
+    /** String przechowujący nazwę przycisku używany do KeyBindings**/
     private static final String MOVE_LEFT = "move left";
+    /** String przechowujący nazwę przycisku używany do KeyBindings**/
     private static final String MOVE_RIGHT = "move right";
+    /** String przechowujący nazwę przycisku używany do KeyBindings**/
     private static final String MOVE_DOWN = "move down";
+    /** Numer obecnego poziomu**/
+    private int levelNum;
+    /** Ilość pozostałych żyć**/
+    private int leftLives;
+    /** Ilość pozostałego czasu**/
+    private int time = 60;
+    private int asteroid_counter;
+    protected float fuelLevel;
+    private ArrayList<Asteroid> asteroids;
+    /** Ilość punktów**/
+    private float points;
     JLabel vx = new JLabel("H. Speed: 0");
     JLabel vy = new JLabel("V. Speed: 0");
     JLabel leftLandersLabel = new JLabel();
-    JLabel fuelLabel = new JLabel("Fuel: 100");
+    JLabel fuelLabel = new JLabel("Fuel");
     JLabel timeLabel = new JLabel("Left time: 60 sec");
-    JProgressBar fuel = new JProgressBar();
-    private int levelNum;
-    private int leftLives;
-    protected float fuelLevel;
-    private ArrayList<Asteroid> asteroids;
-    private float points;
-    private int time = 60;
-    private int asteroid_counter;
+    JProgressBar fuelBar = new JProgressBar();
+    /** Kolor niebieski używany w oknie*/
+    Color aqua = new Color (51, 134, 175);
+    /** Kolor żółty używany w oknie*/
+    Color citron = new Color (223, 234, 24);
+
     ButtonCustomizer customButtonTrue = new ButtonCustomizer(true, Color.lightGray, 40);
     ButtonCustomizer customButtonFalse = new ButtonCustomizer(false, Color.BLUE, 40);
     LabelCustomizer custom = new LabelCustomizer(Color.lightGray, 20);
+    /** Obiekt klasy GridBagConstraintsMaker**/
+    GridBagConstraintsMaker customGBC = new GridBagConstraintsMaker();
+    /** Obiekt klasy NewWindow **/
+    NewWindow newWindow = new NewWindow();
+
+    ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
 
     public Level(int xSize, int ySize, int levelNumber, int Lives, float previousPoints) {
         this.removeAll();
@@ -80,7 +103,7 @@ public class Level extends JPanel{
         JLabel landersLeft = new JLabel(this.landersLeftIcon = ImageFactory.createImage(Image.Lander));
 
         labelUpdate("lives");
-        timeCounter();
+
 
         customButtonTrue.customizer(pauseButton);
         customButtonFalse.customizer(continueButton);
@@ -95,7 +118,6 @@ public class Level extends JPanel{
         keyBindings(this, 39, MOVE_RIGHT);
         keyBindings(this, 37, MOVE_LEFT);
 
-        LabelCustomizer custom = new LabelCustomizer(Color.lightGray, 20);
         custom.customizer(vx);
         custom.customizer(vy);
         custom.customizer(timeLabel);
@@ -103,48 +125,26 @@ public class Level extends JPanel{
         custom.customizer(fuelLabel);
         custom.customizer(timeLabel);
 
-        gbc.gridx = 1;
-        gbc.gridy = 3;
-        gbc.weighty = 0.005;
-        gbc.anchor = GridBagConstraints.FIRST_LINE_END;
-        this.add(emptyLabel, gbc);
-
-        gbc.gridx = 2;
-        gbc.gridy = 1;
-        gbc.weighty = 0;
-        gbc.anchor = GridBagConstraints.FIRST_LINE_END;
-        this.add(landersLeft, gbc);
-
-        gbc.gridx = 3;
-        gbc.gridy = 1;
-        gbc.anchor = GridBagConstraints.FIRST_LINE_END;
-        this.add(leftLandersLabel, gbc);
+        fuelBar.setVisible(true);
+        fuelBar.setValue(100);
+        fuelBar.setBorderPainted(true);
+        fuelBar.setStringPainted(false);
+        fuelBar.setForeground(citron);
+        fuelBar.setBackground(citron);
 
 
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.weightx=0.1;
-        gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-        this.add(vx, gbc);
 
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-        this.add(vy, gbc);
-
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-        gbc.weighty = 0;
-        gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-        this.add(timeLabel, gbc);
-
-        gbc.gridx = 2;
-        gbc.gridy = 2;
-        gbc.weightx = 1;
-        gbc.anchor = GridBagConstraints.FIRST_LINE_END;
-        this.add(pauseButton, gbc);
-        this.add(exitButton);
-        this.add(continueButton);
+        this.add(emptyLabel, customGBC.gbcCustomize(1,3,0,0.005,0, "FIRST_LINE_END"));
+        this.add(landersLeft, customGBC.gbcCustomize(2,1,0,0,0, "FIRST_LINE_END"));
+        this.add(fuelBar, customGBC.gbcCustomize(3,0,0,0,0, "FIRST_LINE_END"));
+        this.add(fuelLabel, customGBC.gbcCustomize(0,0,0,0,0, "NORTH"));
+        this.add(leftLandersLabel, customGBC.gbcCustomize(3,1,0,0,0, "FIRST_LINE_END"));
+        this.add(vx, customGBC.gbcCustomize(0,0,0.1,0,0, "FIRST_LINE_START"));
+        this.add(vy, customGBC.gbcCustomize(0,1,0.1,0,0, "FIRST_LINE_START"));
+        this.add(timeLabel, customGBC.gbcCustomize(0,2,0.1,0,0, "FIRST_LINE_START"));
+        this.add(pauseButton, customGBC.gbcCustomize(2,2,1,0,0, "FIRST_LINE_END"));
+        this.add(exitButton,customGBC.gbcCustomize(1,4,0,0,0, "FIRST_LINE_START"));
+        this.add(continueButton, customGBC.gbcCustomize(2,4,0,0,0, "FIRST_LINE_END"));
     }
     /** Funkcja inicjująca zmienne klasy*/
     private void initializeVariables(int levelNumber){
@@ -152,6 +152,7 @@ public class Level extends JPanel{
         setFocusable(true);
         asteroid_counter = 0;
         this.lander = new Lander(this);
+        this.lander.landerImageChange(Image.Lander);
         this.asteroids = new ArrayList<Asteroid>();
         this.fuelLevel = PropertiesLoad.fuelAmount;
 
@@ -164,7 +165,7 @@ public class Level extends JPanel{
                 break;
             case 4:  this.backgroundImage = ImageFactory.createImage(Image.Saturn1);
                 break;
-            case 5: this.backgroundImage = ImageFactory.createImage(Image.Earth2);
+            case 5:  this.backgroundImage = ImageFactory.createImage(Image.Earth2);
                 break;
             case 6:  this.backgroundImage = ImageFactory.createImage(Image.Mars2);
                 break;
@@ -175,16 +176,20 @@ public class Level extends JPanel{
         }
         this.timer = new Timer(40, new GameLoop(this));
         this.timer.start();
-
+        timeCounter(true);
 
 
     }
+
+
     /** Funkcja pauzująca grę*/
     private void pause(){
         this.timer.stop();
+        timeCounter(false);
         for(int i = 37; i<41; i++){
             keyBindings(this, i, "nothing");
         }
+
     }
     /** Funkcja wznawiająca grę*/
     private void resume(){
@@ -193,6 +198,8 @@ public class Level extends JPanel{
         keyBindings(this, 40, MOVE_DOWN);
         keyBindings(this, 39, MOVE_RIGHT);
         keyBindings(this, 37, MOVE_LEFT);
+        timeCounter(true);
+
     }
     /**Funkcja odpowiedzialna za rysowanie obrazku reprezentującego gracza oraz jego hitboxa oraz skalowanie rozmiarów
      * tych elementów poprzez mnożenie ich wielkości i położenia przez współczynnik skali będący stosunkiem obecnej wielkośi
@@ -289,65 +296,89 @@ public class Level extends JPanel{
         }
     }
 
-    private void timeCounter(){
-        Runnable helloRunnable = new Runnable() {
-            public void run() {
-               time -= 1;
-               labelUpdate("time");
-            }
+    /**
+     *Metoda odpowiadająca za odliczanie w oknie gry
+     */
+    private void timeCounter(boolean onOff)
+    {
+        Runnable timeOn = () -> {
+            time -= 1;
+           labelUpdate("time");
         };
-        ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
-        executor.scheduleAtFixedRate(helloRunnable, 1, 1, SECONDS);
+
+        if(onOff) {
+            executor.scheduleAtFixedRate(timeOn, 1, 1, SECONDS);
+        }
+        else {
+            executor.shutdown();
+            newExecutor();
+        }
     }
 
     /**
-     * Wykrywanie kolizji
+     * Metoda tworząca nowy obiekt ScheduledExecutorService i przypisująca go do obiektu który został zadeklarowany w klasie Level, który został wyłączony
+     */
+    private void newExecutor(){
+        ScheduledExecutorService newExecutor = Executors.newScheduledThreadPool(1);
+        executor = newExecutor;
+
+    }
+    /**
+     * Wykrywanie kolizji i wywołanie odpowiednych metod
      * @param landing- wielokąt strefy lądowania
      * @param moon - wielokąt obszaru księzyca poza strefą lądowania
      */
     private void detectCollision(Polygon landing, Polygon moon){
-        if(moon.intersects(lander.getRect()))
-        {
+        if(moon.intersects(lander.getRect())) {
+            boom();
+            wreckedShip();
 
-            if(leftLives == 0 ) {
-                countPoints();
-                add(new LostGame(getWidth(), getHeight(), points), buttonsClickedBehaviour());
-            }
-            else{
-                add(new Level(getWidth(), getHeight(), levelNum ,leftLives-1, points), buttonsClickedBehaviour());
-            }
         }
-        if(landing.intersects(lander.getRect()))
-        {
-            if(lander.velx < 7 && lander.vely < 7){
+        if(landing.intersects(lander.getRect())) {
+            goodLanding();
+        }
+    }
+
+    /**
+     * Metoda która zatrzymuje grę na pewien czas i zmienia ikonę statku na wybuch
+     */
+    private void boom(){
+        this.lander.landerImageChange(Image.Boom);
+        pause();
+    }
+    /**
+     * Metoda która definiuje zachowanie okna po udanym lądowaniu
+     */
+    private void goodLanding(){
+        if (lander.velx < 7 && lander.vely < 7) {
             countPoints();
             if (levelNum != PropertiesLoad.numberOfLevels) {
                 add(new WonLevel(getWidth(), getHeight(), levelNum, leftLives, points), buttonsClickedBehaviour());
             } else {
                 add(new WonGame(getWidth(), getHeight(), points), buttonsClickedBehaviour());
             }
-        }
-            else{
-                if(leftLives == 0 ) {
-                    countPoints();
-                    add(new LostGame(getWidth(), getHeight(), points), buttonsClickedBehaviour());
-                }
-                else{
-                    add(new Level(getWidth(), getHeight(), levelNum ,leftLives-1, points), buttonsClickedBehaviour());
-                }
-        }
-
+        } else {
+            wreckedShip();
         }
     }
+    /**
+     * Metoda która definiuje zachowanie okna po rozbiciu statku, w zalezności od ilości żyć
+     */
+    private void wreckedShip(){
+        if(leftLives == 0) {
+            countPoints();
+            add(new LostGame(getWidth(), getHeight(), points), buttonsClickedBehaviour());
+        }
+        else{
+            add(new Level(getWidth(), getHeight(), levelNum, leftLives - 1, points), buttonsClickedBehaviour());
+        }
+    }
+    /**
+     * Odpowiada za wywołanie odpowiedniej funkcji (outOfLives) gdy statkowi zabraknie paliwa
+     */
     protected void noFuel(){
-        if (fuelLevel == 0){
-            if(leftLives == 0 ) {
-                add(new LostGame(getWidth(), getHeight(), points), buttonsClickedBehaviour());
-            }
-            else{
-
-                add(new Level(getWidth(), getHeight(), levelNum ,leftLives-1, points), buttonsClickedBehaviour());
-            }
+        if (fuelLevel <= 0){
+            wreckedShip();
         }
     }
 
@@ -413,16 +444,9 @@ public class Level extends JPanel{
     private ActionListener exitButtonListener() {
         ActionListener actionListener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                removeAll();
-                repaint();
-                revalidate();
-                setLayout(new GridBagLayout());
-                GridBagConstraints gbc = new GridBagConstraints();
-                gbc.weightx = 1;
-                gbc.weighty = 1;
-                gbc.fill = GridBagConstraints.BOTH;
+                cleanWindow();
                 timer.stop();
-                add(new Menu(), gbc);
+                add(new Menu(), newWindow.buttonsClickedBehaviour());
             }
         };
         return actionListener;
@@ -485,6 +509,17 @@ public class Level extends JPanel{
             break;
         }
         super.update(this.getGraphics());
+    }
+
+    public void BarUpdate(){
+        fuelBar.setValue((int)fuelLevel);
+        super.update(this.getGraphics());
+    }
+    /**
+     * Odpowiada za wywołanie metody obiektu klasy NewWindow służącej do usunięcia wszystkich elemntów z obecnego JPanelu
+     */
+    private void cleanWindow(){
+        newWindow.layoutMakerLevel(this);
     }
 
 

@@ -45,6 +45,10 @@ public class ImageFactory {
                 break;
             case Saturn2:
                 imageIcon = new ImageIcon("Images/SaturnMoon2.png");
+                break;
+            case Boom:
+                imageIcon = new ImageIcon("Images/Boom.png");
+                break;
             default:
                 break;
         }

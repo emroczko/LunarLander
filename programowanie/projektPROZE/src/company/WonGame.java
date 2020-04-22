@@ -13,7 +13,9 @@ public class WonGame extends JPanel{
     private String nick;
     /** Zmienne przechowująca wielkość poprzedniego okna*/
     private int a, b;
+    /** Kolor niebieski używany w oknie*/
     Color aqua = new Color (51, 134, 175);
+    /** Kolor żółty używany w oknie*/
     Color citron = new Color (223, 234, 24);
 
     LabelCustomizer customLabel = new LabelCustomizer(aqua, 40);

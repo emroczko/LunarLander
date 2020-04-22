@@ -5,6 +5,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static javafx.application.Platform.exit;
+
 /**
  * Klasa odpowiedzialna za obsługę zdarzeń z pochodzących z graficznego interfejsu użytkownika
  */
@@ -12,57 +14,39 @@ import java.awt.event.ActionListener;
 public class Menu extends JPanel{
     /** Zmienna przechowująca obrazek tła*/
     private ImageIcon MainMenuImage;
-
+    /** Kolor niebieski używany w oknie*/
     Color aqua = new Color (51, 134, 175);
+    /** Kolor żółty używany w oknie*/
     Color citron = new Color (200, 220, 24);
+    /** Obiekt klasy ButtonCustomizer **/
     ButtonCustomizer customButton = new ButtonCustomizer(true, citron, 32);
+    /** Obiekt klasy GridBagConstraintsMaker**/
+    GridBagConstraintsMaker customGBC = new GridBagConstraintsMaker();
+    /** Obiekt klasy NewWindow **/
+    NewWindow newWindow = new NewWindow();
+    JButton startButton = new JButton("Start!");
+    JButton rankingButton = new JButton("Best Scores");
+    JButton exitButton = new JButton("Exit");
+
 
     public Menu() {
         this.removeAll();
         initializeLayout();
         initializeVariables();
 
-
-
-
         this.setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-
-        JButton startButton = new JButton("Start!");
-        JButton rankingButton = new JButton("Best Scores");
 
         startButton.addActionListener(startButtonListener());
         rankingButton.addActionListener(rankingButtonListener());
+        exitButton.addActionListener(exitButtonListener());
 
         customButton.customizer(startButton);
         customButton.customizer(rankingButton);
+        customButton.customizer(exitButton);
 
-        gbc.gridwidth = 3;
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.weightx = 1;
-        gbc.weighty = 0;
-
-        gbc.insets = new Insets(15, 15, 15, 15);
-        this.add(startButton, gbc);
-
-        gbc.gridwidth = 1;
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-
-        gbc.weighty = -1;
-
-        gbc.anchor = GridBagConstraints.SOUTH;
-        gbc.insets = new Insets(15, 15, 15, 15);
-        this.add(rankingButton, gbc);
-
-        //gbc.gridx = 0;
-        //gbc.gridy = 3;
-        //components_container.add(b_instructions, gbc);
-
-
-
-
+        this.add(startButton, customGBC.gbcCustomize(0,1,0,0,0,"SOUTH"));
+        this.add(rankingButton, customGBC.gbcCustomize(0,2,0,0,0, "SOUTH"));
+        this.add(exitButton, customGBC.gbcCustomize(0,3,0,0,0, "SOUTH"));
 
     }
     /** metoda inicjalizująca obrazek tła za pomocą metody obiektu ImageFactory*/
@@ -83,38 +67,49 @@ public class Menu extends JPanel{
 
     }
 
+    /**
+     * Odpowiada za przypisanie akcji przyciskowi START
+     */
     private ActionListener startButtonListener() {
         ActionListener actionListener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                removeAll();
-                repaint();
-                revalidate();
-                setLayout(new GridBagLayout());
-                GridBagConstraints gbc = new GridBagConstraints();
-                gbc.weightx = 1;
-                gbc.weighty = 1;
-                gbc.fill = GridBagConstraints.BOTH;
-                add(new Name(getWidth(),getHeight()), gbc);
+                cleanWindow();
+                add(new Name(getWidth(),getHeight()), newWindow.buttonsClickedBehaviour());
             }
         };
         return actionListener;
     }
 
+    /**
+     * Odpowiada za przypisanie akcji przyciskowi BEST SCORES
+     */
     private ActionListener rankingButtonListener() {
         ActionListener actionListener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                removeAll();
-                repaint();
-                revalidate();
-                setLayout(new GridBagLayout());
-                GridBagConstraints gbc = new GridBagConstraints();
-                gbc.weightx = 1;
-                gbc.weighty = 1;
-                gbc.fill = GridBagConstraints.BOTH;
-                add(new Ranking(getWidth(),getHeight()), gbc);
+                cleanWindow();
+                add(new Ranking(getWidth(),getHeight()), newWindow.buttonsClickedBehaviour());
+            }
+        };
+
+        return actionListener;
+    }
+    /**
+     * Odpowiada za przypisanie akcji przyciskowi EXIT
+     */
+    private ActionListener exitButtonListener() {
+        ActionListener actionListener = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
             }
         };
         return actionListener;
+    }
+
+    /**
+     * Odpowiada za wywołanie metody obiektu klasy NewWindow służącej do usunięcia wszystkich elemntów z obecnego JPanelu
+     */
+    private void cleanWindow(){
+        newWindow.layoutMakerMenu(this);
     }
 
 }
