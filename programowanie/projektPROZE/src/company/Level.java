@@ -67,6 +67,8 @@ public class Level extends JPanel{
     /** Obiekt klasy NewWindow **/
     NewWindow newWindow = new NewWindow();
 
+    ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+
     public Level(int xSize, int ySize, int levelNumber, int Lives, float previousPoints) {
         this.removeAll();
         levelNum = levelNumber;
@@ -150,6 +152,7 @@ public class Level extends JPanel{
         setFocusable(true);
         asteroid_counter = 0;
         this.lander = new Lander(this);
+        this.lander.landerImageChange(Image.Lander);
         this.asteroids = new ArrayList<Asteroid>();
         this.fuelLevel = PropertiesLoad.fuelAmount;
 
@@ -195,6 +198,7 @@ public class Level extends JPanel{
         keyBindings(this, 40, MOVE_DOWN);
         keyBindings(this, 39, MOVE_RIGHT);
         keyBindings(this, 37, MOVE_LEFT);
+        timeCounter(true);
 
     }
     /**Funkcja odpowiedzialna za rysowanie obrazku reprezentującego gracza oraz jego hitboxa oraz skalowanie rozmiarów
@@ -292,17 +296,33 @@ public class Level extends JPanel{
         }
     }
 
-    private void timeCounter(boolean onOff){
-        Runnable helloRunnable = new Runnable() {
-            public void run() {
-                time -= 1;
-               labelUpdate("time");
-            }
+    /**
+     *Metoda odpowiadająca za odliczanie w oknie gry
+     */
+    private void timeCounter(boolean onOff)
+    {
+        Runnable timeOn = () -> {
+            time -= 1;
+           labelUpdate("time");
         };
-        ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
-        executor.scheduleAtFixedRate(helloRunnable, 1, 1, SECONDS);
+
+        if(onOff) {
+            executor.scheduleAtFixedRate(timeOn, 1, 1, SECONDS);
+        }
+        else {
+            executor.shutdown();
+            newExecutor();
+        }
     }
 
+    /**
+     * Metoda tworząca nowy obiekt ScheduledExecutorService i przypisująca go do obiektu który został zadeklarowany w klasie Level, który został wyłączony
+     */
+    private void newExecutor(){
+        ScheduledExecutorService newExecutor = Executors.newScheduledThreadPool(1);
+        executor = newExecutor;
+
+    }
     /**
      * Wykrywanie kolizji i wywołanie odpowiednych metod
      * @param landing- wielokąt strefy lądowania
@@ -310,10 +330,8 @@ public class Level extends JPanel{
      */
     private void detectCollision(Polygon landing, Polygon moon){
         if(moon.intersects(lander.getRect())) {
-            wreckedShip();
-            //this.timer.
             boom();
-
+            wreckedShip();
 
         }
         if(landing.intersects(lander.getRect())) {
@@ -321,8 +339,12 @@ public class Level extends JPanel{
         }
     }
 
+    /**
+     * Metoda która zatrzymuje grę na pewien czas i zmienia ikonę statku na wybuch
+     */
     private void boom(){
-
+        this.lander.landerImageChange(Image.Boom);
+        pause();
     }
     /**
      * Metoda która definiuje zachowanie okna po udanym lądowaniu

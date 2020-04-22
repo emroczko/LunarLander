@@ -5,6 +5,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static javafx.application.Platform.exit;
+
 /**
  * Klasa odpowiedzialna za obsługę zdarzeń z pochodzących z graficznego interfejsu użytkownika
  */
@@ -22,6 +24,10 @@ public class Menu extends JPanel{
     GridBagConstraintsMaker customGBC = new GridBagConstraintsMaker();
     /** Obiekt klasy NewWindow **/
     NewWindow newWindow = new NewWindow();
+    JButton startButton = new JButton("Start!");
+    JButton rankingButton = new JButton("Best Scores");
+    JButton exitButton = new JButton("Exit");
+
 
     public Menu() {
         this.removeAll();
@@ -30,17 +36,17 @@ public class Menu extends JPanel{
 
         this.setLayout(new GridBagLayout());
 
-        JButton startButton = new JButton("Start!");
-        JButton rankingButton = new JButton("Best Scores");
-
         startButton.addActionListener(startButtonListener());
         rankingButton.addActionListener(rankingButtonListener());
+        exitButton.addActionListener(exitButtonListener());
 
         customButton.customizer(startButton);
         customButton.customizer(rankingButton);
+        customButton.customizer(exitButton);
 
         this.add(startButton, customGBC.gbcCustomize(0,1,0,0,0,"SOUTH"));
         this.add(rankingButton, customGBC.gbcCustomize(0,2,0,0,0, "SOUTH"));
+        this.add(exitButton, customGBC.gbcCustomize(0,3,0,0,0, "SOUTH"));
 
     }
     /** metoda inicjalizująca obrazek tła za pomocą metody obiektu ImageFactory*/
@@ -73,6 +79,7 @@ public class Menu extends JPanel{
         };
         return actionListener;
     }
+
     /**
      * Odpowiada za przypisanie akcji przyciskowi BEST SCORES
      */
@@ -81,6 +88,18 @@ public class Menu extends JPanel{
             public void actionPerformed(ActionEvent e) {
                 cleanWindow();
                 add(new Ranking(getWidth(),getHeight()), newWindow.buttonsClickedBehaviour());
+            }
+        };
+
+        return actionListener;
+    }
+    /**
+     * Odpowiada za przypisanie akcji przyciskowi EXIT
+     */
+    private ActionListener exitButtonListener() {
+        ActionListener actionListener = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
             }
         };
         return actionListener;

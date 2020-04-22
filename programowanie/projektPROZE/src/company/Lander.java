@@ -22,14 +22,17 @@ public class Lander extends Sprite {
      * Funkcja inicjująca zmienne odziedziczone od klasy Sprite
      */
     private void initialize() {
-        ImageIcon imageIcon = ImageFactory.createImage(Image.Lander);
-        setImage(imageIcon.getImage());
+        //landerImageChange();
         start_x = PropertiesLoad.xSize / 2 - PropertiesLoad.LanderWidth / 2;
         start_y = PropertiesLoad.ySize - 450;
         setX(start_x);
         setY(start_y);
         Rectangle2D rect = new Rectangle2D.Float(this.getX(), this.getY(), 40, 40);
         setRect(rect);
+    }
+    public void landerImageChange(Image image){
+        ImageIcon imageIcon = ImageFactory.createImage(image);
+        setImage(imageIcon.getImage());
     }
 
     @Override
