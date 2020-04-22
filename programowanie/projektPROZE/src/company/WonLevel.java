@@ -22,6 +22,15 @@ public class WonLevel extends JPanel {
     Color citron = new Color (223, 234, 24);
     LabelCustomizer customLabel = new LabelCustomizer(aqua, 40);
     ButtonCustomizer customButton = new ButtonCustomizer(true, citron, 32);
+    /** Obiekt klasy GridBagConstraintsMaker**/
+    GridBagConstraintsMaker customGBC = new GridBagConstraintsMaker();
+    /** Obiekt klasy NewWindow **/
+    NewWindow newWindow = new NewWindow();
+
+    JButton startButton = new JButton("Continue");
+    JButton backButton = new JButton("Return to Main Menu");
+    JLabel wonLabel =new JLabel("GOOD JOB!");
+
 
     public WonLevel(int xSize, int ySize, int wonLevel, int leftLives, float earnedPoints){
         this.removeAll();
@@ -33,17 +42,10 @@ public class WonLevel extends JPanel {
         a = xSize;
         b = ySize;
         setPreferredSize(new Dimension(a,b));
-        Fonts font = new Fonts();
-
-
 
         initializeVariables();
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-
-        JButton startButton = new JButton("Continue");
-        JButton backButton = new JButton("Return to Main Menu");
-        JLabel wonLabel =new JLabel("GOOD JOB!");
 
         startButton.addActionListener(continueButtonListener());
         backButton.addActionListener(returnToMainMenuButtonListener());
@@ -52,25 +54,11 @@ public class WonLevel extends JPanel {
         customButton.customizer(backButton);
         customLabel.customizer(wonLabel);
 
+        this.add(wonLabel, customGBC.gbcCustomize(0,1 ,0,0,3,"none"));
+        this.add(startButton, customGBC.gbcCustomize(0,3 ,0, 0, 3, "none"));
+        this.add(backButton, customGBC.gbcCustomize(0,4 ,0, 0, 3, "none"));
 
-        gbc.gridwidth = 3;
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.insets = new Insets(15, 15, 15, 15);
-        this.add(wonLabel, gbc);
-
-        gbc.gridx = 0;
-        gbc.gridy = 3;
-        this.add(startButton, gbc);
-
-        gbc.gridx = 0;
-        gbc.gridy = 4;
-        this.add(backButton, gbc);
-
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
-
+        customGBC.gbcCustomize(0,0,1,1,0,"none");
 
     }
     /** metoda inicjalizująca obrazek tła za pomocą metody obiektu ImageFactory*/
@@ -91,7 +79,8 @@ public class WonLevel extends JPanel {
     private ActionListener continueButtonListener() {
         ActionListener actionListener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                add(new Level(getWidth(),getHeight(), wonLevelNumber+1, lives, points),buttonsClickedBehaviour());
+                cleanWindow();
+                add(new Level(getWidth(),getHeight(), wonLevelNumber+1, lives, points),newWindow.buttonsClickedBehaviour());
             }
         };
         return actionListener;
@@ -103,25 +92,15 @@ public class WonLevel extends JPanel {
     private ActionListener returnToMainMenuButtonListener() {
         ActionListener actionListener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                add(new Menu(),buttonsClickedBehaviour());
+                cleanWindow();
+                add(new Menu(),newWindow.buttonsClickedBehaviour());
             }
         };
         return actionListener;
     }
 
-    /**
-     * Odpowiada za wyczyszczenie ekranu i umieszczenie nowego okna po naciśnięciu któregoś z przycisków w oknie Name
-     */
-    private GridBagConstraints buttonsClickedBehaviour(){
-        removeAll();
-        repaint();
-        revalidate();
-        setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.weightx = 1;
-        gbc.weighty = 1;
-        gbc.fill = GridBagConstraints.BOTH;
-        return gbc;
+    private void cleanWindow(){
+        newWindow.layoutMakerWonLevel(this);
     }
 }
 

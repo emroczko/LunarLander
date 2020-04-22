@@ -18,6 +18,11 @@ public class WonGame extends JPanel{
     /** Kolor żółty używany w oknie*/
     Color citron = new Color (223, 234, 24);
 
+    /** Obiekt klasy GridBagConstraintsMaker**/
+    GridBagConstraintsMaker customGBC = new GridBagConstraintsMaker();
+    /** Obiekt klasy NewWindow **/
+    NewWindow newWindow = new NewWindow();
+
     LabelCustomizer customLabel = new LabelCustomizer(aqua, 40);
     ButtonCustomizer customButton = new ButtonCustomizer(true, citron, 32);
 
@@ -29,9 +34,6 @@ public class WonGame extends JPanel{
         a = xSize;
         b = ySize;
         setPreferredSize(new Dimension(a,b));
-        Fonts font = new Fonts();
-
-
 
         initializeVariables();
         this.setLayout(new GridBagLayout());
@@ -44,32 +46,16 @@ public class WonGame extends JPanel{
         startButton.addActionListener(continueButtonListener());
         backButton.addActionListener(returnToMainMenuButtonListener());
 
-
         customButton.customizer(startButton);
         customButton.customizer(backButton);
 
         customLabel.customizer(lost);
 
+        this.add(lost, customGBC.gbcCustomize(0,1 ,0,0,3,"none"));
+        this.add(startButton, customGBC.gbcCustomize(0,3 ,0,0,3,"none"));
+        this.add(backButton, customGBC.gbcCustomize(0,4 ,0,0,3,"none"));
 
-
-        gbc.gridwidth = 3;
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.insets = new Insets(15, 15, 15, 15);
-        this.add(lost, gbc);
-
-        gbc.gridx = 0;
-        gbc.gridy = 3;
-        this.add(startButton, gbc);
-
-        gbc.gridx = 0;
-        gbc.gridy = 4;
-        this.add(backButton, gbc);
-
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
-
+        customGBC.gbcCustomize(0,0,1,1,0,"none");
 
     }
     /** metoda inicjalizująca obrazek tła za pomocą metody obiektu ImageFactory*/
@@ -90,7 +76,8 @@ public class WonGame extends JPanel{
     private ActionListener continueButtonListener() {
         ActionListener actionListener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                add(new Name(getWidth(),getHeight()),buttonsClickedBehaviour());
+                cleanWindow();
+                add(new Name(getWidth(),getHeight()),newWindow.buttonsClickedBehaviour());
             }
         };
         return actionListener;
@@ -102,24 +89,15 @@ public class WonGame extends JPanel{
     private ActionListener returnToMainMenuButtonListener() {
         ActionListener actionListener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                add(new Menu(),buttonsClickedBehaviour());
+                cleanWindow();
+                add(new Menu(),newWindow.buttonsClickedBehaviour());
             }
         };
         return actionListener;
     }
 
-    /**
-     * Odpowiada za wyczyszczenie ekranu i umieszczenie nowego okna po naciśnięciu któregoś z przycisków w oknie Name
-     */
-    private GridBagConstraints buttonsClickedBehaviour(){
-        removeAll();
-        repaint();
-        revalidate();
-        setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.weightx = 1;
-        gbc.weighty = 1;
-        gbc.fill = GridBagConstraints.BOTH;
-        return gbc;
+
+    private void cleanWindow(){
+        newWindow.layoutMakerWonGame(this);
     }
 }
