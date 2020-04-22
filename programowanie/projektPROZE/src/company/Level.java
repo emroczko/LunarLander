@@ -125,10 +125,10 @@ public class Level extends JPanel{
 
         fuelBar.setVisible(true);
         fuelBar.setValue(100);
-        fuelBar.setBorderPainted(true);
+        fuelBar.setBorderPainted(false);
         fuelBar.setStringPainted(false);
         fuelBar.setForeground(citron);
-        fuelBar.setBackground(citron);
+        fuelBar.setBackground(aqua);
 
         this.add(emptyLabel, customGBC.gbcCustomize(1,3,0,0.005,0, "FIRST_LINE_END"));
         this.add(landersLeft, customGBC.gbcCustomize(2,1,0,0,0, "FIRST_LINE_END"));
@@ -230,7 +230,7 @@ public class Level extends JPanel{
 
     private void addAsteroid(){
         Random rand = new Random();
-        if (rand.nextInt(101)<2) {
+        if (rand.nextInt(101)<4) {
             int direction = rand.nextInt(2);
             if (asteroid_counter < levelNum+2) {
                 int velx = rand.nextInt(3) + 1;
@@ -249,7 +249,7 @@ public class Level extends JPanel{
                     catch(Exception e){}
 
                 }
-                asteroid_counter +=1;
+                //asteroid_counter +=1;
             }
         }
     }
@@ -331,7 +331,6 @@ public class Level extends JPanel{
         else{
             boomExecutor = newExecutor;
         }
-
     }
     /**
      * Wykrywanie kolizji i wywołanie odpowiednych metod
@@ -350,21 +349,21 @@ public class Level extends JPanel{
 
     private void asteroidsCollision(Polygon landing, Polygon moon){
         for(int i = 0; i<this.asteroids.size();i++){
-            if (moon.intersects(asteroids.get(i).getRect()) || landing.intersects(asteroids.get(i).getRect())){
-                asteroids.remove(i);
-            }
-            System.out.println(i);
-            System.out.println(asteroids.size());
+
             if (lander.getRect().intersects(asteroids.get(i).getRect())){
                 boom();
             }
 
+            if (moon.intersects(asteroids.get(i).getRect()) || landing.intersects(asteroids.get(i).getRect())){
+                asteroids.remove(i);
+            }
+            if (asteroids.size()==0){
+                break;
+            }
             if (i+1<this.asteroids.size()){
                     for(int j=i+1; j<this.asteroids.size(); j++) {
                         if (asteroids.get(i).getRect().intersects(asteroids.get(j).getRect())) {
-                            //asteroids.remove(i);
-                            //asteroids.remove(j);
-                            System.out.println(i);
+                            asteroids.remove(i);
                         }
                     }
             }
