@@ -5,10 +5,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 7b0d0a56f4bfd08f348af907f172d7a6bd8d32d5
 /**
  * Klasa odpowiedzialna za obsługę zdarzeń z pochodzących z graficznego interfejsu użytkownika
  */
