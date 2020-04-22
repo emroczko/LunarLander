@@ -72,10 +72,14 @@ public class Level extends JPanel{
 
     public Level(int xSize, int ySize, int levelNumber, int Lives, float previousPoints) {
         this.removeAll();
+        repaint();
+        revalidate();
+
         levelNum = levelNumber;
         leftLives = Lives;
         points = previousPoints;
         setPreferredSize(new Dimension(xSize, ySize));
+        keyBindings(this, 32, "nothing");
 
 
         try {
@@ -84,8 +88,7 @@ public class Level extends JPanel{
             e.printStackTrace();
         }
 
-        revalidate();
-        repaint();
+
         initializeVariables(levelNumber);
 
         this.setLayout(new GridBagLayout());
@@ -97,8 +100,6 @@ public class Level extends JPanel{
         JButton exitButton = new JButton("EXIT");
         JButton pauseButton = new JButton("||");
         JButton continueButton = new JButton("CONTINUE");
-
-        JLabel emptyLabel = new JLabel("eeeeeeee");
         JLabel landersLeft = new JLabel(this.landersLeftIcon = ImageFactory.createImage(Image.Lander));
 
         labelUpdate("lives");
@@ -281,6 +282,7 @@ public class Level extends JPanel{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        setDoubleBuffered(true);
         g.drawImage(backgroundImage.getImage(), 0, 0, this.getWidth(), this.getHeight(), null);
         doDrawing(g);
     }
