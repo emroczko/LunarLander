@@ -332,7 +332,6 @@ public class Level extends JPanel{
         if(moon.intersects(lander.getRect())) {
             boom();
             wreckedShip();
-
         }
         if(landing.intersects(lander.getRect())) {
             goodLanding();
@@ -344,7 +343,6 @@ public class Level extends JPanel{
      */
     private void boom(){
         this.lander.landerImageChange(Image.Boom);
-        pause();
     }
     /**
      * Metoda która definiuje zachowanie okna po udanym lądowaniu

@@ -40,5 +40,17 @@ public class NewWindow extends JPanel{
         lostGame.revalidate();
         lostGame.setLayout(new GridBagLayout());
     }
+    public void layoutMakerWonLevel(WonLevel wonLevel){
+        wonLevel.removeAll();
+        wonLevel.repaint();
+        wonLevel.revalidate();
+        wonLevel.setLayout(new GridBagLayout());
+    }
+    public void layoutMakerWonGame(WonGame wonGame){
+        wonGame.removeAll();
+        wonGame.repaint();
+        wonGame.revalidate();
+        wonGame.setLayout(new GridBagLayout());
+    }
 }
 
