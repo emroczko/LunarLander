@@ -339,12 +339,17 @@ public class Level extends JPanel{
         if(landing.intersects(lander.getRect())) {
             goodLanding();
         }
-
+        asteroidsCollision(landing, moon);
     }
 
     private void asteroidsCollision(Polygon landing, Polygon moon){
         for(int i = 0; i<this.asteroids.size();i++){
-            //if (moon.intersects())
+            if (moon.intersects(asteroids.get(i).getRect())){
+                asteroids.remove(i);
+            }
+            if (landing.intersects(asteroids.get(i).getRect())){
+                asteroids.remove(i);
+            }
             if (i+1<this.asteroids.size()){
                 if(asteroids.get(i).getRect().intersects(lander.getRect()))
                     for(int j=i+1; j<this.asteroids.size(); j++) {
