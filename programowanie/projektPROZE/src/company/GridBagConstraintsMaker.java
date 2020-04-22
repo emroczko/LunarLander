@@ -30,17 +30,16 @@ public class GridBagConstraintsMaker {
      */
     private void anchorMaker(String whichDirection, GridBagConstraints gbc){
         switch(whichDirection){
-            case "SOUTH": gbc.anchor = GridBagConstraints.SOUTH;
+            case "LAST_LINE_END": gbc.anchor = GridBagConstraints.LAST_LINE_END;
                 break;
-            case "NORTH": gbc.anchor = GridBagConstraints.NORTH;
+            case "LAST_LINE_START": gbc.anchor = GridBagConstraints.LAST_LINE_START;
+                break;
+            case "CENTER": gbc.anchor = GridBagConstraints.CENTER;
                 break;
             case "FIRST_LINE_END": gbc.anchor = GridBagConstraints.FIRST_LINE_END;
                 break;
             case "FIRST_LINE_START": gbc.anchor = GridBagConstraints.FIRST_LINE_START;
                 break;
-            case "NORTHWEST": gbc.anchor = GridBagConstraints.NORTHWEST;
-                break;
-            case "none": break;
         }
 
     }

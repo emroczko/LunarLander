@@ -98,7 +98,7 @@ public class Level extends JPanel{
         JButton pauseButton = new JButton("||");
         JButton continueButton = new JButton("CONTINUE");
 
-        JLabel emptyLabel = new JLabel("  ");
+        JLabel emptyLabel = new JLabel("eeeeeeee");
         JLabel landersLeft = new JLabel(this.landersLeftIcon = ImageFactory.createImage(Image.Lander));
 
         labelUpdate("lives");
@@ -130,17 +130,16 @@ public class Level extends JPanel{
         fuelBar.setForeground(citron);
         fuelBar.setBackground(aqua);
 
-        this.add(emptyLabel, customGBC.gbcCustomize(1,3,0,0.005,0, "FIRST_LINE_END"));
-        this.add(landersLeft, customGBC.gbcCustomize(2,1,0,0,0, "FIRST_LINE_END"));
-        this.add(fuelBar, customGBC.gbcCustomize(3,0,0,0,0, "FIRST_LINE_END"));
-        this.add(fuelLabel, customGBC.gbcCustomize(0,0,0,0,0, "NORTH"));
-        this.add(leftLandersLabel, customGBC.gbcCustomize(3,1,0,0,0, "FIRST_LINE_END"));
-        this.add(vx, customGBC.gbcCustomize(0,0,0.1,0,0, "FIRST_LINE_START"));
-        this.add(vy, customGBC.gbcCustomize(0,1,0.1,0,0, "FIRST_LINE_START"));
-        this.add(timeLabel, customGBC.gbcCustomize(0,2,0.1,0,0, "FIRST_LINE_START"));
-        this.add(pauseButton, customGBC.gbcCustomize(2,2,1,0,0, "FIRST_LINE_END"));
-        this.add(exitButton,customGBC.gbcCustomize(1,4,0,0,0, "FIRST_LINE_START"));
-        this.add(continueButton, customGBC.gbcCustomize(2,4,0,0,0, "FIRST_LINE_END"));
+        this.add(leftLandersLabel, customGBC.gbcCustomize(2,1,0,0,1, "FIRST_LINE_END"));
+        this.add(landersLeft, customGBC.gbcCustomize(2,1,0,0,1, "CENTER"));
+        this.add(fuelLabel, customGBC.gbcCustomize(1,0,1,0,1, "FIRST_LINE_END"));
+        this.add(fuelBar, customGBC.gbcCustomize(2,0,0,0,1, "FIRST_LINE_END"));
+        this.add(vx, customGBC.gbcCustomize(0,0,0,0,1, "FIRST_LINE_START"));
+        this.add(vy, customGBC.gbcCustomize(0,1,0,0,1, "FIRST_LINE_START"));
+        this.add(timeLabel, customGBC.gbcCustomize(0,2,0,1,1, "FIRST_LINE_START"));
+        this.add(pauseButton, customGBC.gbcCustomize(2,2,0,0,1, "FIRST_LINE_END"));
+        this.add(exitButton,customGBC.gbcCustomize(0,3,0,0,1, "LAST_LINE_START"));
+        this.add(continueButton, customGBC.gbcCustomize(1,3,0,0,2, "LAST_LINE_END"));
     }
     /** Funkcja inicjująca zmienne klasy*/
     private void initializeVariables(int levelNumber){
@@ -220,8 +219,6 @@ public class Level extends JPanel{
     private void drawAsteroid(Graphics g){
         for (int i =0; i<asteroids.size(); i++)
         {
-            g.drawRect((int)(asteroids.get(i).getX()*((float)(this.getWidth())/PropertiesLoad.xSize)), (int)(asteroids.get(i).getY()*((float)this.getHeight()/PropertiesLoad.ySize)),
-                    (int)(20*((float)this.getWidth()/PropertiesLoad.xSize)), (int)(20*((float)this.getHeight()/PropertiesLoad.ySize)));
             g.drawImage(asteroids.get(i).getImage(),
                     (int)(asteroids.get(i).getX()*((float)(this.getWidth())/PropertiesLoad.xSize)), (int)(asteroids.get(i).getY()*((float)this.getHeight()/PropertiesLoad.ySize)),
                     (int)(20*((float)this.getWidth()/PropertiesLoad.xSize)), (int)(20*((float)this.getHeight()/PropertiesLoad.ySize)), this);
