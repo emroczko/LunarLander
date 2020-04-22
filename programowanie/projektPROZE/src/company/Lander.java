@@ -43,7 +43,7 @@ public class Lander extends Sprite {
             y += 1;
         }
         else {
-            y += vely;
+            //y += vely;
         }
 
         if(x<0){
