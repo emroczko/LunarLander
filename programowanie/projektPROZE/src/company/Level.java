@@ -350,6 +350,10 @@ public class Level extends JPanel{
             if (landing.intersects(asteroids.get(i).getRect())){
                 asteroids.remove(i);
             }
+            if (lander.getRect().intersects(asteroids.get(i).getRect())){
+                boom();
+                wreckedShip();
+            }
             if (i+1<this.asteroids.size()){
                 if(asteroids.get(i).getRect().intersects(lander.getRect()))
                     for(int j=i+1; j<this.asteroids.size(); j++) {
