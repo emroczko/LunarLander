@@ -80,7 +80,7 @@ public class WonLevel extends JPanel {
         ActionListener actionListener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 cleanWindow();
-                add(new Level(getWidth(),getHeight(), wonLevelNumber+1, lives, points),newWindow.buttonsClickedBehaviour());
+                add(new IntroLevel(getWidth(),getHeight(), wonLevelNumber+1, lives, points),newWindow.buttonsClickedBehaviour());
             }
         };
         return actionListener;

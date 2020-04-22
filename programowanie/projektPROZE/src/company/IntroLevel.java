@@ -21,6 +21,7 @@ public class IntroLevel extends JPanel{
      **/
     private float points;
     private int level;
+    private int lives;
     JLabel levelLabel = new JLabel();
     JLabel spaceLabel = new JLabel("Press space to begin...");
     /**
@@ -46,7 +47,7 @@ public class IntroLevel extends JPanel{
     /** Obiekt klasy NewWindow **/
     NewWindow newWindow = new NewWindow();
 
-    public IntroLevel(int xSize, int ySize, int levelNumber, float previousPoints) {
+    public IntroLevel(int xSize, int ySize, int levelNumber, int livesNumber, float previousPoints) {
 
         this.removeAll();
         repaint();
@@ -58,6 +59,7 @@ public class IntroLevel extends JPanel{
 
         points = previousPoints;
         level = levelNumber;
+        lives = livesNumber;
         keyBindings(this, 32);
         setBackground(levelNumber);
         customLabel.customizer(levelLabel);
@@ -126,7 +128,7 @@ public class IntroLevel extends JPanel{
     }
     private void startLevel(){
         cleanWindow();
-        add(new Level(getWidth(),getHeight(), level, PropertiesLoad.numberOfLives, points),newWindow.buttonsClickedBehaviour());
+        add(new Level(getWidth(),getHeight(), level, lives, points),newWindow.buttonsClickedBehaviour());
     }
     private void cleanWindow(){
         newWindow.layoutMakerIntroLevel(this);
