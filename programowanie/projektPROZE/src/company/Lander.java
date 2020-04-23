@@ -22,7 +22,6 @@ public class Lander extends Sprite {
      * Funkcja inicjująca zmienne odziedziczone od klasy Sprite
      */
     private void initialize() {
-        //landerImageChange();
         start_x = PropertiesLoad.xSize / 2 - PropertiesLoad.LanderWidth / 2;
         start_y = PropertiesLoad.ySize - 450;
         setX(start_x);
@@ -103,7 +102,6 @@ public class Lander extends Sprite {
         velx += PropertiesLoad.enginePowerVx;
         level.fuelLevel -= 2.5;
         level.BarUpdate();
-        //level.labelUpdate("fuel");
         level.noFuel();
     }
 }

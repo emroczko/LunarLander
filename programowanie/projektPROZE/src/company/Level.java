@@ -139,11 +139,11 @@ public class Level extends JPanel{
 
 
 
-
-        this.add(fuelBar, customGBC.gbcCustomize(2,0,0,0,1, "FIRST_LINE_END"));
-        this.add(fuelLabel, customGBC.gbcCustomize(1,0,1,0,1, "FIRST_LINE_END"));
         this.add(vx, customGBC.gbcCustomize(0,0,0,0,1, "FIRST_LINE_START"));
         this.add(vy, customGBC.gbcCustomize(0,1,0,0,1, "FIRST_LINE_START"));
+        this.add(fuelBar, customGBC.gbcCustomize(2,0,0,0,1, "FIRST_LINE_END"));
+        this.add(fuelLabel, customGBC.gbcCustomize(1,0,1,0,1, "FIRST_LINE_END"));
+
         this.add(timeLabel, customGBC.gbcCustomize(0,2,0,1,1, "FIRST_LINE_START"));
         this.add(pauseButton, customGBC.gbcCustomize(2,2,0,0,1, "FIRST_LINE_END"));
         this.add(exitButton,customGBC.gbcCustomize(0,3,0,0,1, "LAST_LINE_START"));
@@ -166,8 +166,6 @@ public class Level extends JPanel{
         this.timer = new Timer(40, new GameLoop(this));
         this.timer.start();
         timeCounter(true);
-
-
     }
 
 
@@ -241,7 +239,6 @@ public class Level extends JPanel{
                     catch(Exception e){}
 
                 }
-                //asteroid_counter +=1;
             }
         }
     }
@@ -396,7 +393,6 @@ public class Level extends JPanel{
             countPoints();
             if (levelNum != PropertiesLoad.numberOfLevels) {
                 cleanWindow();
-                //add(new WonLevel(getWidth(), getHeight(), levelNum, leftLives, points, nick), newWindow.buttonsClickedBehaviour());
                 add(new IntroLevel(getWidth(), getHeight(), levelNum+1, leftLives, points, nick), newWindow.buttonsClickedBehaviour());
             } else {
                 cleanWindow();
@@ -412,11 +408,9 @@ public class Level extends JPanel{
     private void wreckedShip(){
         if(leftLives == 0) {
             countPoints();
-            //cleanWindow();
             add(new LostGame(getWidth(), getHeight(), points, nick), buttonsClickedBehaviour());
         }
         else{
-            //cleanWindow();
             add(new Level(getWidth(), getHeight(), levelNum, leftLives - 1, points, nick, this.backgroundImage), buttonsClickedBehaviour());
         }
     }
