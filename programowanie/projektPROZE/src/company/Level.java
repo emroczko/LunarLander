@@ -75,8 +75,8 @@ public class Level extends JPanel{
 
     public Level(int xSize, int ySize, int levelNumber, int Lives, int previousPoints, String nickName, ImageIcon background) {
         this.removeAll();
-        repaint();
-        revalidate();
+        this.repaint();
+        this.revalidate();
 
         nick = nickName;
         levelNum = levelNumber;
@@ -138,16 +138,18 @@ public class Level extends JPanel{
         fuelBar.setBackground(aqua);
 
 
-        this.add(leftLandersLabel, customGBC.gbcCustomize(2,1,0,0,1, "FIRST_LINE_END"));
-        this.add(landersLeft, customGBC.gbcCustomize(2,1,0,0,1, "CENTER"));
-        this.add(fuelLabel, customGBC.gbcCustomize(1,0,1,0,1, "FIRST_LINE_END"));
+
+
         this.add(fuelBar, customGBC.gbcCustomize(2,0,0,0,1, "FIRST_LINE_END"));
+        this.add(fuelLabel, customGBC.gbcCustomize(1,0,1,0,1, "FIRST_LINE_END"));
         this.add(vx, customGBC.gbcCustomize(0,0,0,0,1, "FIRST_LINE_START"));
         this.add(vy, customGBC.gbcCustomize(0,1,0,0,1, "FIRST_LINE_START"));
         this.add(timeLabel, customGBC.gbcCustomize(0,2,0,1,1, "FIRST_LINE_START"));
         this.add(pauseButton, customGBC.gbcCustomize(2,2,0,0,1, "FIRST_LINE_END"));
         this.add(exitButton,customGBC.gbcCustomize(0,3,0,0,1, "LAST_LINE_START"));
         this.add(continueButton, customGBC.gbcCustomize(1,3,0,0,2, "LAST_LINE_END"));
+        this.add(leftLandersLabel, customGBC.gbcCustomize(2,1,0,0,1, "FIRST_LINE_END"));
+        this.add(landersLeft, customGBC.gbcCustomize(2,1,0,0,1, "CENTER"));
 
     }
     /** Funkcja inicjująca zmienne klasy*/
@@ -290,6 +292,8 @@ public class Level extends JPanel{
             }
             Toolkit.getDefaultToolkit().sync();
         }
+
+
     }
 
     /**
