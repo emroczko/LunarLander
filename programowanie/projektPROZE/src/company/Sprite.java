@@ -5,9 +5,8 @@ import java.awt.geom.Rectangle2D;
 
 
 /**
- * Klasa abstrakcyjna odpowiedzialna za rysowanie gracza
+ * Klasa abstrakcyjna reprezentujaca obiekty graficzne
  */
-
 public abstract class Sprite {
     /** Zmienna przechowująca obrazek*/
     private Image image;
