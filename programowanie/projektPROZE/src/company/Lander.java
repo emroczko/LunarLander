@@ -29,6 +29,11 @@ public class Lander extends Sprite {
         Rectangle2D rect = new Rectangle2D.Float(this.getX(), this.getY(), 40, 40);
         setRect(rect);
     }
+
+    /**
+     * Zmienia obrazek reprezentujący statek
+     * @param image = na jaki obraze zamieniamy
+     */
     public void landerImageChange(Image image){
         ImageIcon imageIcon = ImageFactory.createImage(image);
         setImage(imageIcon.getImage());
@@ -56,28 +61,45 @@ public class Lander extends Sprite {
         }
 
     }
+
+    /**
+     * Aktualizuje hitbox statku
+     */
     private void updateRect() {
         Rectangle2D rect = new Rectangle2D.Float((int)(x*((float)(level.getWidth())/PropertiesLoad.xSize)), (int)(y*((float)level.getHeight()/PropertiesLoad.ySize)), (int)(40*((float)level.getWidth()/PropertiesLoad.xSize)), (int)(40*((float)level.getHeight()/PropertiesLoad.ySize)));
         setRect(rect);
     }
-    public void acceleration(float accX, float accY) {
-        this.velx += accX;
+
+    /**
+     * Dodaje zwiększa wartośc prędkości poziomej(dodaje stałą grawitacyjną)
+     * @param accY przyśpieszenie pionowe
+     */
+    public void acceleration(float accY) {
         this.vely += accY;
-        level.labelUpdate("vx");
         level.labelUpdate("vy");
     }
 
+    /**
+     * Aktualizuje położenie statku i jego hitbox oraz dodaje stałą grawitacyjną do prędkości pionowej
+     */
     public void update() {
         move();
         updateRect();
-        acceleration(0, PropertiesLoad.mapGravity);
+        acceleration( PropertiesLoad.mapGravity);
     }
 
+    /**
+     * Ustawia odniesienie do poziomu
+     * @param lev = poziom
+     */
     public void setLevel(Level lev)
     {
         this.level = lev;
     }
 
+    /**
+     * Metoda wykorzystywana przy obsłudze przycisku strzałki do góry (zmniejsza ilość paliwa oraz powoduje że statek zmniejsza swoją prędkośc spadania)
+     */
     public void moveUp() {
         vely -= PropertiesLoad.enginePowerVy;
         vely += PropertiesLoad.mapGravity;
@@ -86,11 +108,17 @@ public class Lander extends Sprite {
         level.noFuel();
     }
 
+    /**
+     * Metoda wykorzystywana przy obsłudze przycisku strzałki do dołu (zmniejsza ilość paliwa oraz powoduje że statek szybciej porusza sie w dół)
+     */
     public void moveDown() {
         vely += PropertiesLoad.enginePowerVy;
         vely += PropertiesLoad.mapGravity;
     }
 
+    /**
+     * Metoda wykorzystywana przy obsłudze przycisku strzałki w lewo (zmniejsza ilość paliwa oraz zwieksza prędkośc statku w lewo)
+     */
     public void moveLeft() {
         velx -= PropertiesLoad.enginePowerVx;
         level.fuelLevel -= 2.5;
@@ -98,6 +126,9 @@ public class Lander extends Sprite {
         level.noFuel();
     }
 
+    /**
+     * Metoda wykorzystywana przy obsłudze przycisku strzałki w prawo (zmniejsza ilość paliwa oraz zwiększa prędkośc statku w prawo)
+     */
     public void moveRight() {
         velx += PropertiesLoad.enginePowerVx;
         level.fuelLevel -= 2.5;
