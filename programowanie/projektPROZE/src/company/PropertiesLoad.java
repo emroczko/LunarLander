@@ -10,9 +10,7 @@ import java.util.Arrays;
 /**
  * Klasa odpowiedzialna za wczytywanie danych z plików i serwera (na razie tylko pliki, docelowo również z serwera)
  */
-
 public class PropertiesLoad {
-
     /** Okresla startowa szerokosc okna */
     static int xSize;
     /** Okresla startowa wysokosc okna */
@@ -43,7 +41,7 @@ public class PropertiesLoad {
     static int[] yLanding;
     /** Określa przyśpieszenie grawitacyjne na danej mapie*/
     static float mapGravity;
-    /** */
+    /** Liczba żyć*/
     static int numberOfLevels;
 
         /** Metoda wczytuje dane z lokalnego pliku i zapisuje do odpowiednich pól w klasie */

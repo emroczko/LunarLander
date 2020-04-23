@@ -8,7 +8,6 @@ import java.awt.*;
 public class NewWindow extends JPanel{
     public NewWindow(){
     }
-
     public GridBagConstraints buttonsClickedBehaviour(){
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.weightx = 1;
@@ -58,12 +57,11 @@ public class NewWindow extends JPanel{
         ranking.revalidate();
         ranking.setLayout(new GridBagLayout());
     }
-
     public void layoutMakerInstructions(Instructions instructions){
-            instructions.removeAll();
-            instructions.repaint();
-            instructions.revalidate();
-            instructions.setLayout(new GridBagLayout());
+        instructions.removeAll();
+        instructions.repaint();
+        instructions.revalidate();
+        instructions.setLayout(new GridBagLayout());
     }
 }
 

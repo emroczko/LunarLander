@@ -102,7 +102,6 @@ public class LostGame extends JPanel {
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
             g.drawImage(MainMenuImage.getImage(), 0, 0, this.getWidth(), this.getHeight(), null);
-
         }
 
 

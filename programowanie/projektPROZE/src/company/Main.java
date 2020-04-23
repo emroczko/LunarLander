@@ -7,9 +7,7 @@ import java.awt.EventQueue;
  * Klasa odpowiedzialna za wywołanie głównej ramki oraz pobranie danych z pliku
  */
 public class Main {
-
     public static void main(String[] args) {
-
         EventQueue.invokeLater(() -> {
             try {
                 PropertiesLoad.loadProps();

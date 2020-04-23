@@ -9,6 +9,7 @@ public class Fonts {
     /**Czcionka używana w razie niepowodzenia pobrania czcionki z pliku**/
     private static final Font SERIF_FONT = new Font("serif", Font.PLAIN, 24);
 
+    /**Konstruktor klasy*/
     public Fonts(){ }
 
     /**
