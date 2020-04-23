@@ -49,6 +49,9 @@ public class ImageFactory {
             case Boom:
                 imageIcon = new ImageIcon("Images/Boom.png");
                 break;
+            case Instruction:
+                imageIcon = new ImageIcon("Images/InstructionScreen.png");
+                break;
             default:
                 break;
         }

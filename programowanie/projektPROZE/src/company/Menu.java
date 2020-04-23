@@ -50,8 +50,8 @@ public class Menu extends JPanel{
 
         this.add(startButton, customGBC.gbcCustomize(0,1,0,0,0,"SOUTH"));
         this.add(rankingButton, customGBC.gbcCustomize(0,2,0,0,0, "SOUTH"));
-        this.add(instructionsButton, customGBC.gbcCustomize(0,4,0,0,0, "SOUTH"));
-        this.add(exitButton, customGBC.gbcCustomize(0,3,0,0,0, "SOUTH"));
+        this.add(instructionsButton, customGBC.gbcCustomize(0,3,0,0,0, "SOUTH"));
+        this.add(exitButton, customGBC.gbcCustomize(0,4,0,0,0, "SOUTH"));
 
 
 
