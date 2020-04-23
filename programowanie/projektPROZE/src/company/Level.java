@@ -367,12 +367,12 @@ public class Level extends JPanel{
      * @param moon - wielokąt obszaru księzyca poza strefą lądowania
      */
     private void detectCollision(Polygon landing, Polygon moon){
-        if(moon.intersects(lander.getRect())) {
+        if(moon.intersects(lander.getRect()))
             boom();
-        }
-        if(landing.intersects(lander.getRect())) {
+
+        if(landing.intersects(lander.getRect()))
             goodLanding();
-        }
+
         asteroidsCollision(landing, moon);
     }
 
@@ -383,15 +383,12 @@ public class Level extends JPanel{
      */
     private void asteroidsCollision(Polygon landing, Polygon moon){
         for(int i = 0; i<this.asteroids.size();i++){
-            if (lander.getRect().intersects(asteroids.get(i).getRect())){
-                boom();
-            }
-            if (moon.intersects(asteroids.get(i).getRect()) || landing.intersects(asteroids.get(i).getRect())){
-                asteroids.remove(i);
-            }
-            if (asteroids.size()==0){
-                break;
-            }
+            if (lander.getRect().intersects(asteroids.get(i).getRect())) boom();
+
+            if (moon.intersects(asteroids.get(i).getRect()) || landing.intersects(asteroids.get(i).getRect())) asteroids.remove(i);
+
+            if (asteroids.size()==0) break;
+
             if (i+1<this.asteroids.size()){
                 for(int j=i+1; j<this.asteroids.size(); j++) {
                     if (asteroids.get(i).getRect().intersects(asteroids.get(j).getRect())) {

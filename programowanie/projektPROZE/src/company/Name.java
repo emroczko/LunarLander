@@ -127,9 +127,8 @@ public class Name extends JPanel{
         nick = enterName.getText();
         String defaultName = "Your nick...";
         if(nick.equals(defaultName))
-        {
             nick = "UNKNOWN";
-        }
+
         newWindow.layoutMaker(this);
         add(new IntroLevel(getWidth(),getHeight(), 1, PropertiesLoad.numberOfLives, 0, nick),newWindow.buttonsClickedBehaviour());
     }
