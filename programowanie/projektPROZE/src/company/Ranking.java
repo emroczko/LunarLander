@@ -28,17 +28,11 @@ public class Ranking extends JPanel{
     Color aqua = new Color (51, 134, 175);
     Color citron = new Color (223, 234, 24);
     String[] columnNames = {"NICK", "SCORE"};
-<<<<<<< HEAD
+
     RankingSaver rs = new RankingSaver();
     Object[][] data = rs.bestScores();
 
     JTable ranking = new JTable(data, columnNames);
-=======
-    String[][] scores = rankingArray.bestScores();
-
-
-    JTable ranking = new JTable(scores, columnNames);
->>>>>>> 4cb79a5c8940fee2bbfb9cbd49fcf77b8648f7d5
     LabelCustomizer customLabel = new LabelCustomizer(aqua, 40);
     ButtonCustomizer customButton = new ButtonCustomizer(true, citron, 32);
 

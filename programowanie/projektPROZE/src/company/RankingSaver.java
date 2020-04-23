@@ -39,11 +39,7 @@ public class RankingSaver {
             }
             max_ranking_points = new int[]{0, 0, 0, 0, 0};
             max_ranking_names = new String[]{"", "", "", "", ""};
-<<<<<<< HEAD
             for(int i=0; i<max_ranking_points.length; i++){
-=======
-            for(int i=0; i<this.max_ranking_points.length; i++){
->>>>>>> 4cb79a5c8940fee2bbfb9cbd49fcf77b8648f7d5
                 for(int j=0; j<points.size(); j++) {
                     if (i==0){
                         if(points.get(j)>this.max_ranking_points[i]){
@@ -73,15 +69,9 @@ public class RankingSaver {
         }
         catch(Exception e){e.printStackTrace();}
         String[][] arrStr = new String[5][2];
-<<<<<<< HEAD
         for (int i = 0; i < max_ranking_names.length; i++) {
             arrStr[i][0] = max_ranking_names[i];
             arrStr[i][1] = Integer.toString(max_ranking_points[i]);
-=======
-        for (int i = 0; i < this.max_ranking_names.length; i++) {
-            arrStr[i][0] = this.max_ranking_names[i];
-            arrStr[i][1] = Integer.toString(this.max_ranking_points[i]);
->>>>>>> 4cb79a5c8940fee2bbfb9cbd49fcf77b8648f7d5
         }
         return arrStr;
     }
