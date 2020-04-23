@@ -58,11 +58,18 @@ public class NewWindow extends JPanel{
         introLevel.revalidate();
         introLevel.setLayout(new GridBagLayout());
     }
-    public void layoutMakerRanking(Ranking ranking){
+    public void layoutMakerRanking(Ranking ranking) {
         ranking.removeAll();
         ranking.repaint();
         ranking.revalidate();
         ranking.setLayout(new GridBagLayout());
+    }
+
+    public void layoutMakerInstructions(Instructions instructions){
+            instructions.removeAll();
+            instructions.repaint();
+            instructions.revalidate();
+            instructions.setLayout(new GridBagLayout());
     }
 }
 

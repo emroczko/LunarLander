@@ -1,20 +1,18 @@
 package company;
 
 import javax.swing.*;
-import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Ranking extends JPanel{
-    RankingSaver rankingArray = new RankingSaver();
+public class Instructions extends JPanel{
     /** Obiekt klasy GridBagConstraintsMaker**/
     GridBagConstraintsMaker customGBC = new GridBagConstraintsMaker();
     /** Obiekt klasy NewWindow **/
     NewWindow newWindow = new NewWindow();
 
     JButton backButton = new JButton("Return to Main Menu");
-    JLabel lost =new JLabel("RANKING");
+    JLabel lost =new JLabel("INSTRUCTIONS");
 
 
     private ImageIcon MainMenuImage;
@@ -27,22 +25,12 @@ public class Ranking extends JPanel{
 
     Color aqua = new Color (51, 134, 175);
     Color citron = new Color (223, 234, 24);
-    String[] columnNames = {"NICK", "SCORE"};
-<<<<<<< HEAD
-    RankingSaver rs = new RankingSaver();
-    Object[][] data = rs.bestScores();
-
-    JTable ranking = new JTable(data, columnNames);
-=======
-    String[][] scores = rankingArray.bestScores();
 
 
-    JTable ranking = new JTable(scores, columnNames);
->>>>>>> 4cb79a5c8940fee2bbfb9cbd49fcf77b8648f7d5
     LabelCustomizer customLabel = new LabelCustomizer(aqua, 40);
     ButtonCustomizer customButton = new ButtonCustomizer(true, citron, 32);
 
-    public Ranking(int xSize, int ySize){
+    public Instructions(int xSize, int ySize){
         this.removeAll();
         repaint();
         revalidate();
@@ -58,14 +46,11 @@ public class Ranking extends JPanel{
         customButton.customizer(backButton);
         customLabel.customizer(lost);
 
-        ranking.setOpaque(true);
-        ranking.setFont(Fonts.getFont(20));
-        ranking.setBackground(Color.BLACK);
-        ranking.setForeground(Color.WHITE);
-        ranking.setGridColor(Color.BLACK);
+
+
         this.add(lost, customGBC.gbcCustomize(0,1,0,0,3,"none"));
         this.add(backButton, customGBC.gbcCustomize(0,3,0,0,3,"none"));
-        this.add(ranking, customGBC.gbcCustomize(0,2,0,0,3,"none"));
+
         customGBC.gbcCustomize(0,0,1,1,0,"none");
 
     }
@@ -96,8 +81,6 @@ public class Ranking extends JPanel{
     }
 
     private void cleanWindow(){
-        newWindow.layoutMakerRanking(this);
+        newWindow.layoutMakerInstructions(this);
     }
 }
-
-

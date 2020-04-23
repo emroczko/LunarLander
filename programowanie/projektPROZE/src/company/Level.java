@@ -138,10 +138,10 @@ public class Level extends JPanel{
         fuelBar.setBackground(aqua);
 
 
-
+        this.add(fuelBar, customGBC.gbcCustomize(2,0,0,0,1, "FIRST_LINE_END"));
         this.add(vx, customGBC.gbcCustomize(0,0,0,0,1, "FIRST_LINE_START"));
         this.add(vy, customGBC.gbcCustomize(0,1,0,0,1, "FIRST_LINE_START"));
-        this.add(fuelBar, customGBC.gbcCustomize(2,0,0,0,1, "FIRST_LINE_END"));
+
         this.add(fuelLabel, customGBC.gbcCustomize(1,0,1,0,1, "FIRST_LINE_END"));
 
         this.add(timeLabel, customGBC.gbcCustomize(0,2,0,1,1, "FIRST_LINE_START"));
@@ -550,12 +550,12 @@ public class Level extends JPanel{
             case "time": timeLabel.setText("Left time: " + time+ " sec");
             break;
         }
-        super.update(this.getGraphics());
+        //super.update(this.getGraphics());
     }
 
     public void BarUpdate(){
         fuelBar.setValue((int)fuelLevel);
-        super.update(this.getGraphics());
+        //super.update(this.getGraphics());
     }
     /**
      * Odpowiada za wywołanie metody obiektu klasy NewWindow służącej do usunięcia wszystkich elemntów z obecnego JPanelu
