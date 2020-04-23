@@ -16,8 +16,6 @@ public class Instructions extends JPanel{
     NewWindow newWindow = new NewWindow();
     /** Przycisk back **/
     JButton backButton = new JButton("Back");
-
-    JLabel lost =new JLabel("INSTRUCTIONS");
     /**Zmienna przechowująca obrazek okna*/
     private ImageIcon MainMenuImage;
     /** Zmienne przechowująca wielkość poprzedniego okna*/

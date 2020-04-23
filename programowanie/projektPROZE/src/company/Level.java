@@ -547,12 +547,12 @@ public class Level extends JPanel{
             case "time": timeLabel.setText("Left time: " + time+ " sec");
             break;
         }
-        //super.update(this.getGraphics());
+        super.update(this.getGraphics());
     }
 
     public void BarUpdate(){
         fuelBar.setValue((int)fuelLevel);
-        //super.update(this.getGraphics());
+        super.update(this.getGraphics());
     }
     /**
      * Odpowiada za wywołanie metody obiektu klasy NewWindow służącej do usunięcia wszystkich elemntów z obecnego JPanelu
