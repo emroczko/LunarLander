@@ -70,7 +70,7 @@ public class WonGame extends JPanel{
 
 
         customGBC.gbcCustomize(0,0,1,1,0,"none");
-
+        System.out.println("won");
     }
     private void save(){
         try {

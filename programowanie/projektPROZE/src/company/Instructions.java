@@ -47,13 +47,10 @@ public class Instructions extends JPanel{
         customLabel.customizer(lost);
 
 
-        RankingSaver rs = new RankingSaver();
-        try {
-            rs.loadLocalRanking();
-        }
-        catch(Exception e){e.printStackTrace();}
+
         this.add(lost, customGBC.gbcCustomize(0,1,0,0,3,"none"));
         this.add(backButton, customGBC.gbcCustomize(0,3,0,0,3,"none"));
+
         customGBC.gbcCustomize(0,0,1,1,0,"none");
 
     }

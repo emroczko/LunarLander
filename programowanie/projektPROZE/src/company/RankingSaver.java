@@ -14,8 +14,8 @@ public class RankingSaver {
 
     private static ArrayList<String> nick;
     private static ArrayList<Integer> points;
-    private int[] max_ranking_points;
-    private String[] max_ranking_names;
+    private static int[] max_ranking_points;
+    private static String[] max_ranking_names;
 
     public RankingSaver(){
         nick = new ArrayList<String>();
@@ -29,7 +29,7 @@ public class RankingSaver {
         writer.close();
     }
     /** */
-    static void loadLocalRanking() throws IOException{
+    private void loadLocalRanking() throws IOException{
         try{
             Scanner scanner = new Scanner(new File("Ranking.txt"));
             while(scanner.hasNextLine()){
@@ -37,24 +37,24 @@ public class RankingSaver {
                 nick.add(temp[0]);
                 points.add(Integer.parseInt(temp[1]));
             }
-            int[] max_ranking_points = {0, 0, 0, 0, 0};
-            String[] max_ranking_names = {"", "", "", ""};
-            for(int i=0; i<max_ranking_points.length-1; i++){
+            max_ranking_points = new int[]{0, 0, 0, 0, 0};
+            max_ranking_names = new String[]{"", "", "", "", ""};
+            for(int i=0; i<this.max_ranking_points.length; i++){
                 for(int j=0; j<points.size(); j++) {
                     if (i==0){
-                        if(points.get(j)>max_ranking_points[i]){
-                            max_ranking_points[i] = points.get(j);
-                            max_ranking_names[i] = nick.get(j);
-                            points.remove(j);
-                            nick.remove(j);
+                        if(points.get(j)>this.max_ranking_points[i]){
+                            this.max_ranking_points[i] = points.get(j);
+                            this.max_ranking_names[i] = nick.get(j);
+                            this.points.remove(j);
+                            this.nick.remove(j);
                         }
                     }
                     else{
-                        if(points.get(j)>max_ranking_points[i] && points.get(j)<=max_ranking_points[i-1]){
-                            max_ranking_points[i] = points.get(j);
-                            max_ranking_names[i] = nick.get(j);
-                            points.remove(j);
-                            nick.remove(j);
+                        if(this.points.get(j)>this.max_ranking_points[i] && this.points.get(j)<=this.max_ranking_points[i-1]){
+                            this.max_ranking_points[i] = points.get(j);
+                            this.max_ranking_names[i] = nick.get(j);
+                            this.points.remove(j);
+                            this.nick.remove(j);
                         }
                     }
                 }
@@ -63,17 +63,16 @@ public class RankingSaver {
         }
         catch(Exception e){e.printStackTrace();}
     }
-    private String[][] bestScores(String nick, String points){
+    public String[][] bestScores(){
         try{
             loadLocalRanking();
         }
         catch(Exception e){e.printStackTrace();}
         String[][] arrStr = new String[5][2];
-        for (int i = 0; i < arrStr.length; i++) {
-            arrStr[i][0] = max_ranking_names[i];
-            arrStr[i][i] = Integer.toString(max_ranking_points[i]);
+        for (int i = 0; i < this.max_ranking_names.length; i++) {
+            arrStr[i][0] = this.max_ranking_names[i];
+            arrStr[i][1] = Integer.toString(this.max_ranking_points[i]);
         }
         return arrStr;
-
     }
 }

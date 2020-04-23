@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Ranking extends JPanel{
-
+    RankingSaver rankingArray = new RankingSaver();
     /** Obiekt klasy GridBagConstraintsMaker**/
     GridBagConstraintsMaker customGBC = new GridBagConstraintsMaker();
     /** Obiekt klasy NewWindow **/
@@ -28,15 +28,10 @@ public class Ranking extends JPanel{
     Color aqua = new Color (51, 134, 175);
     Color citron = new Color (223, 234, 24);
     String[] columnNames = {"NICK", "SCORE"};
-    Object[][] data = {
-            {"ERYK", "120"},
-            {"JULKA", "200"},
-            {"",""},
-            {"",""},
-            {"",""},
-    };
+    String[][] scores = rankingArray.bestScores();
 
-    JTable ranking = new JTable(data, columnNames);
+
+    JTable ranking = new JTable(scores, columnNames);
     LabelCustomizer customLabel = new LabelCustomizer(aqua, 40);
     ButtonCustomizer customButton = new ButtonCustomizer(true, citron, 32);
 
