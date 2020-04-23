@@ -42,7 +42,7 @@ public class Instructions extends JPanel{
 
         backButton.addActionListener(returnToMainMenuButtonListener());
         customButton.customizer(backButton);
-        this.add(backButton, customGBC.gbcCustomize(0,0,1,1,0,"LAST_LINE_END"));
+        this.add(backButton, customGBC.gbcCustomize(0,0,1,1,0,"SOUTHEAST"));
     }
 
     /**
