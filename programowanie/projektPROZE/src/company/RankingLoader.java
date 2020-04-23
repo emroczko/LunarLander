@@ -10,17 +10,19 @@ import java.util.Scanner;
 
 public class RankingLoader {
 
+    /** Lista przechowująca nicki graczy z pliku Ranking.txt*/
     private static ArrayList<String> nick;
+    /**Lista przechowująca punkty graczy z pliku Ranking.txt*/
     private static ArrayList<Integer> points;
+    /** Tablica z 5 najlepszymi wynikami*/
     private static int[] max_ranking_points;
+    /** Tablica z 5 nickami graczy z najlepszymi wynikami*/
     private static String[] max_ranking_names;
-
+    /**konstruktor klasy inicjujacy zmienne nick i points*/
     public RankingLoader(){
         nick = new ArrayList<>();
         points = new ArrayList<>();
     }
-
-
     /**
      * Wczytuje wszystkie wyniki z pliku "Ranking.txt" i wybiera 5 najlepszych
      */
