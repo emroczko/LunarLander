@@ -74,6 +74,7 @@ public class PropertiesLoad {
             xLanding = Arrays.stream(mapProps.getProperty("xlanding"+levelnumber).split("-")).mapToInt(Integer::parseInt).toArray();
             yLanding = Arrays.stream(mapProps.getProperty("ylanding"+levelnumber).split("-")).mapToInt(Integer::parseInt).toArray();
             mapGravity = Float.parseFloat(mapProps.getProperty("gravity"+levelnumber));
+            propertiesFile_maps.close();
         }
 
 

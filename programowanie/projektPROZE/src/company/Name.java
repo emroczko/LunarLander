@@ -110,7 +110,7 @@ public class Name extends JPanel{
             public void actionPerformed(ActionEvent e) {
                 nick = enterName.getText();
                 cleanWindow();
-                add(new IntroLevel(getWidth(),getHeight(), 1, PropertiesLoad.numberOfLives, 0),newWindow.buttonsClickedBehaviour());
+                add(new IntroLevel(getWidth(),getHeight(), 1, PropertiesLoad.numberOfLives, 0, nick),newWindow.buttonsClickedBehaviour());
             }
         };
         return actionListener;

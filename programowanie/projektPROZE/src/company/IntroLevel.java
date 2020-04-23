@@ -19,9 +19,10 @@ public class IntroLevel extends JPanel{
     /**
      * Ilość punktów
      **/
-    private float points;
+    private int points;
     private int level;
     private int lives;
+    private String nick;
     JLabel levelLabel = new JLabel();
     JLabel spaceLabel = new JLabel("Press space to begin...");
     /**
@@ -47,7 +48,7 @@ public class IntroLevel extends JPanel{
     /** Obiekt klasy NewWindow **/
     NewWindow newWindow = new NewWindow();
 
-    public IntroLevel(int xSize, int ySize, int levelNumber, int livesNumber, float previousPoints) {
+    public IntroLevel(int xSize, int ySize, int levelNumber, int livesNumber, int previousPoints, String nickName) {
 
         this.removeAll();
         repaint();
@@ -57,6 +58,7 @@ public class IntroLevel extends JPanel{
         setPreferredSize(new Dimension(a,b));
         this.setLayout(new GridBagLayout());
 
+        nick = nickName;
         points = previousPoints;
         level = levelNumber;
         lives = livesNumber;
@@ -128,7 +130,7 @@ public class IntroLevel extends JPanel{
     }
     private void startLevel(){
         cleanWindow();
-        add(new Level(getWidth(),getHeight(), level, lives, points),newWindow.buttonsClickedBehaviour());
+        add(new Level(getWidth(),getHeight(), level, lives, points, nick),newWindow.buttonsClickedBehaviour());
     }
     private void cleanWindow(){
         newWindow.layoutMakerIntroLevel(this);

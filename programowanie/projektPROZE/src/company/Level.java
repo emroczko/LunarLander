@@ -44,9 +44,10 @@ public class Level extends JPanel{
     private int time = 60;
     private int asteroid_counter;
     protected float fuelLevel;
+    private String nick;
     private ArrayList<Asteroid> asteroids;
     /** Ilość punktów**/
-    private float points;
+    private int points;
     JLabel vx = new JLabel("H. Speed: 0");
     JLabel vy = new JLabel("V. Speed: 0");
     JLabel leftLandersLabel = new JLabel();
@@ -70,11 +71,12 @@ public class Level extends JPanel{
     ScheduledExecutorService boomExecutor = Executors.newScheduledThreadPool(1);
 
 
-    public Level(int xSize, int ySize, int levelNumber, int Lives, float previousPoints) {
+    public Level(int xSize, int ySize, int levelNumber, int Lives, int previousPoints, String nickName) {
         this.removeAll();
         repaint();
         revalidate();
 
+        nick = nickName;
         levelNum = levelNumber;
         leftLives = Lives;
         points = previousPoints;
@@ -402,9 +404,9 @@ public class Level extends JPanel{
         if (lander.velx < 7 && lander.vely < 7) {
             countPoints();
             if (levelNum != PropertiesLoad.numberOfLevels) {
-                add(new WonLevel(getWidth(), getHeight(), levelNum, leftLives, points), buttonsClickedBehaviour());
+                add(new WonLevel(getWidth(), getHeight(), levelNum, leftLives, points, nick), buttonsClickedBehaviour());
             } else {
-                add(new WonGame(getWidth(), getHeight(), points), buttonsClickedBehaviour());
+                add(new WonGame(getWidth(), getHeight(), nick, points), buttonsClickedBehaviour());
             }
         } else {
             boom();
@@ -416,10 +418,10 @@ public class Level extends JPanel{
     private void wreckedShip(){
         if(leftLives == 0) {
             countPoints();
-            add(new LostGame(getWidth(), getHeight(), points), buttonsClickedBehaviour());
+            add(new LostGame(getWidth(), getHeight(), points, nick), buttonsClickedBehaviour());
         }
         else{
-            add(new Level(getWidth(), getHeight(), levelNum, leftLives - 1, points), buttonsClickedBehaviour());
+            add(new Level(getWidth(), getHeight(), levelNum, leftLives - 1, points, nick), buttonsClickedBehaviour());
         }
     }
     /**
@@ -437,7 +439,7 @@ public class Level extends JPanel{
      * Odpowiada za zliczanie punktów
      */
     private void countPoints(){
-        points = (10 * fuelLevel) + (10 * time);
+        points = (10 * (int)fuelLevel) + (10 * time);
     }
     /**
      * Aplikuje zmiany wykonane przez gracza oraz odświeża okno gry

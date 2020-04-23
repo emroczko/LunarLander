@@ -15,7 +15,7 @@ public class WonLevel extends JPanel {
     private int a, b;
     private int wonLevelNumber;
     private int lives;
-    private float points;
+    private int points;
     /** Kolor niebieski używany w oknie*/
     Color aqua = new Color (51, 134, 175);
     /** Kolor żółty używany w oknie*/
@@ -32,13 +32,14 @@ public class WonLevel extends JPanel {
     JLabel wonLabel =new JLabel("GOOD JOB!");
 
 
-    public WonLevel(int xSize, int ySize, int wonLevel, int leftLives, float earnedPoints){
+    public WonLevel(int xSize, int ySize, int wonLevel, int leftLives, int earnedPoints, String nickName){
         this.removeAll();
         repaint();
         revalidate();
         wonLevelNumber = wonLevel;
         lives = leftLives;
         points = earnedPoints;
+        nick = nickName;
         a = xSize;
         b = ySize;
         setPreferredSize(new Dimension(a,b));
@@ -80,7 +81,7 @@ public class WonLevel extends JPanel {
         ActionListener actionListener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 cleanWindow();
-                add(new IntroLevel(getWidth(),getHeight(), wonLevelNumber+1, lives, points),newWindow.buttonsClickedBehaviour());
+                add(new IntroLevel(getWidth(),getHeight(), wonLevelNumber+1, lives, points, nick),newWindow.buttonsClickedBehaviour());
             }
         };
         return actionListener;

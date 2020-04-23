@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.rmi.server.ExportException;
 
 public class WonGame extends JPanel{
 
@@ -11,6 +13,8 @@ public class WonGame extends JPanel{
     private ImageIcon MainMenuImage;
     /** Zmienna przechowująca nick gracza*/
     private String nick;
+    /** Zmienna przechowująca nick gracza*/
+    private int points;
     /** Zmienne przechowująca wielkość poprzedniego okna*/
     private int a, b;
     /** Kolor niebieski używany w oknie*/
@@ -23,11 +27,13 @@ public class WonGame extends JPanel{
     /** Obiekt klasy NewWindow **/
     NewWindow newWindow = new NewWindow();
 
+    JLabel pointsLabel = new JLabel();
+
     LabelCustomizer customLabel = new LabelCustomizer(aqua, 40);
     ButtonCustomizer customButton = new ButtonCustomizer(true, citron, 32);
 
 
-    public WonGame(int xSize, int ySize, float earnedPoints){
+    public WonGame(int xSize, int ySize, String nickName,int earnedPoints) {
         this.removeAll();
         repaint();
         revalidate();
@@ -37,11 +43,14 @@ public class WonGame extends JPanel{
 
         initializeVariables();
         this.setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
 
+
+        points = earnedPoints;
+        nick = nickName;
+        save();
         JButton startButton = new JButton("Play again!");
         JButton backButton = new JButton("Return to Main Menu");
-        JLabel lost =new JLabel("YOU WON!!!");
+        JLabel lost =new JLabel("YOU WON " + nick + "!!!");
 
         startButton.addActionListener(continueButtonListener());
         backButton.addActionListener(returnToMainMenuButtonListener());
@@ -50,13 +59,24 @@ public class WonGame extends JPanel{
         customButton.customizer(backButton);
 
         customLabel.customizer(lost);
+        customLabel.customizer(pointsLabel);
+        pointsLabel.setText("Your score is: "+ earnedPoints);
 
         this.add(lost, customGBC.gbcCustomize(0,1 ,0,0,3,"none"));
         this.add(startButton, customGBC.gbcCustomize(0,3 ,0,0,3,"none"));
         this.add(backButton, customGBC.gbcCustomize(0,4 ,0,0,3,"none"));
+        this.add(pointsLabel, customGBC.gbcCustomize(0,2 ,0,0,3,"none"));
 
         customGBC.gbcCustomize(0,0,1,1,0,"none");
 
+    }
+    private void save(){
+        try {
+            RankingSaver.saveToFile(nick, points);
+        }
+        catch(Exception E){
+            E.printStackTrace();
+        }
     }
     /** metoda inicjalizująca obrazek tła za pomocą metody obiektu ImageFactory*/
     private void initializeVariables() {
