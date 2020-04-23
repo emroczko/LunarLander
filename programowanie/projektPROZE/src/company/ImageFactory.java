@@ -6,8 +6,6 @@ import javax.swing.*;
 /**
  * Klasa odpowiedzialna za utworzenie obiektów ImageIcon z danych ścieżek
  */
-
-
 public class ImageFactory {
 
     /**

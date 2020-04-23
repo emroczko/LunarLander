@@ -560,8 +560,6 @@ public class Level extends JPanel{
     private void cleanWindow(){
         newWindow.layoutMakerLevel(this);
     }
-
-
 }
 
 

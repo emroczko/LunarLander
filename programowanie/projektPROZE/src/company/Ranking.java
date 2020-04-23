@@ -87,7 +87,7 @@ public class Ranking extends JPanel{
     }
 
     /**
-     * Odświeża okno
+     * Odpowiada za wywołanie metody obiektu klasy NewWindow służącej do usunięcia wszystkich elemntów z obecnego JPanelu
      */
     private void cleanWindow(){
         newWindow.layoutMakerRanking(this);
