@@ -31,7 +31,7 @@ public class Menu extends JPanel{
     /** Przycisk Instructions **/
     JButton instructionsButton = new JButton("Instructions");
 
-
+    /**konstruktor klasy*/
     public Menu() {
         this.removeAll();
         initializeLayout();

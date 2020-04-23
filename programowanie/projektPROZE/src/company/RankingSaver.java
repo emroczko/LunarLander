@@ -7,7 +7,6 @@ import java.io.IOException;
 /**
  * Klasa odpowiedzialna za zapis wyniku gracza do pliku
  */
-
 public class RankingSaver {
     /**
      * Zapisuje podane wartosci nick i points do pliku "Ranking.txt" gdzie znajdują sie wszystkie wyniki graczy

@@ -7,7 +7,6 @@ import java.util.Scanner;
 /**
  * Klasa odpowiedzialna za wczytywanie najlepszych wyników
  */
-
 public class RankingLoader {
 
     /** Lista przechowująca nicki graczy z pliku Ranking.txt*/
@@ -18,7 +17,6 @@ public class RankingLoader {
     private static int[] max_ranking_points;
     /** Tablica z 5 nickami graczy z najlepszymi wynikami*/
     private static String[] max_ranking_names;
-
 
     /**
      * konstruktor klasy inicjujacy zmienne nick i points
