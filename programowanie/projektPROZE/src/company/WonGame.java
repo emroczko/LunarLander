@@ -47,7 +47,7 @@ public class WonGame extends JPanel{
 
         points = earnedPoints;
         nick = nickName;
-        save();
+
         JButton startButton = new JButton("Play again!");
         JButton backButton = new JButton("Return to Main Menu");
         JLabel lost =new JLabel("YOU WON " + nick + "!!!");
@@ -66,14 +66,17 @@ public class WonGame extends JPanel{
         this.add(lost, customGBC.gbcCustomize(0,1 ,0,0,3,"none"));
         this.add(pointsLabel, customGBC.gbcCustomize(0,2 ,0,0,3,"none"));
         this.add(startButton, customGBC.gbcCustomize(0,3 ,0,0,3,"none"));
-
+        System.out.println("aaaa konstruktor");
+        save();
 
 
         customGBC.gbcCustomize(0,0,1,1,0,"none");
 
     }
     private void save(){
+
         try {
+
             RankingSaver.saveToFile(nick, points);
         }
         catch(Exception E){
