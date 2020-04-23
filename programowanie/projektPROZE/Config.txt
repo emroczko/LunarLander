@@ -5,7 +5,7 @@ enginePowerVx=1
 enginePowerVy=1.5
 fuelAmount=100
 maxPointsAmount=400
-numberOfLives=3
+numberOfLives=2
 numberOfLevels=8
 bonusPerSecond=-5;
 
