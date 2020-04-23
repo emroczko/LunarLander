@@ -10,6 +10,8 @@ import java.awt.event.ActionListener;
  */
 
 public class Menu extends JPanel{
+
+
     /** Zmienna przechowująca obrazek tła*/
     private ImageIcon MainMenuImage;
     /** Kolor niebieski używany w oknie*/
@@ -25,7 +27,7 @@ public class Menu extends JPanel{
     JButton startButton = new JButton("Start!");
     JButton rankingButton = new JButton("Best Scores");
     JButton exitButton = new JButton("Exit");
-
+    boolean close;
 
     public Menu() {
         this.removeAll();
@@ -45,6 +47,7 @@ public class Menu extends JPanel{
         this.add(startButton, customGBC.gbcCustomize(0,1,0,0,0,"SOUTH"));
         this.add(rankingButton, customGBC.gbcCustomize(0,2,0,0,0, "SOUTH"));
         this.add(exitButton, customGBC.gbcCustomize(0,3,0,0,0, "SOUTH"));
+
 
     }
     /** metoda inicjalizująca obrazek tła za pomocą metody obiektu ImageFactory*/
@@ -71,7 +74,9 @@ public class Menu extends JPanel{
     private ActionListener startButtonListener() {
         ActionListener actionListener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                //closer.removeComponent(this);
                 cleanWindow();
+
                 add(new Name(getWidth(),getHeight()), newWindow.buttonsClickedBehaviour());
             }
         };
@@ -82,10 +87,13 @@ public class Menu extends JPanel{
      * Odpowiada za przypisanie akcji przyciskowi BEST SCORES
      */
     private ActionListener rankingButtonListener() {
+
         ActionListener actionListener = new ActionListener() {
+
             public void actionPerformed(ActionEvent e) {
+
                 cleanWindow();
-                add(new Ranking(getWidth(),getHeight()), newWindow.buttonsClickedBehaviour());
+               add(new Ranking(getWidth(),getHeight()), newWindow.buttonsClickedBehaviour());
             }
         };
 
@@ -95,6 +103,7 @@ public class Menu extends JPanel{
      * Odpowiada za przypisanie akcji przyciskowi EXIT
      */
     private ActionListener exitButtonListener() {
+
         ActionListener actionListener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
@@ -109,5 +118,6 @@ public class Menu extends JPanel{
     private void cleanWindow(){
         newWindow.layoutMakerMenu(this);
     }
+
 
 }

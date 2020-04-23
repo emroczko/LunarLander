@@ -8,6 +8,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 
+
+
 /**
  * Klasa odpowiedzialna za obsługę zdarzeń z graficznego interfejsu użytkownika, tutaj za pobranie nicku gracza i rozpoczęcie gry
  */
@@ -134,4 +136,7 @@ public class Name extends JPanel{
     private void cleanWindow(){
         newWindow.layoutMakerName(this);
     }
+
+
 }
+
