@@ -16,7 +16,7 @@ public class LostGame extends JPanel {
     private String nick;
     /** Zmienne przechowująca wielkość poprzedniego okna*/
     private int a, b;
-    private float points;
+    private int points;
 
     Color aqua = new Color (51, 134, 175);
     Color citron = new Color (223, 234, 24);
@@ -48,11 +48,7 @@ public class LostGame extends JPanel {
         initializeVariables();
         this.setLayout(new GridBagLayout());
 
-        try {
-            RankingSaver.saveToFile(nick, earnedPoints);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        save();
 
         startButton.addActionListener(playAgainButtonListener());
         backButton.addActionListener(returnToMainMenuButtonListener());
@@ -73,6 +69,16 @@ public class LostGame extends JPanel {
 
 
         }
+
+    private void save(){
+        try {
+            RankingSaver.saveToFile(nick, points);
+        }
+        catch(Exception E){
+            E.printStackTrace();
+        }
+    }
+
         /** metoda inicjalizująca obrazek tła za pomocą metody obiektu ImageFactory*/
         private void initializeVariables() {
             this.MainMenuImage = ImageFactory.createImage(Image.MainMenu);

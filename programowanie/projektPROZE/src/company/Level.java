@@ -395,11 +395,10 @@ public class Level extends JPanel{
         if (lander.velx < 7 && lander.vely < 7) {
             countPoints();
             if (levelNum != PropertiesLoad.numberOfLevels) {
-                countPoints();
                 cleanWindow();
-                add(new WonLevel(getWidth(), getHeight(), levelNum, leftLives, points, nick), newWindow.buttonsClickedBehaviour());
+                //add(new WonLevel(getWidth(), getHeight(), levelNum, leftLives, points, nick), newWindow.buttonsClickedBehaviour());
+                add(new IntroLevel(getWidth(), getHeight(), levelNum+1, leftLives, points, nick), newWindow.buttonsClickedBehaviour());
             } else {
-                countPoints();
                 cleanWindow();
                 add(new WonGame(getWidth(), getHeight(), nick, points), newWindow.buttonsClickedBehaviour());
             }
