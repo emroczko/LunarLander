@@ -14,9 +14,7 @@ public class Instructions extends JPanel{
     JButton backButton = new JButton("Back");
     JLabel lost =new JLabel("INSTRUCTIONS");
 
-
     private ImageIcon MainMenuImage;
-
 
     /** Zmienna przechowująca nick gracza*/
     private String nick;

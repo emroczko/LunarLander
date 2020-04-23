@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 
 /**
- * Klasa odpowiedzialna za rysowanie poziomu ziemi oraz statku gracza
+ * Klasa odpowiedzialna za rysowanie poziomu ziemi, statku gracza i asteroid oraz obsługe zdarzeń w czasie gry
  */
 public class Level extends JPanel{
 

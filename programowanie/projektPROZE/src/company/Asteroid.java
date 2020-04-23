@@ -62,6 +62,9 @@ public class Asteroid extends Sprite {
         this.level = lev;
     }
 
+    /**
+     * Nadpisuje metodę klasy Sprite. Odpowiada za poruszanie sie Asteroidy
+     */
     @Override
     public void move(){
         if (this.direction == 0){

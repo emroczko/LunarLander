@@ -39,6 +39,9 @@ public class Lander extends Sprite {
         setImage(imageIcon.getImage());
     }
 
+    /**
+     * Nadpisuje metodę klasy sprite. Odpowiada za zmianę połozenia statku
+     */
     @Override
     public void move() {
         x += velx;

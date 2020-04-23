@@ -5,6 +5,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Klasa reprezentująca okno rankingu
+ */
 public class Ranking extends JPanel{
     /** Obiekt klasy GridBagConstraintsMaker**/
     GridBagConstraintsMaker customGBC = new GridBagConstraintsMaker();
