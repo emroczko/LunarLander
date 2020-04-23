@@ -393,7 +393,6 @@ public class Level extends JPanel{
             countPoints();
             if (levelNum != PropertiesLoad.numberOfLevels) {
                 cleanWindow();
-                //add(new WonLevel(getWidth(), getHeight(), levelNum, leftLives, points, nick), newWindow.buttonsClickedBehaviour());
                 add(new IntroLevel(getWidth(), getHeight(), levelNum+1, leftLives, points, nick), newWindow.buttonsClickedBehaviour());
             } else {
                 cleanWindow();
@@ -409,11 +408,9 @@ public class Level extends JPanel{
     private void wreckedShip(){
         if(leftLives == 0) {
             countPoints();
-            //cleanWindow();
             add(new LostGame(getWidth(), getHeight(), points, nick), buttonsClickedBehaviour());
         }
         else{
-            //cleanWindow();
             add(new Level(getWidth(), getHeight(), levelNum, leftLives - 1, points, nick, this.backgroundImage), buttonsClickedBehaviour());
         }
     }

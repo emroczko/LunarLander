@@ -102,7 +102,6 @@ public class Lander extends Sprite {
         velx += PropertiesLoad.enginePowerVx;
         level.fuelLevel -= 2.5;
         level.BarUpdate();
-        //level.labelUpdate("fuel");
         level.noFuel();
     }
 }
