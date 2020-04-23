@@ -8,10 +8,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 
-
-
 /**
- * Klasa odpowiedzialna za obsługę zdarzeń z graficznego interfejsu użytkownika, tutaj za pobranie nicku gracza i rozpoczęcie gry
+ * Klasa będąca oknem, gdzie gracz wpisuje swój nick i rozpoczyna grę
  */
 
 public class Name extends JPanel{
@@ -42,7 +40,11 @@ public class Name extends JPanel{
     /** Pole tekstowe do wpisania nicku gracza **/
     JTextField enterName = new JTextField("Your nick...");
 
-
+    /**
+     * Konstruktor klasy dodający przyciski oraz ustawiający poczatkowy rozmiar okna
+     * @param xSize - szerokośc poprzedniego okna
+     * @param ySize - wysokośc poprzedniego okna
+     */
     public Name(int xSize, int ySize){
         this.removeAll();
         repaint();
@@ -90,7 +92,6 @@ public class Name extends JPanel{
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(MainMenuImage.getImage(), 0, 0, this.getWidth(), this.getHeight(), null);
-
     }
 
     /**

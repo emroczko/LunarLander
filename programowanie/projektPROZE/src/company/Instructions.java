@@ -20,7 +20,7 @@ public class Instructions extends JPanel{
     private ImageIcon MainMenuImage;
     /** Zmienne przechowująca wielkość poprzedniego okna*/
     private int a, b;
-    /** Kolor czcionki używanej w oknie*/
+    /** Kolor (żółty) czcionki używanej w oknie*/
     Color citron = new Color (223, 234, 24);
     /** Obiekt klasy ButtonCustomizer*/
     ButtonCustomizer customButton = new ButtonCustomizer(true, citron, 32);

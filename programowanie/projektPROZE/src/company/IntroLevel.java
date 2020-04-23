@@ -29,7 +29,7 @@ public class IntroLevel extends JPanel{
     JLabel levelLabel = new JLabel();
     /**Napis instruujący jak zacząć grę**/
     JLabel spaceLabel = new JLabel("Press space to begin...");
-    /**Kolor niebieski używany w oknie**/
+    /** Kolor (niebieski) czcionki używanej w oknie*/
     Color aqua = new Color(51, 134, 175);
     /** Obiekt klasy LabelCustomizer **/
     LabelCustomizer customLabel = new LabelCustomizer(aqua, 54);

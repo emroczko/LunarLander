@@ -13,26 +13,36 @@ public class Ranking extends JPanel{
     GridBagConstraintsMaker customGBC = new GridBagConstraintsMaker();
     /** Obiekt klasy NewWindow **/
     NewWindow newWindow = new NewWindow();
+    /** Przycisk Return to Main Menu**/
     JButton backButton = new JButton("Return to Main Menu");
+    /** Napis Ranking**/
     JLabel lost =new JLabel("RANKING");
     /** Zmienna przechowująca obrazek w tle okna*/
     private ImageIcon MainMenuImage;
-    /** Zmienna przechowująca nick gracza*/
-    private String nick;
     /** Zmienne przechowująca wielkość poprzedniego okna*/
     private int a, b;
-
+    /** Kolor (niebieski) czcionki używanej w oknie*/
     Color aqua = new Color (51, 134, 175);
+    /** Kolor (żółty) czcionki używanej w oknie*/
     Color citron = new Color (223, 234, 24);
+    /** Tablica nagłówków używanych w graficznej tablicy w oknie**/
     String[] columnNames = {"NICK", "SCORE"};
-
+    /** Obiekt klasy RankingServer**/
     RankingSaver rs = new RankingSaver();
+    /** Dwuwymiarowa tablica przechowująca nicki i punkty 5 najlepszych graczy**/
     Object[][] data = rs.bestScores();
-
+    /** Graficzna tablica używana w oknie**/
     JTable ranking = new JTable(data, columnNames);
+    /** Obiekt klasy LabelCustomizer **/
     LabelCustomizer customLabel = new LabelCustomizer(aqua, 40);
+    /** Obiekt klasy ButtonCustomizer **/
     ButtonCustomizer customButton = new ButtonCustomizer(true, citron, 32);
 
+    /**
+     * Konstruktor klasy dodający przyciski oraz ustawiający poczatkowy rozmiar okna
+     * @param xSize - szerokośc poprzedniego okna
+     * @param ySize - wysokośc poprzedniego okna
+     */
     public Ranking(int xSize, int ySize){
         this.removeAll();
         repaint();
@@ -48,12 +58,8 @@ public class Ranking extends JPanel{
 
         customButton.customizer(backButton);
         customLabel.customizer(lost);
+        tableCustomizer(ranking);
 
-        ranking.setOpaque(true);
-        ranking.setFont(Fonts.getFont(20));
-        ranking.setBackground(Color.BLACK);
-        ranking.setForeground(Color.WHITE);
-        ranking.setGridColor(Color.BLACK);
         this.add(lost, customGBC.gbcCustomize(0,1,0,0,3,"none"));
         this.add(backButton, customGBC.gbcCustomize(0,3,0,0,3,"none"));
         this.add(ranking, customGBC.gbcCustomize(0,2,0,0,3,"none"));
@@ -72,7 +78,16 @@ public class Ranking extends JPanel{
         super.paintComponent(g);
         g.drawImage(MainMenuImage.getImage(), 0, 0, this.getWidth(), this.getHeight(), null);
     }
-
+    /**
+     * Odpowiada za wygląd graficznej tabeli
+     */
+    private void tableCustomizer(JTable ranking){
+        ranking.setOpaque(true);
+        ranking.setFont(Fonts.getFont(20));
+        ranking.setBackground(Color.BLACK);
+        ranking.setForeground(Color.WHITE);
+        ranking.setGridColor(Color.BLACK);
+    }
     /**
      * Odpowiada za przypisanie akcji przyciskowi BACK
      */
