@@ -5,31 +5,31 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
+/**
+ * Klasa będąca oknem zawierającym instrukcje do gry
+ */
 public class Instructions extends JPanel{
     /** Obiekt klasy GridBagConstraintsMaker**/
     GridBagConstraintsMaker customGBC = new GridBagConstraintsMaker();
     /** Obiekt klasy NewWindow **/
     NewWindow newWindow = new NewWindow();
-
+    /** Przycisk back **/
     JButton backButton = new JButton("Back");
-    JLabel lost =new JLabel("INSTRUCTIONS");
-
-
+    /** Zmienna przechowująca obrazek tła*/
     private ImageIcon MainMenuImage;
-
-
-    /** Zmienna przechowująca nick gracza*/
-    private String nick;
     /** Zmienne przechowująca wielkość poprzedniego okna*/
     private int a, b;
-
-    Color aqua = new Color (51, 134, 175);
+    /** Kolor czcionki używanej w oknie*/
     Color citron = new Color (223, 234, 24);
-
-
-
+    /** Obiekt klasy ButtonCustomizer*/
     ButtonCustomizer customButton = new ButtonCustomizer(true, citron, 32);
 
+    /**
+     * Konstruktor klasy dodający przyciski oraz ustawiający poczatkowy rozmiar okna
+     * @param xSize - szerokośc poprzedniego okna
+     * @param ySize - wysokośc poprzedniego okna
+     */
     public Instructions(int xSize, int ySize){
         this.removeAll();
         repaint();
@@ -43,9 +43,6 @@ public class Instructions extends JPanel{
         backButton.addActionListener(returnToMainMenuButtonListener());
         customButton.customizer(backButton);
         this.add(backButton, customGBC.gbcCustomize(0,0,0,0,0,"LAST_LINE_END"));
-
-
-
     }
 
     /** metoda inicjalizująca obrazek tła za pomocą metody obiektu ImageFactory*/
@@ -73,6 +70,9 @@ public class Instructions extends JPanel{
         return actionListener;
     }
 
+    /**
+     * Odpowiada za wywołanie metody obiektu klasy NewWindow służącej do usunięcia wszystkich elemntów z obecnego JPanelu
+     */
     private void cleanWindow(){
         newWindow.layoutMakerInstructions(this);
     }
