@@ -69,19 +69,32 @@ public class Level extends JPanel{
     Color aqua = new Color (51, 134, 175);
     /** Kolor żółty używany w oknie*/
     Color citron = new Color (223, 234, 24);
-
+    /** Obiekt klasy ButtonCustomizer **/
     ButtonCustomizer customButtonTrue = new ButtonCustomizer(true, Color.lightGray, 40);
+    /** Obiekt klasy ButtonCustomizer **/
     ButtonCustomizer customButtonFalse = new ButtonCustomizer(false, Color.BLUE, 40);
+    /** Obiekt klasy LabelCustomizer **/
     LabelCustomizer custom = new LabelCustomizer(Color.lightGray, 20);
     /** Obiekt klasy GridBagConstraintsMaker**/
     GridBagConstraintsMaker customGBC = new GridBagConstraintsMaker();
     /** Obiekt klasy NewWindow **/
     NewWindow newWindow = new NewWindow();
-
+    /** Obiekt klasy ScheduledExecutorService **/
     ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+    /** Obiekt klasy ScheduledExecutorService **/
     ScheduledExecutorService boomExecutor = Executors.newScheduledThreadPool(1);
 
-
+    /**
+     * Konstruktor klasy dodający przyciski, ustawiający poczatkowy rozmiar okna
+     * oraz przypisujący pobrane wartości do odpowiednich pól w klasie
+     * @param xSize - szerokość poprzedniego okna
+     * @param ySize - wysokość poprzedniego okna
+     * @param levelNumber - numer poziomu który ma się rozpocząć
+     * @param Lives - pozostała ilość żyć
+     * @param previousPoints - ilość zdobytych dotychczas punktów
+     * @param nickName - nick gracza
+     * @param background - tło okna
+     */
     public Level(int xSize, int ySize, int levelNumber, int Lives, int previousPoints, String nickName, ImageIcon background) {
         this.removeAll();
         repaint();
@@ -150,9 +163,7 @@ public class Level extends JPanel{
         this.add(fuelBar, customGBC.gbcCustomize(2,0,0,0,1, "FIRST_LINE_END"));
         this.add(vx, customGBC.gbcCustomize(0,0,0,0,1, "FIRST_LINE_START"));
         this.add(vy, customGBC.gbcCustomize(0,1,0,0,1, "FIRST_LINE_START"));
-
         this.add(fuelLabel, customGBC.gbcCustomize(1,0,1,0,1, "FIRST_LINE_END"));
-
         this.add(timeLabel, customGBC.gbcCustomize(0,2,0,1,1, "FIRST_LINE_START"));
         this.add(pauseButton, customGBC.gbcCustomize(2,2,0,0,1, "FIRST_LINE_END"));
         this.add(exitButton,customGBC.gbcCustomize(0,3,0,0,1, "LAST_LINE_START"));
@@ -248,7 +259,6 @@ public class Level extends JPanel{
         }
     }
 
-
     /**
      * Funkcja skalująca zadaną tablicę intów w zależności od rozmiarów okna
      * @param points tablica intów będąca reprezentacją punktów uzywanych w metodzie drawGround do rysowania powieżchni księżyca
@@ -270,7 +280,7 @@ public class Level extends JPanel{
     }
 
     /**
-     * metoda nadpisująca metodę paintComponent w celu przeskalowania obrazka w tle oraz rysowania obiektów z gry
+     * Metoda nadpisująca metodę paintComponent w celu przeskalowania obrazka w tle oraz rysowania obiektów z gry
      */
     @Override
     protected void paintComponent(Graphics g) {
@@ -294,8 +304,6 @@ public class Level extends JPanel{
             }
             Toolkit.getDefaultToolkit().sync();
         }
-
-
     }
 
     /**
@@ -346,11 +354,9 @@ public class Level extends JPanel{
     /**Wykrywa i obsługuje kolizję asteroid*/
     private void asteroidsCollision(Polygon landing, Polygon moon){
         for(int i = 0; i<this.asteroids.size();i++){
-
             if (lander.getRect().intersects(asteroids.get(i).getRect())){
                 boom();
             }
-
             if (moon.intersects(asteroids.get(i).getRect()) || landing.intersects(asteroids.get(i).getRect())){
                 asteroids.remove(i);
             }
@@ -358,11 +364,11 @@ public class Level extends JPanel{
                 break;
             }
             if (i+1<this.asteroids.size()){
-                    for(int j=i+1; j<this.asteroids.size(); j++) {
-                        if (asteroids.get(i).getRect().intersects(asteroids.get(j).getRect())) {
-                            asteroids.remove(i);
-                        }
+                for(int j=i+1; j<this.asteroids.size(); j++) {
+                    if (asteroids.get(i).getRect().intersects(asteroids.get(j).getRect())) {
+                        asteroids.remove(i);
                     }
+                }
             }
         }
     }
@@ -450,14 +456,18 @@ public class Level extends JPanel{
         this.repaint();
     }
 
-    /** Aktualizuje połozenie obiektów z gry*/
+    /**
+     * Aktualizuje połozenie obiektów z gry
+     */
     private void update(){
         this.lander.update();
         this.lander.setLevel(this);
         updateAsteroids();
     }
 
-    /** Aktualizuje położenie asteroid*/
+    /**
+     * Aktualizuje położenie asteroid
+     */
     private void updateAsteroids(){
         for (int i =0; i<asteroids.size(); i++){
             asteroids.get(i).update();
@@ -466,6 +476,7 @@ public class Level extends JPanel{
 
     /**
      * Odpowiada za przypisanie akcji przyciskowi || (pauza)
+     * @return actionListener- obiekt klasy ActionListener
      */
     private ActionListener pauseButtonListener(JButton continueButton, JButton exitButton, JButton pauseButton) {
         ActionListener actionListener = new ActionListener() {
@@ -481,6 +492,7 @@ public class Level extends JPanel{
 
     /**
      * Odpowiada za przypisanie akcji przyciskowi CONTINUE
+     * @return actionListener- obiekt klasy ActionListener
      */
     private ActionListener continueButtonListener(JButton continueButton, JButton exitButton, JButton pauseButton) {
         ActionListener actionListener = new ActionListener() {
@@ -496,6 +508,7 @@ public class Level extends JPanel{
 
     /**
      * Odpowiada za przypisanie akcji przyciskowi EXIT
+     * @return actionListener - obiekt klasy ActionListener
      */
     private ActionListener exitButtonListener() {
         ActionListener actionListener = new ActionListener() {
@@ -509,7 +522,8 @@ public class Level extends JPanel{
     }
 
     /**
-     * Odpowiada za wybranie odpowiedniej metody dla klikniętego klawisza
+     * Odpowiada za stworzenie obiektu Action i wybranie odpowiedniej metody dla klikniętego klawisza
+     * @return newAction - obiekt klasy Action
      */
     private Action action(String action){
         Action newAction = new AbstractAction() {
@@ -531,7 +545,9 @@ public class Level extends JPanel{
         return newAction;
     }
 
-    /***/
+    /** Odpowiada za wyczyszczenie i odświeżenie ekranu, wywoływana tylko w metodzie shipWrecked
+     *  @return gbc - obiekt klasy GridBagConstraints
+     */
     private GridBagConstraints buttonsClickedBehaviour(){
         removeAll();
         repaint();

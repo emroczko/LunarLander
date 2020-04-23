@@ -90,6 +90,7 @@ public class Ranking extends JPanel{
     }
     /**
      * Odpowiada za przypisanie akcji przyciskowi BACK
+     * @return actionListener - obiekt klasy ActionListener
      */
     private ActionListener returnToMainMenuButtonListener() {
         ActionListener actionListener = new ActionListener() {

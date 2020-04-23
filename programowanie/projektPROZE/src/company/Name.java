@@ -52,13 +52,8 @@ public class Name extends JPanel{
         a = xSize;
         b = ySize;
         setPreferredSize(new Dimension(a,b));
-
-
         initializeVariables();
         this.setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-
-
 
         startButton.addActionListener(startButtonListener(enterName));
         backButton.addActionListener(backButtonListener());
@@ -98,15 +93,14 @@ public class Name extends JPanel{
      * Odpowiada za kolor, czcionkę i wygląd pól tekstowych w oknie przed grą
      */
     private void textFieldCustomizer(JTextField textField, Color color){
-
         textField.setBackground(Color.black);
         textField.setFont(Fonts.getFont(24));
         textField.setForeground(color);
-
     }
 
     /**
      * Odpowiada za przypisanie akcji przyciskowi START
+     * @return actionListener - obiekt klasy ActionListener
      */
     private ActionListener startButtonListener(JTextField enterName) {
         ActionListener actionListener = new ActionListener() {
@@ -121,6 +115,7 @@ public class Name extends JPanel{
 
     /**
      * Odpowiada za przypisanie akcji przyciskowi BACK
+     * @return actionListener - obiekt klasy ActionListener
      */
     private ActionListener backButtonListener() {
         ActionListener actionListener = new ActionListener() {

@@ -105,6 +105,7 @@ public class WonGame extends JPanel{
 
     /**
      * Odpowiada za przypisanie akcji przyciskowi START
+     * @return actionListener - obiekt klasy ActionListener
      */
     private ActionListener continueButtonListener() {
         ActionListener actionListener = new ActionListener() {
@@ -118,6 +119,7 @@ public class WonGame extends JPanel{
 
     /**
      * Odpowiada za przypisanie akcji przyciskowi BACK
+     * @return actionListener - obiekt klasy ActionListener
      */
     private ActionListener returnToMainMenuButtonListener() {
         ActionListener actionListener = new ActionListener() {

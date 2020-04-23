@@ -20,7 +20,6 @@ public class RankingLoader {
         points = new ArrayList<>();
     }
 
-
     /**
      * Wczytuje wszystkie wyniki z pliku "Ranking.txt" i wybiera 5 najlepszych
      */

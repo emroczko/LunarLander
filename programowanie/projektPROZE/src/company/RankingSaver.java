@@ -4,6 +4,9 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * Klasa odpowiedzialna za zapis wyniku gracza do pliku
+ */
 
 public class RankingSaver {
     /**

@@ -108,6 +108,7 @@ public class LostGame extends JPanel {
 
         /**
          * Odpowiada za przypisanie akcji przyciskowi START
+         * @return actionListener - obiekt klasy ActionListener
          */
         private ActionListener playAgainButtonListener() {
             ActionListener actionListener = new ActionListener() {
@@ -121,6 +122,7 @@ public class LostGame extends JPanel {
 
         /**
          * Odpowiada za przypisanie akcji przyciskowi BACK
+         * @return actionListener - obiekt klasy ActionListener
          */
         private ActionListener returnToMainMenuButtonListener() {
             ActionListener actionListener = new ActionListener() {

@@ -74,6 +74,7 @@ public class Menu extends JPanel{
 
     /**
      * Odpowiada za przypisanie akcji przyciskowi START
+     * @return actionListener - obiekt klasy ActionListener
      */
     private ActionListener startButtonListener() {
         ActionListener actionListener = new ActionListener() {
@@ -87,6 +88,7 @@ public class Menu extends JPanel{
 
     /**
      * Odpowiada za przypisanie akcji przyciskowi BEST SCORES
+     * @return actionListener - obiekt klasy ActionListener
      */
     private ActionListener rankingButtonListener() {
 
@@ -103,6 +105,7 @@ public class Menu extends JPanel{
     }
     /**
      * Odpowiada za przypisanie akcji przyciskowi BEST SCORES
+     * @return actionListener - obiekt klasy ActionListener
      */
     private ActionListener instructionsButtonListener() {
 
@@ -119,6 +122,7 @@ public class Menu extends JPanel{
     }
     /**
      * Odpowiada za przypisanie akcji przyciskowi EXIT
+     * @return actionListener - obiekt klasy ActionListener
      */
     private ActionListener exitButtonListener() {
 

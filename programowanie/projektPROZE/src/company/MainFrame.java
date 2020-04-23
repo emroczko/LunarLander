@@ -6,7 +6,9 @@ import javax.swing.*;
  * Klasa odpowiedzialna za utworzenie okna głównego i stworzenie w nim okna głównego menu
  */
 public class MainFrame extends JFrame {
-
+    /**
+     * Konstruktor klasy wywołujący metodę initalizeLayout
+     */
     public MainFrame() {
         initializeLayout();
     }
