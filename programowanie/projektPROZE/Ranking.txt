@@ -79,3 +79,4 @@ Your nick...=795
 Your nick...=795
 Your nick...=795
 Your nick...=640
+Your nick...=285

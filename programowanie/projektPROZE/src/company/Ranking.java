@@ -35,6 +35,7 @@ public class Ranking extends JPanel{
             {"",""},
             {"",""},
     };
+
     JTable ranking = new JTable(data, columnNames);
     LabelCustomizer customLabel = new LabelCustomizer(aqua, 40);
     ButtonCustomizer customButton = new ButtonCustomizer(true, citron, 32);
@@ -61,7 +62,11 @@ public class Ranking extends JPanel{
         ranking.setForeground(Color.WHITE);
         ranking.setGridColor(Color.BLACK);
 
-
+        RankingSaver rs = new RankingSaver();
+        try {
+            rs.loadLocalRanking();
+        }
+        catch(Exception e){e.printStackTrace();}
         this.add(lost, customGBC.gbcCustomize(0,1,0,0,3,"none"));
         this.add(backButton, customGBC.gbcCustomize(0,3,0,0,3,"none"));
         this.add(ranking, customGBC.gbcCustomize(0,2,0,0,3,"none"));
