@@ -16,17 +16,13 @@ public class Instructions extends JPanel{
     NewWindow newWindow = new NewWindow();
     /** Przycisk back **/
     JButton backButton = new JButton("Back");
-<<<<<<< HEAD
-    JLabel lost =new JLabel("INSTRUCTIONS");
 
+    JLabel lost =new JLabel("INSTRUCTIONS");
+    /**Zmienna przechowująca obrazek okna*/
     private ImageIcon MainMenuImage;
 
     /** Zmienna przechowująca nick gracza*/
     private String nick;
-=======
-    /** Zmienna przechowująca obrazek tła*/
-    private ImageIcon MainMenuImage;
->>>>>>> 260d3449e2d15d1e2da2ffc1099491198e65c93d
     /** Zmienne przechowująca wielkość poprzedniego okna*/
     private int a, b;
     /** Kolor czcionki używanej w oknie*/
