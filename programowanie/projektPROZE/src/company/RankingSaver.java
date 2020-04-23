@@ -1,12 +1,7 @@
 package company;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Properties;
 import java.util.Scanner;
 
 
@@ -22,13 +17,22 @@ public class RankingSaver {
         points = new ArrayList<Integer>();
     }
 
-    /***/
+    /**
+     * Zapisuje podane wartosci nick i points do pliku "Ranking.txt" gdzie znajdują sie wszystkie wyniki graczy
+     * @param nick = nick do zapisania
+     * @param points = punkty do zapisania
+     * @throws IOException
+     */
     static void saveToFile(String nick, int points) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter("Ranking.txt", true));
         writer.append(nick+"="+points+"\n");
         writer.close();
     }
-    /** */
+
+    /**
+     * Wczytuje wszystkie wyniki z pliku "Ranking.txt" i wybiera 5 najlepszych
+     * @throws IOException
+     */
     private void loadLocalRanking() throws IOException{
         try{
             Scanner scanner = new Scanner(new File("Ranking.txt"));
@@ -63,6 +67,11 @@ public class RankingSaver {
         }
         catch(Exception e){e.printStackTrace();}
     }
+
+    /**
+     * Tworzy tablicę 2 wymiarową wypełnioną wartościami wczytanymi przez funkcję loadLocalRanking
+     * @return zwraca tablice 2 wymiarową
+     */
     public String[][] bestScores(){
         try{
             loadLocalRanking();

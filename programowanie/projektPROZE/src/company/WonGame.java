@@ -71,7 +71,6 @@ public class WonGame extends JPanel{
         System.out.println("won");
     }
     private void save(){
-
         try {
 
             RankingSaver.saveToFile(nick, points);
