@@ -4,11 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.rmi.server.ExportException;
 
+/**
+ * Klasa będąca oknem które ukazuje się po wygraniu gry
+ */
 public class WonGame extends JPanel{
-
     /** Zmienna przechowująca obrazek tła*/
     private ImageIcon MainMenuImage;
     /** Zmienna przechowująca nick gracza*/
@@ -21,18 +21,31 @@ public class WonGame extends JPanel{
     Color aqua = new Color (51, 134, 175);
     /** Kolor żółty używany w oknie*/
     Color citron = new Color (223, 234, 24);
-
     /** Obiekt klasy GridBagConstraintsMaker**/
     GridBagConstraintsMaker customGBC = new GridBagConstraintsMaker();
     /** Obiekt klasy NewWindow **/
     NewWindow newWindow = new NewWindow();
-
+    /** Napis informujący o ilości zdobytych punktów **/
     JLabel pointsLabel = new JLabel();
-
+    /** Obiekt klasy LabelCustomizer **/
     LabelCustomizer customLabel = new LabelCustomizer(aqua, 40);
+    /** Obiekt klasy ButtonCustomizer **/
     ButtonCustomizer customButton = new ButtonCustomizer(true, citron, 32);
+    /** Przycisk Play Again **/
+    JButton startButton = new JButton("Play again!");
+    /** Przycisk Return to Main Menu **/
+    JButton backButton = new JButton("Return to Main Menu");
+    /** Napis informujący o wygranej gracza**/
+    JLabel wonLabel =new JLabel();
 
 
+    /**
+     * Konstruktor klasy dodający przyciski oraz ustawiający poczatkowy rozmiar okna
+     * @param xSize - szerokośc poprzedniego okna
+     * @param ySize - wysokośc poprzedniego okna
+     * @param nickName - nick gracza
+     * @param earnedPoints - ilość zdobytych punktów
+     */
     public WonGame(int xSize, int ySize, String nickName,int earnedPoints) {
         this.removeAll();
         repaint();
@@ -48,31 +61,30 @@ public class WonGame extends JPanel{
         points = earnedPoints;
         nick = nickName;
         save();
-        JButton startButton = new JButton("Play again!");
-        JButton backButton = new JButton("Return to Main Menu");
-        JLabel lost =new JLabel("YOU WON " + nick + "!!!");
 
+        wonLabel.setText("YOU WON " + nick + "!!!");
         startButton.addActionListener(continueButtonListener());
         backButton.addActionListener(returnToMainMenuButtonListener());
 
         customButton.customizer(startButton);
         customButton.customizer(backButton);
 
-        customLabel.customizer(lost);
+        customLabel.customizer(wonLabel);
         customLabel.customizer(pointsLabel);
         pointsLabel.setText("Your score is: "+ earnedPoints);
 
         this.add(backButton, customGBC.gbcCustomize(0,4 ,0,0,3,"none"));
-        this.add(lost, customGBC.gbcCustomize(0,1 ,0,0,3,"none"));
+        this.add(wonLabel, customGBC.gbcCustomize(0,1 ,0,0,3,"none"));
         this.add(pointsLabel, customGBC.gbcCustomize(0,2 ,0,0,3,"none"));
         this.add(startButton, customGBC.gbcCustomize(0,3 ,0,0,3,"none"));
-
         customGBC.gbcCustomize(0,0,1,1,0,"none");
-        System.out.println("won");
+
     }
+    /**
+     * Metoda próbująca zapisać nick oraz punkty gracza do pliku z pomoca metody klasy RankingServer
+     */
     private void save(){
         try {
-
             RankingSaver.saveToFile(nick, points);
         }
         catch(Exception E){
@@ -117,7 +129,9 @@ public class WonGame extends JPanel{
         return actionListener;
     }
 
-
+    /**
+     * Odpowiada za wywołanie metody obiektu klasy NewWindow służącej do usunięcia wszystkich elemntów z obecnego JPanelu
+     */
     private void cleanWindow(){
         newWindow.layoutMakerWonGame(this);
     }

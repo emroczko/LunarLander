@@ -28,7 +28,7 @@ public class Ranking extends JPanel{
     /** Tablica nagłówków używanych w graficznej tablicy w oknie**/
     String[] columnNames = {"NICK", "SCORE"};
     /** Obiekt klasy RankingServer**/
-    RankingSaver rs = new RankingSaver();
+    RankingLoader rs = new RankingLoader();
     /** Dwuwymiarowa tablica przechowująca nicki i punkty 5 najlepszych graczy**/
     Object[][] data = rs.bestScores();
     /** Graficzna tablica używana w oknie**/
