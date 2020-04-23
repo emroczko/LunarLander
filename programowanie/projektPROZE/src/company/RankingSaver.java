@@ -46,19 +46,19 @@ public class RankingSaver {
             for(int i=0; i<max_ranking_points.length; i++){
                 for(int j=0; j<points.size(); j++) {
                     if (i==0){
-                        if(points.get(j)>this.max_ranking_points[i]){
-                            this.max_ranking_points[i] = points.get(j);
-                            this.max_ranking_names[i] = nick.get(j);
-                            this.points.remove(j);
-                            this.nick.remove(j);
+                        if(points.get(j)>max_ranking_points[i]){
+                            max_ranking_points[i] = points.get(j);
+                            max_ranking_names[i] = nick.get(j);
+                            points.remove(j);
+                            nick.remove(j);
                         }
                     }
                     else{
-                        if(this.points.get(j)>this.max_ranking_points[i] && this.points.get(j)<=this.max_ranking_points[i-1]){
-                            this.max_ranking_points[i] = points.get(j);
-                            this.max_ranking_names[i] = nick.get(j);
-                            this.points.remove(j);
-                            this.nick.remove(j);
+                        if(points.get(j)>max_ranking_points[i] && points.get(j)<=max_ranking_points[i-1]){
+                            max_ranking_points[i] = points.get(j);
+                            max_ranking_names[i] = nick.get(j);
+                            points.remove(j);
+                            nick.remove(j);
                         }
                     }
                 }
