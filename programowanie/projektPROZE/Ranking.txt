@@ -1,6 +1,2 @@
-<<<<<<< HEAD
-Your nick...=630
-Your nick...=640
-=======
 Your nick...=550
->>>>>>> 010339c44729de1dd2e0256e50aacf228edffe8e
+
