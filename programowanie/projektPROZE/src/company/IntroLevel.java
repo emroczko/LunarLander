@@ -73,9 +73,6 @@ public class IntroLevel extends JPanel{
 
     }
 
-
-
-
     private void setBackground(int levelNumber) {
         switch (levelNumber) {
             case 1:
@@ -130,7 +127,7 @@ public class IntroLevel extends JPanel{
     }
     private void startLevel(){
         cleanWindow();
-        add(new Level(getWidth(),getHeight(), level, lives, points, nick),newWindow.buttonsClickedBehaviour());
+        add(new Level(getWidth(),getHeight(), level, lives, points, nick, this.backgroundImage),newWindow.buttonsClickedBehaviour());
     }
     private void cleanWindow(){
         newWindow.layoutMakerIntroLevel(this);
