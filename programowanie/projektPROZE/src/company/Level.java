@@ -154,15 +154,12 @@ public class Level extends JPanel{
     }
     /** Funkcja inicjująca zmienne klasy*/
     private void initializeVariables(int levelNumber){
-
         setFocusable(true);
         asteroid_counter = 0;
         this.lander = new Lander(this);
         this.lander.landerImageChange(Image.Lander);
         this.asteroids = new ArrayList<Asteroid>();
         this.fuelLevel = PropertiesLoad.fuelAmount;
-
-
         this.timer = new Timer(40, new GameLoop(this));
         this.timer.start();
         timeCounter(true);
@@ -177,7 +174,6 @@ public class Level extends JPanel{
         for(int i = 37; i<41; i++){
             keyBindings(this, i, "nothing");
         }
-
     }
     /** Funkcja wznawiająca grę*/
     private void resume(){
@@ -187,9 +183,8 @@ public class Level extends JPanel{
         keyBindings(this, 39, MOVE_RIGHT);
         keyBindings(this, 37, MOVE_LEFT);
         timeCounter(true);
-
     }
-    /**Funkcja odpowiedzialna za rysowanie obrazku reprezentującego gracza oraz jego hitboxa oraz skalowanie rozmiarów
+    /**Funkcja odpowiedzialna za rysowanie obrazku reprezentującego gracza oraz generowanie jego hitboxa i skalowanie rozmiarów
      * tych elementów poprzez mnożenie ich wielkości i położenia przez współczynnik skali będący stosunkiem obecnej wielkośi
      * okna do jego początkowej wielkości wczytywanej z pliku konfiguracyjnego
      */
@@ -200,7 +195,7 @@ public class Level extends JPanel{
     }
 
     /**
-     * Rysuje hitbox powirzchni księzyca i lądowiska oraz skaluje do rozmiarów okna
+     * Generuje hitbox powirzchni księzyca i lądowiska oraz skaluje do rozmiarów okna
      */
     private void drawGround(Graphics g){
         Polygon moon = new Polygon(scalePoints(PropertiesLoad.xPoints, 'x'), scalePoints(PropertiesLoad.yPoints, 'y'),
@@ -208,7 +203,7 @@ public class Level extends JPanel{
         Polygon landing = new Polygon(scalePoints(PropertiesLoad.xLanding, 'x'), scalePoints(PropertiesLoad.yLanding, 'y'), PropertiesLoad.xLanding.length);
         detectCollision(landing, moon);
     }
-
+    /**Rysuje asteroidy i skaluje je odpowiednio do rozmiarów okna*/
     private void drawAsteroid(Graphics g){
         for (int i =0; i<asteroids.size(); i++)
         {
@@ -218,6 +213,7 @@ public class Level extends JPanel{
         }
     }
 
+    /** Generuje asteroidy na podstawie zmiennych losowych*/
     private void addAsteroid(){
         Random rand = new Random();
         if (rand.nextInt(101)<7) {
@@ -338,7 +334,7 @@ public class Level extends JPanel{
         }
         asteroidsCollision(landing, moon);
     }
-
+    /**Wykrywa i obsługuje kolizję asteroid*/
     private void asteroidsCollision(Polygon landing, Polygon moon){
         for(int i = 0; i<this.asteroids.size();i++){
 
@@ -439,12 +435,13 @@ public class Level extends JPanel{
         this.update();
         this.repaint();
     }
-
+    /** Aktualizuje połozenie obiektów z gry*/
     private void update(){
         this.lander.update();
         this.lander.setLevel(this);
         updateAsteroids();
     }
+    /** Aktualizuje położenie asteroid*/
     private void updateAsteroids(){
         for (int i =0; i<asteroids.size(); i++){
             asteroids.get(i).update();
@@ -516,7 +513,7 @@ public class Level extends JPanel{
         };
         return newAction;
     }
-
+    /** */
     private GridBagConstraints buttonsClickedBehaviour(){
         removeAll();
         repaint();
