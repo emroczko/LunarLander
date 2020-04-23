@@ -1,6 +1,7 @@
 package company;
 
 import javax.swing.*;
+import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -91,6 +92,9 @@ public class Ranking extends JPanel{
         ranking.setBackground(Color.BLACK);
         ranking.setForeground(Color.WHITE);
         ranking.setGridColor(Color.BLACK);
+        TableColumn column = ranking.getColumnModel().getColumn(0);
+        column.setPreferredWidth(150);
+
     }
     /**
      * Odpowiada za przypisanie akcji przyciskowi BACK

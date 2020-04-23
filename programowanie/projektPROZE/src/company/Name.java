@@ -13,6 +13,10 @@ import java.awt.event.MouseEvent;
  */
 
 public class Name extends JPanel{
+    /**Zmienna wykorzystywana do KeyBindings**/
+    private static final int IFW = JComponent.WHEN_IN_FOCUSED_WINDOW;
+    /**String przechowujący nazwę przycisku używany do KeyBindings**/
+    private static final String ENTER = "enter";
     /** Zmienna przechowująca obrazek tła*/
     private ImageIcon MainMenuImage;
     /** Zmienna przechowująca nick gracza*/
@@ -69,6 +73,7 @@ public class Name extends JPanel{
         customButton.customizer(backButton);
 
         customLabel.customizer(typeNick);
+        keyBindings(this, 10);
 
         textFieldCustomizer(enterName, aqua);
 
@@ -109,14 +114,25 @@ public class Name extends JPanel{
     private ActionListener startButtonListener(JTextField enterName) {
         ActionListener actionListener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                nick = enterName.getText();
-                cleanWindow();
-                add(new IntroLevel(getWidth(),getHeight(), 1, PropertiesLoad.numberOfLives, 0, nick),newWindow.buttonsClickedBehaviour());
+                startLevel();
             }
         };
         return actionListener;
     }
-
+    /**
+     * Odpowiada za wywołanie metody obiektu klasy NewWindow służącej do usunięcia wszystkich elemntów z obecnego JPanelu
+     * oraz przejście do intra poziomu
+     */
+    private void startLevel(){
+        nick = enterName.getText();
+        String defaultName = "Your nick...";
+        if(nick.equals(defaultName))
+        {
+            nick = "UNKNOWN";
+        }
+        newWindow.layoutMaker(this);
+        add(new IntroLevel(getWidth(),getHeight(), 1, PropertiesLoad.numberOfLives, 0, nick),newWindow.buttonsClickedBehaviour());
+    }
     /**
      * Odpowiada za przypisanie akcji przyciskowi BACK
      * @return actionListener - obiekt klasy ActionListener
@@ -129,6 +145,25 @@ public class Name extends JPanel{
             }
         };
         return actionListener;
+    }
+    /**
+     * Metoda tworząca obiekt klasy Action wywołujący daną funkcje
+     * @return newAction - stwoworzony obiekt
+     */
+    private Action action(){
+        Action newAction = new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                startLevel();
+            }
+        };
+        return newAction;
+    }
+    /**
+     * Odpowiada za obłsugę klawiszy
+     */
+    private void keyBindings(Name name, int keyCode){
+        name.getInputMap(IFW).put(KeyStroke.getKeyStroke(keyCode, 0,false), ENTER);
+        name.getActionMap().put(ENTER, action());
     }
     /**
      * Odpowiada za wywołanie metody obiektu klasy NewWindow służącej do usunięcia wszystkich elemntów z obecnego JPanelu
