@@ -1,25 +1,19 @@
 package company;
 
 import javax.swing.*;
-import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Ranking extends JPanel{
-    RankingSaver rankingArray = new RankingSaver();
     /** Obiekt klasy GridBagConstraintsMaker**/
     GridBagConstraintsMaker customGBC = new GridBagConstraintsMaker();
     /** Obiekt klasy NewWindow **/
     NewWindow newWindow = new NewWindow();
-
     JButton backButton = new JButton("Return to Main Menu");
     JLabel lost =new JLabel("RANKING");
-
-
+    /** Zmienna przechowująca obrazek w tle okna*/
     private ImageIcon MainMenuImage;
-
-
     /** Zmienna przechowująca nick gracza*/
     private String nick;
     /** Zmienne przechowująca wielkość poprzedniego okna*/
@@ -28,10 +22,11 @@ public class Ranking extends JPanel{
     Color aqua = new Color (51, 134, 175);
     Color citron = new Color (223, 234, 24);
     String[] columnNames = {"NICK", "SCORE"};
-    String[][] scores = rankingArray.bestScores();
 
+    RankingSaver rs = new RankingSaver();
+    Object[][] data = rs.bestScores();
 
-    JTable ranking = new JTable(scores, columnNames);
+    JTable ranking = new JTable(data, columnNames);
     LabelCustomizer customLabel = new LabelCustomizer(aqua, 40);
     ButtonCustomizer customButton = new ButtonCustomizer(true, citron, 32);
 
@@ -88,6 +83,9 @@ public class Ranking extends JPanel{
         return actionListener;
     }
 
+    /**
+     * Odświeża okno
+     */
     private void cleanWindow(){
         newWindow.layoutMakerRanking(this);
     }

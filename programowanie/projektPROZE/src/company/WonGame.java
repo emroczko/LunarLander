@@ -67,13 +67,12 @@ public class WonGame extends JPanel{
         this.add(pointsLabel, customGBC.gbcCustomize(0,2 ,0,0,3,"none"));
         this.add(startButton, customGBC.gbcCustomize(0,3 ,0,0,3,"none"));
 
-
-
         customGBC.gbcCustomize(0,0,1,1,0,"none");
         System.out.println("won");
     }
     private void save(){
         try {
+
             RankingSaver.saveToFile(nick, points);
         }
         catch(Exception E){
