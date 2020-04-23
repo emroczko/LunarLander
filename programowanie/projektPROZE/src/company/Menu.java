@@ -24,10 +24,12 @@ public class Menu extends JPanel{
     GridBagConstraintsMaker customGBC = new GridBagConstraintsMaker();
     /** Obiekt klasy NewWindow **/
     NewWindow newWindow = new NewWindow();
+
     JButton startButton = new JButton("Start!");
     JButton rankingButton = new JButton("Best Scores");
     JButton exitButton = new JButton("Exit");
-    boolean close;
+    JButton instructionsButton = new JButton("Instructions");
+
 
     public Menu() {
         this.removeAll();
@@ -39,14 +41,19 @@ public class Menu extends JPanel{
         startButton.addActionListener(startButtonListener());
         rankingButton.addActionListener(rankingButtonListener());
         exitButton.addActionListener(exitButtonListener());
+        instructionsButton.addActionListener(instructionsButtonListener());
 
         customButton.customizer(startButton);
         customButton.customizer(rankingButton);
         customButton.customizer(exitButton);
+        customButton.customizer(instructionsButton);
 
         this.add(startButton, customGBC.gbcCustomize(0,1,0,0,0,"SOUTH"));
         this.add(rankingButton, customGBC.gbcCustomize(0,2,0,0,0, "SOUTH"));
+        this.add(instructionsButton, customGBC.gbcCustomize(0,4,0,0,0, "SOUTH"));
         this.add(exitButton, customGBC.gbcCustomize(0,3,0,0,0, "SOUTH"));
+
+
 
 
     }
@@ -94,6 +101,22 @@ public class Menu extends JPanel{
 
                 cleanWindow();
                add(new Ranking(getWidth(),getHeight()), newWindow.buttonsClickedBehaviour());
+            }
+        };
+
+        return actionListener;
+    }
+    /**
+     * Odpowiada za przypisanie akcji przyciskowi BEST SCORES
+     */
+    private ActionListener instructionsButtonListener() {
+
+        ActionListener actionListener = new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+
+                cleanWindow();
+                add(new Instructions(getWidth(),getHeight()), newWindow.buttonsClickedBehaviour());
             }
         };
 
