@@ -64,7 +64,7 @@ public class IntroLevel extends JPanel{
         points = previousPoints;
         level = levelNumber;
         lives = livesNumber;
-        keyBindings(this, 32);
+        keyBindings(32);
         setBackground(levelNumber);
         customLabel.customizer(levelLabel);
         customLabelSpace.customizer(spaceLabel);
@@ -131,10 +131,11 @@ public class IntroLevel extends JPanel{
     }
     /**
      * Odpowiada za obłsugę klawiszy
+     * @param keyCode - kod klawisza
      */
-    private void keyBindings(IntroLevel introLevel, int keyCode){
-        introLevel.getInputMap(IFW).put(KeyStroke.getKeyStroke(keyCode, 0,false), SPACE);
-        introLevel.getActionMap().put(SPACE, action());
+    private void keyBindings(int keyCode){
+       this.getInputMap(IFW).put(KeyStroke.getKeyStroke(keyCode, 0,false), SPACE);
+       this.getActionMap().put(SPACE, action());
     }
     /**
      * Odpowiada za wywołanie metody obiektu klasy NewWindow służącej do usunięcia wszystkich elemntów z obecnego JPanelu

@@ -35,6 +35,10 @@ public class Level extends JPanel{
     private static final String MOVE_RIGHT = "move right";
     /** String przechowujący nazwę przycisku używany do KeyBindings**/
     private static final String MOVE_DOWN = "move down";
+    /** String przechowujący nazwę przycisku używany do KeyBindings**/
+    private static final String PAUSE = "pause";
+    /** String przechowujący nazwę przycisku używany do KeyBindings**/
+    private static final String RESUME= "resume";
     /** Numer obecnego poziomu**/
     private int levelNum;
     /** Ilość pozostałych żyć**/
@@ -83,6 +87,14 @@ public class Level extends JPanel{
     ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
     /** Obiekt klasy ScheduledExecutorService **/
     ScheduledExecutorService boomExecutor = Executors.newScheduledThreadPool(1);
+    /** Przycisk Exit **/
+    JButton exitButton = new JButton("EXIT");
+    /** Przycisk Pause**/
+    JButton pauseButton = new JButton("||");
+    /** Przycisk Continue**/
+    JButton continueButton = new JButton("CONTINUE");
+    /** Obrazek statku**/
+    JLabel landersLeft = new JLabel(ImageFactory.createImage(Image.Lander));
 
     /**
      * Konstruktor klasy dodający przyciski, ustawiający poczatkowy rozmiar okna
@@ -105,7 +117,7 @@ public class Level extends JPanel{
         leftLives = Lives;
         prevPoints = previousPoints;
         setPreferredSize(new Dimension(xSize, ySize));
-        keyBindings(this, 32, "nothing");
+
 
 
         try {
@@ -125,10 +137,7 @@ public class Level extends JPanel{
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.fill = GridBagConstraints.VERTICAL;
 
-        JButton exitButton = new JButton("EXIT");
-        JButton pauseButton = new JButton("||");
-        JButton continueButton = new JButton("CONTINUE");
-        JLabel landersLeft = new JLabel(ImageFactory.createImage(Image.Lander));
+
 
         labelUpdate("lives");
 
@@ -137,13 +146,14 @@ public class Level extends JPanel{
         customButtonFalse.customizer(exitButton);
 
         pauseButton.addActionListener(pauseButtonListener(continueButton, exitButton, pauseButton));
-        continueButton.addActionListener(continueButtonListener(continueButton, exitButton, pauseButton));
+        continueButton.addActionListener(continueButtonListener());
         exitButton.addActionListener(exitButtonListener());
 
-        keyBindings(this, 38, MOVE_UP);
-        keyBindings(this, 40, MOVE_DOWN);
-        keyBindings(this, 39, MOVE_RIGHT);
-        keyBindings(this, 37, MOVE_LEFT);
+        keyBindings(32, PAUSE);
+        keyBindings( 38, MOVE_UP);
+        keyBindings( 40, MOVE_DOWN);
+        keyBindings( 39, MOVE_RIGHT);
+        keyBindings( 37, MOVE_LEFT);
 
         custom.customizer(vx);
         custom.customizer(vy);
@@ -194,18 +204,20 @@ public class Level extends JPanel{
         this.timer.stop();
         timeCounter(false);
         for(int i = 37; i<41; i++){
-            keyBindings(this, i, "nothing");
+            keyBindings( i, "nothing");
         }
+        keyBindings(32, RESUME);
     }
     /**
      * Funkcja wznawiająca grę
      */
     private void resume(){
         this.timer.start();
-        keyBindings(this, 38, MOVE_UP);
-        keyBindings(this, 40, MOVE_DOWN);
-        keyBindings(this, 39, MOVE_RIGHT);
-        keyBindings(this, 37, MOVE_LEFT);
+        keyBindings( 38, MOVE_UP);
+        keyBindings( 40, MOVE_DOWN);
+        keyBindings(39, MOVE_RIGHT);
+        keyBindings(37, MOVE_LEFT);
+        keyBindings(32, PAUSE);
         timeCounter(true);
     }
     /** Funkcja odpowiedzialna za rysowanie obrazku reprezentującego gracza oraz generowanie jego hitboxa i skalowanie rozmiarów
@@ -452,7 +464,7 @@ public class Level extends JPanel{
     protected void noFuel(){
         if (fuelLevel <= 0){
             for(int i = 37; i<41; i++){
-                keyBindings(this, i, "nothing");
+                keyBindings(i, "nothing");
             }
         }
     }
@@ -498,10 +510,7 @@ public class Level extends JPanel{
     private ActionListener pauseButtonListener(JButton continueButton, JButton exitButton, JButton pauseButton) {
         ActionListener actionListener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                continueButton.setVisible(true);
-                exitButton.setVisible(true);
-                pauseButton.setVisible(false);
-                pause();
+                pauseBehaviour();
             }
         };
         return actionListener;
@@ -511,16 +520,32 @@ public class Level extends JPanel{
      * Odpowiada za przypisanie akcji przyciskowi CONTINUE
      * @return actionListener- obiekt klasy ActionListener
      */
-    private ActionListener continueButtonListener(JButton continueButton, JButton exitButton, JButton pauseButton) {
+    private ActionListener continueButtonListener() {
         ActionListener actionListener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                pauseButton.setVisible(true);
-                resume();
-                continueButton.setVisible(false);
-                exitButton.setVisible(false);
+                resumeBehaviour();
             }
         };
         return actionListener;
+    }
+
+    /**
+     * Odpowiada za wyłączenie pauzy i schowanie oraz pokazanie odpowiednich przycisków
+     */
+    private void resumeBehaviour(){
+        pauseButton.setVisible(true);
+        resume();
+        continueButton.setVisible(false);
+        exitButton.setVisible(false);
+    }
+    /**
+     * Odpowiada za włączenie pauzy i schowanie oraz pokazanie odpowiednich przycisków
+     */
+    private void pauseBehaviour(){
+        continueButton.setVisible(true);
+        exitButton.setVisible(true);
+        pauseButton.setVisible(false);
+        pause();
     }
 
     /**
@@ -555,6 +580,10 @@ public class Level extends JPanel{
                         break;
                     case "move down": lander.moveDown();
                         break;
+                    case "pause": pauseBehaviour();
+                        break;
+                    case "resume": resumeBehaviour();
+                        break;
                     case "nothing":
                         break;
                 }
@@ -580,13 +609,12 @@ public class Level extends JPanel{
 
     /**
      * Odpowiada za obłsugę klawiszy
-     * @param level - obiekt klasy Level
      * @param keyCode - kod klawisza
      * @param keyName - nazwa klawisza
      */
-    private void keyBindings(Level level, int keyCode, String keyName){
-        level.getInputMap(IFW).put(KeyStroke.getKeyStroke(keyCode, 0,false), keyName);
-        level.getActionMap().put(keyName, action(keyName));
+    private void keyBindings(int keyCode, String keyName){
+        this.getInputMap(IFW).put(KeyStroke.getKeyStroke(keyCode, 0,false), keyName);
+        this.getActionMap().put(keyName, action(keyName));
     }
 
     /**

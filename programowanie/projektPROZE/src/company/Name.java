@@ -73,7 +73,7 @@ public class Name extends JPanel{
         customButton.customizer(backButton);
 
         customLabel.customizer(typeNick);
-        keyBindings(this, 10);
+        keyBindings(10);
 
         textFieldCustomizer(enterName, aqua);
 
@@ -158,12 +158,14 @@ public class Name extends JPanel{
         };
         return newAction;
     }
+
     /**
      * Odpowiada za obłsugę klawiszy
+     * @param keyCode - kod klawisza
      */
-    private void keyBindings(Name name, int keyCode){
-        name.getInputMap(IFW).put(KeyStroke.getKeyStroke(keyCode, 0,false), ENTER);
-        name.getActionMap().put(ENTER, action());
+    private void keyBindings(int keyCode){
+        this.getInputMap(IFW).put(KeyStroke.getKeyStroke(keyCode, 0,false), ENTER);
+        this.getActionMap().put(ENTER, action());
     }
     /**
      * Odpowiada za wywołanie metody obiektu klasy NewWindow służącej do usunięcia wszystkich elemntów z obecnego JPanelu
