@@ -166,8 +166,6 @@ public class Level extends JPanel{
         this.timer = new Timer(40, new GameLoop(this));
         this.timer.start();
         timeCounter(true);
-
-
     }
 
 
@@ -241,7 +239,6 @@ public class Level extends JPanel{
                     catch(Exception e){}
 
                 }
-                //asteroid_counter +=1;
             }
         }
     }

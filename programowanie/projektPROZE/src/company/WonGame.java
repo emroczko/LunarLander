@@ -61,7 +61,7 @@ public class WonGame extends JPanel{
         customLabel.customizer(lost);
         customLabel.customizer(pointsLabel);
         pointsLabel.setText("Your score is: "+ earnedPoints);
-        
+
         this.add(backButton, customGBC.gbcCustomize(0,4 ,0,0,3,"none"));
         this.add(lost, customGBC.gbcCustomize(0,1 ,0,0,3,"none"));
         this.add(pointsLabel, customGBC.gbcCustomize(0,2 ,0,0,3,"none"));
