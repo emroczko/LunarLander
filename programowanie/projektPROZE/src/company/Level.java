@@ -21,6 +21,7 @@ public class Level extends JPanel{
 
     private ImageIcon backgroundImage;
     private ImageIcon landersLeftIcon;
+    private Image currentImage;
     /** Obiekt klasy Timer**/
     private Timer timer;
     /** Obiekt klasy Lander**/
@@ -44,9 +45,11 @@ public class Level extends JPanel{
     private int time = 60;
     private int asteroid_counter;
     protected float fuelLevel;
+    private String nick;
     private ArrayList<Asteroid> asteroids;
     /** Ilość punktów**/
-    private float points;
+    private int points;
+    private int prevPoints;
     JLabel vx = new JLabel("H. Speed: 0");
     JLabel vy = new JLabel("V. Speed: 0");
     JLabel leftLandersLabel = new JLabel();
@@ -70,14 +73,15 @@ public class Level extends JPanel{
     ScheduledExecutorService boomExecutor = Executors.newScheduledThreadPool(1);
 
 
-    public Level(int xSize, int ySize, int levelNumber, int Lives, float previousPoints) {
+    public Level(int xSize, int ySize, int levelNumber, int Lives, int previousPoints, String nickName, ImageIcon background) {
         this.removeAll();
-        repaint();
-        revalidate();
+        this.repaint();
+        this.revalidate();
 
+        nick = nickName;
         levelNum = levelNumber;
         leftLives = Lives;
-        points = previousPoints;
+        prevPoints = previousPoints;
         setPreferredSize(new Dimension(xSize, ySize));
         keyBindings(this, 32, "nothing");
 
@@ -87,6 +91,8 @@ public class Level extends JPanel{
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        this.backgroundImage = background;
 
 
         initializeVariables(levelNumber);
@@ -132,16 +138,18 @@ public class Level extends JPanel{
         fuelBar.setBackground(aqua);
 
 
-        this.add(leftLandersLabel, customGBC.gbcCustomize(2,1,0,0,1, "FIRST_LINE_END"));
-        this.add(landersLeft, customGBC.gbcCustomize(2,1,0,0,1, "CENTER"));
-        this.add(fuelLabel, customGBC.gbcCustomize(1,0,1,0,1, "FIRST_LINE_END"));
+
+
         this.add(fuelBar, customGBC.gbcCustomize(2,0,0,0,1, "FIRST_LINE_END"));
+        this.add(fuelLabel, customGBC.gbcCustomize(1,0,1,0,1, "FIRST_LINE_END"));
         this.add(vx, customGBC.gbcCustomize(0,0,0,0,1, "FIRST_LINE_START"));
         this.add(vy, customGBC.gbcCustomize(0,1,0,0,1, "FIRST_LINE_START"));
         this.add(timeLabel, customGBC.gbcCustomize(0,2,0,1,1, "FIRST_LINE_START"));
         this.add(pauseButton, customGBC.gbcCustomize(2,2,0,0,1, "FIRST_LINE_END"));
         this.add(exitButton,customGBC.gbcCustomize(0,3,0,0,1, "LAST_LINE_START"));
         this.add(continueButton, customGBC.gbcCustomize(1,3,0,0,2, "LAST_LINE_END"));
+        this.add(leftLandersLabel, customGBC.gbcCustomize(2,1,0,0,1, "FIRST_LINE_END"));
+        this.add(landersLeft, customGBC.gbcCustomize(2,1,0,0,1, "CENTER"));
 
     }
     /** Funkcja inicjująca zmienne klasy*/
@@ -154,24 +162,7 @@ public class Level extends JPanel{
         this.asteroids = new ArrayList<Asteroid>();
         this.fuelLevel = PropertiesLoad.fuelAmount;
 
-        switch(levelNumber){
-            case 1: this.backgroundImage = ImageFactory.createImage(Image.Earth1);
-                break;
-            case 2:  this.backgroundImage = ImageFactory.createImage(Image.Mars1);
-                break;
-            case 3:  this.backgroundImage = ImageFactory.createImage(Image.Jupiter1);
-                break;
-            case 4:  this.backgroundImage = ImageFactory.createImage(Image.Saturn1);
-                break;
-            case 5:  this.backgroundImage = ImageFactory.createImage(Image.Earth2);
-                break;
-            case 6:  this.backgroundImage = ImageFactory.createImage(Image.Mars2);
-                break;
-            case 7:  this.backgroundImage = ImageFactory.createImage(Image.Jupiter2);
-                break;
-            case 8:  this.backgroundImage = ImageFactory.createImage(Image.Saturn2);
-                break;
-        }
+
         this.timer = new Timer(40, new GameLoop(this));
         this.timer.start();
         timeCounter(true);
@@ -301,6 +292,8 @@ public class Level extends JPanel{
             }
             Toolkit.getDefaultToolkit().sync();
         }
+
+
     }
 
     /**
@@ -313,7 +306,7 @@ public class Level extends JPanel{
            labelUpdate("time");
         };
 
-        if(onOff) {
+        if(onOff){
             executor.scheduleAtFixedRate(timeOn, 1, 1, SECONDS);
         }
         else {
@@ -402,9 +395,13 @@ public class Level extends JPanel{
         if (lander.velx < 7 && lander.vely < 7) {
             countPoints();
             if (levelNum != PropertiesLoad.numberOfLevels) {
-                add(new WonLevel(getWidth(), getHeight(), levelNum, leftLives, points), buttonsClickedBehaviour());
+                countPoints();
+                cleanWindow();
+                add(new WonLevel(getWidth(), getHeight(), levelNum, leftLives, points, nick), newWindow.buttonsClickedBehaviour());
             } else {
-                add(new WonGame(getWidth(), getHeight(), points), buttonsClickedBehaviour());
+                countPoints();
+                cleanWindow();
+                add(new WonGame(getWidth(), getHeight(), nick, points), newWindow.buttonsClickedBehaviour());
             }
         } else {
             boom();
@@ -416,10 +413,12 @@ public class Level extends JPanel{
     private void wreckedShip(){
         if(leftLives == 0) {
             countPoints();
-            add(new LostGame(getWidth(), getHeight(), points), buttonsClickedBehaviour());
+            cleanWindow();
+            add(new LostGame(getWidth(), getHeight(), points, nick), newWindow.buttonsClickedBehaviour());
         }
         else{
-            add(new Level(getWidth(), getHeight(), levelNum, leftLives - 1, points), buttonsClickedBehaviour());
+            cleanWindow();
+            add(new Level(getWidth(), getHeight(), levelNum, leftLives - 1, points, nick, this.backgroundImage), newWindow.buttonsClickedBehaviour());
         }
     }
     /**
@@ -437,7 +436,7 @@ public class Level extends JPanel{
      * Odpowiada za zliczanie punktów
      */
     private void countPoints(){
-        points = (10 * fuelLevel) + (10 * time);
+        points = (5 * (int)fuelLevel) + (5 * time) + prevPoints;
     }
     /**
      * Aplikuje zmiany wykonane przez gracza oraz odświeża okno gry
@@ -524,20 +523,7 @@ public class Level extends JPanel{
         };
         return newAction;
     }
-    /**
-     * Odpowiada za wyczyszczenie ekranu i umieszczenie nowego okna po naciśnięciu któregoś z przycisków w oknie Name
-     */
-    private GridBagConstraints buttonsClickedBehaviour(){
-        removeAll();
-        repaint();
-        revalidate();
-        setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.weightx = 1;
-        gbc.weighty = 1;
-        gbc.fill = GridBagConstraints.BOTH;
-        return gbc;
-    }
+
     /**
      * Odpowiada za obłsugę klawiszy
      */

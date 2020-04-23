@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 
 public class LostGame extends JPanel {
 
@@ -34,18 +35,24 @@ public class LostGame extends JPanel {
     /** Obiekt klasy NewWindow **/
     NewWindow newWindow = new NewWindow();
 
-    public LostGame(int xSize, int ySize, float earnedPoints){
+    public LostGame(int xSize, int ySize, int earnedPoints, String nickName){
         this.removeAll();
         repaint();
         revalidate();
         points = earnedPoints;
+        nick = nickName;
         a = xSize;
         b = ySize;
         setPreferredSize(new Dimension(a,b));
 
         initializeVariables();
         this.setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
+
+        try {
+            RankingSaver.saveToFile(nick, earnedPoints);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         startButton.addActionListener(playAgainButtonListener());
         backButton.addActionListener(returnToMainMenuButtonListener());
@@ -86,7 +93,8 @@ public class LostGame extends JPanel {
             ActionListener actionListener = new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     cleanWindow();
-                    add(new Level(getWidth(),getHeight(),1, PropertiesLoad.numberOfLives, 0),newWindow.buttonsClickedBehaviour());
+                    add(new IntroLevel(getWidth(),getHeight(),1, PropertiesLoad.numberOfLives, 0, nick),newWindow.buttonsClickedBehaviour());
+
                 }
             };
             return actionListener;
