@@ -56,7 +56,7 @@ public class Name extends JPanel{
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 
-        
+
 
         startButton.addActionListener(startButtonListener(enterName));
         backButton.addActionListener(backButtonListener());

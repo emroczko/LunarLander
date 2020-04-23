@@ -11,7 +11,7 @@ public class Instructions extends JPanel{
     /** Obiekt klasy NewWindow **/
     NewWindow newWindow = new NewWindow();
 
-    JButton backButton = new JButton("Return to Main Menu");
+    JButton backButton = new JButton("Back");
     JLabel lost =new JLabel("INSTRUCTIONS");
 
 
@@ -27,7 +27,7 @@ public class Instructions extends JPanel{
     Color citron = new Color (223, 234, 24);
 
 
-    LabelCustomizer customLabel = new LabelCustomizer(aqua, 40);
+
     ButtonCustomizer customButton = new ButtonCustomizer(true, citron, 32);
 
     public Instructions(int xSize, int ySize){
@@ -39,25 +39,18 @@ public class Instructions extends JPanel{
         setPreferredSize(new Dimension(a,b));
         initializeVariables();
         this.setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
 
         backButton.addActionListener(returnToMainMenuButtonListener());
-
         customButton.customizer(backButton);
-        customLabel.customizer(lost);
+        this.add(backButton, customGBC.gbcCustomize(0,0,0,0,0,"LAST_LINE_END"));
 
 
-
-        this.add(lost, customGBC.gbcCustomize(0,1,0,0,3,"none"));
-        this.add(backButton, customGBC.gbcCustomize(0,3,0,0,3,"none"));
-
-        customGBC.gbcCustomize(0,0,1,1,0,"none");
 
     }
 
     /** metoda inicjalizująca obrazek tła za pomocą metody obiektu ImageFactory*/
     private void initializeVariables() {
-        this.MainMenuImage = ImageFactory.createImage(Image.MainMenu);
+        this.MainMenuImage = ImageFactory.createImage(Image.Instruction);
     }
 
     /** metoda przesłaniająca metodę paintComponent, w celu odpowiedniego skalowania obrazka w tle*/
