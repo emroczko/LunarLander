@@ -1,5 +1,13 @@
+<<<<<<< HEAD
+Your nick...=630
+Your nick...=640
+=======
 Your nick...=550
+<<<<<<< HEAD
 Your nick...=485
 Your nick...=1580
 Your nick...=610
 Your nick...=3545
+=======
+>>>>>>> 010339c44729de1dd2e0256e50aacf228edffe8e
+>>>>>>> e625aaa302c6243f105981f9a7a21bf8e2844713
