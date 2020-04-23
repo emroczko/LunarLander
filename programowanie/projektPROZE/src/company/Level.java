@@ -10,7 +10,6 @@ import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import static java.util.concurrent.TimeUnit.*;
-
 import java.util.ArrayList;
 
 
@@ -18,10 +17,8 @@ import java.util.ArrayList;
  * Klasa odpowiedzialna za rysowanie poziomu ziemi, statku gracza i asteroid oraz obsługe zdarzeń w czasie gry
  */
 public class Level extends JPanel{
-
     private ImageIcon backgroundImage;
     private ImageIcon landersLeftIcon;
-    private Image currentImage;
     /** Obiekt klasy Timer**/
     private Timer timer;
     /** Obiekt klasy Lander**/
@@ -425,8 +422,9 @@ public class Level extends JPanel{
      * Odpowiada za zliczanie punktów
      */
     private void countPoints(){
-        points = (5 * (int)fuelLevel) + (5 * time) + prevPoints;
+        points = (PropertiesLoad.bonusPerFuel * (int)(fuelLevel) + (PropertiesLoad.bonusPerSecond * time) + prevPoints);
     }
+
     /**
      * Aplikuje zmiany wykonane przez gracza oraz odświeża okno gry
      */
@@ -435,18 +433,21 @@ public class Level extends JPanel{
         this.update();
         this.repaint();
     }
+
     /** Aktualizuje połozenie obiektów z gry*/
     private void update(){
         this.lander.update();
         this.lander.setLevel(this);
         updateAsteroids();
     }
+
     /** Aktualizuje położenie asteroid*/
     private void updateAsteroids(){
         for (int i =0; i<asteroids.size(); i++){
             asteroids.get(i).update();
         }
     }
+
     /**
      * Odpowiada za przypisanie akcji przyciskowi || (pauza)
      */
@@ -461,7 +462,6 @@ public class Level extends JPanel{
         };
         return actionListener;
     }
-
 
     /**
      * Odpowiada za przypisanie akcji przyciskowi CONTINUE
@@ -491,6 +491,7 @@ public class Level extends JPanel{
         };
         return actionListener;
     }
+
     /**
      * Odpowiada za wybranie odpowiedniej metody dla klikniętego klawisza
      */
@@ -513,7 +514,8 @@ public class Level extends JPanel{
         };
         return newAction;
     }
-    /** */
+
+    /***/
     private GridBagConstraints buttonsClickedBehaviour(){
         removeAll();
         repaint();
@@ -533,6 +535,11 @@ public class Level extends JPanel{
         level.getInputMap(IFW).put(KeyStroke.getKeyStroke(keyCode, 0,false), keyName);
         level.getActionMap().put(keyName, action(keyName));
     }
+
+    /**
+     * Odświeża kekst w JLabelach wyświetlanych na ekranie
+     * @param label który tekst odświeżyć
+     */
     public void labelUpdate(String label){
         DecimalFormat df = new DecimalFormat("#.##");
         switch(label){
@@ -550,6 +557,9 @@ public class Level extends JPanel{
         super.update(this.getGraphics());
     }
 
+    /**
+     * Aktualizuje poziom paliwa w progres barze wyswietlanym na ekranie
+     */
     public void BarUpdate(){
         fuelBar.setValue((int)fuelLevel);
         super.update(this.getGraphics());

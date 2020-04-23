@@ -8,10 +8,8 @@ import java.awt.geom.Rectangle2D;
  */
 public class Lander extends Sprite {
 
+    /** Zminna przechowująca poziom na którym znajduje sie obiekt*/
     private Level level;
-    public int start_x;
-    public int start_y;
-
     /**
      * Konstruktr klasy ustawiający podstawowe parametry potrzebne do działania kalsy
      * @param level poziom na którym znajduje sie obiekt
@@ -25,8 +23,8 @@ public class Lander extends Sprite {
      * Funkcja inicjująca zmienne odziedziczone od klasy Sprite
      */
     private void initialize() {
-        start_x = PropertiesLoad.xSize / 2 - PropertiesLoad.LanderWidth / 2;
-        start_y = PropertiesLoad.ySize - 450;
+        int start_x = PropertiesLoad.xSize / 2 - PropertiesLoad.LanderWidth / 2;
+        int start_y = PropertiesLoad.ySize - 450;
         setX(start_x);
         setY(start_y);
         Rectangle2D rect = new Rectangle2D.Float(this.getX(), this.getY(), 40, 40);
