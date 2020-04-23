@@ -61,12 +61,6 @@ public class Ranking extends JPanel{
         ranking.setBackground(Color.BLACK);
         ranking.setForeground(Color.WHITE);
         ranking.setGridColor(Color.BLACK);
-
-        RankingSaver rs = new RankingSaver();
-        try {
-            rs.loadLocalRanking();
-        }
-        catch(Exception e){e.printStackTrace();}
         this.add(lost, customGBC.gbcCustomize(0,1,0,0,3,"none"));
         this.add(backButton, customGBC.gbcCustomize(0,3,0,0,3,"none"));
         this.add(ranking, customGBC.gbcCustomize(0,2,0,0,3,"none"));
