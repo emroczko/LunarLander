@@ -6,13 +6,16 @@ import java.awt.geom.Rectangle2D;
 /**
  * Klasa odpowiedzialna za utworzenie statku
  */
-
 public class Lander extends Sprite {
 
     private Level level;
     public int start_x;
     public int start_y;
 
+    /**
+     * Konstruktr klasy ustawiający podstawowe parametry potrzebne do działania kalsy
+     * @param level poziom na którym znajduje sie obiekt
+     */
     public Lander(Level level) {
         this.level = level;
         initialize();
@@ -74,7 +77,7 @@ public class Lander extends Sprite {
     }
 
     /**
-     * Dodaje zwiększa wartośc prędkości poziomej(dodaje stałą grawitacyjną)
+     * Zwiększa wartośc prędkości poziomej(dodaje stałą grawitacyjną)
      * @param accY przyśpieszenie pionowe
      */
     public void acceleration(float accY) {
@@ -92,7 +95,7 @@ public class Lander extends Sprite {
     }
 
     /**
-     * Ustawia odniesienie do poziomu
+     * Ustawia obecny poziom na którym jest obiekt
      * @param lev = poziom
      */
     public void setLevel(Level lev)

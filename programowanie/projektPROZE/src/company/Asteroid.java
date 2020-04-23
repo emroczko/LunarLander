@@ -10,6 +10,16 @@ public class Asteroid extends Sprite {
     private int velx;
     private int vely;
     private int direction;
+
+    /**
+     *  Konstruktr klasy ustawiający podstawowe parametry potrzebne do działania kalsy
+     * @param start_x początkowe położenie asteroidy na osi OX
+     * @param start_y poczatkowe położenie asteroidy na osi OY
+     * @param velx prędkość pozioma asteroidy
+     * @param vely prędkośc pionowa asteroidy
+     * @param direction określa w którą stronę będize poruszać się asteroida
+     * @param level poziom na którym znajduje się obiekt
+     */
     public Asteroid(int start_x, int start_y, int velx, int vely, int direction, Level level) {
         initialize(start_x, start_y, velx, vely, direction, level);
     }

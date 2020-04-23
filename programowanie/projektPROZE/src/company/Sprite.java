@@ -25,19 +25,12 @@ public abstract class Sprite {
     protected float velx;
     /**Prędkość w pionie*/
     protected float vely;
-
+    /**hitbox*/
     protected Rectangle2D rect;
-
+    /**metoda odpowiedzialna za poruszanie*/
     public abstract void move();
-
-
-    public Sprite(){
-        this.dead = false;
-    }
-    /** metoda która "uśmierca" statek*/
-    public void die(){
-        this.dead = true;
-    }
+    /**Konstruktor klasy*/
+    public Sprite(){}
     /** metoda typu setter do ustanawiania obrazka statku*/
     public void setImage(Image image){
         this.image = image;
@@ -66,12 +59,4 @@ public abstract class Sprite {
     public Rectangle2D getRect() {
         return rect;
     }
-
-    public void setdead(boolean dead){
-        this.dead = dead;
-    }
-    public boolean isDead(){
-        return this.dead;
-    }
-
 }
