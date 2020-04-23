@@ -78,9 +78,7 @@ public class Menu extends JPanel{
     private ActionListener startButtonListener() {
         ActionListener actionListener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //closer.removeComponent(this);
                 cleanWindow();
-
                 add(new Name(getWidth(),getHeight()), newWindow.buttonsClickedBehaviour());
             }
         };

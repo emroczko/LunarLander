@@ -23,6 +23,7 @@ public class Level extends JPanel{
     private Timer timer;
     /** Obiekt klasy Lander**/
     private Lander lander;
+    /** Zmienna określająca czy gra jest aktywna*/
     private boolean inGame = true;
     /** Zmienna wykorzystywana do KeyBindings**/
     private static final int IFW = JComponent.WHEN_IN_FOCUSED_WINDOW;
@@ -40,18 +41,29 @@ public class Level extends JPanel{
     private int leftLives;
     /** Ilość pozostałego czasu**/
     private int time = 60;
+    /** Przechowuje liczbę wygenerowanych asteroid*/
     private int asteroid_counter;
+    /** Poziom paliwa*/
     protected float fuelLevel;
+    /** przechowuje nicka aktualnego gracza*/
     private String nick;
+    /** Lista przechowująca istniejące asteroidy*/
     private ArrayList<Asteroid> asteroids;
     /** Ilość punktów**/
     private int points;
+    /** Pukty uzyskane przez gracza w poprzednim poziomie*/
     private int prevPoints;
+    /** Napis informujący o prędkości poziomej gracza*/
     JLabel vx = new JLabel("H. Speed: 0");
+    /**Napis informujący o prędkości pionowej gracza*/
     JLabel vy = new JLabel("V. Speed: 0");
+    /** Ikona Statku przy ilości zyć*/
     JLabel leftLandersLabel = new JLabel();
+    /** Napis paliwo przy pasku stanu paliwa*/
     JLabel fuelLabel = new JLabel("Fuel");
+    /** Napis informujący ile pozostało czasu za który możemy otrzymać punkty*/
     JLabel timeLabel = new JLabel("Left time: 60 sec");
+    /** Pasek pokazujący stan paliwa*/
     JProgressBar fuelBar = new JProgressBar();
     /** Kolor niebieski używany w oknie*/
     Color aqua = new Color (51, 134, 175);
@@ -386,9 +398,11 @@ public class Level extends JPanel{
             countPoints();
             if (levelNum != PropertiesLoad.numberOfLevels) {
                 cleanWindow();
+                inGame = false;
                 add(new IntroLevel(getWidth(), getHeight(), levelNum+1, leftLives, points, nick), newWindow.buttonsClickedBehaviour());
             } else {
                 cleanWindow();
+                inGame=false;
                 add(new WonGame(getWidth(), getHeight(), nick, points), newWindow.buttonsClickedBehaviour());
             }
         } else {
@@ -401,9 +415,11 @@ public class Level extends JPanel{
     private void wreckedShip(){
         if(leftLives == 0) {
             countPoints();
+            inGame=false;
             add(new LostGame(getWidth(), getHeight(), points, nick), buttonsClickedBehaviour());
         }
         else{
+            inGame=false;
             add(new Level(getWidth(), getHeight(), levelNum, leftLives - 1, points, nick, this.backgroundImage), buttonsClickedBehaviour());
         }
     }
