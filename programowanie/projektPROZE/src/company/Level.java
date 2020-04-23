@@ -17,8 +17,8 @@ import java.util.ArrayList;
  * Klasa odpowiedzialna za rysowanie poziomu ziemi, statku gracza i asteroid oraz obsługe zdarzeń w czasie gry
  */
 public class Level extends JPanel{
+    /**Zmienna przechowująca tło okna*/
     private ImageIcon backgroundImage;
-    private ImageIcon landersLeftIcon;
     /** Obiekt klasy Timer**/
     private Timer timer;
     /** Obiekt klasy Lander**/
@@ -128,7 +128,7 @@ public class Level extends JPanel{
         JButton exitButton = new JButton("EXIT");
         JButton pauseButton = new JButton("||");
         JButton continueButton = new JButton("CONTINUE");
-        JLabel landersLeft = new JLabel(this.landersLeftIcon = ImageFactory.createImage(Image.Lander));
+        JLabel landersLeft = new JLabel(ImageFactory.createImage(Image.Lander));
 
         labelUpdate("lives");
 
@@ -172,7 +172,9 @@ public class Level extends JPanel{
         this.add(landersLeft, customGBC.gbcCustomize(2,1,0,0,1, "CENTER"));
 
     }
-    /** Funkcja inicjująca zmienne klasy*/
+    /**
+     * Funkcja inicjująca zmienne klasy
+     */
     private void initializeVariables(int levelNumber){
         setFocusable(true);
         asteroid_counter = 0;
@@ -185,9 +187,9 @@ public class Level extends JPanel{
         timeCounter(true);
     }
 
-
-
-    /** Funkcja pauzująca grę*/
+    /**
+     * Funkcja pauzująca grę
+     */
     private void pause(){
         this.timer.stop();
         timeCounter(false);
@@ -195,7 +197,9 @@ public class Level extends JPanel{
             keyBindings(this, i, "nothing");
         }
     }
-    /** Funkcja wznawiająca grę*/
+    /**
+     * Funkcja wznawiająca grę
+     */
     private void resume(){
         this.timer.start();
         keyBindings(this, 38, MOVE_UP);
@@ -204,9 +208,10 @@ public class Level extends JPanel{
         keyBindings(this, 37, MOVE_LEFT);
         timeCounter(true);
     }
-    /**Funkcja odpowiedzialna za rysowanie obrazku reprezentującego gracza oraz generowanie jego hitboxa i skalowanie rozmiarów
+    /** Funkcja odpowiedzialna za rysowanie obrazku reprezentującego gracza oraz generowanie jego hitboxa i skalowanie rozmiarów
      * tych elementów poprzez mnożenie ich wielkości i położenia przez współczynnik skali będący stosunkiem obecnej wielkośi
      * okna do jego początkowej wielkości wczytywanej z pliku konfiguracyjnego
+     * @param g - obiekt klasy Graphics
      */
     private void drawPlayer(Graphics g){
         g.drawImage(lander.getImage(), (int)(lander.getX()*((float)(this.getWidth())/PropertiesLoad.xSize)),
@@ -217,13 +222,15 @@ public class Level extends JPanel{
     /**
      * Generuje hitbox powirzchni księzyca i lądowiska oraz skaluje do rozmiarów okna
      */
-    private void drawGround(Graphics g){
+    private void drawGround(){
         Polygon moon = new Polygon(scalePoints(PropertiesLoad.xPoints, 'x'), scalePoints(PropertiesLoad.yPoints, 'y'),
                 PropertiesLoad.xPoints.length);
         Polygon landing = new Polygon(scalePoints(PropertiesLoad.xLanding, 'x'), scalePoints(PropertiesLoad.yLanding, 'y'), PropertiesLoad.xLanding.length);
         detectCollision(landing, moon);
     }
-    /**Rysuje asteroidy i skaluje je odpowiednio do rozmiarów okna*/
+    /**Rysuje asteroidy i skaluje je odpowiednio do rozmiarów okna
+     * @param g - obiekt klasy Graphics
+     */
     private void drawAsteroid(Graphics g){
         for (int i =0; i<asteroids.size(); i++)
         {
@@ -281,6 +288,7 @@ public class Level extends JPanel{
 
     /**
      * Metoda nadpisująca metodę paintComponent w celu przeskalowania obrazka w tle oraz rysowania obiektów z gry
+     * @param g - obiekt klasy Graphics
      */
     @Override
     protected void paintComponent(Graphics g) {
@@ -291,12 +299,13 @@ public class Level extends JPanel{
     }
 
     /**
-     *Funkcja rysująca obiekty gry(gracz i powierzchnia księżyca)
+     * Funkcja rysująca obiekty gry (gracz i powierzchnia księżyca)
+     * @param g - obiekt klasy Graphics
      */
     private void doDrawing(Graphics g) {
         if (inGame) {
             drawPlayer(g);
-            drawGround(g);
+            drawGround();
             drawAsteroid(g);
         } else {
             if (timer.isRunning()) {
@@ -307,7 +316,8 @@ public class Level extends JPanel{
     }
 
     /**
-     *Metoda odpowiadająca za odliczanie w oknie gry
+     * Metoda odpowiadająca za odliczanie w oknie gry
+     * @param onOff - wartość określająca czy zegar ma być włączony czy zatrzymany
      */
     private void timeCounter(boolean onOff)
     {
@@ -326,7 +336,9 @@ public class Level extends JPanel{
     }
 
     /**
-     * Metoda tworząca nowy obiekt ScheduledExecutorService i przypisująca go do obiektu który został zadeklarowany w klasie Level, który został wyłączony
+     * Metoda tworząca nowy obiekt ScheduledExecutorService i przypisująca go do obiektu,
+     * który został zadeklarowany w klasie Level, który został wyłączony
+     * @param whichExecutor - string określający który Executor ma zostać "zrestartowany"
      */
     private void newExecutor(String whichExecutor){
         ScheduledExecutorService newExecutor = Executors.newScheduledThreadPool(1);
@@ -351,7 +363,12 @@ public class Level extends JPanel{
         }
         asteroidsCollision(landing, moon);
     }
-    /**Wykrywa i obsługuje kolizję asteroid*/
+
+    /**
+     * Wykrywa i obsługuje kolizję asteroid
+     * @param landing - wielokąt strefy lądowania
+     * @param moon - wielokąt obszaru księzyca poza strefą lądowania
+     */
     private void asteroidsCollision(Polygon landing, Polygon moon){
         for(int i = 0; i<this.asteroids.size();i++){
             if (lander.getRect().intersects(asteroids.get(i).getRect())){
@@ -523,6 +540,7 @@ public class Level extends JPanel{
 
     /**
      * Odpowiada za stworzenie obiektu Action i wybranie odpowiedniej metody dla klikniętego klawisza
+     * @param action - string określajcy która akcja ma się wykonać
      * @return newAction - obiekt klasy Action
      */
     private Action action(String action){
@@ -562,6 +580,9 @@ public class Level extends JPanel{
 
     /**
      * Odpowiada za obłsugę klawiszy
+     * @param level - obiekt klasy Level
+     * @param keyCode - kod klawisza
+     * @param keyName - nazwa klawisza
      */
     private void keyBindings(Level level, int keyCode, String keyName){
         level.getInputMap(IFW).put(KeyStroke.getKeyStroke(keyCode, 0,false), keyName);
@@ -600,7 +621,7 @@ public class Level extends JPanel{
      * Odpowiada za wywołanie metody obiektu klasy NewWindow służącej do usunięcia wszystkich elemntów z obecnego JPanelu
      */
     private void cleanWindow(){
-        newWindow.layoutMakerLevel(this);
+        newWindow.layoutMaker(this);
     }
 }
 

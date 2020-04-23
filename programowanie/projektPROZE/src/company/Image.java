@@ -1,6 +1,6 @@
 package company;
 /**
- * Klasa przechowująca dostępne tytuły obrazków używanych w grze
+ * Klasa (enum) przechowująca dostępne tytuły obrazków używanych w grze
  */
 
 public enum Image {

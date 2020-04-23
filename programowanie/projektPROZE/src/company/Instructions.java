@@ -45,12 +45,17 @@ public class Instructions extends JPanel{
         this.add(backButton, customGBC.gbcCustomize(0,0,1,1,0,"LAST_LINE_END"));
     }
 
-    /** metoda inicjalizująca obrazek tła za pomocą metody obiektu ImageFactory*/
+    /**
+     * Metoda inicjalizująca obrazek tła za pomocą metody obiektu ImageFactory
+     */
     private void initializeVariables() {
         this.MainMenuImage = ImageFactory.createImage(Image.Instruction);
     }
 
-    /** metoda przesłaniająca metodę paintComponent, w celu odpowiedniego skalowania obrazka w tle*/
+    /**
+     * Metoda przesłaniająca metodę paintComponent, w celu odpowiedniego skalowania obrazka w tle
+     * @param g - obiekt klasy Graphics
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -75,6 +80,6 @@ public class Instructions extends JPanel{
      * Odpowiada za wywołanie metody obiektu klasy NewWindow służącej do usunięcia wszystkich elemntów z obecnego JPanelu
      */
     private void cleanWindow(){
-        newWindow.layoutMakerInstructions(this);
+        newWindow.layoutMaker(this);
     }
 }

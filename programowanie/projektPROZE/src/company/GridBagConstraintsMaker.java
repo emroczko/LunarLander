@@ -20,6 +20,7 @@ public class GridBagConstraintsMaker {
      * @param weightY - wartość przypisywana polu weighty w obiekcie klasy GridBagConstraints
      * @param gridWidth - wartość przypisywana polu gridwidth w obiekcie klasy GridBagConstraints
      * @param whichDirection - wartość przekazywana do metody anchorMaker
+     * @return gbc - obiekt klasy GridBagConstraints
      */
     public GridBagConstraints gbcCustomize(int gridX, int gridY, double weightX, double weightY, int gridWidth, String whichDirection){
         gbc.gridwidth = gridWidth;

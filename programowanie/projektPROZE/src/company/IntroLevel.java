@@ -109,6 +109,7 @@ public class IntroLevel extends JPanel{
     }
     /**
      * Metoda nadpisująca metodę paintComponent w celu przeskalowania obrazka w tle oraz rysowania obiektów z gry
+     * @param g - obiekt klasy Graphics
      */
     @Override
     protected void paintComponent(Graphics g) {
@@ -140,7 +141,7 @@ public class IntroLevel extends JPanel{
      * oraz rozpoczęcie poziomu
      */
     private void startLevel(){
-        newWindow.layoutMakerIntroLevel(this);
+        newWindow.layoutMaker(this);
         add(new Level(getWidth(),getHeight(), level, lives, points, nick, this.backgroundImage),newWindow.buttonsClickedBehaviour());
     }
 

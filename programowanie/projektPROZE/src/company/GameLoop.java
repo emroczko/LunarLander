@@ -18,6 +18,10 @@ public class GameLoop implements ActionListener{
         this.level = level;
     }
 
+    /**
+     * Metoda wywołująca pojedynczą pętlę gry
+     * @param a - obiekt klasy ActionEvent
+     */
     @Override
     public void actionPerformed(ActionEvent a) {
         this.level.doOneLoop();

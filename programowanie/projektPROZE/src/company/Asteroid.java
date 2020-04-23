@@ -6,9 +6,13 @@ import java.awt.geom.Rectangle2D;
 /** Klasa odpowiedzialna za tworzenie asteroid*/
 public class Asteroid extends Sprite {
 
+    /** Obiekt klasy Level**/
     private Level level;
+    /** Prędkość asteroidy w poziomie**/
     private int velx;
+    /** Prędkość asteroidy w pionie**/
     private int vely;
+    /** Zmienna określająca kierunek asteroidy**/
     private int direction;
 
     /**

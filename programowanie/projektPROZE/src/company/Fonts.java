@@ -12,7 +12,7 @@ public class Fonts {
     public Fonts(){ }
 
     /**
-     * Klasa dostosowująca czcionkę użytą w grze
+     * Metoda tworząca czcionkę z pliku
      * @param size - rozmiar czcionki
      * @return font - czcionka
      */

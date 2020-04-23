@@ -64,7 +64,9 @@ public class Menu extends JPanel{
         setPreferredSize(new Dimension(PropertiesLoad.xSize, PropertiesLoad.ySize));
     }
 
-    /** metoda przesłaniająca metodę paintComponent, w celu odpowiedniego skalowania obrazka w tle*/
+    /** metoda przesłaniająca metodę paintComponent, w celu odpowiedniego skalowania obrazka w tle
+     * @param g - obiekt klasy Graphics
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -95,7 +97,6 @@ public class Menu extends JPanel{
         ActionListener actionListener = new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
-
                 cleanWindow();
                add(new Ranking(getWidth(),getHeight()), newWindow.buttonsClickedBehaviour());
             }
@@ -112,7 +113,6 @@ public class Menu extends JPanel{
         ActionListener actionListener = new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
-
                 cleanWindow();
                 add(new Instructions(getWidth(),getHeight()), newWindow.buttonsClickedBehaviour());
             }
@@ -138,7 +138,7 @@ public class Menu extends JPanel{
      * Odpowiada za wywołanie metody obiektu klasy NewWindow służącej do usunięcia wszystkich elemntów z obecnego JPanelu
      */
     private void cleanWindow(){
-        newWindow.layoutMakerMenu(this);
+        newWindow.layoutMaker(this);
     }
 
 

@@ -43,11 +43,13 @@ public class PropertiesLoad {
     static int[] yLanding;
     /** Określa przyśpieszenie grawitacyjne na danej mapie*/
     static float mapGravity;
-    /** */
+    /** Ilość poziomów*/
     static int numberOfLevels;
 
-        /** Metoda wczytuje dane z lokalnego pliku i zapisuje do odpowiednich pól w klasie */
-        static void loadProps() throws IOException {
+     /** Metoda wczytuje dane z lokalnego pliku i zapisuje do odpowiednich pól w klasie
+     * @throws IOException
+     */
+    static void loadProps() throws IOException {
 
             InputStream propertiesFile = new FileInputStream("Config.txt");
             Properties gameProps = new Properties();
@@ -65,7 +67,12 @@ public class PropertiesLoad {
             numberOfLevels = Integer.parseInt(gameProps.getProperty("numberOfLevels"));
             propertiesFile.close();
         }
-        /** metoda wczytująca współrzędne ukształtowania planet (Hit Box) i jej współczynnik grawitacji */
+
+    /**
+     * Metoda wczytująca współrzędne ukształtowania planet (Hit Box) i jej współczynnik grawitacji
+     * @param levelnumber - numer poziomu, którego ww. dane mają zostać wczytane
+     * @throws IOException
+     */
         static void loadMapsConfigs(int levelnumber) throws IOException{
             InputStream propertiesFile_maps = new FileInputStream("Maps.txt");
             Properties mapProps = new Properties();

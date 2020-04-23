@@ -72,14 +72,18 @@ public class Ranking extends JPanel{
         this.MainMenuImage = ImageFactory.createImage(Image.MainMenu);
     }
 
-    /** metoda przesłaniająca metodę paintComponent, w celu odpowiedniego skalowania obrazka w tle*/
+    /** metoda przesłaniająca metodę paintComponent, w celu odpowiedniego skalowania obrazka w tle
+     * @param g - obiekt klasy Graphics
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(MainMenuImage.getImage(), 0, 0, this.getWidth(), this.getHeight(), null);
     }
+
     /**
      * Odpowiada za wygląd graficznej tabeli
+     * @param ranking - Obiekt klasy JTabel - graficzna tabela
      */
     private void tableCustomizer(JTable ranking){
         ranking.setOpaque(true);
@@ -106,7 +110,7 @@ public class Ranking extends JPanel{
      * Odpowiada za wywołanie metody obiektu klasy NewWindow służącej do usunięcia wszystkich elemntów z obecnego JPanelu
      */
     private void cleanWindow(){
-        newWindow.layoutMakerRanking(this);
+        newWindow.layoutMaker(this);
     }
 }
 
