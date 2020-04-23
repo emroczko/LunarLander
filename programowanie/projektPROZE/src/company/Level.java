@@ -75,8 +75,8 @@ public class Level extends JPanel{
 
     public Level(int xSize, int ySize, int levelNumber, int Lives, int previousPoints, String nickName, ImageIcon background) {
         this.removeAll();
-        this.repaint();
-        this.revalidate();
+        repaint();
+        revalidate();
 
         nick = nickName;
         levelNum = levelNumber;
@@ -409,12 +409,12 @@ public class Level extends JPanel{
     private void wreckedShip(){
         if(leftLives == 0) {
             countPoints();
-            cleanWindow();
-            add(new LostGame(getWidth(), getHeight(), points, nick), newWindow.buttonsClickedBehaviour());
+            //cleanWindow();
+            add(new LostGame(getWidth(), getHeight(), points, nick), buttonsClickedBehaviour());
         }
         else{
-            cleanWindow();
-            add(new Level(getWidth(), getHeight(), levelNum, leftLives - 1, points, nick, this.backgroundImage), newWindow.buttonsClickedBehaviour());
+            //cleanWindow();
+            add(new Level(getWidth(), getHeight(), levelNum, leftLives - 1, points, nick, this.backgroundImage), buttonsClickedBehaviour());
         }
     }
     /**
@@ -518,6 +518,18 @@ public class Level extends JPanel{
             }
         };
         return newAction;
+    }
+
+    private GridBagConstraints buttonsClickedBehaviour(){
+        removeAll();
+        repaint();
+        revalidate();
+        setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+        gbc.fill = GridBagConstraints.BOTH;
+        return gbc;
     }
 
     /**
