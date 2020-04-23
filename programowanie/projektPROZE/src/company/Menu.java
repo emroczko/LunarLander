@@ -10,8 +10,6 @@ import java.awt.event.ActionListener;
  */
 
 public class Menu extends JPanel{
-
-
     /** Zmienna przechowująca obrazek tła*/
     private ImageIcon MainMenuImage;
     /** Kolor niebieski używany w oknie*/
@@ -24,10 +22,13 @@ public class Menu extends JPanel{
     GridBagConstraintsMaker customGBC = new GridBagConstraintsMaker();
     /** Obiekt klasy NewWindow **/
     NewWindow newWindow = new NewWindow();
-
+    /** Przycisk Start **/
     JButton startButton = new JButton("Start!");
+    /** Przycisk Best Scores **/
     JButton rankingButton = new JButton("Best Scores");
+    /** Przycisk Exit **/
     JButton exitButton = new JButton("Exit");
+    /** Przycisk Instructions **/
     JButton instructionsButton = new JButton("Instructions");
 
 
