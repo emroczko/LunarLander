@@ -16,7 +16,7 @@ public class Instructions extends JPanel{
     NewWindow newWindow = new NewWindow();
     /** Przycisk back **/
     JButton backButton = new JButton("Back");
-    /** Zmienna przechowująca obrazek tła*/
+    /**Zmienna przechowująca obrazek okna*/
     private ImageIcon MainMenuImage;
     /** Zmienne przechowująca wielkość poprzedniego okna*/
     private int a, b;
@@ -42,7 +42,7 @@ public class Instructions extends JPanel{
 
         backButton.addActionListener(returnToMainMenuButtonListener());
         customButton.customizer(backButton);
-        this.add(backButton, customGBC.gbcCustomize(0,0,0,0,0,"LAST_LINE_END"));
+        this.add(backButton, customGBC.gbcCustomize(0,0,1,1,0,"LAST_LINE_END"));
     }
 
     /** metoda inicjalizująca obrazek tła za pomocą metody obiektu ImageFactory*/
