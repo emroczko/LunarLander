@@ -9,6 +9,12 @@ import javax.swing.*;
 
 
 public class ImageFactory {
+
+    /**
+     * Metoda tworząca obiekt klasy ImageIcon z odpowiedniej ścieżki
+     * @param image - nazwa obrazka z klasy Image
+     * @return imageIcon - utworzony obiekt klasy ImageIcon z odpowiednim obrazkiem
+     */
     public static ImageIcon createImage(Image image) {
         ImageIcon imageIcon = null;
 
