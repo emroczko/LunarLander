@@ -45,6 +45,10 @@ public class GridBagConstraintsMaker {
                 break;
             case "FIRST_LINE_END": gbc.anchor = GridBagConstraints.FIRST_LINE_END;
                 break;
+            case "SOUTH": gbc.anchor=GridBagConstraints.SOUTH;
+                break;
+            case "NORTH": gbc.anchor = GridBagConstraints.NORTH;
+                break;
             case "FIRST_LINE_START": gbc.anchor = GridBagConstraints.FIRST_LINE_START;
                 break;
             case "NORTHWEST": gbc.anchor = GridBagConstraints.NORTHWEST;
