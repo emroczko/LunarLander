@@ -13,9 +13,9 @@ import java.util.Scanner;
 public class RankingSaver {
 
     private static ArrayList<String> nick;
-    private String[] nicks;
     private static ArrayList<Integer> points;
-    private int i = 0;
+    private int[] max_ranking_points;
+    private String[] max_ranking_names;
 
     public RankingSaver(){
         nick = new ArrayList<String>();
@@ -40,37 +40,41 @@ public class RankingSaver {
             }
             int[] max_ranking_points = {0, 0, 0, 0, 0};
             String[] max_ranking_names = {"", "", "", ""};
-            //System.out.println(max_ranking_points.length);
-
             for(int i=0; i<max_ranking_points.length-1; i++){
                 for(int j=0; j<points.size(); j++) {
                     if (i==0){
                         if(points.get(j)>max_ranking_points[i]){
                             max_ranking_points[i] = points.get(j);
+                            max_ranking_names[i] = nick.get(j);
                             points.remove(j);
+                            nick.remove(j);
                         }
                     }
                     else{
                         if(points.get(j)>max_ranking_points[i] && points.get(j)<=max_ranking_points[i-1]){
                             max_ranking_points[i] = points.get(j);
+                            max_ranking_names[i] = nick.get(j);
                             points.remove(j);
+                            nick.remove(j);
                         }
                     }
                 }
-                System.out.println(max_ranking_points[i]);
             }
-            //System.out.println(max);
             scanner.close();
         }
         catch(Exception e){e.printStackTrace();}
     }
-    private static String[][] bestScores(String nick, String points){
+    private String[][] bestScores(String nick, String points){
+        try{
+            loadLocalRanking();
+        }
+        catch(Exception e){e.printStackTrace();}
         String[][] arrStr = new String[5][2];
         for (int i = 0; i < arrStr.length; i++) {
-            for (int j = 0; j < arrStr[i].length; j++) {
-                arrStr[i][j] = "Str" + j;
-            }
+            arrStr[i][0] = max_ranking_names[i];
+            arrStr[i][i] = Integer.toString(max_ranking_points[i]);
         }
         return arrStr;
+
     }
 }
