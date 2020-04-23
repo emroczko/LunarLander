@@ -20,7 +20,7 @@ public class NewWindow extends JPanel {
         gbc.fill = GridBagConstraints.BOTH;
         return gbc;
     }
-    
+
     /**
      * Metoda czyszcząca i usuwająca wszystkie elementy z panelu
      * @param panel - panel który ma zostać wyczyszczony
