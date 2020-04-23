@@ -20,9 +20,6 @@ public class Instructions extends JPanel{
     JLabel lost =new JLabel("INSTRUCTIONS");
     /**Zmienna przechowująca obrazek okna*/
     private ImageIcon MainMenuImage;
-
-    /** Zmienna przechowująca nick gracza*/
-    private String nick;
     /** Zmienne przechowująca wielkość poprzedniego okna*/
     private int a, b;
     /** Kolor czcionki używanej w oknie*/
@@ -47,7 +44,7 @@ public class Instructions extends JPanel{
 
         backButton.addActionListener(returnToMainMenuButtonListener());
         customButton.customizer(backButton);
-        this.add(backButton, customGBC.gbcCustomize(0,0,0,0,0,"LAST_LINE_END"));
+        this.add(backButton, customGBC.gbcCustomize(0,0,1,1,0,"LAST_LINE_END"));
     }
 
     /** metoda inicjalizująca obrazek tła za pomocą metody obiektu ImageFactory*/
