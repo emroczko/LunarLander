@@ -18,13 +18,14 @@ public class ServerCommands {
             case "GetLevel":
                 serverMessage = PropertiesLoad.loadMapsConfigs(Integer.parseInt(commands[1]));
                 break;
-           /*case "GetRanking":
-                serverMessage = Ranking.getRanking();
+           case "GetRanking":
+               RankingLoad.bestScores();
+                serverMessage = "Ranking loaded";
                 break;
-            case "SaveScore":
-                Ranking.saveScore(commands[1],commands[2]);
+           case "SaveScore":
+                RankingSaver.saveToFile(commands[1],Integer.parseInt(commands[2]));
                 serverMessage = "Score saved";
-                break;*/
+                break;
             default:
                 serverMessage = "Invalid command";
         }
