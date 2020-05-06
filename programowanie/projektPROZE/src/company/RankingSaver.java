@@ -19,4 +19,7 @@ public class RankingSaver {
         writer.append(nick + "=" + points + "\n");
         writer.close();
     }
+    static void saveToServer(String nick, int points) throws IOException {
+
+    }
 }
