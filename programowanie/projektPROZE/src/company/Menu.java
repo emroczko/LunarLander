@@ -34,6 +34,7 @@ public class Menu extends JPanel{
     /**konstruktor klasy*/
     public Menu() {
         this.removeAll();
+        Client.Connect("127.0.1.1", 2222);
         initializeLayout();
         initializeVariables();
 
