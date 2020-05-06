@@ -27,6 +27,15 @@ public class Server {
                 Socket clientSocket = ss.accept();
                 PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
                 BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                String fromClient = in.readLine();
+                if (fromClient != null) {
+                    System.out.println("From client: " + fromClient);
+                    String serverRespond = ServerCommands.serverAction(fromClient);
+                    out.println(serverRespond);
+                    out.flush();
+                    System.out.println("Server respond: " + serverRespond);
+                    break;
+                }
             }
             catch(Exception e){e.printStackTrace();}
         }
