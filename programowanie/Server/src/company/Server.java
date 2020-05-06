@@ -8,12 +8,19 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Server {
+    /** Zmienna przechowująca port serwera*/
     int port;
+    /**Konstruktor serwera*/
     public Server() throws IOException {
         PropertiesLoad.loadPort();
         port = PropertiesLoad.port;
     }
-    public void run() throws IOException, InterruptedException{
+
+    /**
+     *
+     * @throws IOException
+     */
+    public void run() throws IOException{
         ServerSocket ss = new ServerSocket(port);
         while(true){
             try{
