@@ -130,25 +130,22 @@ public class ConnectionWelcomeMenu extends JPanel{
      * @return actionListener - obiekt klasy ActionListener
      */
     private ActionListener startOfflineListener() {
-
         ActionListener actionListener = new ActionListener() {
-
             public void actionPerformed(ActionEvent e) {
                 cleanWindow();
                 add(new Menu(), newWindow.buttonsClickedBehaviour());
             }
         };
-
         return actionListener;
     }
     /**
 
      */
     private void startOnline(){
-        ip = enterIP.getText();
-        port= Integer.parseInt(enterPort.getText());
+        //ip = enterIP.getText();
+        //port= Integer.parseInt(enterPort.getText());
         newWindow.layoutMaker(this);
-        Client.Connect(ip, port);
+        //Client.Connect(ip, port);
         add(new Menu(), newWindow.buttonsClickedBehaviour());
     }
     /**
