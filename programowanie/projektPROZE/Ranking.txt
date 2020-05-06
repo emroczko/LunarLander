@@ -1,1 +1,12 @@
-Your nick...=830
+Your nick...=2530
+unknown=1450
+UNKNOWN=1210
+UNKNOWN=1500
+UNKNOWN=2050
+eryk=1500
+ok=1110
+kkk=1350
+kkk=1570
+kkk=5310
+elyk=3710
+ERYK=6490
