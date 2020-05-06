@@ -10,14 +10,10 @@ import java.net.UnknownHostException;
 public class Client {
 
     private static Socket socket;
-<<<<<<< HEAD
     /**Zmienna przechowująca adres ip serwera*/
-=======
->>>>>>> 505455e143644beeb11f1fc8bd94f4c3d40c1f14
     static String Address;
     /**Zmienna przechowująca numer portu serwera*/
     static int Port;
-<<<<<<< HEAD
     /**Zmienna określająca czy jesteśmy online*/
     static boolean online = false;
 
@@ -33,15 +29,7 @@ public class Client {
         Address = address;
         Port = port;
         System.out.println("Connected");
-=======
-    static boolean online;
->>>>>>> 505455e143644beeb11f1fc8bd94f4c3d40c1f14
 
-    static void Connect(String address, int port) throws UnknownHostException, IOException {
-        socket = new Socket(address, port);
-        Address = address;
-        Port = port;
-        System.out.println("Connected");
     }
 
     /**
