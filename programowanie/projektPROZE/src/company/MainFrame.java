@@ -19,7 +19,7 @@ public class MainFrame extends JFrame {
     private void initializeLayout() {
         setTitle("Lunar Lander");
         setIconImage(ImageFactory.createImage(Image.Lander).getImage());
-        add(new Menu());
+        add(new ConnectionWelcomeMenu());
         pack();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
