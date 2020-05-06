@@ -7,7 +7,7 @@ import java.net.UnknownHostException;
 
 public class Client {
     private static Socket socket;
-    static boolean offline = true;
+    static boolean online;
     public static void Connect(String address, int port) throws UnknownHostException, IOException {
             socket = new Socket(address, port);
             System.out.println("Connected");
