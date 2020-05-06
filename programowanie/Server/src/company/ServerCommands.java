@@ -12,16 +12,16 @@ public class ServerCommands {
         String serverMessage;
         String[] commands = command.split("-");
         switch (commands[0]) {
-            case "getConfig":
+            case "GetConfigs":
                 serverMessage = PropertiesLoad.loadConfig();
                 break;
-            case "getLevel":
+            case "GetLevel":
                 serverMessage = PropertiesLoad.loadMapsConfigs(Integer.parseInt(commands[1]));
                 break;
-           /*case "getRanking":
+           /*case "GetRanking":
                 serverMessage = Ranking.getRanking();
                 break;
-            case "saveScore":
+            case "SaveScore":
                 Ranking.saveScore(commands[1],commands[2]);
                 serverMessage = "Score saved";
                 break;*/
