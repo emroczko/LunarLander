@@ -85,7 +85,8 @@ public class WonGame extends JPanel{
      */
     private void save(){
         try {
-            RankingSaver.saveToFile(nick, points);
+            if (Client.online) RankingSaver.saveToServer(nick, points);
+            if (!Client.online) RankingSaver.saveToFile(nick, points);
         }
         catch(Exception E){
             E.printStackTrace();

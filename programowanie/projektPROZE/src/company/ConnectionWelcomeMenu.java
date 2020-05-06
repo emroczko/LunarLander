@@ -135,6 +135,7 @@ public class ConnectionWelcomeMenu extends JPanel{
     private ActionListener startOfflineListener() {
         ActionListener actionListener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                Client.online = false;
                 cleanWindow();
                 add(new Menu(), newWindow.buttonsClickedBehaviour());
             }
@@ -149,12 +150,17 @@ public class ConnectionWelcomeMenu extends JPanel{
             ip = enterIP.getText();
             port = Integer.parseInt(enterPort.getText());
             Client.Connect(ip, port);
+<<<<<<< HEAD
             Client.offline = false;
             //PropertiesLoad.loadPropsServer();
+=======
+            Client.online = true;
+>>>>>>> 947311be07a77d5919a7c31ce6602474914d3b57
             newWindow.layoutMaker(this);
             add(new Menu(), newWindow.buttonsClickedBehaviour());
         }
         catch(IOException e){
+            Client.online = false;
             JOptionPane.showMessageDialog(new JFrame(), "Incorrect data or server offline", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }

@@ -81,8 +81,8 @@ public class RankingLoader {
      */
     public String[][] bestScores(){
         try{
-            if(!Client.offline) loadServerRanking();
-            if(Client.offline) loadLocalRanking();
+            if(Client.online) loadServerRanking();
+            if(!Client.online) loadLocalRanking();
         }
         catch(Exception e){e.printStackTrace();}
         String[][] arrStr = new String[5][2];
