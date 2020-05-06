@@ -10,7 +10,7 @@ import java.net.Socket;
 public class Server {
     /** Zmienna przechowująca port serwera*/
     int port;
-    /**Konstruktor serwera*/
+    /**Konstruktor serwera przydzielający numer portu pobrany z pliku konfiguracyjnego*/
     public Server() throws IOException {
         PropertiesLoad.loadPort();
         port = PropertiesLoad.port;
