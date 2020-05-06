@@ -1,4 +1,3 @@
-Your nick...=2530
 unknown=1450
 UNKNOWN=1210
 UNKNOWN=1500
