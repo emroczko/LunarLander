@@ -452,7 +452,7 @@ public class Level extends JPanel{
         }
         else{
             inGame=false;
-            add(new Level(getWidth(), getHeight(), levelNum, leftLives - 1, points, nick, this.backgroundImage), buttonsClickedBehaviour());
+            add(new Level(getWidth(), getHeight(), levelNum, leftLives - 1, prevPoints, nick, this.backgroundImage), buttonsClickedBehaviour());
         }
     }
     /**
