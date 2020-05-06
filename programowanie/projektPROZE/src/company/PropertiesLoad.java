@@ -66,8 +66,15 @@ public class PropertiesLoad {
             propertiesFile.close();
         }
 
+    /** Metoda wczytuje dane z serwera i zapisuje do odpowiednich pól w klasie
+     * @throws IOException
+     */
+    static void loadPropsServer() throws IOException {
+
+    }
+
     /**
-     * Metoda wczytująca współrzędne ukształtowania planet (Hit Box) i jej współczynnik grawitacji
+     * Metoda wczytująca współrzędne ukształtowania planet (Hit Box) i jej współczynnik grawitacji z pliku lokalnego
      * @param levelnumber - numer poziomu, którego ww. dane mają zostać wczytane
      * @throws IOException
      */
@@ -82,6 +89,16 @@ public class PropertiesLoad {
             mapGravity = Float.parseFloat(mapProps.getProperty("gravity"+levelnumber));
             propertiesFile_maps.close();
         }
+
+    /**
+     * Metoda wczytująca współrzędne ukształtowania planet (Hit Box) i jej współczynnik grawitacji z serwera
+     * @param levelnumber - numer poziomu, którego ww. dane mają zostać wczytane
+     * @throws IOException
+     */
+    static void loadMapsConfigsServer(int levelnumber) throws IOException{
+
+    }
+
 
 
 }

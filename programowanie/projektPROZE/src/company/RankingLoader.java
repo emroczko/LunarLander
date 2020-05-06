@@ -27,7 +27,7 @@ public class RankingLoader {
     }
 
     /**
-     * Wczytuje wszystkie wyniki z pliku "Ranking.txt" i wybiera 5 najlepszych
+     * Wczytuje wszystkie wyniki z pliku "Ranking.txt"
      */
     private void loadLocalRanking(){
         try{
@@ -37,38 +37,52 @@ public class RankingLoader {
                 nick.add(temp[0]);
                 points.add(Integer.parseInt(temp[1]));
             }
-            max_ranking_points = new int[]{0, 0, 0, 0, 0};
-            max_ranking_names = new String[]{"", "", "", "", ""};
-            for(int i=0; i<max_ranking_points.length; i++){
-                int max = 0;
-                int index = 0;
-                for(int j=0; j<points.size(); j++) {
-                    if (points.get(j)>=max)
-                    {
-                        max =points.get(j);
-                        index = j;
-                    }
-                }
-                if (points.size() != 0) {
-                    max_ranking_points[i] = points.get(index);
-                    max_ranking_names[i] = nick.get(index);
-                    nick.remove(index);
-                    points.remove(index);
-                }
-            }
+            parser();
             scanner.close();
         }
-
         catch(Exception e){e.printStackTrace();}
     }
 
+    /**
+     * Wybiera 5 najlepszych wyników
+     */
+    private void parser(){
+        max_ranking_points = new int[]{0, 0, 0, 0, 0};
+        max_ranking_names = new String[]{"", "", "", "", ""};
+        for(int i=0; i<max_ranking_points.length; i++){
+            int max = 0;
+            int index = 0;
+            for(int j=0; j<points.size(); j++) {
+                if (points.get(j)>=max)
+                {
+                    max =points.get(j);
+                    index = j;
+                }
+            }
+            if (points.size() != 0) {
+                max_ranking_points[i] = points.get(index);
+                max_ranking_names[i] = nick.get(index);
+                nick.remove(index);
+                points.remove(index);
+            }
+        }
+    }
+    /**
+     * Wczytuje wszystkie wyniki z serwera
+     */
+    private void loadServerRanking(){
+        try {
+        }
+        catch(Exception e){e.printStackTrace();}
+    }
     /**
      * Tworzy tablicę 2 wymiarową wypełnioną wartościami wczytanymi przez funkcję loadLocalRanking
      * @return zwraca tablice 2 wymiarową
      */
     public String[][] bestScores(){
         try{
-            loadLocalRanking();
+            if(!Client.offline) loadServerRanking();
+            if(Client.offline) loadLocalRanking();
         }
         catch(Exception e){e.printStackTrace();}
         String[][] arrStr = new String[5][2];

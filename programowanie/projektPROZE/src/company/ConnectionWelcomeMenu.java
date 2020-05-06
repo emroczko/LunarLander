@@ -145,13 +145,6 @@ public class ConnectionWelcomeMenu extends JPanel{
 
      */
     private void startOnline(){
-<<<<<<< HEAD
-        //ip = enterIP.getText();
-        //port= Integer.parseInt(enterPort.getText());
-        newWindow.layoutMaker(this);
-        //Client.Connect(ip, port);
-        add(new Menu(), newWindow.buttonsClickedBehaviour());
-=======
         try {
             ip = enterIP.getText();
             port = Integer.parseInt(enterPort.getText());
@@ -162,7 +155,6 @@ public class ConnectionWelcomeMenu extends JPanel{
         catch(IOException e){
             JOptionPane.showMessageDialog(new JFrame(), "Incorrect data or server offline", "Error", JOptionPane.ERROR_MESSAGE);
         }
->>>>>>> e380c2e6521ae104a76f123593397147e1f5cd12
     }
     /**
      * Odpowiada za przypisanie akcji przyciskowi EXIT

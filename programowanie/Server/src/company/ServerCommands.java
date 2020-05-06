@@ -13,10 +13,10 @@ public class ServerCommands {
         String[] commands = command.split("-");
         switch (commands[0]) {
             case "getConfig":
-                serverMessage = PropertiesLoader.loadConfig();
+                serverMessage = PropertiesLoad.loadConfig();
                 break;
             case "getLevel":
-                serverMessage = PropertiesLoader.loadLevel(Integer.parseInt(commands[1]));
+                serverMessage = PropertiesLoad.loadMapsConfigs(Integer.parseInt(commands[1]));
                 break;
            /*case "getRanking":
                 serverMessage = Ranking.getRanking();

@@ -33,15 +33,15 @@ public class PropertiesLoad {
         }
         return configs;
     }
-    static String loadMapsConfigs(int levelnumber) throws IOException{
+    static String loadMapsConfigs(int levelNumber) throws IOException{
         InputStream propertiesFile = new FileInputStream("Maps.txt");
         Properties mapProps = new Properties();
         mapProps.load(propertiesFile);
-        int[] xPoints = Arrays.stream(mapProps.getProperty("xpoints"+levelnumber).split("-")).mapToInt(Integer::parseInt).toArray();
-        int[] yPoints = Arrays.stream(mapProps.getProperty("ypoints"+levelnumber).split("-")).mapToInt(Integer::parseInt).toArray();
-        int[] xLanding = Arrays.stream(mapProps.getProperty("xlanding"+levelnumber).split("-")).mapToInt(Integer::parseInt).toArray();
-        int[] yLanding = Arrays.stream(mapProps.getProperty("ylanding"+levelnumber).split("-")).mapToInt(Integer::parseInt).toArray();
-        float mapGravity = Float.parseFloat(mapProps.getProperty("gravity"+levelnumber));
+        int[] xPoints = Arrays.stream(mapProps.getProperty("xpoints"+levelNumber).split("-")).mapToInt(Integer::parseInt).toArray();
+        int[] yPoints = Arrays.stream(mapProps.getProperty("ypoints"+levelNumber).split("-")).mapToInt(Integer::parseInt).toArray();
+        int[] xLanding = Arrays.stream(mapProps.getProperty("xlanding"+levelNumber).split("-")).mapToInt(Integer::parseInt).toArray();
+        int[] yLanding = Arrays.stream(mapProps.getProperty("ylanding"+levelNumber).split("-")).mapToInt(Integer::parseInt).toArray();
+        float mapGravity = Float.parseFloat(mapProps.getProperty("gravity"+levelNumber));
         return (Arrays.toString(xPoints) + ";" +  Arrays.toString(yPoints) + ";" + Arrays.toString(xLanding) + ";" +
                 Arrays.toString(yLanding) + ";" + Float.toString(mapGravity)).replace("[","")
                 .replace("]","").replace(",", "").trim();

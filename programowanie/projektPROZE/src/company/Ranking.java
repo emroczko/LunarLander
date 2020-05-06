@@ -53,7 +53,6 @@ public class Ranking extends JPanel{
         setPreferredSize(new Dimension(a,b));
         initializeVariables();
         this.setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
 
         backButton.addActionListener(returnToMainMenuButtonListener());
 
