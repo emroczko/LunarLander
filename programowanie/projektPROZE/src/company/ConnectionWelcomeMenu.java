@@ -156,7 +156,7 @@ public class ConnectionWelcomeMenu extends JPanel{
             add(new Menu(), newWindow.buttonsClickedBehaviour());
         }
         catch(IOException e){
-            JOptionPane.showMessageDialog(new JFrame(), "Incorrect data", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(new JFrame(), "Incorrect data or server offline", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
     /**
