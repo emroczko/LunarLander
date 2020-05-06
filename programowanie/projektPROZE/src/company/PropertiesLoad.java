@@ -70,7 +70,19 @@ public class PropertiesLoad {
      * @throws IOException
      */
     static void loadPropsServer() throws IOException {
-
+            String serv_response = Client.getConfigs();
+            double[] configs = Arrays.stream(serv_response.split(";")).mapToDouble(Double::parseDouble).toArray();
+            xSize = (int)configs[0];
+            ySize = (int)configs[1];
+            LanderWidth = (int)configs[2];
+            enginePowerVx = (int)configs[3];
+            enginePowerVy = (float)configs[4];
+            fuelAmount = (int)configs[5];
+            numberOfLives = (int)configs[6];
+            bonusPerSecond = (int)configs[7];
+            bonusPerFuel = (int)configs[8];
+            maxPointsAmount = (int)configs[9];
+            numberOfLevels = (int)configs[10];
     }
 
     /**
@@ -96,7 +108,13 @@ public class PropertiesLoad {
      * @throws IOException
      */
     static void loadMapsConfigsServer(int levelnumber) throws IOException{
-
+            String serv_response = Client.getLevel(levelnumber);
+            String[] configs = serv_response.split(";");
+            xPoints = Arrays.stream(configs[0].split(" ")).mapToInt(Integer::parseInt).toArray();
+            yPoints = Arrays.stream(configs[1].split(" ")).mapToInt(Integer::parseInt).toArray();
+            xLanding = Arrays.stream(configs[2].split(" ")).mapToInt(Integer::parseInt).toArray();
+            yLanding = Arrays.stream(configs[3].split(" ")).mapToInt(Integer::parseInt).toArray();
+            mapGravity = Float.parseFloat(configs[4]);
     }
 
 

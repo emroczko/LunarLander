@@ -149,6 +149,8 @@ public class ConnectionWelcomeMenu extends JPanel{
             ip = enterIP.getText();
             port = Integer.parseInt(enterPort.getText());
             Client.Connect(ip, port);
+            Client.offline = false;
+            //PropertiesLoad.loadPropsServer();
             newWindow.layoutMaker(this);
             add(new Menu(), newWindow.buttonsClickedBehaviour());
         }
