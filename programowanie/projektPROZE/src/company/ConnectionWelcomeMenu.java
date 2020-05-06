@@ -4,26 +4,48 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class ConnectionWelcomeMenu extends JPanel{
     /** Zmienna przechowująca obrazek tła*/
     private ImageIcon MainMenuImage;
+    /** Zmienna przechowująca ip serwera*/
+    private String ip;
+    /** Zmienna przechowująca port serwera*/
+    private String port;
     /** Kolor niebieski używany w oknie*/
     Color aqua = new Color (51, 134, 175);
     /** Kolor żółty używany w oknie*/
     Color citron = new Color (200, 220, 24);
     /** Obiekt klasy ButtonCustomizer **/
     ButtonCustomizer customButton = new ButtonCustomizer(true, citron, 32);
+    /** Obiekt klasy TextFieldCustomizer**/
+    TextFieldCustomizer customTextField = new TextFieldCustomizer(aqua, 24);
     /** Obiekt klasy GridBagConstraintsMaker**/
     GridBagConstraintsMaker customGBC = new GridBagConstraintsMaker();
+    /** Obiekt klasy LabelCustomizer **/
+    LabelCustomizer customLabel = new LabelCustomizer(aqua, 36);
+    /** Obiekt klasy LabelCustomizer **/
+    LabelCustomizer customLabelCitron = new LabelCustomizer(citron, 24);
     /** Obiekt klasy NewWindow **/
     NewWindow newWindow = new NewWindow();
     /** Przycisk Start **/
-    JButton startOfflineButton = new JButton("Start offline...");
+    JButton startOfflineButton = new JButton("Start offline");
     /** Przycisk Best Scores **/
-    JButton startOnlineButton = new JButton("Start online...");
+    JButton startOnlineButton = new JButton("Start online");
     /** Przycisk Exit **/
     JButton exitButton = new JButton("Exit");
+    /** Pole tekstowe do wpisania IP serwera **/
+    JTextField enterIP = new JTextField("Enter Server IP...");
+    /** Pole tekstowe do wpisania portu serwera **/
+    JTextField enterPort = new JTextField("Enter Server Port...");
+    /** Etykieta "Welcome!" **/
+    JLabel welcomeLabel =new JLabel("WELCOME!");
+    /** Etykieta "IP" **/
+    JLabel ipLabel =new JLabel("IP:");
+    /** Etykieta "PORT" **/
+    JLabel portLabel =new JLabel("Port:");
 
     /**konstruktor klasy*/
     public ConnectionWelcomeMenu(){
@@ -41,12 +63,34 @@ public class ConnectionWelcomeMenu extends JPanel{
         customButton.customizer(startOfflineButton);
         customButton.customizer(startOnlineButton);
         customButton.customizer(exitButton);
+        customTextField.customizer(enterIP);
+        customTextField.customizer(enterPort);
+        customLabel.customizer(welcomeLabel);
+        customLabelCitron.customizer(ipLabel);
+        customLabelCitron.customizer(portLabel);
+
+        enterIP.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e){
+                enterIP.setText("");
+            }
+        });
+        enterPort.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e){
+                enterPort.setText("");
+            }
+        });
 
 
-        this.add(startOfflineButton, customGBC.gbcCustomize(0,1,0,0.4,0,"NORTH"));
-        this.add(startOnlineButton, customGBC.gbcCustomize(2,1,0,0,0, "NORTH"));
-
-        this.add(exitButton, customGBC.gbcCustomize(1,4,0,0.1,0, "NORTH"));
+        this.add(startOfflineButton, customGBC.gbcCustomize(0,5,0,0,2, "none"));
+        this.add(startOnlineButton, customGBC.gbcCustomize(2,5,0,0,2, "none"));
+        this.add(exitButton, customGBC.gbcCustomize(1,6,0,0,3, "none"));
+        this.add(welcomeLabel, customGBC.gbcCustomize(1,2,0,0,3, "none"));
+        this.add(enterIP, customGBC.gbcCustomize(2,3,0,0,3, "none"));
+        this.add(enterPort, customGBC.gbcCustomize(2,4,0,0,3, "none"));
+        this.add(ipLabel, customGBC.gbcCustomize(0,3,0,0,3, "none"));
+        this.add(portLabel, customGBC.gbcCustomize(0,4,0,0,3, "none"));
     }
     /** metoda inicjalizująca obrazek tła za pomocą metody obiektu ImageFactory*/
     private void initializeVariables() {
@@ -75,8 +119,7 @@ public class ConnectionWelcomeMenu extends JPanel{
     private ActionListener startOnlineListener() {
         ActionListener actionListener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                cleanWindow();
-
+                startOnline();
             }
         };
         return actionListener;
@@ -98,7 +141,16 @@ public class ConnectionWelcomeMenu extends JPanel{
 
         return actionListener;
     }
+    /**
 
+     */
+    private void startOnline(){
+        ip = enterIP.getText();
+        port = enterIP.getText();
+        newWindow.layoutMaker(this);
+        add(new Menu(), newWindow.buttonsClickedBehaviour());
+
+    }
     /**
      * Odpowiada za przypisanie akcji przyciskowi EXIT
      * @return actionListener - obiekt klasy ActionListener

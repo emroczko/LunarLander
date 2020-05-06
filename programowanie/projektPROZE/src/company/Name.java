@@ -31,6 +31,8 @@ public class Name extends JPanel{
     LabelCustomizer customLabel = new LabelCustomizer(Color.lightGray, 36);
     /** Obiekt klasy ButtonCustomizer **/
     ButtonCustomizer customButton = new ButtonCustomizer(true, citron, 32);
+    /** Obiekt klasy TextFieldCustomizer**/
+    TextFieldCustomizer customTextField = new TextFieldCustomizer(aqua, 24);
     /** Obiekt klasy GridBagConstraintsMaker**/
     GridBagConstraintsMaker customGBC = new GridBagConstraintsMaker();
     /** Obiekt klasy NewWindow **/
@@ -59,7 +61,7 @@ public class Name extends JPanel{
         initializeVariables();
         this.setLayout(new GridBagLayout());
 
-        startButton.addActionListener(startButtonListener(enterName));
+        startButton.addActionListener(startButtonListener());
         backButton.addActionListener(backButtonListener());
 
         enterName.addMouseListener(new MouseAdapter(){
@@ -71,11 +73,10 @@ public class Name extends JPanel{
 
         customButton.customizer(startButton);
         customButton.customizer(backButton);
-
         customLabel.customizer(typeNick);
-        keyBindings(10);
+        customTextField.customizer(enterName);
 
-        textFieldCustomizer(enterName, aqua);
+        keyBindings(10);
 
         this.add(typeNick, customGBC.gbcCustomize(0,1,0,0,3, "none"));
         this.add(enterName, customGBC.gbcCustomize(1,2,0,0,2, "none"));
@@ -97,21 +98,10 @@ public class Name extends JPanel{
     }
 
     /**
-     * Odpowiada za kolor, czcionkę i wygląd pól tekstowych w oknie przed grą
-     * @param textField - pole tekstowe którego wygląd ma zostać zmodyfikowany
-     * @param color - kolor czcionki
-     */
-    private void textFieldCustomizer(JTextField textField, Color color){
-        textField.setBackground(Color.black);
-        textField.setFont(Fonts.getFont(24));
-        textField.setForeground(color);
-    }
-
-    /**
      * Odpowiada za przypisanie akcji przyciskowi START
      * @return actionListener - obiekt klasy ActionListener
      */
-    private ActionListener startButtonListener(JTextField enterName) {
+    private ActionListener startButtonListener() {
         ActionListener actionListener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 startLevel();

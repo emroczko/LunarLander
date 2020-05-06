@@ -56,6 +56,10 @@ public class GridBagConstraintsMaker {
                 break;
             case "SOUTHEAST": gbc.anchor = GridBagConstraints.SOUTHEAST;
                 break;
+            case "WEST": gbc.anchor = GridBagConstraints.WEST;
+                break;
+            case "EAST": gbc.anchor = GridBagConstraints.EAST;
+                break;
             case "none": break;
 
         }
