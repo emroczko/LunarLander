@@ -17,7 +17,6 @@ public class Client {
 
     }
     static String getProperty(String command) throws IOException {
-        System.out.println("aaaaaaaaaaaaaa");
         try {
             socket = new Socket(Address, Port);
         }
