@@ -121,14 +121,8 @@ public class Level extends JPanel{
 
 
         try {
-<<<<<<< HEAD
-            if(!Client.offline) PropertiesLoad.loadMapsConfigsServer(levelNumber);//SERVER
-            if(Client.offline) PropertiesLoad.loadMapsConfigs(levelNumber);
-=======
             if(Client.online) PropertiesLoad.loadMapsConfigs(levelNumber);//SERVER
             if(!Client.online) PropertiesLoad.loadMapsConfigs(levelNumber);
-            PropertiesLoad.loadMapsConfigs(levelNumber);
->>>>>>> 947311be07a77d5919a7c31ce6602474914d3b57
         } catch (Exception e) {
             e.printStackTrace();
         }
