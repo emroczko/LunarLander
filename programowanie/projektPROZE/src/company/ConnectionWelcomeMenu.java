@@ -13,7 +13,7 @@ public class ConnectionWelcomeMenu extends JPanel{
     /** Zmienna przechowująca ip serwera*/
     private String ip;
     /** Zmienna przechowująca port serwera*/
-    private String port;
+    private int port;
     /** Kolor niebieski używany w oknie*/
     Color aqua = new Color (51, 134, 175);
     /** Kolor żółty używany w oknie*/
@@ -146,10 +146,10 @@ public class ConnectionWelcomeMenu extends JPanel{
      */
     private void startOnline(){
         ip = enterIP.getText();
-        port = enterIP.getText();
+        port= Integer.parseInt(enterPort.getText());
         newWindow.layoutMaker(this);
+        Client.Connect(ip, port);
         add(new Menu(), newWindow.buttonsClickedBehaviour());
-
     }
     /**
      * Odpowiada za przypisanie akcji przyciskowi EXIT
