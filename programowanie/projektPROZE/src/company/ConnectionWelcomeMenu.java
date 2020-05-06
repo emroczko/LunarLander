@@ -6,6 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 public class ConnectionWelcomeMenu extends JPanel{
     /** Zmienna przechowująca obrazek tła*/
@@ -142,11 +145,24 @@ public class ConnectionWelcomeMenu extends JPanel{
 
      */
     private void startOnline(){
+<<<<<<< HEAD
         //ip = enterIP.getText();
         //port= Integer.parseInt(enterPort.getText());
         newWindow.layoutMaker(this);
         //Client.Connect(ip, port);
         add(new Menu(), newWindow.buttonsClickedBehaviour());
+=======
+        try {
+            ip = enterIP.getText();
+            port = Integer.parseInt(enterPort.getText());
+            Client.Connect(ip, port);
+            newWindow.layoutMaker(this);
+            add(new Menu(), newWindow.buttonsClickedBehaviour());
+        }
+        catch(IOException e){
+            JOptionPane.showMessageDialog(new JFrame(), "Incorrect data or server offline", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+>>>>>>> e380c2e6521ae104a76f123593397147e1f5cd12
     }
     /**
      * Odpowiada za przypisanie akcji przyciskowi EXIT
