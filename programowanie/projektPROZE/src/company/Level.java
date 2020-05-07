@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
+import java.util.Properties;
 import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -117,8 +118,6 @@ public class Level extends JPanel{
         leftLives = Lives;
         prevPoints = previousPoints;
         setPreferredSize(new Dimension(xSize, ySize));
-
-
 
         try {
             if(Client.online) PropertiesLoad.loadMapsConfigs(levelNumber);//SERVER

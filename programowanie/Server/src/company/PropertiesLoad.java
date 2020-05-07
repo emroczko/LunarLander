@@ -6,6 +6,9 @@ import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Properties;
 
+/**
+ * Klasa odpowiedzialna za wczytywanie danych z plików konfiguracyjnych i rankingu do serwera
+ */
 public class PropertiesLoad {
     static int port;
 
@@ -20,6 +23,12 @@ public class PropertiesLoad {
         port = Integer.parseInt(port_prop.getProperty("port"));
         propertiesFile.close();
     }
+
+    /**
+     * Wczytuje dane z pliku konfiguracyjnego
+     * @return zwraca dane z pliku konfiguracyjnego umieszczone wjendym stringu
+     * @throws IOException
+     */
     static String loadConfig() throws IOException{
         InputStream propertiesFile = new FileInputStream("Config.txt");
         Properties properties = new Properties();
@@ -33,6 +42,13 @@ public class PropertiesLoad {
         }
         return configs;
     }
+
+    /**
+     * Wczytuje dane z pliku konfiguracyjnego dla map
+     * @param levelNumber numer mapy która ma zostać wczytana
+     * @return zwraca dane konfiguracyjne mapy zamieszczone w jednym stringu
+     * @throws IOException
+     */
     static String loadMapsConfigs(int levelNumber) throws IOException{
         InputStream propertiesFile = new FileInputStream("Maps.txt");
         Properties mapProps = new Properties();

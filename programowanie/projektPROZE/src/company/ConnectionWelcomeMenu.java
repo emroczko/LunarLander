@@ -142,8 +142,9 @@ public class ConnectionWelcomeMenu extends JPanel{
         };
         return actionListener;
     }
-    /**
 
+    /**
+     * metoda próbująca utworzyć połączenie z serwerem
      */
     private void startOnline(){
         try {
@@ -151,12 +152,11 @@ public class ConnectionWelcomeMenu extends JPanel{
             port = Integer.parseInt(enterPort.getText());
             Client.Connect(ip, port);
             Client.online = true;
-
             newWindow.layoutMaker(this);
             add(new Menu(), newWindow.buttonsClickedBehaviour());
         }
         catch(IOException e){
-            Client.online = false;
+            //Client.online = false;
             JOptionPane.showMessageDialog(new JFrame(), "Incorrect data or server offline", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
