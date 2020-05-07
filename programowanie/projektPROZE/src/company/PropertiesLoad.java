@@ -115,6 +115,7 @@ public class PropertiesLoad {
             xLanding = Arrays.stream(configs[2].split(" ")).mapToInt(Integer::parseInt).toArray();
             yLanding = Arrays.stream(configs[3].split(" ")).mapToInt(Integer::parseInt).toArray();
             mapGravity = Float.parseFloat(configs[4]);
+
     }
 
 
