@@ -152,6 +152,13 @@ public class ConnectionWelcomeMenu extends JPanel{
             port = Integer.parseInt(enterPort.getText());
             Client.Connect(ip, port);
             Client.online = true;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+
+>>>>>>> 333d19181e1b98a0ff4525c9f59ed84f411198d3
+>>>>>>> ff9fbcad5c7f2899d3eac1557f794a2ebd4c7b8d
             newWindow.layoutMaker(this);
             add(new Menu(), newWindow.buttonsClickedBehaviour());
         }
