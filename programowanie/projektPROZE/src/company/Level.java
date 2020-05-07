@@ -120,8 +120,9 @@ public class Level extends JPanel{
         setPreferredSize(new Dimension(xSize, ySize));
 
         try {
-            if(Client.online) PropertiesLoad.loadMapsConfigsServer(levelNumber);
-            if(!Client.online) PropertiesLoad.loadMapsConfigs(levelNumber);
+            if(Client.online) {PropertiesLoad.loadMapsConfigsServer(levelNumber);}
+            else PropertiesLoad.loadMapsConfigs(levelNumber);
+
         } catch (Exception e) {
             e.printStackTrace();
         }

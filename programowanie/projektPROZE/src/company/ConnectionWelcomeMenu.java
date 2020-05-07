@@ -152,11 +152,11 @@ public class ConnectionWelcomeMenu extends JPanel{
             port = Integer.parseInt(enterPort.getText());
             Client.Connect(ip, port);
             Client.online = true;
+            JOptionPane.showMessageDialog(new JFrame(), "Connected successfully!", "Connected", JOptionPane.INFORMATION_MESSAGE);
             newWindow.layoutMaker(this);
             add(new Menu(), newWindow.buttonsClickedBehaviour());
         }
         catch(IOException e){
-            //Client.online = false;
             JOptionPane.showMessageDialog(new JFrame(), "Incorrect data or server offline", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }

@@ -37,7 +37,7 @@ public class Server {
                     out.println(serverRespond);
                     out.flush();
                     System.out.println("Server respond: " + serverRespond);
-                    break;
+                    //break;
                 }
             }
             catch(Exception e){e.printStackTrace();}
