@@ -25,8 +25,8 @@ public class Server {
     public void run() throws IOException{
         ServerSocket ss = new ServerSocket(port);
 
-        Timer serverTimer = new Timer(true);
-        serverTimer.scheduleAtFixedRate(new TimerTask() {    public void run() {
+      //  Timer serverTimer = new Timer(true);
+     //   serverTimer.scheduleAtFixedRate(new TimerTask() {    public void run() {
         while(true){
             try{
                 Socket clientSocket = ss.accept();
@@ -44,7 +44,7 @@ public class Server {
             }
             catch(Exception e){e.printStackTrace();}
         }
-            }
-        }, 0, 10);
+        //    }
+        //}, 0, 10);
     }
 }
