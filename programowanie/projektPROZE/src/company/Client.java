@@ -28,6 +28,7 @@ public class Client {
         socket = new Socket(address, port);
         Address = address;
         Port = port;
+        socket.close();
         System.out.println("Connected");
 
     }

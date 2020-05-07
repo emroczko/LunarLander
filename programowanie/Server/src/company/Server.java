@@ -6,8 +6,6 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Server {
     /** Zmienna przechowująca port serwera*/
@@ -25,8 +23,10 @@ public class Server {
     public void run() throws IOException{
         ServerSocket ss = new ServerSocket(port);
 
+
       //  Timer serverTimer = new Timer(true);
      //   serverTimer.scheduleAtFixedRate(new TimerTask() {    public void run() {
+
         while(true){
             try{
                 Socket clientSocket = ss.accept();
@@ -39,7 +39,7 @@ public class Server {
                     out.println(serverRespond);
                     out.flush();
                     System.out.println("Server respond: " + serverRespond);
-                    break;
+                    //break;
                 }
             }
             catch(Exception e){e.printStackTrace();}
