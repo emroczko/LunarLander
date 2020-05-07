@@ -22,9 +22,6 @@ public class Server {
      */
     public void run() throws IOException{
         ServerSocket ss = new ServerSocket(port);
-
-        //Timer serverTimer = new Timer(true);
-        //serverTimer.scheduleAtFixedRate(new TimerTask() {    public void run() {
         while(true){
             try{
                 Socket clientSocket = ss.accept();
@@ -37,12 +34,9 @@ public class Server {
                     out.println(serverRespond);
                     out.flush();
                     System.out.println("Server respond: " + serverRespond);
-                    //break;
                 }
             }
             catch(Exception e){e.printStackTrace();}
         }
-        //    }
-        //}, 0, 10);
     }
 }

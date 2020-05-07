@@ -43,7 +43,6 @@ public class PropertiesLoad {
     static float mapGravity;
     /** Ilość poziomów*/
     static int numberOfLevels;
-
      /** Metoda wczytuje dane z lokalnego pliku i zapisuje do odpowiednich pól w klasie
      * @throws IOException
      */
