@@ -18,8 +18,6 @@ public class ServerScreen extends JPanel {
 
         ip.setText("IP adress = " + InetAddress.getLocalHost());
         port.setText("Port = " + PropertiesLoad.port);
-
-
         this.add(ip);
         this.add(port);
 
