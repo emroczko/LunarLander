@@ -9,6 +9,7 @@ public class Main {
         EventQueue.invokeLater(() -> {
             try {
                 new MainFrame();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
