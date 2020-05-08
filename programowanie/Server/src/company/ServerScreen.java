@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 
 public class ServerScreen extends JPanel {
-    private static DefaultComboBoxModel<String> listModel = new DefaultComboBoxModel<>();
+    private static DefaultListModel listModel = new DefaultListModel();
     private JList list;
     private JScrollPane vertical;
     JLabel ip = new JLabel();
@@ -21,12 +21,13 @@ public class ServerScreen extends JPanel {
         initializeLayout();
         initializeVariables();
         this.setLayout(new GridBagLayout());
+        Server server = new Server();
+        server.run();
 
         ip.setText("IP adress = " + InetAddress.getLocalHost());
         port.setText("Port = " + PropertiesLoad.port);
 
-        Server server = new Server();
-        server.run();
+
         customizedLabel.customizer(ip);
         customizedLabel.customizer(port);
         listModel.addElement("Messages");
@@ -49,8 +50,18 @@ public class ServerScreen extends JPanel {
 
     }
 
-
-
+    /** metoda przesłaniająca metodę paintComponent, w celu odpowiedniego skalowania obrazka w tle
+     * @param g - obiekt klasy Graphics
+     */
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        update();
+    }
+    private void update(){
+        revalidate();
+        repaint();
+    }
     /** metoda inicjalizująca obrazek tła za pomocą metody obiektu ImageFactory*/
     private void initializeVariables() {
         this.setBackground(Color.BLACK);

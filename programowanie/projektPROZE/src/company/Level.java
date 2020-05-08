@@ -120,7 +120,10 @@ public class Level extends JPanel{
         setPreferredSize(new Dimension(xSize, ySize));
 
         try {
-            if(Client.online) {PropertiesLoad.loadMapsConfigsServer(levelNumber);}
+            if(Client.online) {
+                PropertiesLoad.loadPropsServer();
+                PropertiesLoad.loadMapsConfigsServer(levelNumber);
+                }
             else PropertiesLoad.loadMapsConfigs(levelNumber);
 
         } catch (Exception e) {
@@ -130,7 +133,7 @@ public class Level extends JPanel{
         this.backgroundImage = background;
 
 
-        initializeVariables(levelNumber);
+        initializeVariables();
 
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -186,7 +189,7 @@ public class Level extends JPanel{
     /**
      * Funkcja inicjująca zmienne klasy
      */
-    private void initializeVariables(int levelNumber){
+    private void initializeVariables(){
         setFocusable(true);
         asteroid_counter = 0;
         this.lander = new Lander(this);
