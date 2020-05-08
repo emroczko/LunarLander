@@ -28,7 +28,6 @@ public class Server {
      */
     public void run() throws IOException {
         ServerSocket ss = new ServerSocket(port);
-
         Timer serverTimer = new Timer(true);
         serverTimer.scheduleAtFixedRate(new TimerTask() {
             public void run() {
@@ -48,8 +47,6 @@ public class Server {
 
         }, 0,  10);
     }
-
-
     private void messagesFromClient(PrintWriter out, String fromClient) throws IOException {
         ServerScreen.addMessage("From client: " + fromClient);
         System.out.println("From client: " + fromClient);

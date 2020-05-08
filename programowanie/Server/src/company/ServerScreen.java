@@ -24,7 +24,7 @@ public class ServerScreen extends JPanel {
         Server server = new Server();
         server.run();
 
-        ip.setText("IP adress = " + InetAddress.getLocalHost());
+        ip.setText("IP adress = " + InetAddress.getLocalHost().getHostAddress());
         port.setText("Port = " + PropertiesLoad.port);
 
 
@@ -43,11 +43,9 @@ public class ServerScreen extends JPanel {
         vertical = new JScrollPane(list);
         vertical.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
-
         this.add(ip, customGBC.gbcCustomize(0,0,0,0,0,"none"));
         this.add(port, customGBC.gbcCustomize(0,1,0,0,0,"none"));
         this.add(vertical, customGBC.gbcCustomize(0,2,0,1,0,"none"));
-
     }
 
     /** metoda przesłaniająca metodę paintComponent, w celu odpowiedniego skalowania obrazka w tle
@@ -71,7 +69,6 @@ public class ServerScreen extends JPanel {
     private void initializeLayout() {
         setPreferredSize(new Dimension(700,500));
     }
-    public static void addMessage(String message){
-        listModel.addElement(message);
+    public static void addMessage(String message){ listModel.addElement(message);
     }
 }
