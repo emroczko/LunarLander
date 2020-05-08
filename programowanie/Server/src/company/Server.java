@@ -22,14 +22,6 @@ public class Server {
      */
     public void run() throws IOException{
         ServerSocket ss = new ServerSocket(port);
-<<<<<<< HEAD
-=======
-
-
-      //  Timer serverTimer = new Timer(true);
-     //   serverTimer.scheduleAtFixedRate(new TimerTask() {    public void run() {
-
->>>>>>> 3fa06f3be49e0623ff1b44e19722ef4a4f257a70
         while(true){
             try{
                 Socket clientSocket = ss.accept();
