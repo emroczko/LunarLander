@@ -19,8 +19,7 @@ public class ServerCommands {
                 serverMessage = PropertiesLoad.loadMapsConfigs(Integer.parseInt(commands[1]));
                 break;
            case "GetRanking":
-               RankingLoad.bestScores();
-                serverMessage = "Ranking loaded";
+                serverMessage = RankingLoad.passRanking();
                 break;
            case "SaveScore":
                 RankingSaver.saveToFile(commands[1],Integer.parseInt(commands[2]));

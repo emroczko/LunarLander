@@ -53,15 +53,6 @@ public class Server {
         };
         executor.scheduleAtFixedRate(timeOn, 1, 10, MILLISECONDS);
 
-        /*
-        Timer serverTimer = new Timer(true);
-        serverTimer.scheduleAtFixedRate(new TimerTask() {
-            public void run() {
-
-                ServerScreen.addMessage("wyszedlem");
-
-            }
-        }, 0,  10);*/
     }
     private void messagesFromClient(PrintWriter out, String fromClient) throws IOException {
        // ServerScreen.addMessage("dziala");

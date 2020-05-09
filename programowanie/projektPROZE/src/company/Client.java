@@ -63,6 +63,16 @@ public class Client {
     }
 
     /**
+     * Wysyła do serwera zapytanie o dane konfiguracyjne przy uzyciu metody getRanking z odpowiednią komendą
+     * @return zwraca ranking
+     * @throws IOException
+     */
+    static String getRanking() throws IOException{
+        String ranking = getProperty("GetRanking");
+        socket.close();
+        return ranking;
+    }
+    /**
      * Wysyła do serwera zapytanie o dane konfiguracyjne przy uzyciu metody getProperty z odpowiednią komendą
      * @param levelNumber numer poziomu którego dane konfiguracyjne chcemy otrzymać
      * @return zwraca dane konfiguracyjne poziomu
