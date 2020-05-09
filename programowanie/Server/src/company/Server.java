@@ -8,13 +8,19 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
+import static java.util.concurrent.TimeUnit.SECONDS;
 
 public class Server {
     /**
      * Zmienna przechowująca port serwera
      */
     int port;
-
+    /** Obiekt klasy ScheduledExecutorService **/
+    ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
     /**
      * Konstruktor serwera przydzielający numer portu pobrany z pliku konfiguracyjnego
      */
@@ -28,26 +34,37 @@ public class Server {
      */
     public void run() throws IOException {
         ServerSocket ss = new ServerSocket(port);
+
+        Runnable timeOn = () -> {
+
+            try {
+
+                Socket clientSocket = ss.accept();
+                PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+                BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                String fromClient = in.readLine();
+
+                if (fromClient != null) messagesFromClient(out, fromClient);
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        };
+        executor.scheduleAtFixedRate(timeOn, 1, 10, MILLISECONDS);
+
+        /*
         Timer serverTimer = new Timer(true);
         serverTimer.scheduleAtFixedRate(new TimerTask() {
             public void run() {
-                while (true) {
-                    try {
-                        Socket clientSocket = ss.accept();
-                        PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
-                        BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-                        String fromClient = in.readLine();
-                        if (fromClient != null) messagesFromClient(out, fromClient);
-                        break;
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-               }
-            }
 
-        }, 0,  10);
+                ServerScreen.addMessage("wyszedlem");
+
+            }
+        }, 0,  10);*/
     }
     private void messagesFromClient(PrintWriter out, String fromClient) throws IOException {
+       // ServerScreen.addMessage("dziala");
         ServerScreen.addMessage("From client: " + fromClient);
         System.out.println("From client: " + fromClient);
         String serverRespond = ServerCommands.serverAction(fromClient);

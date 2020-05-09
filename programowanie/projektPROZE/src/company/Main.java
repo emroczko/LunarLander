@@ -10,7 +10,7 @@ public class Main {
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
             try {
-                PropertiesLoad.loadProps();
+                PropertiesLoad.loadNecessaryProps();
             } catch (IOException e) {
                 e.printStackTrace();
             }
