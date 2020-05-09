@@ -21,6 +21,9 @@ public class Server {
     int port;
     /** Obiekt klasy ScheduledExecutorService **/
     ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+    ServerSocket ss = new ServerSocket(port);
+    boolean closeServer = false;
+
     /**
      * Konstruktor serwera przydzielający numer portu pobrany z pliku konfiguracyjnego
      */
@@ -33,12 +36,10 @@ public class Server {
      * @throws IOException
      */
     public void run() throws IOException {
-        ServerSocket ss = new ServerSocket(port);
 
         Runnable timeOn = () -> {
 
             try {
-
                 Socket clientSocket = ss.accept();
                 PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
                 BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
@@ -52,10 +53,9 @@ public class Server {
 
         };
         executor.scheduleAtFixedRate(timeOn, 1, 10, MILLISECONDS);
-
     }
     private void messagesFromClient(PrintWriter out, String fromClient) throws IOException {
-       // ServerScreen.addMessage("dziala");
+
         ServerScreen.addMessage("From client: " + fromClient);
         System.out.println("From client: " + fromClient);
         String serverRespond = ServerCommands.serverAction(fromClient);

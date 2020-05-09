@@ -11,7 +11,7 @@ public class RankingLoad {
      * Wczytuje wszystkie wyniki z pliku "Ranking.txt"
      */
     private static void loadRanking() {
-
+    stringToBeSent = "";
         try {
             Scanner scanner = new Scanner(new File("Ranking.txt"));
             while (scanner.hasNextLine()) {

@@ -86,7 +86,7 @@ public class LostGame extends JPanel {
      */
     private void save(){
         try {
-            if (Client.online) RankingSaver.saveToServer(nick, points);
+            if (Client.online) Client.saveScore(nick, points);
             if (!Client.online) RankingSaver.saveToFile(nick, points);
         }
         catch(Exception E){

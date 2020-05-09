@@ -2,6 +2,8 @@ package company;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.InetAddress;
 
@@ -11,9 +13,12 @@ public class ServerScreen extends JPanel {
     private JScrollPane vertical;
     JLabel ip = new JLabel();
     JLabel port = new JLabel();
-
+    JButton resetServerButton = new JButton("Reset server");
+    JButton resetConsoleButton = new JButton("Reset console");
     LabelCustomizer customizedLabel = new LabelCustomizer(Color.white);
+    ButtonCustomizer customizedButton = new ButtonCustomizer();
     GridBagConstraintsMaker customGBC = new GridBagConstraintsMaker();
+    Server server = new Server();
 
     /**konstruktor klasy*/
     public ServerScreen() throws IOException {
@@ -21,31 +26,40 @@ public class ServerScreen extends JPanel {
         initializeLayout();
         initializeVariables();
         this.setLayout(new GridBagLayout());
-        Server server = new Server();
+
         server.run();
 
+        resetConsoleButton.addActionListener(resetConsoleButtonListener());
+        resetServerButton.addActionListener(resetServerButtonListener());
         ip.setText("IP adress = " + InetAddress.getLocalHost().getHostAddress());
         port.setText("Port = " + PropertiesLoad.port);
 
-
+        customizedButton.customizer(resetConsoleButton);
+        customizedButton.customizer(resetServerButton);
         customizedLabel.customizer(ip);
         customizedLabel.customizer(port);
-        listModel.addElement("Messages");
+
+        listModel.addElement("Messages:");
         list = new JList(listModel);
         list.setPreferredSize(new Dimension(500, 400));
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         list.setSelectedIndex(0);
-        list.setVisibleRowCount(5);
+        list.setVisibleRowCount(12);
+        list.setFont(new Font("Menlo", Font.PLAIN, 14));
         list.setForeground(Color.white);
         list.setBackground(Color.black);
         list.setOpaque(true);
 
         vertical = new JScrollPane(list);
         vertical.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        //vertical.setPreferredSize(new Dimension(500, 400));
 
         this.add(ip, customGBC.gbcCustomize(0,0,0,0,0,"none"));
         this.add(port, customGBC.gbcCustomize(0,1,0,0,0,"none"));
-        this.add(vertical, customGBC.gbcCustomize(0,2,0,1,0,"none"));
+        this.add(resetConsoleButton, customGBC.gbcCustomize(0,3,0,0,0,"none"));
+        this.add(resetServerButton, customGBC.gbcCustomize(0,4,0,0,0,"none"));
+        this.add(vertical, customGBC.gbcCustomize(0,2,0,0,0,"none"));
+
     }
 
     /** metoda przesłaniająca metodę paintComponent, w celu odpowiedniego skalowania obrazka w tle
@@ -70,5 +84,41 @@ public class ServerScreen extends JPanel {
         setPreferredSize(new Dimension(700,500));
     }
     public static void addMessage(String message){ listModel.addElement(message);
+    }
+    /**
+     * Odpowiada za przypisanie akcji przyciskowi reset console
+     * @return actionListener - obiekt klasy ActionListener
+     */
+    private ActionListener resetConsoleButtonListener() {
+        ActionListener actionListener = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                listModel.removeAllElements();
+                listModel.addElement("Messages:");
+            }
+        };
+        return actionListener;
+    }
+    /**
+     * Odpowiada za przypisanie akcji przyciskowi reset server
+     * @return actionListener - obiekt klasy ActionListener
+     */
+    private ActionListener resetServerButtonListener() {
+        ActionListener actionListener = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    resetServer();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        };
+        return actionListener;
+    }
+    private void resetServer() throws IOException {
+        server.executor.shutdown();
+        Server newServer = new Server();
+        server = newServer;
+        server.run();
+        listModel.addElement("Server reset");
     }
 }

@@ -87,8 +87,8 @@ public class Client {
      * Zapisuje wyniku na serwerze, w tym celu wywoluje metode connect z odpowiednim zapytaniem
      * @param nick nick gracza wraz z wynikiem odzielone znakiem "-"
      */
-    public static void saveScore(String nick) throws IOException {
-        getProperty("saveScore" + "-" + nick);
+    public static void saveScore(String nick, int points) throws IOException {
+        getProperty("SaveScore" + "-" + nick + "-" + points);
         socket.close();
     }
 }
