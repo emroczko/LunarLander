@@ -13,7 +13,8 @@ public class ServerScreen extends JPanel {
     private JScrollPane vertical;
     JLabel ip = new JLabel();
     JLabel port = new JLabel();
-    JButton resetServerButton = new JButton("Reset server");
+    JButton turnOffButton = new JButton("Turn off server");
+    JButton turnOnButton = new JButton("Turn on server");
     JButton resetConsoleButton = new JButton("Clear console");
     LabelCustomizer customizedLabel = new LabelCustomizer(Color.white);
     ButtonCustomizer customizedButton = new ButtonCustomizer();
@@ -30,14 +31,17 @@ public class ServerScreen extends JPanel {
         server.run();
 
         resetConsoleButton.addActionListener(resetConsoleButtonListener());
-        //resetServerButton.addActionListener(resetServerButtonListener());
+        turnOnButton.addActionListener(turnOnButtonListener());
+        turnOffButton.addActionListener(turnOffButtonListener());
         ip.setText("IP adress = " + InetAddress.getLocalHost().getHostAddress());
         port.setText("Port = " + PropertiesLoad.port);
 
         customizedButton.customizer(resetConsoleButton);
-        //customizedButton.customizer(resetServerButton);
+        customizedButton.customizer(turnOffButton);
+        customizedButton.customizer(turnOnButton);
         customizedLabel.customizer(ip);
         customizedLabel.customizer(port);
+        turnOnButton.setVisible(false);
 
         listModel.addElement("Messages:");
         list = new JList(listModel);
@@ -56,7 +60,8 @@ public class ServerScreen extends JPanel {
         this.add(ip, customGBC.gbcCustomize(0,0,0,0,0,"none"));
         this.add(port, customGBC.gbcCustomize(0,1,0,0,0,"none"));
         this.add(resetConsoleButton, customGBC.gbcCustomize(0,3,0,0,0,"none"));
-        //this.add(resetServerButton, customGBC.gbcCustomize(0,4,0,0,0,"none"));
+        this.add(turnOffButton, customGBC.gbcCustomize(0,4,0,0,0,"none"));
+        this.add(turnOnButton, customGBC.gbcCustomize(0,4,0,0,0,"none"));
         this.add(vertical, customGBC.gbcCustomize(0,2,0,0,0,"none"));
 
     }
@@ -97,17 +102,13 @@ public class ServerScreen extends JPanel {
         };
         return actionListener;
     }
-    /*
-    /**
 
-     * Odpowiada za przypisanie akcji przyciskowi reset server
-     * @return actionListener - obiekt klasy ActionListener
 
-    private ActionListener resetServerButtonListener() {
+    private ActionListener turnOffButtonListener() {
         ActionListener actionListener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-                    resetServer();
+                    turnOffServer();
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
@@ -115,11 +116,32 @@ public class ServerScreen extends JPanel {
         };
         return actionListener;
     }
-    private void resetServer() throws IOException {
-        server.executor.shutdown();
+    private ActionListener turnOnButtonListener() {
+        ActionListener actionListener = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    turnOnServer();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        };
+        return actionListener;
+    }
+    private void turnOffServer() throws IOException {
+        server.turnOff = "yes";
+
+        turnOffButton.setVisible(false);
+        turnOnButton.setVisible(true);
+        listModel.addElement("Server turned off");
+    }
+    private void turnOnServer() throws IOException {
         Server newServer = new Server();
-        server = newServer;
-        server.run();
-        listModel.addElement("Server reset");
-    }*/
+        server.turnOff = "no";
+        //server = newServer;
+        newServer.run();
+        turnOffButton.setVisible(true);
+        turnOnButton.setVisible(false);
+        listModel.addElement("Server turned on");
+    }
 }

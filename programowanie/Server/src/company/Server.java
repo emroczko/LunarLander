@@ -19,6 +19,8 @@ public class Server {
      * Zmienna przechowująca port serwera
      */
     int port;
+   String turnOff = "no";
+    ServerSocket ss;
     /** Obiekt klasy ScheduledExecutorService **/
     ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
 
@@ -29,22 +31,27 @@ public class Server {
     public Server() throws IOException {
         PropertiesLoad.loadPort();
         port = PropertiesLoad.port;
+       //
     }
 
     /**
      * @throws IOException
      */
     public void run() throws IOException {
-        ServerSocket ss = new ServerSocket(port);
+        ss = new ServerSocket(port);
+        ss.setReuseAddress(true);
         Runnable timeOn = () -> {
 
             try {
-                Socket clientSocket = ss.accept();
-                PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
-                BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-                String fromClient = in.readLine();
+                if(turnOff.equals("no")) {
 
-                if (fromClient != null) messagesFromClient(out, fromClient);
+                    Socket clientSocket = ss.accept();
+                    PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+                    BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                    String fromClient = in.readLine();
+                    if (fromClient != null) messagesFromClient(out, fromClient);
+                }
+
             }
             catch (Exception e) {
                 e.printStackTrace();
@@ -62,5 +69,20 @@ public class Server {
         out.flush();
         ServerScreen.addMessage("Server respond: " + serverRespond);
         System.out.println("Server respond: " + serverRespond);
+    }
+    private void newExecutor(){
+        ScheduledExecutorService newExecutor = Executors.newScheduledThreadPool(1);
+        executor = newExecutor;
+    }
+    public void closeServer(ServerSocket ss) throws IOException {
+        ServerSocket temp = new ServerSocket();
+        try {
+            ss.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        executor.shutdown();
+        ss = temp;
+        newExecutor();
     }
 }
