@@ -25,6 +25,9 @@ public class ServerCommands {
                 RankingSaver.saveToFile(commands[1], Integer.parseInt(commands[2]));
                 serverMessage = "Score saved";
                 break;
+            case "Check":
+                serverMessage = "connected";
+                break;
             default:
                 serverMessage = "Invalid command";
         }

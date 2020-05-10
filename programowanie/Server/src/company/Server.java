@@ -21,8 +21,7 @@ public class Server {
     int port;
     /** Obiekt klasy ScheduledExecutorService **/
     ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
-    ServerSocket ss = new ServerSocket(port);
-    boolean closeServer = false;
+
 
     /**
      * Konstruktor serwera przydzielający numer portu pobrany z pliku konfiguracyjnego
@@ -36,7 +35,7 @@ public class Server {
      * @throws IOException
      */
     public void run() throws IOException {
-
+        ServerSocket ss = new ServerSocket(port);
         Runnable timeOn = () -> {
 
             try {
@@ -52,7 +51,7 @@ public class Server {
             }
 
         };
-        executor.scheduleAtFixedRate(timeOn, 1, 10, MILLISECONDS);
+        executor.scheduleAtFixedRate(timeOn, 1, 100, MILLISECONDS);
     }
     private void messagesFromClient(PrintWriter out, String fromClient) throws IOException {
 

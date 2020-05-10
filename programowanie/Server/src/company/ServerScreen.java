@@ -14,7 +14,7 @@ public class ServerScreen extends JPanel {
     JLabel ip = new JLabel();
     JLabel port = new JLabel();
     JButton resetServerButton = new JButton("Reset server");
-    JButton resetConsoleButton = new JButton("Reset console");
+    JButton resetConsoleButton = new JButton("Clear console");
     LabelCustomizer customizedLabel = new LabelCustomizer(Color.white);
     ButtonCustomizer customizedButton = new ButtonCustomizer();
     GridBagConstraintsMaker customGBC = new GridBagConstraintsMaker();
@@ -30,12 +30,12 @@ public class ServerScreen extends JPanel {
         server.run();
 
         resetConsoleButton.addActionListener(resetConsoleButtonListener());
-        resetServerButton.addActionListener(resetServerButtonListener());
+        //resetServerButton.addActionListener(resetServerButtonListener());
         ip.setText("IP adress = " + InetAddress.getLocalHost().getHostAddress());
         port.setText("Port = " + PropertiesLoad.port);
 
         customizedButton.customizer(resetConsoleButton);
-        customizedButton.customizer(resetServerButton);
+        //customizedButton.customizer(resetServerButton);
         customizedLabel.customizer(ip);
         customizedLabel.customizer(port);
 
@@ -52,12 +52,11 @@ public class ServerScreen extends JPanel {
 
         vertical = new JScrollPane(list);
         vertical.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        //vertical.setPreferredSize(new Dimension(500, 400));
 
         this.add(ip, customGBC.gbcCustomize(0,0,0,0,0,"none"));
         this.add(port, customGBC.gbcCustomize(0,1,0,0,0,"none"));
         this.add(resetConsoleButton, customGBC.gbcCustomize(0,3,0,0,0,"none"));
-        this.add(resetServerButton, customGBC.gbcCustomize(0,4,0,0,0,"none"));
+        //this.add(resetServerButton, customGBC.gbcCustomize(0,4,0,0,0,"none"));
         this.add(vertical, customGBC.gbcCustomize(0,2,0,0,0,"none"));
 
     }
@@ -98,10 +97,12 @@ public class ServerScreen extends JPanel {
         };
         return actionListener;
     }
+    /*
     /**
+
      * Odpowiada za przypisanie akcji przyciskowi reset server
      * @return actionListener - obiekt klasy ActionListener
-     */
+
     private ActionListener resetServerButtonListener() {
         ActionListener actionListener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -120,5 +121,5 @@ public class ServerScreen extends JPanel {
         server = newServer;
         server.run();
         listModel.addElement("Server reset");
-    }
+    }*/
 }

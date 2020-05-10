@@ -23,6 +23,7 @@ public class RankingLoader {
      * konstruktor klasy inicjujacy zmienne nick i points
      */
     public RankingLoader(){
+        ConnectionCheck.detectServer();
         nick = new ArrayList<>();
         points = new ArrayList<>();
     }

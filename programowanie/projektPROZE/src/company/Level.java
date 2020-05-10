@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.Properties;
 import java.util.Random;
@@ -113,6 +114,7 @@ public class Level extends JPanel{
         repaint();
         revalidate();
 
+
         nick = nickName;
         levelNum = levelNumber;
         leftLives = Lives;
@@ -120,6 +122,7 @@ public class Level extends JPanel{
         setPreferredSize(new Dimension(xSize, ySize));
 
         try {
+            ConnectionCheck.detectServer();
             if(Client.online) PropertiesLoad.loadMapsConfigsServer(levelNumber);
             else PropertiesLoad.loadMapsConfigs(levelNumber);
 

@@ -43,7 +43,11 @@ public class Client {
         try {
             socket = new Socket(Address, Port);
         }
-        catch(Exception e){e.printStackTrace();}
+        catch(Exception e){
+            online = false;
+            socket.close();
+            return "not";
+        }
         PrintWriter pw = new PrintWriter(socket.getOutputStream(), true);
         pw.println(command);
         InputStream in = socket.getInputStream();
@@ -83,6 +87,15 @@ public class Client {
         socket.close();
         return levelConfigs;
     }
+    public static String checkConnected() throws IOException {
+
+            String check = getProperty("Check");
+            socket.close();
+            return check;
+
+
+
+    }
     /**
      * Zapisuje wyniku na serwerze, w tym celu wywoluje metode connect z odpowiednim zapytaniem
      * @param nick nick gracza wraz z wynikiem odzielone znakiem "-"
@@ -91,4 +104,5 @@ public class Client {
         getProperty("SaveScore" + "-" + nick + "-" + points);
         socket.close();
     }
+
 }
