@@ -28,14 +28,11 @@ public class ServerScreen extends JPanel {
         initializeVariables();
         this.setLayout(new GridBagLayout());
 
-<<<<<<< HEAD
-=======
         server.run();
 
         resetConsoleButton.addActionListener(resetConsoleButtonListener());
         turnOnButton.addActionListener(turnOnButtonListener());
         turnOffButton.addActionListener(turnOffButtonListener());
->>>>>>> 98866061300d57c2e13e39da0737c4d61e9c37ce
         ip.setText("IP adress = " + InetAddress.getLocalHost().getHostAddress());
         port.setText("Port = " + PropertiesLoad.port);
 
@@ -62,15 +59,11 @@ public class ServerScreen extends JPanel {
 
         this.add(ip, customGBC.gbcCustomize(0,0,0,0,0,"none"));
         this.add(port, customGBC.gbcCustomize(0,1,0,0,0,"none"));
-<<<<<<< HEAD
         this.add(vertical, customGBC.gbcCustomize(0,2,0,1,0,"none"));
-=======
         this.add(resetConsoleButton, customGBC.gbcCustomize(0,3,0,0,0,"none"));
         this.add(turnOffButton, customGBC.gbcCustomize(0,4,0,0,0,"none"));
         this.add(turnOnButton, customGBC.gbcCustomize(0,4,0,0,0,"none"));
         this.add(vertical, customGBC.gbcCustomize(0,2,0,0,0,"none"));
-
->>>>>>> 98866061300d57c2e13e39da0737c4d61e9c37ce
     }
 
     /** metoda przesłaniająca metodę paintComponent, w celu odpowiedniego skalowania obrazka w tle
@@ -94,10 +87,7 @@ public class ServerScreen extends JPanel {
     private void initializeLayout() {
         setPreferredSize(new Dimension(700,500));
     }
-    public static void addMessage(String message){ listModel.addElement(message);
-<<<<<<< HEAD
-=======
-    }
+    public static void addMessage(String message){ listModel.addElement(message);}
     /**
      * Odpowiada za przypisanie akcji przyciskowi reset console
      * @return actionListener - obiekt klasy ActionListener
@@ -139,7 +129,6 @@ public class ServerScreen extends JPanel {
     }
     private void turnOffServer() throws IOException {
         server.turnOff = "yes";
-
         turnOffButton.setVisible(false);
         turnOnButton.setVisible(true);
         listModel.addElement("Server turned off");
@@ -147,11 +136,9 @@ public class ServerScreen extends JPanel {
     private void turnOnServer() throws IOException {
         Server newServer = new Server();
         server.turnOff = "no";
-        //server = newServer;
         newServer.run();
         turnOffButton.setVisible(true);
         turnOnButton.setVisible(false);
         listModel.addElement("Server turned on");
->>>>>>> 98866061300d57c2e13e39da0737c4d61e9c37ce
     }
 }
