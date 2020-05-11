@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 
 /**
@@ -50,7 +51,7 @@ public class LostGame extends JPanel {
      * @param earnedPoints - ilość zdobytych punktów
      * @param nickName - nick gracza
      */
-    public LostGame(int xSize, int ySize, int earnedPoints, String nickName){
+    public LostGame(int xSize, int ySize, int earnedPoints, String nickName) {
         this.removeAll();
         repaint();
         revalidate();
@@ -59,6 +60,8 @@ public class LostGame extends JPanel {
         a = xSize;
         b = ySize;
         setPreferredSize(new Dimension(a,b));
+
+        ConnectionCheck.detectServer();
 
         initializeVariables();
         this.setLayout(new GridBagLayout());
@@ -86,7 +89,7 @@ public class LostGame extends JPanel {
      */
     private void save(){
         try {
-            if (Client.online) RankingSaver.saveToServer(nick, points);
+            if (Client.online) Client.saveScore(nick, points);
             if (!Client.online) RankingSaver.saveToFile(nick, points);
         }
         catch(Exception E){

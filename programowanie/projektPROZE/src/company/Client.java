@@ -43,7 +43,11 @@ public class Client {
         try {
             socket = new Socket(Address, Port);
         }
-        catch(Exception e){e.printStackTrace();}
+        catch(Exception e){
+            online = false;
+            socket.close();
+            return "not";
+        }
         PrintWriter pw = new PrintWriter(socket.getOutputStream(), true);
         pw.println(command);
         InputStream in = socket.getInputStream();
@@ -63,6 +67,16 @@ public class Client {
     }
 
     /**
+     * Wysyła do serwera zapytanie o dane konfiguracyjne przy uzyciu metody getRanking z odpowiednią komendą
+     * @return zwraca ranking
+     * @throws IOException
+     */
+    static String getRanking() throws IOException{
+        String ranking = getProperty("GetRanking");
+        socket.close();
+        return ranking;
+    }
+    /**
      * Wysyła do serwera zapytanie o dane konfiguracyjne przy uzyciu metody getProperty z odpowiednią komendą
      * @param levelNumber numer poziomu którego dane konfiguracyjne chcemy otrzymać
      * @return zwraca dane konfiguracyjne poziomu
@@ -73,12 +87,22 @@ public class Client {
         socket.close();
         return levelConfigs;
     }
+    public static String checkConnected() throws IOException {
+
+            String check = getProperty("Check");
+            socket.close();
+            return check;
+
+
+
+    }
     /**
      * Zapisuje wyniku na serwerze, w tym celu wywoluje metode connect z odpowiednim zapytaniem
      * @param nick nick gracza wraz z wynikiem odzielone znakiem "-"
      */
-    public static void saveScore(String nick) throws IOException {
-        getProperty("saveScore" + "-" + nick);
+    public static void saveScore(String nick, int points) throws IOException {
+        getProperty("SaveScore" + "-" + nick + "-" + points);
         socket.close();
     }
+
 }

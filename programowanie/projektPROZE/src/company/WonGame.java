@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 /**
  * Klasa będąca oknem które ukazuje się po wygraniu gry
@@ -54,6 +55,10 @@ public class WonGame extends JPanel{
         b = ySize;
         setPreferredSize(new Dimension(a,b));
 
+
+        ConnectionCheck.detectServer();
+
+
         initializeVariables();
         this.setLayout(new GridBagLayout());
 
@@ -85,7 +90,7 @@ public class WonGame extends JPanel{
      */
     private void save(){
         try {
-            if (Client.online) RankingSaver.saveToServer(nick, points);
+            if (Client.online) Client.saveScore(nick, points);
             if (!Client.online) RankingSaver.saveToFile(nick, points);
         }
         catch(Exception E){

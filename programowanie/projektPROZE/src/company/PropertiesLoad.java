@@ -43,6 +43,17 @@ public class PropertiesLoad {
     static float mapGravity;
     /** Ilość poziomów*/
     static int numberOfLevels;
+    /** Metoda wczytuje dane z lokalnego pliku i zapisuje do odpowiednich pól w klasie
+     * @throws IOException
+     */
+    static void loadNecessaryProps() throws IOException {
+        InputStream propertiesFile = new FileInputStream("NecessaryConfig.txt");
+        Properties gameProps = new Properties();
+        gameProps.load(propertiesFile);
+        xSize = Integer.parseInt(gameProps.getProperty("xSize"));
+        ySize = Integer.parseInt(gameProps.getProperty("ySize"));
+        propertiesFile.close();
+    }
      /** Metoda wczytuje dane z lokalnego pliku i zapisuje do odpowiednich pól w klasie
      * @throws IOException
      */
@@ -51,8 +62,6 @@ public class PropertiesLoad {
             InputStream propertiesFile = new FileInputStream("Config.txt");
             Properties gameProps = new Properties();
             gameProps.load(propertiesFile);
-            xSize = Integer.parseInt(gameProps.getProperty("xSize"));
-            ySize = Integer.parseInt(gameProps.getProperty("ySize"));
             LanderWidth = Integer.parseInt(gameProps.getProperty("LanderWidth"));
             enginePowerVx = Float.parseFloat(gameProps.getProperty("enginePowerVx"));
             enginePowerVy = Float.parseFloat(gameProps.getProperty("enginePowerVy"));
@@ -71,17 +80,15 @@ public class PropertiesLoad {
     static void loadPropsServer() throws IOException {
             String serv_response = Client.getConfigs();
             double[] configs = Arrays.stream(serv_response.split(";")).mapToDouble(Double::parseDouble).toArray();
-            xSize = (int)configs[0];
-            ySize = (int)configs[1];
-            LanderWidth = (int)configs[2];
-            enginePowerVx = (int)configs[3];
-            enginePowerVy = (float)configs[4];
-            fuelAmount = (int)configs[5];
-            numberOfLives = (int)configs[6];
-            bonusPerSecond = (int)configs[7];
-            bonusPerFuel = (int)configs[8];
-            maxPointsAmount = (int)configs[9];
-            numberOfLevels = (int)configs[10];
+            LanderWidth = (int)configs[0];
+            enginePowerVx = (int)configs[1];
+            enginePowerVy = (float)configs[2];
+            fuelAmount = (int)configs[3];
+            numberOfLives = (int)configs[4];
+            bonusPerSecond = (int)configs[5];
+            bonusPerFuel = (int)configs[6];
+            maxPointsAmount = (int)configs[7];
+            numberOfLevels = (int)configs[8];
     }
 
     /**

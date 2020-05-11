@@ -2,6 +2,7 @@ package company;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -22,6 +23,7 @@ public class RankingLoader {
      * konstruktor klasy inicjujacy zmienne nick i points
      */
     public RankingLoader(){
+        ConnectionCheck.detectServer();
         nick = new ArrayList<>();
         points = new ArrayList<>();
     }
@@ -39,6 +41,22 @@ public class RankingLoader {
             }
             parser();
             scanner.close();
+        }
+        catch(Exception e){e.printStackTrace();}
+    }
+    /**
+     * Wczytuje wszystkie wyniki z serwera
+     */
+    private void loadServerRanking(){
+        try {
+            String serv_response = Client.getRanking();
+
+            String[] temp = serv_response.split(";");
+            for(int i=0; i<=(temp.length-1); i+=2) {
+                nick.add(temp[i]);
+                points.add((Integer.parseInt(temp[i+1])));
+            }
+            parser();
         }
         catch(Exception e){e.printStackTrace();}
     }
@@ -67,14 +85,7 @@ public class RankingLoader {
             }
         }
     }
-    /**
-     * Wczytuje wszystkie wyniki z serwera
-     */
-    private void loadServerRanking(){
-        try {
-        }
-        catch(Exception e){e.printStackTrace();}
-    }
+
     /**
      * Tworzy tablicę 2 wymiarową wypełnioną wartościami wczytanymi przez funkcję loadLocalRanking
      * @return zwraca tablice 2 wymiarową
@@ -93,3 +104,4 @@ public class RankingLoader {
         return arrStr;
     }
 }
+

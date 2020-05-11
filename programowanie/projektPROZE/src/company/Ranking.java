@@ -5,6 +5,7 @@ import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 /**
  * Klasa reprezentująca okno rankingu
@@ -44,13 +45,16 @@ public class Ranking extends JPanel{
      * @param xSize - szerokośc poprzedniego okna
      * @param ySize - wysokośc poprzedniego okna
      */
-    public Ranking(int xSize, int ySize){
+    public Ranking(int xSize, int ySize) {
         this.removeAll();
         repaint();
         revalidate();
         a = xSize;
         b = ySize;
         setPreferredSize(new Dimension(a,b));
+
+
+
         initializeVariables();
         this.setLayout(new GridBagLayout());
 

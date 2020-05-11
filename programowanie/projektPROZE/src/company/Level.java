@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.Properties;
 import java.util.Random;
@@ -113,6 +114,7 @@ public class Level extends JPanel{
         repaint();
         revalidate();
 
+
         nick = nickName;
         levelNum = levelNumber;
         leftLives = Lives;
@@ -120,7 +122,8 @@ public class Level extends JPanel{
         setPreferredSize(new Dimension(xSize, ySize));
 
         try {
-            if(Client.online) {PropertiesLoad.loadMapsConfigsServer(levelNumber);}
+            ConnectionCheck.detectServer();
+            if(Client.online) PropertiesLoad.loadMapsConfigsServer(levelNumber);
             else PropertiesLoad.loadMapsConfigs(levelNumber);
 
         } catch (Exception e) {
@@ -130,7 +133,7 @@ public class Level extends JPanel{
         this.backgroundImage = background;
 
 
-        initializeVariables(levelNumber);
+        initializeVariables();
 
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -186,7 +189,7 @@ public class Level extends JPanel{
     /**
      * Funkcja inicjująca zmienne klasy
      */
-    private void initializeVariables(int levelNumber){
+    private void initializeVariables(){
         setFocusable(true);
         asteroid_counter = 0;
         this.lander = new Lander(this);
