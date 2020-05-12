@@ -35,6 +35,10 @@ public class Server {
      * @throws IOException
      */
     public void run() throws IOException {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 73772a6448b42b3e528f4ce22364463802e20bbb
         ss = new ServerSocket(port);
         ss.setReuseAddress(true);
         Runnable timeOn = () -> {
@@ -50,18 +54,26 @@ public class Server {
             catch (Exception e) {
                 e.printStackTrace();
             }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 73772a6448b42b3e528f4ce22364463802e20bbb
         };
         executor.scheduleAtFixedRate(timeOn, 1, 100, MILLISECONDS);
+<<<<<<< HEAD
     };
+=======
+
+    }
+>>>>>>> 73772a6448b42b3e528f4ce22364463802e20bbb
     private void messagesFromClient(PrintWriter out, String fromClient) throws IOException {
 
-        ServerScreen.addMessage("From client: " + fromClient);
+        //ServerScreen.addMessage("From client: " + fromClient);
         System.out.println("From client: " + fromClient);
         String serverRespond = ServerCommands.serverAction(fromClient);
         out.println(serverRespond);
         out.flush();
-        ServerScreen.addMessage("Server respond: " + serverRespond);
+        //ServerScreen.addMessage("Server respond: " + serverRespond);
         System.out.println("Server respond: " + serverRespond);
     }
     private void newExecutor(){
