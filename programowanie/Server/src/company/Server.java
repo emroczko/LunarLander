@@ -35,25 +35,22 @@ public class Server {
      * @throws IOException
      */
     public void run() throws IOException {
-        ss = new ServerSocket(port);
-        ss.setReuseAddress(true);
         Runnable timeOn = () -> {
             try {
                 if(turnOff.equals("no")) {
-
+                    ss = new ServerSocket(port);
+                    ss.setReuseAddress(true);
                     Socket clientSocket = ss.accept();
                     PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
                     BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                     String fromClient = in.readLine();
                     if (fromClient != null) messagesFromClient(out, fromClient);
                 }
-
             }
             catch (Exception e) {
                 e.printStackTrace();
             }
-
-        }0, 60 * 1000);
+        };
     }
     private void messagesFromClient(PrintWriter out, String fromClient) throws IOException {
 
