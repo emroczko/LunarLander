@@ -41,7 +41,6 @@ public class Server {
         ss = new ServerSocket(port);
         ss.setReuseAddress(true);
         Runnable timeOn = () -> {
-
             try {
                 if(turnOff.equals("no")) {
 
