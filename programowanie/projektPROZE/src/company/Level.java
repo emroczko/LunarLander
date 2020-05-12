@@ -261,19 +261,21 @@ public class Level extends JPanel{
         Random rand = new Random();
         if (rand.nextInt(101)<7) {
             int direction = rand.nextInt(2);
-            if (asteroid_counter < levelNum+2) {
+            if (asteroid_counter < levelNum+4) {
                 int velx = rand.nextInt(6) + 3;
                 int vely = rand.nextInt(6) + 3;
                 if (direction == 0) {
                     try {
                         int start_x = rand.nextInt(this.getWidth() / 2 - (int) (this.getWidth() / (17.5 * 2))) + this.getWidth() / 2 + (int) (this.getWidth() / (17.5 * 2));
                         this.asteroids.add(new Asteroid(start_x, -20, velx, vely, direction, this));
+                        asteroid_counter+=1;
                     }
                     catch(Exception e){}
                 } else {
                     try {
                         int start_x = rand.nextInt(this.getHeight() / 2 - (int) (this.getHeight() / (17.5 * 2)));
                         this.asteroids.add(new Asteroid(start_x, -20, velx, vely, direction, this));
+                        asteroid_counter+=1;
                     }
                     catch(Exception e){}
 
