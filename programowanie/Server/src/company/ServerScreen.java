@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 
 public class ServerScreen extends JPanel {
-    private static DefaultListModel listModel = new DefaultListModel();
+    //private static DefaultListModel listModel = new DefaultListModel();
     private JList list;
     private JScrollPane vertical;
     JLabel ip = new JLabel();
@@ -43,6 +43,7 @@ public class ServerScreen extends JPanel {
         customizedLabel.customizer(port);
         turnOnButton.setVisible(false);
 
+        /*
         listModel.addElement("Messages:");
         list = new JList(listModel);
         list.setPreferredSize(new Dimension(500, 400));
@@ -55,15 +56,15 @@ public class ServerScreen extends JPanel {
         list.setOpaque(true);
 
         vertical = new JScrollPane(list);
-        vertical.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        vertical.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);*/
 
         this.add(ip, customGBC.gbcCustomize(0,0,0,0,0,"none"));
         this.add(port, customGBC.gbcCustomize(0,1,0,0,0,"none"));
-        this.add(vertical, customGBC.gbcCustomize(0,2,0,1,0,"none"));
+        //this.add(vertical, customGBC.gbcCustomize(0,2,0,1,0,"none"));
         this.add(resetConsoleButton, customGBC.gbcCustomize(0,3,0,0,0,"none"));
         this.add(turnOffButton, customGBC.gbcCustomize(0,4,0,0,0,"none"));
         this.add(turnOnButton, customGBC.gbcCustomize(0,4,0,0,0,"none"));
-        this.add(vertical, customGBC.gbcCustomize(0,2,0,0,0,"none"));
+        //this.add(vertical, customGBC.gbcCustomize(0,2,0,0,0,"none"));
     }
 
     /** metoda przesłaniająca metodę paintComponent, w celu odpowiedniego skalowania obrazka w tle
@@ -87,7 +88,7 @@ public class ServerScreen extends JPanel {
     private void initializeLayout() {
         setPreferredSize(new Dimension(700,500));
     }
-    public static void addMessage(String message){ listModel.addElement(message);}
+    //public static void addMessage(String message){ listModel.addElement(message);}
     /**
      * Odpowiada za przypisanie akcji przyciskowi reset console
      * @return actionListener - obiekt klasy ActionListener
@@ -95,8 +96,8 @@ public class ServerScreen extends JPanel {
     private ActionListener resetConsoleButtonListener() {
         ActionListener actionListener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                listModel.removeAllElements();
-                listModel.addElement("Messages:");
+                //listModel.removeAllElements();
+                //listModel.addElement("Messages:");
             }
         };
         return actionListener;
@@ -131,7 +132,7 @@ public class ServerScreen extends JPanel {
         server.turnOff = "yes";
         turnOffButton.setVisible(false);
         turnOnButton.setVisible(true);
-        listModel.addElement("Server turned off");
+       // listModel.addElement("Server turned off");
     }
     private void turnOnServer() throws IOException {
         Server newServer = new Server();
@@ -139,7 +140,7 @@ public class ServerScreen extends JPanel {
         newServer.run();
         turnOffButton.setVisible(true);
         turnOnButton.setVisible(false);
-        listModel.addElement("Server turned on");
+        //listModel.addElement("Server turned on");
     }
 
     
