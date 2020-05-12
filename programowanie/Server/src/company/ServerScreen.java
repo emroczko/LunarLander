@@ -141,4 +141,6 @@ public class ServerScreen extends JPanel {
         turnOnButton.setVisible(false);
         listModel.addElement("Server turned on");
     }
+
+    
 }
