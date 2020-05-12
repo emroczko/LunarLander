@@ -11,3 +11,12 @@ Eryk=1601
 =======
 =1598
 >>>>>>> 802b75ad12eeef9b2e38457d0c4cd393d180aeb4
+eryk=3443
+eryk=2132
+eryk=950
+eryk=418
+eryk=891
+eryk=977
+eryk=848
+eryk=1601
+eryk=2842
