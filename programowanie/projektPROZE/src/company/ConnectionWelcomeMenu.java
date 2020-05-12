@@ -99,9 +99,7 @@ public class ConnectionWelcomeMenu extends JPanel{
     }
 
     /** metoda ustawiająca rozmiar okna za pomocą danych z pliku Config.txt*/
-    private void initializeLayout() {
-        setPreferredSize(new Dimension(PropertiesLoad.xSize, PropertiesLoad.ySize));
-    }
+    private void initializeLayout() {setPreferredSize(new Dimension(PropertiesLoad.xSize, PropertiesLoad.ySize));}
 
     /** metoda przesłaniająca metodę paintComponent, w celu odpowiedniego skalowania obrazka w tle
      * @param g - obiekt klasy Graphics
@@ -156,10 +154,11 @@ public class ConnectionWelcomeMenu extends JPanel{
             Client.Connect(ip, port);
             Client.online = true;
             JOptionPane.showMessageDialog(new JFrame(), "Connected successfully!", "Connected", JOptionPane.INFORMATION_MESSAGE);
+            newWindow.layoutMaker(this);
+            add(new Menu(), newWindow.buttonsClickedBehaviour());
             PropertiesLoad.loadPropsServer();
-
         }
-        catch(IOException e){
+        catch(Exception e){
             JOptionPane.showMessageDialog(new JFrame(), "Incorrect data or server offline", "Error", JOptionPane.ERROR_MESSAGE);
             Client.online = false;
             try {

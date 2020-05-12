@@ -59,11 +59,11 @@ public class ServerScreen extends JPanel {
 
         this.add(ip, customGBC.gbcCustomize(0,0,0,0,0,"none"));
         this.add(port, customGBC.gbcCustomize(0,1,0,0,0,"none"));
+        this.add(vertical, customGBC.gbcCustomize(0,2,0,1,0,"none"));
         this.add(resetConsoleButton, customGBC.gbcCustomize(0,3,0,0,0,"none"));
         this.add(turnOffButton, customGBC.gbcCustomize(0,4,0,0,0,"none"));
         this.add(turnOnButton, customGBC.gbcCustomize(0,4,0,0,0,"none"));
         this.add(vertical, customGBC.gbcCustomize(0,2,0,0,0,"none"));
-
     }
 
     /** metoda przesłaniająca metodę paintComponent, w celu odpowiedniego skalowania obrazka w tle
@@ -87,8 +87,7 @@ public class ServerScreen extends JPanel {
     private void initializeLayout() {
         setPreferredSize(new Dimension(700,500));
     }
-    public static void addMessage(String message){ listModel.addElement(message);
-    }
+    public static void addMessage(String message){ listModel.addElement(message);}
     /**
      * Odpowiada za przypisanie akcji przyciskowi reset console
      * @return actionListener - obiekt klasy ActionListener
@@ -130,7 +129,6 @@ public class ServerScreen extends JPanel {
     }
     private void turnOffServer() throws IOException {
         server.turnOff = "yes";
-
         turnOffButton.setVisible(false);
         turnOnButton.setVisible(true);
         listModel.addElement("Server turned off");
@@ -138,7 +136,6 @@ public class ServerScreen extends JPanel {
     private void turnOnServer() throws IOException {
         Server newServer = new Server();
         server.turnOff = "no";
-        //server = newServer;
         newServer.run();
         turnOffButton.setVisible(true);
         turnOnButton.setVisible(false);

@@ -12,7 +12,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
-import static java.util.concurrent.TimeUnit.SECONDS;
 
 public class Server {
     /**
@@ -23,8 +22,6 @@ public class Server {
     ServerSocket ss;
     /** Obiekt klasy ScheduledExecutorService **/
     ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
-
-
     /**
      * Konstruktor serwera przydzielający numer portu pobrany z pliku konfiguracyjnego
      */
@@ -38,6 +35,7 @@ public class Server {
      * @throws IOException
      */
     public void run() throws IOException {
+<<<<<<< HEAD
         ss = new ServerSocket(port);
         ss.setReuseAddress(true);
         Runnable timeOn = () -> {
@@ -54,10 +52,27 @@ public class Server {
             }
             catch (Exception e) {
                 e.printStackTrace();
+=======
+        ServerSocket ss = new ServerSocket(port);
+        Timer serverTimer = new Timer(true);
+        serverTimer.scheduleAtFixedRate(new TimerTask() {
+            public void run() {
+                while (true) {
+                    try {
+                        Socket clientSocket = ss.accept();
+                        PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+                        BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                        String fromClient = in.readLine();
+                        if (fromClient != null) messagesFromClient(out, fromClient);
+                        break;
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+               }
+>>>>>>> 802b75ad12eeef9b2e38457d0c4cd393d180aeb4
             }
 
-        };
-        executor.scheduleAtFixedRate(timeOn, 1, 100, MILLISECONDS);
+        }, 0, 60 * 1000);
     }
     private void messagesFromClient(PrintWriter out, String fromClient) throws IOException {
 
