@@ -35,7 +35,10 @@ public class Server {
      * @throws IOException
      */
     public void run() throws IOException {
+<<<<<<< HEAD
 
+=======
+>>>>>>> ec1bf5f939c5726352eefed8bfcd27d43e4bf7c6
         ss = new ServerSocket(port);
         ss.setReuseAddress(true);
         Runnable timeOn = () -> {
@@ -53,9 +56,14 @@ public class Server {
             catch (Exception e) {
                 e.printStackTrace();
             }
+<<<<<<< HEAD
         };
         
         executor.scheduleAtFixedRate(timeOn, 1, 100, MILLISECONDS);
+=======
+
+        }0, 60 * 1000);
+>>>>>>> ec1bf5f939c5726352eefed8bfcd27d43e4bf7c6
     }
     private void messagesFromClient(PrintWriter out, String fromClient) throws IOException {
 
