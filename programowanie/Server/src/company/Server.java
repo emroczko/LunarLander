@@ -35,11 +35,11 @@ public class Server {
      * @throws IOException
      */
     public void run() throws IOException {
+        ss = new ServerSocket(port);
+        ss.setReuseAddress(true);
         Runnable timeOn = () -> {
             try {
-                if(turnOff.equals("no")) {
-                    ss = new ServerSocket(port);
-                    ss.setReuseAddress(true);
+                if(turnOff.equals("no")){
                     Socket clientSocket = ss.accept();
                     PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
                     BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
@@ -50,8 +50,10 @@ public class Server {
             catch (Exception e) {
                 e.printStackTrace();
             }
+
         };
-    }
+        executor.scheduleAtFixedRate(timeOn, 1, 100, MILLISECONDS);
+    };
     private void messagesFromClient(PrintWriter out, String fromClient) throws IOException {
 
         ServerScreen.addMessage("From client: " + fromClient);

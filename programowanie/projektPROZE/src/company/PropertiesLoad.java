@@ -85,10 +85,11 @@ public class PropertiesLoad {
             enginePowerVy = (float)configs[2];
             fuelAmount = (int)configs[3];
             numberOfLives = (int)configs[4];
-            bonusPerSecond = (int)configs[5];
-            bonusPerFuel = (int)configs[6];
-            maxPointsAmount = (int)configs[7];
-            numberOfLevels = (int)configs[8];
+            numberOfLevels = (int)configs[5];
+            bonusPerSecond = (int)configs[6];
+            bonusPerFuel = (int)configs[7];
+            maxPointsAmount = (int)configs[8];
+
     }
 
     /**
