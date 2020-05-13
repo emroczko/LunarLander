@@ -460,7 +460,7 @@ public class Level extends JPanel{
             inGame=false;
             add(new Level(getWidth(), getHeight(), levelNum, leftLives - 1, prevPoints, nick, this.backgroundImage), buttonsClickedBehaviour());
         }
-    }
+     }
     /**
      * Odpowiada za wywołanie odpowiedniej funkcji (outOfLives) gdy statkowi zabraknie paliwa
      */
