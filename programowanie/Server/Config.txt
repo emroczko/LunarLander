@@ -3,8 +3,13 @@ prop3=1
 prop4=1.5
 prop5=100
 prop6=3
+<<<<<<< HEAD
 prop7=8
 prop8=10
+=======
+prop7=3
+prop8=8
+>>>>>>> df43f8b032596a394508bc7c3e4dd2ef1800994d
 prop9=10
 prop10=400
 port=2222
