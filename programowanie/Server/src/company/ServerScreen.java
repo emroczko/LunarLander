@@ -2,14 +2,16 @@ package company;
 
 import javax.swing.*;
 import java.awt.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.InetAddress;
 
 public class ServerScreen extends JPanel {
-    private static DefaultListModel listModel = new DefaultListModel();
-    private JList list;
+    public static DefaultListModel listModel = new DefaultListModel();
+
+    private static JList list;
     private JScrollPane vertical;
     JLabel ip = new JLabel();
     JLabel port = new JLabel();
@@ -41,10 +43,10 @@ public class ServerScreen extends JPanel {
 
         listModel.addElement("Messages:");
         list = new JList(listModel);
-        list.setPreferredSize(new Dimension(500, 400));
+        list.setPreferredSize(new Dimension(500, 200));
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         list.setSelectedIndex(0);
-        list.setVisibleRowCount(12);
+        list.setVisibleRowCount(10);
         list.setFont(new Font("Menlo", Font.PLAIN, 14));
         list.setForeground(Color.white);
         list.setBackground(Color.black);
@@ -53,11 +55,14 @@ public class ServerScreen extends JPanel {
         vertical = new JScrollPane(list);
         vertical.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
+
+
+
         this.add(ip, customGBC.gbcCustomize(0,0,0,0,0,"none"));
         this.add(port, customGBC.gbcCustomize(0,1,0,0,0,"none"));
         this.add(vertical, customGBC.gbcCustomize(0,2,0,1,0,"none"));
         this.add(resetConsoleButton, customGBC.gbcCustomize(0,3,0,0,0,"none"));
-        //this.add(vertical, customGBC.gbcCustomize(0,2,0,0,0,"none"));
+
     }
 
     /** metoda przesłaniająca metodę paintComponent, w celu odpowiedniego skalowania obrazka w tle
@@ -67,6 +72,9 @@ public class ServerScreen extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         update();
+        vertical.revalidate();
+        vertical.repaint();
+
     }
     private void update(){
         revalidate();
@@ -82,7 +90,8 @@ public class ServerScreen extends JPanel {
         setPreferredSize(new Dimension(700,500));
     }
 
-    public static void addMessage(String message){ listModel.addElement(message);}
+    public static void addMessage(String message){ listModel.addElement(message);
+    list.setPreferredSize(new Dimension(500, listModel.getSize()*20));}
     /**
      * Odpowiada za przypisanie akcji przyciskowi reset console
      * @return actionListener - obiekt klasy ActionListener
