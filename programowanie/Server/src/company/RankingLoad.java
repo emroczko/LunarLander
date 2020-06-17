@@ -22,7 +22,6 @@ public class RankingLoad {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
     public static String passRanking(){
         loadRanking();
