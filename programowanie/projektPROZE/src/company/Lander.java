@@ -2,6 +2,7 @@ package company;
 
 import javax.swing.*;
 import java.awt.geom.Rectangle2D;
+import java.util.Properties;
 
 /**
  * Klasa odpowiedzialna za utworzenie statku
@@ -46,8 +47,8 @@ public class Lander extends Sprite {
     @Override
     public void move() {
         //System.out.println("w lander.move " + x);
-        x += velx;
 
+        x += velx;
         if (vely<1 && vely>0) {
             y += 1;
         }
@@ -55,10 +56,12 @@ public class Lander extends Sprite {
             y += vely;
         }
         if(x<0){
-            x = level.getWidth();
+            x = 0;
+            velx=0;
         }
-        if(x>level.getWidth() && level.getWidth()!=0){
-           x = 0;
+        if(x+PropertiesLoad.LanderWidth>=PropertiesLoad.xSize && level.getWidth()!=0){
+            x = PropertiesLoad.xSize - PropertiesLoad.LanderWidth;
+            velx=0;
         }
         if(y<0){
             y = 0;
@@ -82,6 +85,7 @@ public class Lander extends Sprite {
     public void acceleration(float accY) {
         this.vely += accY;
         level.labelUpdate("vy");
+        level.labelUpdate("vx");
     }
 
     /**
@@ -90,7 +94,7 @@ public class Lander extends Sprite {
     public void update() {
         move();
         updateRect();
-        acceleration( PropertiesLoad.mapGravity);
+        acceleration(PropertiesLoad.mapGravity);
     }
 
     /**
