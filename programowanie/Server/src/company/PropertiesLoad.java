@@ -17,7 +17,7 @@ public class PropertiesLoad {
      * @throws IOException
      */
     static void loadPort() throws IOException {
-        InputStream propertiesFile = new FileInputStream("Config.txt");
+        InputStream propertiesFile = new FileInputStream("txtFiles/Config.txt");
         Properties port_prop = new Properties();
         port_prop.load(propertiesFile);
         port = Integer.parseInt(port_prop.getProperty("port"));
@@ -30,7 +30,7 @@ public class PropertiesLoad {
      * @throws IOException
      */
     static String loadConfig() throws IOException{
-        InputStream propertiesFile = new FileInputStream("Config.txt");
+        InputStream propertiesFile = new FileInputStream("txtFiles/Config.txt");
         Properties properties = new Properties();
         properties.load(propertiesFile);
         String configs = "";
@@ -50,7 +50,7 @@ public class PropertiesLoad {
      * @throws IOException
      */
     static String loadMapsConfigs(int levelNumber) throws IOException{
-        InputStream propertiesFile = new FileInputStream("Maps.txt");
+        InputStream propertiesFile = new FileInputStream("txtFiles/Maps.txt");
         Properties mapProps = new Properties();
         mapProps.load(propertiesFile);
         int[] xPoints = Arrays.stream(mapProps.getProperty("xpoints"+levelNumber).split("-")).mapToInt(Integer::parseInt).toArray();
