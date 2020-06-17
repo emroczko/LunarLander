@@ -39,19 +39,12 @@ public class Server {
         ss.setReuseAddress(true);
         Runnable timeOn = () -> {
             try {
-<<<<<<< HEAD
-=======
-                if(turnOff.equals("no")){
->>>>>>> 09445c7d309e48629f735b8d10b7fbbb98b6576e
                     Socket clientSocket = ss.accept();
                     PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
                     BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                     String fromClient = in.readLine();
                     if (fromClient != null) messagesFromClient(out, fromClient);
-<<<<<<< HEAD
-=======
-                }
->>>>>>> 09445c7d309e48629f735b8d10b7fbbb98b6576e
+
             }
             catch (Exception e) {
                 e.printStackTrace();
@@ -61,19 +54,12 @@ public class Server {
     };
 
     private void messagesFromClient(PrintWriter out, String fromClient) throws IOException {
-<<<<<<< HEAD
-
         ServerScreen.addMessage("From client: " + fromClient);
-=======
->>>>>>> 09445c7d309e48629f735b8d10b7fbbb98b6576e
         System.out.println("From client: " + fromClient);
         String serverRespond = ServerCommands.serverAction(fromClient);
         out.println(serverRespond);
         out.flush();
-<<<<<<< HEAD
         ServerScreen.addMessage("Server respond: " + serverRespond);
-=======
->>>>>>> 09445c7d309e48629f735b8d10b7fbbb98b6576e
         System.out.println("Server respond: " + serverRespond);
     }
 
