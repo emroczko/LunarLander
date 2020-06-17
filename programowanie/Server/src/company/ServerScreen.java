@@ -9,23 +9,36 @@ import java.io.IOException;
 import java.net.InetAddress;
 
 public class ServerScreen extends JPanel {
+    /** Obiekt klasy DefaultListModel dynamicznie zmieniany
+     * w czasie działania programu która znajduje się w konsoli programu*/
     public static DefaultListModel listModel = new DefaultListModel();
-
+    /** Konsola widoczna na ekranie */
     private static JList list;
+    /** Scroll w konsoli */
     private JScrollPane vertical;
+    /** JLabel z numerem IP serwera **/
     JLabel ip = new JLabel();
+    /** JLabel z numerem portu serwera **/
     JLabel port = new JLabel();
+    /** Przycisk do resetowania konsoli **/
     JButton resetConsoleButton = new JButton("Clear console");
+    /** Obiekt klasy LabelCustomizer **/
     LabelCustomizer customizedLabel = new LabelCustomizer(Color.white);
+    /** Obiekt klasy ButtonCustomizer **/
     ButtonCustomizer customizedButton = new ButtonCustomizer();
+    /** Obiekt klasy GridBagConstraintsMaker**/
     GridBagConstraintsMaker customGBC = new GridBagConstraintsMaker();
+    /** Obiekt klasy Server**/
     Server server = new Server();
 
-    /**konstruktor klasy*/
+    /**
+     * Konstruktor klasy ustalający wygląd okna oraz inicjalizujący komponenty okna.
+     * Konstruktor uruchamia również serwer.
+     */
     public ServerScreen() throws IOException {
         this.removeAll();
         initializeLayout();
-        initializeVariables();
+        initializeBackground();
         this.setLayout(new GridBagLayout());
 
         server.run();
@@ -38,8 +51,6 @@ public class ServerScreen extends JPanel {
         customizedButton.customizer(resetConsoleButton);
         customizedLabel.customizer(ip);
         customizedLabel.customizer(port);
-
-
 
         listModel.addElement("Messages:");
         list = new JList(listModel);
@@ -54,9 +65,6 @@ public class ServerScreen extends JPanel {
 
         vertical = new JScrollPane(list);
         vertical.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-
-
-
 
         this.add(ip, customGBC.gbcCustomize(0,0,0,0,0,"none"));
         this.add(port, customGBC.gbcCustomize(0,1,0,0,0,"none"));
@@ -76,22 +84,36 @@ public class ServerScreen extends JPanel {
         vertical.repaint();
 
     }
+    /**
+     * Aktualizuje komponenty okna
+     */
     private void update(){
         revalidate();
         repaint();
     }
-    /** metoda inicjalizująca obrazek tła za pomocą metody obiektu ImageFactory*/
-    private void initializeVariables() {
+    /**
+     * Metoda inicjalizująca kolor tła za pomocą metody obiektu ImageFactory
+     */
+    private void initializeBackground() {
         this.setBackground(Color.BLACK);
     }
 
-    /** metoda ustawiająca rozmiar okna za pomocą danych z pliku Config.txt*/
+    /**
+     * Metoda ustawiająca rozmiar okna za pomocą danych z pliku Config.txt
+     */
     private void initializeLayout() {
         setPreferredSize(new Dimension(700,500));
     }
 
-    public static void addMessage(String message){ listModel.addElement(message);
-    list.setPreferredSize(new Dimension(500, listModel.getSize()*20));}
+    /**
+     * Metoda aktualizująca konsole programu
+     * @param message - wiadomość która ma zostać wyświetlona
+     */
+    public static void addMessage(String message){
+        listModel.addElement(message);
+        list.setPreferredSize(new Dimension(500, listModel.getSize()*20));
+    }
+
     /**
      * Odpowiada za przypisanie akcji przyciskowi reset console
      * @return actionListener - obiekt klasy ActionListener
@@ -101,6 +123,7 @@ public class ServerScreen extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 listModel.removeAllElements();
                 listModel.addElement("Messages:");
+                list.setPreferredSize(new Dimension(500,200));
             }
         };
         return actionListener;

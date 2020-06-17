@@ -4,6 +4,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Klasa pobierająca ranking z pliku
+ */
 public class RankingLoad {
     private static String stringToBeSent;
 
@@ -24,6 +27,10 @@ public class RankingLoad {
         }
 
     }
+    /**
+     * Metoda przekazująca wczytane wyniki
+     * @return stringToBeSent - string z wynikami
+     */
     public static String passRanking(){
         loadRanking();
         return stringToBeSent;

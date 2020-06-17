@@ -2,10 +2,13 @@ package company;
 
 import java.awt.*;
 import java.io.IOException;
-import java.net.InetAddress;
 
+
+/**
+ * Klasa odpowiedzialna za wywołanie głównej ramki
+ */
 public class Main {
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
             try {
                 new MainFrame();
