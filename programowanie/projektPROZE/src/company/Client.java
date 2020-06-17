@@ -87,14 +87,16 @@ public class Client {
         socket.close();
         return levelConfigs;
     }
-    public static String checkConnected() throws IOException {
 
+    /**
+     * Sprawdza czy program jest połączony z serwerem
+     * @return
+     * @throws IOException
+     */
+    public static String checkConnected() throws IOException {
             String check = getProperty("Check");
             socket.close();
             return check;
-
-
-
     }
     /**
      * Zapisuje wyniku na serwerze, w tym celu wywoluje metode connect z odpowiednim zapytaniem

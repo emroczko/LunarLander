@@ -3,8 +3,10 @@ package company;
 import javax.swing.*;
 import java.io.IOException;
 
+/**
+ * Sprawdza połączenie z serwerem
+ */
 public class ConnectionCheck {
-
     public static void detectServer() {
         if(Client.online) check();
     }
