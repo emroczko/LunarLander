@@ -8,13 +8,11 @@ import java.io.IOException;
 import java.net.InetAddress;
 
 public class ServerScreen extends JPanel {
-    //private static DefaultListModel listModel = new DefaultListModel();
+    private static DefaultListModel listModel = new DefaultListModel();
     private JList list;
     private JScrollPane vertical;
     JLabel ip = new JLabel();
     JLabel port = new JLabel();
-    JButton turnOffButton = new JButton("Turn off server");
-    JButton turnOnButton = new JButton("Turn on server");
     JButton resetConsoleButton = new JButton("Clear console");
     LabelCustomizer customizedLabel = new LabelCustomizer(Color.white);
     ButtonCustomizer customizedButton = new ButtonCustomizer();
@@ -31,19 +29,16 @@ public class ServerScreen extends JPanel {
         server.run();
 
         resetConsoleButton.addActionListener(resetConsoleButtonListener());
-        turnOnButton.addActionListener(turnOnButtonListener());
-        turnOffButton.addActionListener(turnOffButtonListener());
+
         ip.setText("IP adress = " + InetAddress.getLocalHost().getHostAddress());
         port.setText("Port = " + PropertiesLoad.port);
 
         customizedButton.customizer(resetConsoleButton);
-        customizedButton.customizer(turnOffButton);
-        customizedButton.customizer(turnOnButton);
         customizedLabel.customizer(ip);
         customizedLabel.customizer(port);
-        turnOnButton.setVisible(false);
 
-        /*
+
+
         listModel.addElement("Messages:");
         list = new JList(listModel);
         list.setPreferredSize(new Dimension(500, 400));
@@ -56,14 +51,12 @@ public class ServerScreen extends JPanel {
         list.setOpaque(true);
 
         vertical = new JScrollPane(list);
-        vertical.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);*/
+        vertical.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
         this.add(ip, customGBC.gbcCustomize(0,0,0,0,0,"none"));
         this.add(port, customGBC.gbcCustomize(0,1,0,0,0,"none"));
-        //this.add(vertical, customGBC.gbcCustomize(0,2,0,1,0,"none"));
+        this.add(vertical, customGBC.gbcCustomize(0,2,0,1,0,"none"));
         this.add(resetConsoleButton, customGBC.gbcCustomize(0,3,0,0,0,"none"));
-        this.add(turnOffButton, customGBC.gbcCustomize(0,4,0,0,0,"none"));
-        this.add(turnOnButton, customGBC.gbcCustomize(0,4,0,0,0,"none"));
         //this.add(vertical, customGBC.gbcCustomize(0,2,0,0,0,"none"));
     }
 
@@ -88,7 +81,8 @@ public class ServerScreen extends JPanel {
     private void initializeLayout() {
         setPreferredSize(new Dimension(700,500));
     }
-    //public static void addMessage(String message){ listModel.addElement(message);}
+
+    public static void addMessage(String message){ listModel.addElement(message);}
     /**
      * Odpowiada za przypisanie akcji przyciskowi reset console
      * @return actionListener - obiekt klasy ActionListener
@@ -96,52 +90,11 @@ public class ServerScreen extends JPanel {
     private ActionListener resetConsoleButtonListener() {
         ActionListener actionListener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //listModel.removeAllElements();
-                //listModel.addElement("Messages:");
+                listModel.removeAllElements();
+                listModel.addElement("Messages:");
             }
         };
         return actionListener;
     }
 
-
-    private ActionListener turnOffButtonListener() {
-        ActionListener actionListener = new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    turnOffServer();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-            }
-        };
-        return actionListener;
-    }
-    private ActionListener turnOnButtonListener() {
-        ActionListener actionListener = new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    turnOnServer();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-            }
-        };
-        return actionListener;
-    }
-    private void turnOffServer() throws IOException {
-        server.turnOff = "yes";
-        turnOffButton.setVisible(false);
-        turnOnButton.setVisible(true);
-       // listModel.addElement("Server turned off");
-    }
-    private void turnOnServer() throws IOException {
-        Server newServer = new Server();
-        server.turnOff = "no";
-        newServer.run();
-        turnOffButton.setVisible(true);
-        turnOnButton.setVisible(false);
-        //listModel.addElement("Server turned on");
-    }
-
-    
 }

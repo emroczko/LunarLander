@@ -18,7 +18,7 @@ public class Server {
      * Zmienna przechowująca port serwera
      */
     int port;
-   String turnOff = "no";
+
     ServerSocket ss;
     /** Obiekt klasy ScheduledExecutorService **/
     ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
@@ -40,15 +40,11 @@ public class Server {
         ss.setReuseAddress(true);
         Runnable timeOn = () -> {
             try {
-                if(turnOff.equals("no")) {
-
                     Socket clientSocket = ss.accept();
                     PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
                     BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                     String fromClient = in.readLine();
                     if (fromClient != null) messagesFromClient(out, fromClient);
-                }
-
             }
             catch (Exception e) {
                 e.printStackTrace();
@@ -60,27 +56,14 @@ public class Server {
     }
     private void messagesFromClient(PrintWriter out, String fromClient) throws IOException {
 
-        //ServerScreen.addMessage("From client: " + fromClient);
+        ServerScreen.addMessage("From client: " + fromClient);
         System.out.println("From client: " + fromClient);
         String serverRespond = ServerCommands.serverAction(fromClient);
         out.println(serverRespond);
         out.flush();
-        //ServerScreen.addMessage("Server respond: " + serverRespond);
+        ServerScreen.addMessage("Server respond: " + serverRespond);
         System.out.println("Server respond: " + serverRespond);
     }
-    private void newExecutor(){
-        ScheduledExecutorService newExecutor = Executors.newScheduledThreadPool(1);
-        executor = newExecutor;
-    }
-    public void closeServer(ServerSocket ss) throws IOException {
-        ServerSocket temp = new ServerSocket();
-        try {
-            ss.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        executor.shutdown();
-        ss = temp;
-        newExecutor();
-    }
+
+
 }
