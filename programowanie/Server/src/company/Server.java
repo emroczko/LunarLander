@@ -28,7 +28,7 @@ public class Server {
     public Server() throws IOException {
         PropertiesLoad.loadPort();
         port = PropertiesLoad.port;
-       //
+
     }
 
     /**
@@ -55,12 +55,13 @@ public class Server {
 
     private void messagesFromClient(PrintWriter out, String fromClient) throws IOException {
         ServerScreen.addMessage("From client: " + fromClient);
-        System.out.println("From client: " + fromClient);
+        //System.out.println("From client: " + fromClient);
         String serverRespond = ServerCommands.serverAction(fromClient);
         out.println(serverRespond);
         out.flush();
         ServerScreen.addMessage("Server respond: " + serverRespond);
-        System.out.println("Server respond: " + serverRespond);
+        //System.out.println("Server respond: " + serverRespond);
+
     }
 
 
