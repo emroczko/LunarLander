@@ -1,11 +1,11 @@
-prop2=40
-prop3=1
-prop4=1.5
-prop5=100
-prop6=3
-prop7=3
-prop8=8
-prop9=10
-prop10=10
+prop1=40
+prop2=1
+prop3=1.5
+prop4=100
+prop5=3
+prop6=8
+prop7=10
+prop8=10
+prop9=400
 port=2222
 

@@ -45,6 +45,7 @@ public class Lander extends Sprite {
      */
     @Override
     public void move() {
+        //System.out.println("w lander.move " + x);
         x += velx;
 
         if (vely<1 && vely>0) {
@@ -56,8 +57,8 @@ public class Lander extends Sprite {
         if(x<0){
             x = level.getWidth();
         }
-        if(x>level.getWidth()){
-            x = 0;
+        if(x>level.getWidth() && level.getWidth()!=0){
+           x = 0;
         }
         if(y<0){
             y = 0;

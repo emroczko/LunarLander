@@ -166,10 +166,9 @@ public class ConnectionWelcomeMenu extends JPanel{
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
-
         }
-        newWindow.layoutMaker(this);
-        add(new Menu(), newWindow.buttonsClickedBehaviour());
+        //newWindow.layoutMaker(this);
+        //add(new Menu(), newWindow.buttonsClickedBehaviour());
     }
     /**
      * Odpowiada za przypisanie akcji przyciskowi EXIT

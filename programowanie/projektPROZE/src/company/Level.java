@@ -120,7 +120,7 @@ public class Level extends JPanel{
         leftLives = Lives;
         prevPoints = previousPoints;
         setPreferredSize(new Dimension(xSize, ySize));
-
+        initializeVariables();
         try {
             ConnectionCheck.detectServer();
             if(Client.online) PropertiesLoad.loadMapsConfigsServer(levelNumber);
@@ -131,9 +131,6 @@ public class Level extends JPanel{
         }
 
         this.backgroundImage = background;
-
-
-        initializeVariables();
 
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -192,10 +189,10 @@ public class Level extends JPanel{
     private void initializeVariables(){
         setFocusable(true);
         asteroid_counter = 0;
-        this.lander = new Lander(this);
-        this.lander.landerImageChange(Image.Lander);
         this.asteroids = new ArrayList<Asteroid>();
         this.fuelLevel = PropertiesLoad.fuelAmount;
+        this.lander = new Lander(this);
+        this.lander.landerImageChange(Image.Lander);
         this.timer = new Timer(40, new GameLoop(this));
         this.timer.start();
         timeCounter(true);
@@ -261,7 +258,7 @@ public class Level extends JPanel{
         Random rand = new Random();
         if (rand.nextInt(101)<7) {
             int direction = rand.nextInt(2);
-            if (asteroid_counter < levelNum+4) {
+            if (asteroid_counter < levelNum+3) {
                 int velx = rand.nextInt(6) + 3;
                 int vely = rand.nextInt(6) + 3;
                 if (direction == 0) {
@@ -391,14 +388,17 @@ public class Level extends JPanel{
         for(int i = 0; i<this.asteroids.size();i++){
             if (lander.getRect().intersects(asteroids.get(i).getRect())) boom();
 
-            if (moon.intersects(asteroids.get(i).getRect()) || landing.intersects(asteroids.get(i).getRect())) asteroids.remove(i);
-
+            if (moon.intersects(asteroids.get(i).getRect()) || landing.intersects(asteroids.get(i).getRect())) {
+                asteroids.remove(i);
+                this.asteroid_counter -= 1;
+            }
             if (asteroids.size()==0) break;
 
             if (i+1<this.asteroids.size()){
                 for(int j=i+1; j<this.asteroids.size(); j++) {
                     if (asteroids.get(i).getRect().intersects(asteroids.get(j).getRect())) {
                         asteroids.remove(i);
+                        this.asteroid_counter -=1;
                     }
                 }
             }
@@ -460,7 +460,7 @@ public class Level extends JPanel{
             inGame=false;
             add(new Level(getWidth(), getHeight(), levelNum, leftLives - 1, prevPoints, nick, this.backgroundImage), buttonsClickedBehaviour());
         }
-    }
+     }
     /**
      * Odpowiada za wywołanie odpowiedniej funkcji (outOfLives) gdy statkowi zabraknie paliwa
      */
