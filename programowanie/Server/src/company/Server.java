@@ -13,25 +13,28 @@ import java.util.concurrent.ScheduledExecutorService;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
+/**
+ * Klasa implementująca działanie serwera
+ */
 public class Server {
-    /**
-     * Zmienna przechowująca port serwera
-     */
+    /**Zmienna przechowująca port serwera*/
     int port;
-
+    /**Gniazdo komunikacji sieciowej po stronie odbiorcy*/
     ServerSocket ss;
     /** Obiekt klasy ScheduledExecutorService **/
     ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+
+
     /**
      * Konstruktor serwera przydzielający numer portu pobrany z pliku konfiguracyjnego
      */
     public Server() throws IOException {
         PropertiesLoad.loadPort();
         port = PropertiesLoad.port;
-
     }
 
     /**
+     * Metoda odbierająca połączenie od klienta
      * @throws IOException
      */
     public void run() throws IOException {
@@ -44,7 +47,6 @@ public class Server {
                     BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                     String fromClient = in.readLine();
                     if (fromClient != null) messagesFromClient(out, fromClient);
-
             }
             catch (Exception e) {
                 e.printStackTrace();
@@ -53,16 +55,17 @@ public class Server {
         executor.scheduleAtFixedRate(timeOn, 1, 100, MILLISECONDS);
     };
 
+    /**
+     * Metoda przesyłająca wiadomości z serwera do listy w konsoli programu
+     * @param out - obiekt klasy PrintWriter przechowujący wiadomości ze strumienia wyjściowego
+     * @param fromClient - wiadomosc od klienta
+     * @throws IOException
+     */
     private void messagesFromClient(PrintWriter out, String fromClient) throws IOException {
         ServerScreen.addMessage("From client: " + fromClient);
-        //System.out.println("From client: " + fromClient);
         String serverRespond = ServerCommands.serverAction(fromClient);
         out.println(serverRespond);
         out.flush();
         ServerScreen.addMessage("Server respond: " + serverRespond);
-        //System.out.println("Server respond: " + serverRespond);
-
     }
-
-
 }
