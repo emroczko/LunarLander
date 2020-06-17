@@ -89,7 +89,6 @@ public class PropertiesLoad {
             bonusPerSecond = (int)configs[6];
             bonusPerFuel = (int)configs[7];
             maxPointsAmount = (int)configs[8];
-
     }
 
     /**
