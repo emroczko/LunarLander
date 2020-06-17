@@ -47,7 +47,7 @@ public class PropertiesLoad {
      * @throws IOException
      */
     static void loadNecessaryProps() throws IOException {
-        InputStream propertiesFile = new FileInputStream("NecessaryConfig.txt");
+        InputStream propertiesFile = new FileInputStream("txtFiles/NecessaryConfig.txt");
         Properties gameProps = new Properties();
         gameProps.load(propertiesFile);
         xSize = Integer.parseInt(gameProps.getProperty("xSize"));
@@ -59,7 +59,7 @@ public class PropertiesLoad {
      */
     static void loadProps() throws IOException {
 
-            InputStream propertiesFile = new FileInputStream("Config.txt");
+            InputStream propertiesFile = new FileInputStream("txtFiles/Config.txt");
             Properties gameProps = new Properties();
             gameProps.load(propertiesFile);
             LanderWidth = Integer.parseInt(gameProps.getProperty("LanderWidth"));
@@ -97,7 +97,7 @@ public class PropertiesLoad {
      * @throws IOException
      */
         static void loadMapsConfigs(int levelnumber) throws IOException{
-            InputStream propertiesFile_maps = new FileInputStream("Maps.txt");
+            InputStream propertiesFile_maps = new FileInputStream("txtFiles/Maps.txt");
             Properties mapProps = new Properties();
             mapProps.load(propertiesFile_maps);
             xPoints = Arrays.stream(mapProps.getProperty("xpoints"+levelnumber).split("-")).mapToInt(Integer::parseInt).toArray();

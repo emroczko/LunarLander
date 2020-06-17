@@ -8,6 +8,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 
+/**
+ * Klasa reprezentujaca panel służacy do nawiązywania połączenia z serwerem
+ */
 public class ConnectionWelcomeMenu extends JPanel{
     /** Zmienna przechowująca obrazek tła*/
     private ImageIcon MainMenuImage;
