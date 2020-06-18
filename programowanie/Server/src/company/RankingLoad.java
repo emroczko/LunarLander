@@ -25,7 +25,6 @@ public class RankingLoad {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
     /**
      * Metoda przekazująca wczytane wyniki
