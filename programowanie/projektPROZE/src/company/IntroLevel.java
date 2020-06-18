@@ -115,7 +115,10 @@ public class IntroLevel extends JPanel{
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(backgroundImage.getImage(), 0, 0, this.getWidth(), this.getHeight(), null);
+        revalidate();
+        repaint();
     }
+
 
     /**
      * Metoda tworząca obiekt klasy Action wywołujący daną funkcje
