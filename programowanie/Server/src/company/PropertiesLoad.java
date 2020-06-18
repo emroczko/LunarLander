@@ -34,8 +34,8 @@ public class PropertiesLoad {
         Properties properties = new Properties();
         properties.load(propertiesFile);
         String configs = "";
-        for(int i=1; i<10; i++){
-            if(i<10){
+        for(int i=1; i<9; i++){
+            if(i<9){
                 configs += properties.getProperty("prop" + i) + ";";
             }
             else{configs += properties.getProperty("prop" + i);}

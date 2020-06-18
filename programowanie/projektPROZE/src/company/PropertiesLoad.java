@@ -29,8 +29,6 @@ public class PropertiesLoad {
     static int bonusPerSecond;
     /** Określa ilość punktów przyznawanych za pozostałe paliwo*/
     static int bonusPerFuel;
-    /** Okersla punkt startowy w ktorym pojawia sie gracz */
-    static int maxPointsAmount;
     /** tablica przechowujaca x'owe wspolrzedne wierzcholkow wielokata bedacych powierzchnia ksiezyca */
     static int[] xPoints;
     /** tabblica przechowujaca y'owe wspolrzedne wierzcholkow wielokata bedacych powierzchnia ksiezcya */
@@ -69,7 +67,6 @@ public class PropertiesLoad {
             numberOfLives = Integer.parseInt(gameProps.getProperty("numberOfLives"));
             bonusPerSecond = Integer.parseInt(gameProps.getProperty("bonusPerSecond"));
             bonusPerFuel = Integer.parseInt(gameProps.getProperty("bonusPerFuel"));
-            maxPointsAmount = Integer.parseInt(gameProps.getProperty("maxPointsAmount"));
             numberOfLevels = Integer.parseInt(gameProps.getProperty("numberOfLevels"));
             propertiesFile.close();
         }
@@ -88,7 +85,6 @@ public class PropertiesLoad {
             numberOfLevels = (int)configs[5];
             bonusPerSecond = (int)configs[6];
             bonusPerFuel = (int)configs[7];
-            maxPointsAmount = (int)configs[8];
     }
 
     /**
