@@ -82,7 +82,6 @@ public class ServerScreen extends JPanel {
         update();
         vertical.revalidate();
         vertical.repaint();
-
     }
     /**
      * Aktualizuje komponenty okna
