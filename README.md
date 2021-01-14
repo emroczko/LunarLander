@@ -52,6 +52,7 @@ In order to install the server, you have to do the same things, but the code in 
 ## Technologies
 * Java 11
 * Swing GUI widget toolkit
+* AWT
 
 ## Instruction
 * After launching the game, you can choose whether you want to play offline or online. You can play online, only if th server was launched (from Server folder).
