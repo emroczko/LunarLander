@@ -1,4 +1,4 @@
-# LunarLander
+# Lunar Lander
 > Our implementation of famous arcade game from 70's in Java language,
 
 ## Table of contents
